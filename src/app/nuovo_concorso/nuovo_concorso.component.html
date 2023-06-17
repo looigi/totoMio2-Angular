@@ -3,14 +3,26 @@
     <div style="width: 50%; float: left;">
       <img class="immagineIcona" style="margin-left: 5px;" title="Nuovo Incontro"
         src="../../assets/Immagini/aggiungi.png" (click)="aggiungePartita()" />
-      <img class="immagineIcona" style="margin-left: 5px;" title="Salva Concorso"
+      <img *ngIf="tastoSalvataggio" class="immagineIcona" style="margin-left: 5px;" title="Salva Concorso"
         src="../../assets/Immagini/save.png" (click)="salvaConcorso()" />
+      <img *ngIf="tastoConferma" class="immagineIcona" style="margin-left: 5px;" title="Pubblica Concorso"
+        src="../../assets/Immagini/invia.png" (click)="pubblicaConcorso()" />
     </div>
     <div class="scritta" style="width: 50%; float: left; margin-top: 5px; font-weight: bold; white-space: nowrap;">
       Anno {{idAnno2}} - {{DescrizioneAnno}} Concorso {{NumeroConcorso2}} Partite {{partite.length}}
     </div>
   </div>
   <div class="contenitoreInterno">
+    <div class="rigaIncontro scritta" style="font-weight: bold;">
+      <div style="width: 5%; float: left;">
+        &nbsp;
+      </div>
+      <div style="width: 5%; float: left; margin-top: 10px;">N°</div>
+      <div style="width: 35%; float: left; margin-top: 10px;">Casa</div>
+      <div style="width: 35%; float: left; margin-top: 10px;">Fuori</div>
+      <div style="width: 15%; float: left; margin-top: 10px;">Ris.</div>
+      <div style="width: 5%; float: left; margin-top: 10px;">S.</div>
+    </div>
     <div *ngFor="let partita of partite; let i = index" [attr.data-index]="i" class="rigaIncontro scritta">
       <div style="width: 5%; float: left;">
         <img class="immagineIcona" title="Elimina Incontro"

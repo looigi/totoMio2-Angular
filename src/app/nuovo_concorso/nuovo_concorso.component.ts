@@ -16,8 +16,11 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
   @Output() chiusuraFinestra: EventEmitter<string> = new EventEmitter<string>();
 
   partite = new Array();
+  vecchiePartite = new Array();
   idAnno2;
   NumeroConcorso2;
+  tastoSalvataggio = false;
+  tastoConferma = false;
 
   constructor(
     private apiService: ApiService,
@@ -55,6 +58,14 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
           } else {
             this.partite = new Array();
           }
+
+          this.vecchiePartite = this.partite;
+
+          this.controllaTasti();
+        } else {
+          this.vecchiePartite = new Array();
+
+          this.controllaTasti();
         }
       }
     )
@@ -92,6 +103,8 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
       Segno: ''
     }
     this.partite.push(p);
+
+    this.controllaTasti();
   }
 
   eliminaPartita(n) {
@@ -105,6 +118,8 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
       }
     });
     this.partite = nuove;
+
+    this.controllaTasti();
   }
 
   salvaConcorso() {
@@ -126,11 +141,56 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {
+            this.vecchiePartite = this.partite;
+
+            this.controllaTasti();
           } else {
             alert(data);
           }
         }
       }
     );
+  }
+
+  pubblicaConcorso() {
+    const parametri = {
+      idAnno: this.idAnno2
+    }
+    this.apiService.apreConcorso(parametri)
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            const r = data.split(';');
+
+            this.variabiliGlobali.idModalitaConcorso = +r[0];
+            this.variabiliGlobali.ModalitaConcorso = r[1];
+
+            this.chiusura();
+          } else {
+            alert(data);
+          }
+        }
+      }
+    );
+  }
+
+  controllaTasti() {
+    if (this.partite.length === 0) {
+      this.tastoSalvataggio = false;
+      this.tastoConferma = false;
+    } else {
+      if (JSON.stringify(this.vecchiePartite) !== JSON.stringify(this.partite)) {
+        // console.log('s');
+        this.tastoSalvataggio = true;
+        this.tastoConferma = false;
+      } else {
+        // console.log(JSON.stringify(this.vecchiePartite), JSON.stringify(this.partite));
+        // console.log('n');
+        this.tastoSalvataggio = false;
+        this.tastoConferma = true;
+      }
+    }
   }
 }
