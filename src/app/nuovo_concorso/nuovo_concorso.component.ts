@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, Output, EventEmitter, OnChanges, OnInit, SimpleChanges, Input } from "@angular/core";
 import { ApiService } from "../services/api.service";
+import { VariabiliGlobali } from "../VariabiliGlobali.component";
 
 @Component({
   templateUrl: 'nuovo_concorso.component.html',
@@ -18,7 +19,10 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
   idAnno2;
   NumeroConcorso2;
 
-  constructor(private apiService: ApiService) {
+  constructor(
+    private apiService: ApiService,
+    private variabiliGlobali: VariabiliGlobali
+  ) {
 
   }
 
@@ -39,8 +43,8 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
                 const cc = element.split(';');
                 const ccc = {
                   idPartita: +cc[0],
-                  Prima: cc[1],
-                  Seconda: cc[2],
+                  Prima: this.variabiliGlobali.sistemaStringaDaPassaggio(cc[1]),
+                  Seconda: this.variabiliGlobali.sistemaStringaDaPassaggio(cc[2]),
                   Risultato: cc[3],
                   Segno: cc[4]
                 }
@@ -62,13 +66,14 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes["idAnno"] && changes["idAnno"].currentValue) {
+    if (changes.idAnno && changes.idAnno.currentValue) {
       this.idAnno2 = changes["idAnno"].currentValue;
     }
-    if (changes["NumeroConcorso"] && changes["NumeroConcorso"].currentValue) {
-      this.NumeroConcorso2 = changes["NumeroConcorso"].currentValue;
+    if (changes.NumeroConcorso && changes.NumeroConcorso.currentValue) {
+      this.NumeroConcorso2 = changes.NumeroConcorso.currentValue;
     }
-    if (this.idAnno2 && this.NumeroConcorso2) {
+    if (this.idAnno2 !== undefined && this.NumeroConcorso2 !== undefined) {
+      // alert('Carico ' + this.idAnno2 + ' ' + this.NumeroConcorso2);
       this.leggeConcorso();
     }
   }
@@ -90,10 +95,42 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
   }
 
   eliminaPartita(n) {
-
+    const nuove = new Array();
+    let q = 1;
+    this.partite.forEach(element => {
+      if (element.idPartita !== n) {
+        element.idPartita = q;
+        q++;
+        nuove.push(element);
+      }
+    });
+    this.partite = nuove;
   }
 
   salvaConcorso() {
-
+    let dati = '';
+    this.partite.forEach(element => {
+      dati += element.idPartita + ';' +
+        this.variabiliGlobali.sistemaStringaPerPassaggio(element.Prima) + ';' +
+        this.variabiliGlobali.sistemaStringaPerPassaggio(element.Seconda) + ';' +
+        element.Risultato + ';' + element.Segno + '§';
+    });
+    const parametri = {
+      idAnno: this.idAnno2,
+      idConcorso: this.NumeroConcorso2,
+      Dati: dati
+    }
+    this.apiService.salvaConcorso(parametri)
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+          } else {
+            alert(data);
+          }
+        }
+      }
+    );
   }
 }

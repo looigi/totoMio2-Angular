@@ -44,4 +44,25 @@ export class VariabiliGlobali {
     },
   ]
 
+  sistemaStringaPerPassaggio(stringa) {
+    let s = stringa;
+    while (s.indexOf('§') > -1) {
+      s = s.replace('§', '*SS*');
+    }
+    while (s.indexOf(';') > -1) {
+      s = s.replace(';', '*PV*');
+    }
+    return s;
+  }
+
+  sistemaStringaDaPassaggio(stringa) {
+    let s = stringa;
+    while (s.indexOf('*SS*') > -1) {
+      s = s.replace('*SS*', '§');
+    }
+    while (s.indexOf('*PV*') > -1) {
+      s = s.replace('*PV*', ';');
+    }
+    return s;
+  }
 }

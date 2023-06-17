@@ -143,4 +143,21 @@ export class ApiService {
     this.variabiliGlobali.CaricamentoInCorso = false;
     return ritorno;
   }
+
+  salvaConcorso(parametri) {
+    this.variabiliGlobali.CaricamentoInCorso = true;
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/ModificaConcorso?' +
+      'idAnno=' + parametri.idAnno + '&' +
+      'idConcorso=' + parametri.idConcorso + '&' +
+      'Dati=' + parametri.Dati
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    this.variabiliGlobali.CaricamentoInCorso = false;
+    return ritorno;
+  }
+
 }

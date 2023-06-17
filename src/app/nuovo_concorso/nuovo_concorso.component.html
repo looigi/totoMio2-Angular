@@ -14,7 +14,7 @@
     <div *ngFor="let partita of partite; let i = index" [attr.data-index]="i" class="rigaIncontro scritta">
       <div style="width: 5%; float: left;">
         <img class="immagineIcona" title="Elimina Incontro"
-          src="../../assets/Immagini/elimina.png" (click)="eliminaPartita(i)" />
+          src="../../assets/Immagini/elimina.png" (click)="eliminaPartita(partita.idPartita)" />
       </div>
       <div style="width: 5%; float: left; margin-top: 10px;">{{partita.idPartita}}</div>
       <div style="width: 35%; float: left; margin-top: 10px;">
