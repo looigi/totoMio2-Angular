@@ -1,0 +1,118 @@
+<div class="barraSuperiore">
+  <div style="width: 100%; text-align: right; margin-top: -1px;">
+    <div class="immagineIcona" title="Login" style="float: right; background-image: url('../assets/Immagini/login.png'); background-size: contain;" (click)="apreLogin()"></div>
+    <div class="immagineIcona" title="Registrazione nuovo utente" style="float: right; background-image: url('../assets/Immagini/signin.png'); background-size: contain;" (click)="apreNuovoUtente()"></div>
+    <div class="barraSuperioreTesto scritta">
+      <div class="casellaIntestazione">
+        Anno {{VariabiliGlobali.idAnno}} {{VariabiliGlobali.descrizioneAnno}}
+        Concorso {{VariabiliGlobali.idConcorso}} {{VariabiliGlobali.ModalitaConcorso}}
+      </div>
+      <div class="casellaIntestazione">
+        <span *ngIf="VariabiliGlobali.Utente">
+          {{VariabiliGlobali.Tipologia}} {{VariabiliGlobali.Utente}} ({{VariabiliGlobali.Cognome}} {{VariabiliGlobali.Nome}})
+        </span>
+      </div>
+      <div class="casellaIntestazione">
+      </div>
+      <!-- RIEPILOGO INFORMAZIONI UTENTE -->
+    </div>
+  </div>
+</div>
+
+<div class="corpoCentrale">
+  <div *ngIf="loginEffettuato" class="menuSinistra" [style.width]="menuVisibile ? '30%' : '40px'">
+    <div class="immagineIcona" title="Apre Chiude Menù" (click)="apreChiudeMenu()" style="z-index: 30; position: absolute; width: 40px; height: 40px; right: 0px; top: 0px; background-image: url('../assets/Immagini/hamburger.png'); background-size: contain;"></div>
+    <div style="position: absolute; left: 0px; top: 0px; width: 100%; height: calc(100% - 35px); padding-top: 35px;">
+      <div *ngFor="let pagina of VariabiliGlobali.pagine; let i = index;">
+        <div *ngIf="ControllaVisibilitaMenu(i)" class="voceMenu" (click)="selezionePagina(i)">
+          <div class="immagineIcona" title="{{pagina.Titolo}}" [style.background]="'url(../assets/Immagini/' + pagina.Icona + ')'" [style.background-size]="'contain'" style="float: left; background-repeat: no-repeat; background-size: contain;"></div>
+          <span *ngIf="menuVisibile" class="scrittaGrande" style="float: left; width: calc(100% - 45px); margin-top: 6px; margin-left: 5px;">{{pagina.Pagina}}</span>
+        </div>
+        <div class="pulisce"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divCentrale">
+    <nuovo-concorso-component
+      *ngIf="nuovoConcorsoVisibile"
+      [idAnno]="VariabiliGlobali.idAnno"
+      [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
+      [NumeroConcorso]="VariabiliGlobali.idConcorso + 1"
+
+      (chiusuraFinestra)="nuovoConcorsoVisibile = false"
+    />
+  </div>
+</div>
+
+<div class="barraInferiore">
+  <div style="width: 99%; text-align: right; margin-top: 6px;">
+    <span class="scritta">TotoMIO 2 - Copyright looigi227</span>
+  </div>
+</div>
+
+<div class="logo"></div>
+
+<div *ngIf="mascheraNuovoUtente" class="mascheraNuovoUtente">
+  <div style="width: 100%; height: 40px;">
+    <div class="scritta grassetto" style="width: 40%; float: left;">NickName</div>
+    <div style="width: 55%; float: left;">
+      <input type="text" [(ngModel)]="nickName" class="scritta grassetto" style="width: 100%; background-color: white;" />
+    </div>
+    <div class="pulisce"></div>
+
+    <div class="scritta grassetto" style="width: 40%; float: left;">Password</div>
+    <div style="width: 55%; float: left;">
+      <input type="password" [(ngModel)]="passwordNU" class="scritta grassetto" style="width: 100%; background-color: white;" />
+    </div>
+    <div class="pulisce"></div>
+
+    <div class="scritta grassetto" style="width: 40%; float: left;">Cognome</div>
+    <div style="width: 55%; float: left;">
+      <input type="text" [(ngModel)]="cognome" class="scritta grassetto" style="width: 100%; background-color: white;" />
+    </div>
+    <div class="pulisce"></div>
+
+    <div class="scritta grassetto" style="width: 40%; float: left;">Nome</div>
+    <div style="width: 55%; float: left;">
+      <input type="text" [(ngModel)]="nome" class="scritta grassetto" style="width: 100%; background-color: white;" />
+    </div>
+    <div class="pulisce"></div>
+
+    <div class="scritta grassetto" style="width: 40%; float: left;">E-Mail</div>
+    <div style="width: 55%; float: left;">
+      <input type="text" [(ngModel)]="eMail" class="scritta grassetto" style="width: 100%; background-color: white;" />
+    </div>
+    <div class="pulisce"></div>
+
+    <div style="width: 100%; text-align: right;">
+      <div class="immagineIcona" title="Crea nuovo utente" (click)="effettuaSalvataggio()" style="float: right; background-image: url('../assets/Immagini/save.png'); background-size: contain; background-repeat: no-repeat;"></div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="mascheraLogin" class="mascheraLogin">
+  <div style="width: 100%; height: 40px;">
+    <div class="scritta grassetto" style="width: 40%; float: left;">User</div>
+    <div style="width: 55%; float: left;">
+      <input type="text" [(ngModel)]="user" class="scritta grassetto" style="width: 100%; background-color: white;" />
+    </div>
+    <div class="pulisce"></div>
+
+    <div class="scritta grassetto" style="width: 40%; float: left;">Password</div>
+    <div style="width: 55%; float: left;">
+      <input type="password" [(ngModel)]="password" class="scritta grassetto" style="width: 100%; background-color: white;" />
+    </div>
+    <div class="pulisce"></div>
+
+    <div class="scritta grassetto" style="width: 70%; margin-top: 10px; float: left;">
+      Ricordami&nbsp;
+      <input type="checkbox" [checked]="ricordami" (change)="cambioRicordami()">
+    </div>
+    <div style="width: 30%; text-align: right; float: left;">
+      <div class="immagineIcona" title="Login" (click)="effettuaLogin()" style="float: right; background-image: url('../assets/Immagini/login.png'); background-size: contain; background-repeat: no-repeat;"></div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="VariabiliGlobali.CaricamentoInCorso" class="caricamentoInCorso"></div>

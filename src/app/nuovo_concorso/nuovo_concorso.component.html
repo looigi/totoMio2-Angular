@@ -1,0 +1,33 @@
+<div class="finestra">
+  <div class="barraSuperiore">
+    <div style="width: 50%; float: left;">
+      <img class="immagineIcona" style="margin-left: 5px;" title="Nuovo Incontro"
+        src="../../assets/Immagini/aggiungi.png" (click)="aggiungePartita()" />
+      <img class="immagineIcona" style="margin-left: 5px;" title="Salva Concorso"
+        src="../../assets/Immagini/save.png" (click)="salvaConcorso()" />
+    </div>
+    <div class="scritta" style="width: 50%; float: left; margin-top: 5px; font-weight: bold; white-space: nowrap;">
+      Anno {{idAnno2}} - {{DescrizioneAnno}} Concorso {{NumeroConcorso2}} Partite {{partite.length}}
+    </div>
+  </div>
+  <div class="contenitoreInterno">
+    <div *ngFor="let partita of partite; let i = index" [attr.data-index]="i" class="rigaIncontro scritta">
+      <div style="width: 5%; float: left;">
+        <img class="immagineIcona" title="Elimina Incontro"
+          src="../../assets/Immagini/elimina.png" (click)="eliminaPartita(i)" />
+      </div>
+      <div style="width: 5%; float: left; margin-top: 10px;">{{partita.idPartita}}</div>
+      <div style="width: 35%; float: left; margin-top: 10px;">
+        <input type="text" [(ngModel)]="partita.Prima" class="scritta" style="width: 95%;">
+      </div>
+      <div style="width: 35%; float: left; margin-top: 10px;">
+        <input type="text" [(ngModel)]="partita.Seconda" class="scritta" style="width: 95%;">
+      </div>
+      <div style="width: 15%; float: left; margin-top: 10px;">{{partita.Risultato}}</div>
+      <div style="width: 5%; float: left; margin-top: 10px;">{{partita.Segno}}</div>
+    </div>
+  </div>
+</div>
+
+<div class="chiusura" (click)="chiusura()" title="Chiusura finestra">
+</div>
