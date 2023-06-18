@@ -29,6 +29,13 @@ export class VariabiliGlobali {
       idTipologia: 0
     },
     {
+      idTasto: 3,
+      Icona: 'pronostici.png',
+      Titolo: 'Pronostici',
+      Pagina: 'Pronostici',
+      idTipologia: -1
+    },
+    {
       idTasto: 1,
       Icona: 'classifica.png',
       Titolo: 'Classifica',

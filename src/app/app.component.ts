@@ -24,7 +24,9 @@ export class AppComponent implements OnInit {
   nome = '';
   eMail = '';
   ricordami = false;
+
   nuovoConcorsoVisibile = false;
+  pronosticiVisibile = false;
 
   constructor(
     public VariabiliGlobali: VariabiliGlobali,
@@ -62,11 +64,16 @@ export class AppComponent implements OnInit {
     this.menuVisibile = !this.menuVisibile;
   }
 
-  selezionePagina(i: any) {
+  selezionePagina(n: any) {
+    const i = this.VariabiliGlobali.pagine[n].idTasto;
     console.log('Pagina ', i);
     switch(i) {
       case 0: // NUOVO CONCORSO
         this.nuovoConcorsoVisibile = true;
+        break;
+      case 3: // PRONOSTICI
+        this.pronosticiVisibile = true;
+        break;
     }
   }
 

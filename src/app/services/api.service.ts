@@ -163,7 +163,7 @@ export class ApiService {
   apreConcorso(parametri) {
     this.variabiliGlobali.CaricamentoInCorso = true;
     this.controlloPresenzaUtente();
-    const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/apreConcorso?' +
+    const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/ApreConcorso?' +
       'idAnno=' + parametri.idAnno
       ;
       // 'Password=' + this.sistemaTesto(params.Password;

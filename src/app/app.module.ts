@@ -8,11 +8,13 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientService } from './services/httpclient.service';
 import { NuovoConcorsoComponent } from './nuovo_concorso/nuovo_concorso.component';
+import { PronosticiComponent } from './pronostici/pronostici.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NuovoConcorsoComponent
+    NuovoConcorsoComponent,
+    PronosticiComponent
   ],
   imports: [
     BrowserModule,

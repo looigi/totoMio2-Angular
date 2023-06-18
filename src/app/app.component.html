@@ -42,6 +42,16 @@
 
       (chiusuraFinestra)="nuovoConcorsoVisibile = false"
     />
+
+    <pronostici-component
+      *ngIf="pronosticiVisibile"
+      [idAnno]="VariabiliGlobali.idAnno"
+      [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
+      [NumeroConcorso]="VariabiliGlobali.idConcorso"
+
+      (chiusuraFinestra)="pronosticiVisibile = false"
+    />
+
   </div>
 </div>
 

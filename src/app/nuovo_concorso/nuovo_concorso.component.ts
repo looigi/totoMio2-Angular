@@ -162,10 +162,12 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {
+            console.log(data);
             const r = data.split(';');
 
             this.variabiliGlobali.idModalitaConcorso = +r[0];
             this.variabiliGlobali.ModalitaConcorso = r[1];
+            this.variabiliGlobali.idConcorso = this.NumeroConcorso2;
 
             this.chiusura();
           } else {
@@ -177,17 +179,19 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
   }
 
   controllaTasti() {
+    // console.log('Partite', this.partite.length);
+    // console.log('Diff', JSON.stringify(this.vecchiePartite) === JSON.stringify(this.partite));
     if (this.partite.length === 0) {
+      // console.log('Ritorno 1');
       this.tastoSalvataggio = false;
       this.tastoConferma = false;
     } else {
       if (JSON.stringify(this.vecchiePartite) !== JSON.stringify(this.partite)) {
-        // console.log('s');
+        // console.log('Ritorno 2');
         this.tastoSalvataggio = true;
         this.tastoConferma = false;
       } else {
-        // console.log(JSON.stringify(this.vecchiePartite), JSON.stringify(this.partite));
-        // console.log('n');
+        // console.log('Ritorno 3');
         this.tastoSalvataggio = false;
         this.tastoConferma = true;
       }
