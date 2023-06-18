@@ -68,6 +68,8 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
               }
             });
             this.partite = p;
+
+            this.leggePronostico();
           } else {
             this.partite = new Array();
           }
@@ -77,6 +79,39 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
       }
     )
 
+  }
+
+  leggePronostico() {
+    this.apiService.ritornaPronosticoUtente()
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            const r = data.split('§');
+            r.forEach(element => {
+              if (element !== '') {
+                const c = element.split(';');
+                this.partite.forEach(element2 => {
+                  if (+element2.idPartita === +c[0]) {
+                    element2.Risultato = c[1];
+                    element2.Segno = c[2];
+                    const rr = c[1].split('-');
+                    element2.Risultato1 = +rr[0];
+                    element2.Risultato2 = +rr[1];
+
+                    this.risu1[element2.idPartita - 1] = +rr[0];
+                    this.risu2[element2.idPartita - 1] = +rr[1];
+                  }
+                });
+              }
+            });
+          } else {
+
+          }
+        }
+      }
+    );
   }
 
   ngAfterViewInit(): void {
@@ -101,7 +136,24 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   salvaPronostico() {
-
+    let Dati = '';
+    this.partite.forEach(element => {
+      const ris = element.Risultato1 + '-' + element.Risultato2;
+      Dati += element.idPartita + ';' + ris + ';' + element.Segno + '§';
+    });
+    this.apiService.salvaPronosticoUtente(Dati)
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            alert('Pronostico salvato');
+          } else {
+            alert(data);
+          }
+        }
+      }
+    );
   }
 
   handleKey1(n, t) {
