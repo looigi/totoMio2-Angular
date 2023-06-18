@@ -174,4 +174,37 @@ export class ApiService {
     return ritorno;
   }
 
+  salvaPronosticoUtente(Dati) {
+    this.variabiliGlobali.CaricamentoInCorso = true;
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/SalvaPronosticoUtente?' +
+      'idAnno=' + this.variabiliGlobali.idAnno +
+      '&idUtente=' + this.variabiliGlobali.idUser +
+      '&idConcorso=' + this.variabiliGlobali.idConcorso +
+      '&Dati=' + Dati
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    this.variabiliGlobali.CaricamentoInCorso = false;
+    return ritorno;
+  }
+
+  ritornaPronosticoUtente() {
+    this.variabiliGlobali.CaricamentoInCorso = true;
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/RitornaPronosticoUtente?' +
+      'idAnno=' + this.variabiliGlobali.idAnno +
+      '&idUtente=' + this.variabiliGlobali.idUser +
+      '&idConcorso=' + this.variabiliGlobali.idConcorso
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    this.variabiliGlobali.CaricamentoInCorso = false;
+    return ritorno;
+  }
+
 }
