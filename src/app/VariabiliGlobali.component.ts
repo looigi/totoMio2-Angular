@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class VariabiliGlobali {
   CaricamentoInCorso = false;
   urlWS = 'http://looigi.ddns.net:1081/';
-  // urlWS = 'http://192.168.0.205:1081/';
+  urlImmagini = 'http://192.168.0.205:1080/Immagini/';
   idAnno = 1;
   idConcorso = -1;
   descrizioneAnno = '';
@@ -36,6 +36,13 @@ export class VariabiliGlobali {
       idTipologia: -1
     },
     {
+      idTasto: 4,
+      Icona: 'gestione_concorso.png',
+      Titolo: 'Gestione Concorso',
+      Pagina: 'Gestione Concorso',
+      idTipologia: 0
+    },
+    {
       idTasto: 1,
       Icona: 'classifica.png',
       Titolo: 'Classifica',
@@ -48,6 +55,20 @@ export class VariabiliGlobali {
       Titolo: 'Risultati',
       Pagina: 'Risultati',
       idTipologia: -1
+    },
+    {
+      idTasto: 5,
+      Icona: 'controllo.png',
+      Titolo: 'Controllo',
+      Pagina: 'Controllo',
+      idTipologia: 0
+    },
+    {
+      idTasto: 6,
+      Icona: 'chiusura.png',
+      Titolo: 'Chiusura',
+      Pagina: 'Chiusura',
+      idTipologia: 0
     },
   ]
 

@@ -9,12 +9,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientService } from './services/httpclient.service';
 import { NuovoConcorsoComponent } from './nuovo_concorso/nuovo_concorso.component';
 import { PronosticiComponent } from './pronostici/pronostici.component';
+import { GestioneConcorsoComponent } from './gestione_concorso/gestione_concorso.component';
+import { ChiusuraConcorsoComponent } from './chiusura_concorso/chiusura_concorso.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NuovoConcorsoComponent,
-    PronosticiComponent
+    PronosticiComponent,
+    ChiusuraConcorsoComponent,
+    GestioneConcorsoComponent
   ],
   imports: [
     BrowserModule,

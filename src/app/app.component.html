@@ -52,6 +52,22 @@
       (chiusuraFinestra)="pronosticiVisibile = false"
     />
 
+    <chiusura_concorsocomponent
+      *ngIf="chiusuraConcorso"
+      [idAnno]="VariabiliGlobali.idAnno"
+      [NumeroConcorso]="VariabiliGlobali.idConcorso"
+
+      (chiusuraFinestra)="chiusuraConcorso = false"
+    />
+
+    <gestione_concorsocomponent
+      *ngIf="gestioneConcorso"
+      [idAnno]="VariabiliGlobali.idAnno"
+      [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
+      [NumeroConcorso]="VariabiliGlobali.idConcorso"
+
+      (chiusuraFinestra)="gestioneConcorso = false"
+    />
   </div>
 </div>
 

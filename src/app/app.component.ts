@@ -27,6 +27,8 @@ export class AppComponent implements OnInit {
 
   nuovoConcorsoVisibile = false;
   pronosticiVisibile = false;
+  gestioneConcorso = false;
+  chiusuraConcorso = false;
 
   constructor(
     public VariabiliGlobali: VariabiliGlobali,
@@ -74,6 +76,16 @@ export class AppComponent implements OnInit {
       case 3: // PRONOSTICI
         this.pronosticiVisibile = true;
         break;
+      case 6: // CHIUSURA CONCORSO
+        this.chiusuraConcorso = true;
+        break;
+      case 5: // CONTROLLO CONCORSO
+        break;
+      case 4: // GESTIONE CONCORSO
+        this.gestioneConcorso = true;
+        break;
+      case 5: // CONTROLLO CONCORSO
+        break;
     }
   }
 
@@ -90,16 +102,25 @@ export class AppComponent implements OnInit {
   ControllaVisibilitaMenu(n) {
     const id = this.VariabiliGlobali.pagine[n].idTipologia;
     const idTasto = this.VariabiliGlobali.pagine[n].idTasto;
+    // console.log('Tasto ' + n + '. ID Tasto ' + idTasto + ' ID Concorso: ' + this.VariabiliGlobali.idModalitaConcorso);
 
     if (id === -1) {
       // TASTO CON IDTIPOLOGIA -1 (TUTTI)
       switch (idTasto) {
         case 2: // RISULTATI
-          if (this.VariabiliGlobali.idModalitaConcorso === 3) {
+          if (this.VariabiliGlobali.idModalitaConcorso === 3) { // ID CONCORSO CONTROLLATO
             // SI POSSONO VEDERE I RISULTATI
             return true;
           } else {
             // RISULTATI NON ATTIVI
+            return false;
+          }
+        case 3: // PRONOSTICI
+          if (this.VariabiliGlobali.idModalitaConcorso === 1) { // ID CONCORSO APERTO
+            // SI POSSONO GESTIRE I PRONOSTICI
+            return true;
+          } else {
+            // PRONOSTICI NON ATTIVI
             return false;
           }
         default:
@@ -115,6 +136,30 @@ export class AppComponent implements OnInit {
               return true;
             } else {
               // CONCORSO IN FASE DI GIOCO
+              return false;
+            }
+          case 4: // GESTIONE CONCORSO
+            if (this.VariabiliGlobali.idModalitaConcorso === 2) {
+              // CONCORSO APERTO - SI PUO' GESTIRE IL CONCORSO
+              return true;
+            } else {
+              // GESTIONE CONCORSO NON ATTIVA
+              return false;
+            }
+          case 5: // CONTROLLO CONCORSO
+            if (this.VariabiliGlobali.idModalitaConcorso === 2) {
+              // CONCORSO CHIUSO - SI PUO' GESTIRE IL CONCORSO
+              return true;
+            } else {
+              // CONTROLLO CONCORSO NON ATTIVO
+              return false;
+            }
+          case 6: // CHIUSURA CONCORSO
+            if (this.VariabiliGlobali.idModalitaConcorso === 1) {
+              // CONCORSO APERTO - SI PUO' CHIUDERE IL CONCORSO
+              return true;
+            } else {
+              // CHIUSURA CONCORSO NON ATTIVA
               return false;
             }
           default:
