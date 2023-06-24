@@ -1,0 +1,61 @@
+<div class="finestra">
+  <div class="barraSuperiore">
+    <div style="width: 10%; float: left;">
+      <img class="immagineIcona" style="margin-left: 5px;" title="Controlla Concorso"
+        src="../../assets/Immagini/controllo.png" (click)="controllaConcorso()" />
+    </div>
+    <div class="scritta" style="width: 90%; float: left; margin-top: 5px; font-weight: bold; white-space: nowrap;">
+      Controllo concorso Anno {{idAnno}} - {{DescrizioneAnno}} Concorso {{NumeroConcorso}}
+    </div>
+  </div>
+  <div class="contenitoreInterno">
+    <div *ngFor="let risultato of risultati; let i = index" [attr.data-index]="i">
+      <div  class="rigaGenerale">
+        <div class="rigaIntestazione scritta">
+          idUtente: {{risultato.idUtente}} - Punti Totali: {{risultato.PuntiTotali}}
+        </div>
+        <div style="width: 10%; float: left; text-align: right;">
+          <img class="immagineIcona" style="margin-left: 5px;" title="Mostra dettaglio"
+            src="../../assets/Immagini/dettaglio.png" (click)="risultato.Espanso = !risultato.Espanso" />
+        </div>
+      </div>
+      <div *ngIf="risultato.Espanso == true" class="dettaglio scritta">
+        <table style="width: 100%;">
+          <tr>
+            <th>Partita</th>
+            <th>Squadra 1</th>
+            <th>Squadra 2</th>
+            <th>Risultato</th>
+            <th>Segno</th>
+            <th>Pronostico</th>
+            <th>Pron. Segno</th>
+            <th>Punti</th>
+          </tr>
+          <tr *ngFor="let partita of risultato.Dettaglio; let i2 = index" [attr.data-index]="i2">
+            <td style="text-align: center;">{{partita.idPartita}}</td>
+            <td style="text-align: left;">{{partita.Squadra1}}</td>
+            <td style="text-align: left;">{{partita.Squadra2}}</td>
+            <td style="text-align: center;">{{partita.Risultato}}</td>
+            <td style="text-align: center;">{{partita.Segno}}</td>
+            <td style="text-align: center;">{{partita.Pronostico}}</td>
+            <td style="text-align: center;">{{partita.PronosticoSegno}}</td>
+            <td style="text-align: right;">{{partita.Punti}}</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="text-align: right;">{{risultato.PuntiTotali}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="chiusura" (click)="chiusura()" title="Chiusura finestra">
+</div>

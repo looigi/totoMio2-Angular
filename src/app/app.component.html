@@ -60,6 +60,15 @@
       (chiusuraFinestra)="chiusuraConcorso = false"
     />
 
+    <controllo_concorsocomponent
+      *ngIf="controlloConcorso"
+      [idAnno]="VariabiliGlobali.idAnno"
+      [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
+      [NumeroConcorso]="VariabiliGlobali.idConcorso"
+
+      (chiusuraFinestra)="controlloConcorso = false"
+    />
+
     <gestione_concorsocomponent
       *ngIf="gestioneConcorso"
       [idAnno]="VariabiliGlobali.idAnno"

@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
   pronosticiVisibile = false;
   gestioneConcorso = false;
   chiusuraConcorso = false;
+  controlloConcorso = false;
 
   constructor(
     public VariabiliGlobali: VariabiliGlobali,
@@ -67,7 +68,7 @@ export class AppComponent implements OnInit {
   }
 
   selezionePagina(n: any) {
-    const i = this.VariabiliGlobali.pagine[n].idTasto;
+    const i = +this.VariabiliGlobali.pagine[n].idTasto;
     console.log('Pagina ', i);
     switch(i) {
       case 0: // NUOVO CONCORSO
@@ -79,12 +80,11 @@ export class AppComponent implements OnInit {
       case 6: // CHIUSURA CONCORSO
         this.chiusuraConcorso = true;
         break;
-      case 5: // CONTROLLO CONCORSO
-        break;
       case 4: // GESTIONE CONCORSO
         this.gestioneConcorso = true;
         break;
       case 5: // CONTROLLO CONCORSO
+        this.controlloConcorso = true;
         break;
     }
   }

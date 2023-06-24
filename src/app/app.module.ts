@@ -11,6 +11,7 @@ import { NuovoConcorsoComponent } from './nuovo_concorso/nuovo_concorso.componen
 import { PronosticiComponent } from './pronostici/pronostici.component';
 import { GestioneConcorsoComponent } from './gestione_concorso/gestione_concorso.component';
 import { ChiusuraConcorsoComponent } from './chiusura_concorso/chiusura_concorso.component';
+import { ControlloConcorsoComponent } from './controllo_concorso/controllo_concorso.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ChiusuraConcorsoComponent } from './chiusura_concorso/chiusura_concorso
     NuovoConcorsoComponent,
     PronosticiComponent,
     ChiusuraConcorsoComponent,
-    GestioneConcorsoComponent
+    GestioneConcorsoComponent,
+    ControlloConcorsoComponent
   ],
   imports: [
     BrowserModule,
