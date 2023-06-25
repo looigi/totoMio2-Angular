@@ -3,6 +3,8 @@
     <div style="width: 10%; float: left;">
       <img class="immagineIcona" style="margin-left: 5px;" title="Controlla Concorso"
         src="../../assets/Immagini/controllo.png" (click)="controllaConcorso()" />
+      <img *ngIf="arrivatiDati" class="immagineIcona" style="margin-left: 5px;" title="Chiude Concorso"
+        src="../../assets/Immagini/invia.png" (click)="chiudeConcorso()" />
     </div>
     <div class="scritta" style="width: 90%; float: left; margin-top: 5px; font-weight: bold; white-space: nowrap;">
       Controllo concorso Anno {{idAnno}} - {{DescrizioneAnno}} Concorso {{NumeroConcorso}}
@@ -12,7 +14,8 @@
     <div *ngFor="let risultato of risultati; let i = index" [attr.data-index]="i">
       <div  class="rigaGenerale">
         <div class="rigaIntestazione scritta">
-          idUtente: {{risultato.idUtente}} - Punti Totali: {{risultato.PuntiTotali}}
+          Utente: <span style="font-weight: bold;">{{risultato.NickName}}</span>
+          Punti Totali: <span style="font-weight: bold;">{{risultato.PuntiTotali}}</span>
         </div>
         <div style="width: 10%; float: left; text-align: right;">
           <img class="immagineIcona" style="margin-left: 5px;" title="Mostra dettaglio"
@@ -22,26 +25,44 @@
       <div *ngIf="risultato.Espanso == true" class="dettaglio scritta">
         <table style="width: 100%;">
           <tr>
-            <th>Partita</th>
-            <th>Squadra 1</th>
-            <th>Squadra 2</th>
-            <th>Risultato</th>
-            <th>Segno</th>
-            <th>Pronostico</th>
-            <th>Pron. Segno</th>
+            <th style="border-right: 1px solid #aaa;">N°</th>
+            <th style="border-right: 1px solid #aaa;">Squadra 1</th>
+            <th style="border-right: 1px solid #aaa;">Squadra 2</th>
+            <th style="border-right: 1px solid #aaa;">Risultato</th>
+            <th style="border-right: 1px solid #aaa;">Segno</th>
+            <th style="border-right: 1px solid #aaa;">Pronostico</th>
+            <th style="border-right: 1px solid #aaa;">Pron. Segno</th>
+            <th style="border-right: 1px solid #aaa;">Segni</th>
+            <th style="border-right: 1px solid #aaa;">Ris.Es.</th>
+            <th style="border-right: 1px solid #aaa;">G. Casa</th>
+            <th style="border-right: 1px solid #aaa;">G. Fuori</th>
+            <th style="border-right: 1px solid #aaa;">Somma</th>
+            <th style="border-right: 1px solid #aaa;">Diff.</th>
             <th>Punti</th>
           </tr>
           <tr *ngFor="let partita of risultato.Dettaglio; let i2 = index" [attr.data-index]="i2">
-            <td style="text-align: center;">{{partita.idPartita}}</td>
-            <td style="text-align: left;">{{partita.Squadra1}}</td>
-            <td style="text-align: left;">{{partita.Squadra2}}</td>
-            <td style="text-align: center;">{{partita.Risultato}}</td>
-            <td style="text-align: center;">{{partita.Segno}}</td>
-            <td style="text-align: center;">{{partita.Pronostico}}</td>
-            <td style="text-align: center;">{{partita.PronosticoSegno}}</td>
+            <td style="text-align: center; border-right: 1px solid #aaa;">{{partita.idPartita}}</td>
+            <td style="text-align: left; border-right: 1px solid #aaa;">{{partita.Squadra1}}</td>
+            <td style="text-align: left; border-right: 1px solid #aaa;">{{partita.Squadra2}}</td>
+            <td style="text-align: center; border-right: 1px solid #aaa;">{{partita.Risultato}}</td>
+            <td style="text-align: center; border-right: 1px solid #aaa;">{{partita.Segno}}</td>
+            <td style="text-align: center; border-right: 1px solid #aaa;">{{partita.Pronostico}}</td>
+            <td style="text-align: center; border-right: 1px solid #aaa;">{{partita.PronosticoSegno}}</td>
+            <td style="text-align: center; border-right: 1px solid #aaa;">{{partita.SegnoPreso == 1 ? 'O' : '-'}}</td>
+            <td style="text-align: center; border-right: 1px solid #aaa;">{{partita.RisultatoEsatto == 1 ? 'O' : '-'}}</td>
+            <td style="text-align: center; border-right: 1px solid #aaa;">{{partita.RisultatoCasaTot == 1 ? 'O' : '-'}}</td>
+            <td style="text-align: center; border-right: 1px solid #aaa;">{{partita.RisultatoFuoriTot == 1 ? 'O' : '-'}}</td>
+            <td style="text-align: center; border-right: 1px solid #aaa;">{{partita.SommaGoal == 1 ? 'O' : '-'}}</td>
+            <td style="text-align: center; border-right: 1px solid #aaa;">{{partita.DifferenzaGoal == 1 ? 'O' : '-'}}</td>
             <td style="text-align: right;">{{partita.Punti}}</td>
           </tr>
           <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>

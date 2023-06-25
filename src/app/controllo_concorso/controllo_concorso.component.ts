@@ -16,6 +16,7 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
   @Output() chiusuraFinestra: EventEmitter<string> = new EventEmitter<string>();
 
   risultati;
+  arrivatiDati = false;
 
   constructor(
     private apiService: ApiService,
@@ -51,13 +52,19 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
                 const Intest = parti[0].split(';');
                 // console.log('Intest', Intest);
                 const idUtente = +Intest[0];
-                const PuntiTotali = +Intest[1];
+                const nickName = Intest[1];
+                const PuntiTotali = +Intest[2];
                 const Risultati = parti[1].split('§');
                 // console.log('Risultati', Risultati);
                 const DettaglioArray = new Array();
                 Risultati.forEach(element2 => {
                   if (element2) {
                     const Dettaglio = element2.split(';');
+
+  // idPartita & ";" & Squadra1 & ";" & Squadra2 & ";" & Risultato & ";" & RisultatoSegno & ";" & Pronostico2 & ";" & PronosticoSegno & ";" &
+	// SegnoPreso & ";" & RisultatoEsattoPartita & ";" & RisultatoCasaPartita & ";" & RisultatoFuoriPartita & ";" & SommaGoalPartita & ";" &
+	// DifferenzaGoalPartita & ";"
+	// 				Ritorno &= Punti
                     const dett = {
                       idPartita: +Dettaglio[0],
                       Squadra1: Dettaglio[1],
@@ -66,7 +73,13 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
                       Segno: Dettaglio[4],
                       Pronostico: Dettaglio[5],
                       PronosticoSegno: Dettaglio[6],
-                      Punti: +Dettaglio[7]
+                      SegnoPreso: + Dettaglio[7],
+                      RisultatoEsatto: +Dettaglio[8],
+                      RisultatoCasaTot: +Dettaglio[9],
+                      RisultatoFuoriTot: +Dettaglio[10],
+                      SommaGoal: +Dettaglio[11],
+                      DifferenzaGoal: +Dettaglio[12],
+                      Punti: +Dettaglio[13],
                     };
                     DettaglioArray.push(dett);
                     // console.log(DettaglioArray);
@@ -74,6 +87,7 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
                 });
                 const finale = {
                   idUtente: idUtente,
+                  NickName: nickName,
                   PuntiTotali: PuntiTotali,
                   Espanso: false,
                   Dettaglio: DettaglioArray
@@ -82,14 +96,20 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
                 // console.log(RisultatiFinali);
               }
             });
+            RisultatiFinali.sort((a, b) => a.PuntiTotali - b.PuntiTotali);
             this.risultati = RisultatiFinali;
             console.log(this.risultati);
+            this.arrivatiDati = true;
           } else {
             alert(data);
           }
         }
       }
     );
+  }
+
+  chiudeConcorso() {
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
