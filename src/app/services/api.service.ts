@@ -251,4 +251,19 @@ export class ApiService {
     return ritorno;
   }
 
+  leggeClassifica(parametri) {
+    this.variabiliGlobali.CaricamentoInCorso = true;
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/RitornaClassifica?' +
+      'idAnno=' + parametri.idAnno +
+      '&idConcorso=' + parametri.idConcorso
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    this.variabiliGlobali.CaricamentoInCorso = false;
+    return ritorno;
+  }
+
 }

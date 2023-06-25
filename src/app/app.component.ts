@@ -30,6 +30,7 @@ export class AppComponent implements OnInit {
   gestioneConcorso = false;
   chiusuraConcorso = false;
   controlloConcorso = false;
+  classifica = false;
 
   constructor(
     public VariabiliGlobali: VariabiliGlobali,
@@ -73,6 +74,9 @@ export class AppComponent implements OnInit {
     switch(i) {
       case 0: // NUOVO CONCORSO
         this.nuovoConcorsoVisibile = true;
+        break;
+      case 1: // CLASSIFICA
+        this.classifica = true;
         break;
       case 2: // RISULTATI
         this.controlloConcorso = true;

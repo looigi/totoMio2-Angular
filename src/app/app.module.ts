@@ -12,6 +12,7 @@ import { PronosticiComponent } from './pronostici/pronostici.component';
 import { GestioneConcorsoComponent } from './gestione_concorso/gestione_concorso.component';
 import { ChiusuraConcorsoComponent } from './chiusura_concorso/chiusura_concorso.component';
 import { ControlloConcorsoComponent } from './controllo_concorso/controllo_concorso.component';
+import { ClassificaComponent } from './classifica/classifica.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ControlloConcorsoComponent } from './controllo_concorso/controllo_conco
     PronosticiComponent,
     ChiusuraConcorsoComponent,
     GestioneConcorsoComponent,
-    ControlloConcorsoComponent
+    ControlloConcorsoComponent,
+    ClassificaComponent
   ],
   imports: [
     BrowserModule,
