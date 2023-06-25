@@ -49,6 +49,9 @@
   height: 40px;
   border: 1px solid #999;
   margin: 3px;
+  background-color: #ffcece;
+  margin-top: 5px;
+  border-radius: 5px;
 }
 
 .rigaIntestazione {
@@ -62,6 +65,9 @@
 .dettaglio {
   width: calc(100% - 6px);
   border: 1px solid #999;
+  background-color: #c4ddf3;
   height: auto;
-  margin: 3px;
+  margin-top: -2px;
+  border-radius: 5px;
+  margin-left: 3px;
 }

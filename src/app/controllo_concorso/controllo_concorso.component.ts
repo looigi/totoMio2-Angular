@@ -12,6 +12,7 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
   @Input() idAnno;
   @Input() DescrizioneAnno;
   @Input() NumeroConcorso;
+  @Input() ModalitaConcorso;
 
   @Output() chiusuraFinestra: EventEmitter<string> = new EventEmitter<string>();
 
@@ -32,7 +33,8 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
   controllaConcorso() {
     const parametri = {
       idAnno: this.idAnno,
-      idUtente: this.variabiliGlobali.idUser
+      idUtente: this.variabiliGlobali.idUser,
+      ModalitaConcorso: this.ModalitaConcorso
     }
     this.apiService.controllaConcorso(parametri)
     .map((response: any) => response)
@@ -109,11 +111,37 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
   }
 
   chiudeConcorso() {
+    const parametri = {
+      idAnno: this.idAnno
+    }
+    this.apiService.impostaConcorsoControllato(parametri)
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            console.log(data);
+            const r = data.split(';');
+
+            this.variabiliGlobali.idModalitaConcorso = +r[0];
+            this.variabiliGlobali.ModalitaConcorso = r[1];
+
+            this.chiusura();
+          } else {
+            alert(data);
+          }
+        }
+      }
+    );
 
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-
+    if (changes.ModalitaConcorso && changes.ModalitaConcorso.currentValue) {
+      if (changes.ModalitaConcorso.currentValue === 'Controllato') {
+        this.controllaConcorso();
+      }
+    }
   }
 
   ngOnInit(): void {

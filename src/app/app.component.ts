@@ -74,6 +74,9 @@ export class AppComponent implements OnInit {
       case 0: // NUOVO CONCORSO
         this.nuovoConcorsoVisibile = true;
         break;
+      case 2: // RISULTATI
+        this.controlloConcorso = true;
+        break;
       case 3: // PRONOSTICI
         this.pronosticiVisibile = true;
         break;

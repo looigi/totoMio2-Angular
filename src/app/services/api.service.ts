@@ -188,6 +188,20 @@ export class ApiService {
     return ritorno;
   }
 
+  impostaConcorsoControllato(parametri) {
+    this.variabiliGlobali.CaricamentoInCorso = true;
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/ChiudeConcorso?' +
+      'idAnno=' + parametri.idAnno
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    this.variabiliGlobali.CaricamentoInCorso = false;
+    return ritorno;
+  }
+
   salvaPronosticoUtente(Dati) {
     this.variabiliGlobali.CaricamentoInCorso = true;
     this.controlloPresenzaUtente();
@@ -226,7 +240,8 @@ export class ApiService {
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/controllaConcorso?' +
       'idAnno=' + parametri.idAnno +
-      '&idUtente=' + parametri.idUtente
+      '&idUtente=' + parametri.idUtente +
+      '&ModalitaConcorso=' + parametri.ModalitaConcorso
       ;
       // 'Password=' + this.sistemaTesto(params.Password;
     // console.log('Login:', url);
