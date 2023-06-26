@@ -30,10 +30,10 @@
       </div>
       <div style="width: 5%; float: left; margin-top: 10px;">{{partita.idPartita}}</div>
       <div style="width: 35%; float: left; margin-top: 10px;">
-        <input type="text" [(ngModel)]="partita.Prima" class="scritta" style="width: 95%;">
+        <input type="text" [(ngModel)]="partita.Prima" (focusout)="controllaTasti()" class="scritta" style="width: 95%;">
       </div>
       <div style="width: 35%; float: left; margin-top: 10px;">
-        <input type="text" [(ngModel)]="partita.Seconda" class="scritta" style="width: 95%;">
+        <input type="text" [(ngModel)]="partita.Seconda" (focusout)="controllaTasti()" class="scritta" style="width: 95%;">
       </div>
       <div style="width: 15%; float: left; margin-top: 10px;">{{partita.Risultato}}</div>
       <div style="width: 5%; float: left; margin-top: 10px;">{{partita.Segno}}</div>

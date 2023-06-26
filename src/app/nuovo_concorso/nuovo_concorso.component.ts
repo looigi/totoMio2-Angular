@@ -144,6 +144,8 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
             this.vecchiePartite = this.partite;
 
             this.controllaTasti();
+
+            alert('Concorso salvato');
           } else {
             alert(data);
           }
@@ -179,22 +181,28 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
   }
 
   controllaTasti() {
-    // console.log('Partite', this.partite.length);
+    console.log('Partite', this.partite.length);
+    console.log('Confronto', this.vecchiePartite, this.partite);
     // console.log('Diff', JSON.stringify(this.vecchiePartite) === JSON.stringify(this.partite));
     if (this.partite.length === 0) {
       // console.log('Ritorno 1');
       this.tastoSalvataggio = false;
       this.tastoConferma = false;
     } else {
-      if (JSON.stringify(this.vecchiePartite) !== JSON.stringify(this.partite)) {
-        // console.log('Ritorno 2');
-        this.tastoSalvataggio = true;
+      this.tastoSalvataggio = true;
+      this.tastoConferma = true;
+      this.partite.forEach(element => {
+        if (!element.Prima || !element.Seconda) {
+          this.tastoConferma = false;
+        }
+      });
+      /* if (JSON.stringify(this.vecchiePartite) !== JSON.stringify(this.partite)) {
         this.tastoConferma = false;
       } else {
         // console.log('Ritorno 3');
         this.tastoSalvataggio = false;
         this.tastoConferma = true;
-      }
+      } */
     }
   }
 }

@@ -199,10 +199,13 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
 
   controllaTastoSalvataggio() {
     let ok = true;
+    let q = 0;
     this.partite.forEach(element => {
       if (ok && element.Segno === '') {
+        // console.log('Segno non valido', q+1, element.Segno);
         ok = false;
       }
+      q++;
     });
     if (ok) {
       this.tastoSalvataggio = true;
