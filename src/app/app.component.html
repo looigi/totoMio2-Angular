@@ -4,10 +4,6 @@
     <div class="immagineIcona" title="Registrazione nuovo utente" style="float: right; background-image: url('../assets/Immagini/signin.png'); background-size: contain;" (click)="apreNuovoUtente()"></div>
     <div class="barraSuperioreTesto scritta">
       <div class="casellaIntestazione">
-        Anno {{VariabiliGlobali.idAnno}} {{VariabiliGlobali.descrizioneAnno}}
-        Concorso {{VariabiliGlobali.idConcorso}} {{VariabiliGlobali.ModalitaConcorso}}
-      </div>
-      <div class="casellaIntestazione">
         <span *ngIf="VariabiliGlobali.Utente">
           {{VariabiliGlobali.Tipologia}} {{VariabiliGlobali.Utente}} ({{VariabiliGlobali.Cognome}} {{VariabiliGlobali.Nome}})
         </span>
@@ -34,64 +30,73 @@
   </div>
 
   <div class="divCentrale">
-    <nuovo-concorso-component
-      *ngIf="nuovoConcorsoVisibile"
-      [idAnno]="VariabiliGlobali.idAnno"
-      [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
-      [NumeroConcorso]="VariabiliGlobali.idConcorso + 1"
+    <div class="contenitoreMaschere">
+      <nuovo-concorso-component
+        *ngIf="nuovoConcorsoVisibile"
+        [idAnno]="VariabiliGlobali.idAnno"
+        [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
+        [NumeroConcorso]="VariabiliGlobali.idConcorso + 1"
 
-      (chiusuraFinestra)="nuovoConcorsoVisibile = false"
-    />
+        (chiusuraFinestra)="nuovoConcorsoVisibile = false"
+      />
 
-    <pronostici-component
-      *ngIf="pronosticiVisibile"
-      [idAnno]="VariabiliGlobali.idAnno"
-      [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
-      [NumeroConcorso]="VariabiliGlobali.idConcorso"
+      <pronostici-component
+        *ngIf="pronosticiVisibile"
+        [idAnno]="VariabiliGlobali.idAnno"
+        [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
+        [NumeroConcorso]="VariabiliGlobali.idConcorso"
 
-      (chiusuraFinestra)="pronosticiVisibile = false"
-    />
+        (chiusuraFinestra)="pronosticiVisibile = false"
+      />
 
-    <chiusura_concorsocomponent
-      *ngIf="chiusuraConcorso"
-      [idAnno]="VariabiliGlobali.idAnno"
-      [NumeroConcorso]="VariabiliGlobali.idConcorso"
+      <chiusura_concorsocomponent
+        *ngIf="chiusuraConcorso"
+        [idAnno]="VariabiliGlobali.idAnno"
+        [NumeroConcorso]="VariabiliGlobali.idConcorso"
 
-      (chiusuraFinestra)="chiusuraConcorso = false"
-    />
+        (chiusuraFinestra)="chiusuraConcorso = false"
+      />
 
-    <classifica_component
-      *ngIf="classifica"
-      [idAnno]="VariabiliGlobali.idAnno"
-      [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
-      [NumeroConcorso]="VariabiliGlobali.idConcorso"
+      <classifica_component
+        *ngIf="classifica"
+        [idAnno]="VariabiliGlobali.idAnno"
+        [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
+        [NumeroConcorso]="VariabiliGlobali.idConcorso"
 
-      (chiusuraFinestra)="classifica = false"
-    />
+        (chiusuraFinestra)="classifica = false"
+      />
 
-    <controllo_concorsocomponent
-      *ngIf="controlloConcorso"
-      [idAnno]="VariabiliGlobali.idAnno"
-      [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
-      [NumeroConcorso]="VariabiliGlobali.idConcorso"
-      [ModalitaConcorso]="VariabiliGlobali.ModalitaConcorso"
+      <controllo_concorsocomponent
+        *ngIf="controlloConcorso"
+        [idAnno]="VariabiliGlobali.idAnno"
+        [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
+        [NumeroConcorso]="VariabiliGlobali.idConcorso"
+        [ModalitaConcorso]="VariabiliGlobali.ModalitaConcorso"
 
-      (chiusuraFinestra)="controlloConcorso = false"
-    />
+        (chiusuraFinestra)="controlloConcorso = false"
+      />
 
-    <gestione_concorsocomponent
-      *ngIf="gestioneConcorso"
-      [idAnno]="VariabiliGlobali.idAnno"
-      [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
-      [NumeroConcorso]="VariabiliGlobali.idConcorso"
+      <gestione_concorsocomponent
+        *ngIf="gestioneConcorso"
+        [idAnno]="VariabiliGlobali.idAnno"
+        [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
+        [NumeroConcorso]="VariabiliGlobali.idConcorso"
 
-      (chiusuraFinestra)="gestioneConcorso = false"
-    />
+        (chiusuraFinestra)="gestioneConcorso = false"
+      />
+    </div>
   </div>
 </div>
 
 <div class="barraInferiore">
-  <div style="width: 99%; text-align: right; margin-top: 6px;">
+  <div style="width: 74%; float: left; margin-top: 6px; height: 20px; white-space: nowrap; border-right: 1px solid #ccc; overflow: hidden;">
+    <span class="scritta">
+      Anno {{VariabiliGlobali.idAnno}} {{VariabiliGlobali.descrizioneAnno}}
+      Concorso {{VariabiliGlobali.idConcorso}} {{VariabiliGlobali.ModalitaConcorso}}
+      <span *ngIf="eventi"> - Eventi: {{eventi}}</span>
+    </span>
+  </div>
+  <div style="width: 25%; float: left; padding-left: 3px; text-align: right; margin-top: 6px; overflow: hidden; height: 23px; white-space: nowrap;">
     <span class="scritta">TotoMIO 2 - Copyright looigi227</span>
   </div>
 </div>

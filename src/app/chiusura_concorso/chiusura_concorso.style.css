@@ -19,3 +19,15 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 14px;
 }
+
+.chiusura {
+  position: absolute;
+  right: 10px;
+  top: 4px;
+  width: 30px;
+  background-repeat: no-repeat;
+  height: 30px;
+  background-size: contain;
+  background-image: url('../../assets/Immagini/chiusura.png');
+  cursor: pointer;
+}

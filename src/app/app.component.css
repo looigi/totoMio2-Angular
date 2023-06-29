@@ -51,8 +51,15 @@ body {
   /* overflow: auto; */
 }
 
+
+.contenitoreMaschere {
+  float: left;
+  height: 100%;
+  width: 100%;
+}
+
 .casellaIntestazione {
-  width: calc(50% - 9px);
+  width: calc(100% - 9px);
   float: left;
   height: 32px;
   overflow: auto;

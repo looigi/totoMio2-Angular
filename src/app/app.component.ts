@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
   nome = '';
   eMail = '';
   ricordami = false;
+  eventi;
 
   nuovoConcorsoVisibile = false;
   pronosticiVisibile = false;
@@ -289,7 +290,19 @@ export class AppComponent implements OnInit {
               }
             });
             this.VariabiliGlobali.Anni = anni;
-            console.log(anni);
+
+            const terzaParte = parti[2].split('§');
+            let eventi = '';
+            terzaParte.forEach(element => {
+              if (element) {
+                eventi += element + ', ';
+              }
+            });
+            if (eventi.length > 0) {
+              eventi = eventi.substring(0, eventi.length - 2);
+            }
+            this.eventi = eventi;
+            console.log(anni, eventi);
           } else {
             console.error(data);
           }
