@@ -70,6 +70,13 @@ export class VariabiliGlobali {
       Pagina: 'Chiusura',
       idTipologia: 0
     },
+    {
+      idTasto: 7,
+      Icona: 'coppe.png',
+      Titolo: 'Tornei',
+      Pagina: 'Tornei',
+      idTipologia: -1
+    },
   ]
 
   sistemaStringaPerPassaggio(stringa) {

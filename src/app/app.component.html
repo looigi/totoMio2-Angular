@@ -37,7 +37,7 @@
         [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
         [NumeroConcorso]="VariabiliGlobali.idConcorso + 1"
 
-        (chiusuraFinestra)="nuovoConcorsoVisibile = false"
+        (chiusuraFinestra)="nuovoConcorsoVisibile = false; ritornaDatiGlobali()"
       />
 
       <pronostici-component
@@ -46,7 +46,16 @@
         [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
         [NumeroConcorso]="VariabiliGlobali.idConcorso"
 
-        (chiusuraFinestra)="pronosticiVisibile = false"
+        (chiusuraFinestra)="pronosticiVisibile = false; ritornaDatiGlobali()"
+      />
+
+      <coppe_component
+        *ngIf="coppeVisibile"
+        [idAnno]="VariabiliGlobali.idAnno"
+        [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
+        [NumeroConcorso]="VariabiliGlobali.idConcorso"
+
+        (chiusuraFinestra)="coppeVisibile = false; ritornaDatiGlobali()"
       />
 
       <chiusura_concorsocomponent
@@ -54,7 +63,7 @@
         [idAnno]="VariabiliGlobali.idAnno"
         [NumeroConcorso]="VariabiliGlobali.idConcorso"
 
-        (chiusuraFinestra)="chiusuraConcorso = false"
+        (chiusuraFinestra)="chiusuraConcorso = false; ritornaDatiGlobali()"
       />
 
       <classifica_component
@@ -63,7 +72,7 @@
         [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
         [NumeroConcorso]="VariabiliGlobali.idConcorso"
 
-        (chiusuraFinestra)="classifica = false"
+        (chiusuraFinestra)="classifica = false; ritornaDatiGlobali()"
       />
 
       <controllo_concorsocomponent
@@ -73,7 +82,7 @@
         [NumeroConcorso]="VariabiliGlobali.idConcorso"
         [ModalitaConcorso]="VariabiliGlobali.ModalitaConcorso"
 
-        (chiusuraFinestra)="controlloConcorso = false"
+        (chiusuraFinestra)="controlloConcorso = false; ritornaDatiGlobali()"
       />
 
       <gestione_concorsocomponent
@@ -82,14 +91,14 @@
         [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
         [NumeroConcorso]="VariabiliGlobali.idConcorso"
 
-        (chiusuraFinestra)="gestioneConcorso = false"
+        (chiusuraFinestra)="gestioneConcorso = false; ritornaDatiGlobali()"
       />
     </div>
   </div>
 </div>
 
 <div class="barraInferiore">
-  <div style="width: 74%; float: left; margin-top: 6px; height: 20px; white-space: nowrap; border-right: 1px solid #ccc; overflow: hidden;">
+  <div [title]="eventi ? 'Eventi: ' + eventi : ''" style="width: 74%; float: left; margin-top: 6px; height: 20px; white-space: nowrap; border-right: 1px solid #ccc; overflow: hidden;">
     <span class="scritta">
       Anno {{VariabiliGlobali.idAnno}} {{VariabiliGlobali.descrizioneAnno}}
       Concorso {{VariabiliGlobali.idConcorso}} {{VariabiliGlobali.ModalitaConcorso}}

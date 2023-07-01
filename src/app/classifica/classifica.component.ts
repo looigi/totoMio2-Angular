@@ -68,10 +68,12 @@ export class ClassificaComponent implements OnInit, AfterViewInit, OnChanges {
             const righe = data.split('§');
             const classif = new Array();
             let posizione = 1;
+            let pari = false;
             righe.forEach(element => {
               if (element) {
                 const c = element.split(';');
                 const cc = {
+                  Pari: pari,
                   Posizione: posizione,
                   idUtente: +c[0],
                   NickName: c[1],
@@ -81,8 +83,10 @@ export class ClassificaComponent implements OnInit, AfterViewInit, OnChanges {
                   RisFuoriTot: +c[5],
                   Segni: +c[6],
                   SommaGoal: +c[7],
-                  DifferenzeGoal: +c[8]
+                  DifferenzeGoal: +c[8],
+                  Giocate: +c[9]
                 }
+                pari = !pari
                 posizione++;
                 classif.push(cc);
               }

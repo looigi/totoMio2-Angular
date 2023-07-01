@@ -13,6 +13,8 @@ import { GestioneConcorsoComponent } from './gestione_concorso/gestione_concorso
 import { ChiusuraConcorsoComponent } from './chiusura_concorso/chiusura_concorso.component';
 import { ControlloConcorsoComponent } from './controllo_concorso/controllo_concorso.component';
 import { ClassificaComponent } from './classifica/classifica.component';
+import { CoppeComponent } from './coppe/coppe.compnent';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { ClassificaComponent } from './classifica/classifica.component';
     ChiusuraConcorsoComponent,
     GestioneConcorsoComponent,
     ControlloConcorsoComponent,
-    ClassificaComponent
+    ClassificaComponent,
+    CoppeComponent
   ],
   imports: [
     BrowserModule,

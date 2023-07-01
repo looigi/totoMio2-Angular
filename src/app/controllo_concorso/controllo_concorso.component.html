@@ -11,7 +11,8 @@
     </div>
   </div>
   <div class="contenitoreInterno">
-    <div *ngFor="let risultato of risultati; let i = index" [attr.data-index]="i">
+    <div *ngFor="let risultato of risultati; let i = index" [attr.data-index]="i"
+      [style.background-color]="risultato.NickName == variabiliGlobali.Utente ? '#b2b4ff' : 'transparent'">
       <div  class="rigaGenerale">
         <div class="rigaIntestazione scritta">
           Utente: <span style="font-weight: bold;">{{risultato.NickName}}</span>
@@ -40,7 +41,8 @@
             <th style="border-right: 1px solid #aaa;">Diff.</th>
             <th>Punti</th>
           </tr>
-          <tr *ngFor="let partita of risultato.Dettaglio; let i2 = index" [attr.data-index]="i2">
+          <tr *ngFor="let partita of risultato.Dettaglio; let i2 = index" [attr.data-index]="i2"
+            [style.background-color]="partita.Pari ? '#cecefd' : 'transparent'">
             <td style="text-align: center; border-right: 1px solid #aaa;">{{partita.idPartita}}</td>
             <td style="text-align: left; border-right: 1px solid #aaa;">{{partita.Squadra1}}</td>
             <td style="text-align: left; border-right: 1px solid #aaa;">{{partita.Squadra2}}</td>

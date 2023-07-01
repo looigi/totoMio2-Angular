@@ -35,8 +35,8 @@
 }
 
 .immagineIcona {
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
 }
 
@@ -47,11 +47,10 @@
 
 .rigaGenerale {
   width: calc(100% - 6px);
-  height: 40px;
+  height: 30px;
   border: 1px solid #999;
   margin: 3px;
-  background-color: #ffcece;
-  margin-top: 5px;
+  /* margin-top: 3px; */
   border-radius: 5px;
 }
 
@@ -59,14 +58,14 @@
   width: calc(90% - 5px);
   float: left;
   font-size: 16px;
-  margin-top: 9px;
+  margin-top: 5px;
   margin-left: 5px;
 }
 
 .dettaglio {
   width: calc(100% - 6px);
   border: 1px solid #999;
-  background-color: #c4ddf3;
+  /* background-color: #c4ddf3; */
   height: auto;
   margin-top: -2px;
   border-radius: 5px;

@@ -1,0 +1,24 @@
+<div class="finestra">
+  <div class="barraSuperiore">
+    <div style="width: 50%; float: left;">
+    </div>
+    <div class="scritta" style="width: 50%; float: left; margin-top: 5px; font-weight: bold; white-space: nowrap;">
+      Coppe Anno {{idAnno}} - {{DescrizioneAnno}} Concorso {{NumeroConcorso}}
+    </div>
+  </div>
+  <div class="contenitoreInterno">
+    <div style="width: 100%; height: 35px; float: left; white-space: nowrap; overflow: hidden;">
+      <div class="tab scritta" [style.border-bottom]="coppaScelta == 1 ? '2px solid red' : '0px'" (click)="coppaScelta=1">Rotolo di coppa</div>
+      <div class="tab scritta" [style.border-bottom]="coppaScelta == 2 ? '2px solid red' : '0px'" (click)="coppaScelta=2">Coppa Coppata</div>
+      <div class="tab scritta" [style.border-bottom]="coppaScelta == 3 ? '2px solid red' : '0px'" (click)="coppaScelta=3">TotoMIO</div>
+      <div class="tab scritta" [style.border-bottom]="coppaScelta == 4 ? '2px solid red' : '0px'" (click)="coppaScelta=4">Coppa dei Settimini</div>
+      <div class="tab scritta" [style.border-bottom]="coppaScelta == 5 ? '2px solid red' : '0px'" (click)="coppaScelta=5">Pippettero</div>
+    </div>
+    <div class="contenitoreTab scritta">
+      {{coppaScelta}}
+    </div>
+  </div>
+</div>
+
+<div class="chiusura" (click)="chiusura()" title="Chiusura finestra">
+</div>

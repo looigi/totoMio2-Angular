@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
   chiusuraConcorso = false;
   controlloConcorso = false;
   classifica = false;
+  coppeVisibile = false;
 
   constructor(
     public VariabiliGlobali: VariabiliGlobali,
@@ -93,6 +94,9 @@ export class AppComponent implements OnInit {
         break;
       case 5: // CONTROLLO CONCORSO
         this.controlloConcorso = true;
+        break;
+      case 7: // TORNEI
+        this.coppeVisibile = true;
         break;
     }
   }

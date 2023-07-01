@@ -11,11 +11,12 @@
     </div>
   </div>
   <div class="contenitoreInterno scritta">
-    <table style="width: 100%;">
+    <table style="width: 100%;" cellpadding="0" cellspacing="0">
       <tr>
         <th style="border-right: 1px solid #aaa;">N°</th>
         <th style="border-right: 1px solid #aaa;">NickName</th>
         <th style="border-right: 1px solid #aaa;">Punti</th>
+        <th style="border-right: 1px solid #aaa;">Giocate</th>
         <th style="border-right: 1px solid #aaa;">Ris. Es.</th>
         <th style="border-right: 1px solid #aaa;">G. Casa</th>
         <th style="border-right: 1px solid #aaa;">G. Fuori</th>
@@ -23,10 +24,12 @@
         <th style="border-right: 1px solid #aaa;">Somma</th>
         <th style="border-right: 1px solid #aaa;">Diff.</th>
       </tr>
-      <tr *ngFor="let classifica_utente of classifica; let i2 = index" [attr.data-index]="i2">
+      <tr *ngFor="let classifica_utente of classifica; let i2 = index" [attr.data-index]="i2"
+        [style.background-color]="classifica_utente.Pari ? '#cecefd' : 'transparent'">
         <td style="text-align: center; border-right: 1px solid #aaa;">{{classifica_utente.Posizione}}</td>
         <td style="text-align: left; border-right: 1px solid #aaa;">{{classifica_utente.NickName}}</td>
         <td style="text-align: right; border-right: 1px solid #aaa;">{{classifica_utente.Punti}}</td>
+        <td style="text-align: right; border-right: 1px solid #aaa;">{{classifica_utente.Giocate}}</td>
         <td style="text-align: right; border-right: 1px solid #aaa;">{{classifica_utente.RisultatiEsatti}}</td>
         <td style="text-align: right; border-right: 1px solid #aaa;">{{classifica_utente.RisCasaTot}}</td>
         <td style="text-align: right; border-right: 1px solid #aaa;">{{classifica_utente.RisFuoriTot}}</td>

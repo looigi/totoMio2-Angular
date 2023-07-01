@@ -30,7 +30,6 @@
 .contenitoreInterno {
   width: 100%;
   height: calc(100% - 40px);
-  margin-top: 40px;
   overflow: auto;
 }
 
@@ -42,33 +41,32 @@
 
 .scritta {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 15px;
+  font-size: 14px;
 }
 
-.rigaGenerale {
-  width: calc(100% - 6px);
-  height: 40px;
-  border: 1px solid #999;
-  margin: 3px;
-  background-color: #ffcece;
-  margin-top: 5px;
-  border-radius: 5px;
-}
-
-.rigaIntestazione {
-  width: calc(90% - 5px);
+.tab {
   float: left;
-  font-size: 16px;
-  margin-top: 9px;
-  margin-left: 5px;
+  width: calc(20% - 15px);
+  height: 20px;
+  text-align: center;
+  background-color: white;
+  white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow: hidden;
 }
 
-.dettaglio {
-  width: calc(100% - 6px);
+.tab:hover {
+  background-color: #d3d3d3;
+  border-bottom: 2px solid red;
+}
+
+.contenitoreTab {
+  margin-top: 25px;
+  width: calc(100% - 10px);
+  height: calc(100% - 35px);
   border: 1px solid #999;
-  background-color: #c4ddf3;
-  height: auto;
-  margin-top: -2px;
-  border-radius: 5px;
-  margin-left: 3px;
+  border-radius: 3px;
+  background-color: white;
+  padding: 3px;
 }

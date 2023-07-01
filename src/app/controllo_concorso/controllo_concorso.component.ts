@@ -21,7 +21,7 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
 
   constructor(
     private apiService: ApiService,
-    private variabiliGlobali: VariabiliGlobali
+    public variabiliGlobali: VariabiliGlobali
   ) {
 
   }
@@ -47,6 +47,7 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
             const righe = data.split('%');
             // console.log('Righe', righe);
             const RisultatiFinali = new Array();
+            let pari = false;
             righe.forEach(element => {
               if (element) {
                 const parti = element.split('|');
@@ -68,6 +69,7 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
 	// DifferenzaGoalPartita & ";"
 	// 				Ritorno &= Punti
                     const dett = {
+                      Pari: pari,
                       idPartita: +Dettaglio[0],
                       Squadra1: Dettaglio[1],
                       Squadra2: Dettaglio[2],
@@ -86,6 +88,7 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
                     DettaglioArray.push(dett);
                     // console.log(DettaglioArray);
                   }
+                  pari = !pari;
                 });
                 const finale = {
                   idUtente: idUtente,
