@@ -34,8 +34,8 @@
 }
 
 .immagineIcona {
-  width: 35px;
-  height: 35px;
+  width: 19px;
+  height: 19px;
   cursor: pointer;
 }
 
@@ -58,7 +58,7 @@
 
 .tab:hover {
   background-color: #d3d3d3;
-  border-bottom: 2px solid red;
+  border-bottom: 2px solid #a9a9a9;
 }
 
 .contenitoreTab {

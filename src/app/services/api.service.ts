@@ -174,6 +174,22 @@ export class ApiService {
     return ritorno;
   }
 
+  ritornaDatiCoppa(parametri) {
+    this.variabiliGlobali.CaricamentoInCorso = true;
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/RitornaClassificaCoppe?' +
+      'idAnno=' + parametri.idAnno + '&' +
+      'idGiornata=' + parametri.idGiornata + '&' +
+      'Torneo=' + parametri.Torneo
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    this.variabiliGlobali.CaricamentoInCorso = false;
+    return ritorno;
+  }
+
   impostaConcorsoPerControllo(parametri) {
     this.variabiliGlobali.CaricamentoInCorso = true;
     this.controlloPresenzaUtente();
