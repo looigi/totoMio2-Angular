@@ -49,11 +49,11 @@
         (chiusuraFinestra)="pronosticiVisibile = false; ritornaDatiGlobali()"
       />
 
+      <!--        [NumeroConcorso]="VariabiliGlobali.idConcorso" -->
       <coppe_component
         *ngIf="coppeVisibile"
         [idAnno]="VariabiliGlobali.idAnno"
         [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
-        [NumeroConcorso]="VariabiliGlobali.idConcorso"
 
         (chiusuraFinestra)="coppeVisibile = false; ritornaDatiGlobali()"
       />

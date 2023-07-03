@@ -11,14 +11,14 @@ import { VariabiliGlobali } from "../VariabiliGlobali.component";
 export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() idAnno;
   @Input() DescrizioneAnno;
-  @Input() NumeroConcorso;
+  // @Input() NumeroConcorso;
   @Input() ModalitaConcorso;
 
   @Output() chiusuraFinestra: EventEmitter<string> = new EventEmitter<string>();
 
   coppaScelta = 1;
   idAnno2;
-  idConcorso2;
+  idConcorso2 = 1;
   errore;
   classifica;
   partite;

@@ -65,7 +65,7 @@ export class VariabiliGlobali {
     },
     {
       idTasto: 6,
-      Icona: 'chiusura.png',
+      Icona: 'lucchetto.png',
       Titolo: 'Chiusura',
       Pagina: 'Chiusura',
       idTipologia: 0
