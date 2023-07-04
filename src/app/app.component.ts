@@ -76,26 +76,82 @@ export class AppComponent implements OnInit {
     switch(i) {
       case 0: // NUOVO CONCORSO
         this.nuovoConcorsoVisibile = true;
+        this.classifica = false;
+        this.controlloConcorso = false;
+        this.pronosticiVisibile = false;
+        this.chiusuraConcorso = false;
+        this.gestioneConcorso = false;
+        this.controlloConcorso = false;
+        this.coppeVisibile = false;
         break;
       case 1: // CLASSIFICA
+        this.nuovoConcorsoVisibile = false;
         this.classifica = true;
+        this.controlloConcorso = false;
+        this.pronosticiVisibile = false;
+        this.chiusuraConcorso = false;
+        this.gestioneConcorso = false;
+        this.controlloConcorso = false;
+        this.coppeVisibile = false;
         break;
       case 2: // RISULTATI
+        this.nuovoConcorsoVisibile = false;
+        this.classifica = false;
         this.controlloConcorso = true;
+        this.pronosticiVisibile = false;
+        this.chiusuraConcorso = false;
+        this.gestioneConcorso = false;
+        this.controlloConcorso = false;
+        this.coppeVisibile = false;
         break;
       case 3: // PRONOSTICI
+        this.nuovoConcorsoVisibile = false;
+        this.classifica = false;
+        this.controlloConcorso = false;
         this.pronosticiVisibile = true;
+        this.chiusuraConcorso = false;
+        this.gestioneConcorso = false;
+        this.controlloConcorso = false;
+        this.coppeVisibile = false;
         break;
       case 6: // CHIUSURA CONCORSO
+        this.nuovoConcorsoVisibile = false;
+        this.classifica = false;
+        this.controlloConcorso = false;
+        this.pronosticiVisibile = false;
         this.chiusuraConcorso = true;
+        this.gestioneConcorso = false;
+        this.controlloConcorso = false;
+        this.coppeVisibile = false;
         break;
       case 4: // GESTIONE CONCORSO
+        this.nuovoConcorsoVisibile = false;
+        this.classifica = false;
+        this.controlloConcorso = false;
+        this.pronosticiVisibile = false;
+        this.chiusuraConcorso = false;
         this.gestioneConcorso = true;
+        this.controlloConcorso = false;
+        this.coppeVisibile = false;
         break;
       case 5: // CONTROLLO CONCORSO
+        this.nuovoConcorsoVisibile = false;
+        this.classifica = false;
+        this.controlloConcorso = false;
+        this.pronosticiVisibile = false;
+        this.chiusuraConcorso = false;
+        this.gestioneConcorso = false;
         this.controlloConcorso = true;
+        this.coppeVisibile = false;
         break;
       case 7: // TORNEI
+        this.nuovoConcorsoVisibile = false;
+        this.classifica = false;
+        this.controlloConcorso = false;
+        this.pronosticiVisibile = false;
+        this.chiusuraConcorso = false;
+        this.gestioneConcorso = false;
+        this.controlloConcorso = false;
         this.coppeVisibile = true;
         break;
     }
@@ -198,10 +254,12 @@ export class AppComponent implements OnInit {
       NickName: this.user,
       Password: this.password
     }
+    this.VariabiliGlobali.CaricamentoInCorso = true;
 
     this.apiService.effettuaLogin(params)
     .map((response: any) => response)
     .subscribe((data2: string | string[]) => {
+        this.VariabiliGlobali.CaricamentoInCorso = false;
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {
@@ -242,10 +300,12 @@ export class AppComponent implements OnInit {
       Mail: this.eMail,
       idTipologia: 1
     }
+    this.VariabiliGlobali.CaricamentoInCorso = true;
 
     this.apiService.creaNuovoUtente(params)
     .map((response: any) => response)
     .subscribe((data2: string | string[]) => {
+        this.VariabiliGlobali.CaricamentoInCorso = false;
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {
@@ -263,9 +323,11 @@ export class AppComponent implements OnInit {
   }
 
   ritornaDatiGlobali() {
+    this.VariabiliGlobali.CaricamentoInCorso = true;
     this.apiService.login()
     .map((response: any) => response)
     .subscribe((data2: string | string[]) => {
+        this.VariabiliGlobali.CaricamentoInCorso = false;
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {

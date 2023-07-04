@@ -33,9 +33,11 @@ export class GestioneConcorsoComponent implements OnInit, AfterViewInit, OnChang
   }
 
   leggeConcorso() {
+    this.variabiliGlobali.CaricamentoInCorso = true;
     this.apiService.ritornaConcorso(this.idAnno2, this.NumeroConcorso2)
     .map((response: any) => response)
     .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {
@@ -124,9 +126,11 @@ export class GestioneConcorsoComponent implements OnInit, AfterViewInit, OnChang
     }
     // console.log(parametri);
     // return;
+    this.variabiliGlobali.CaricamentoInCorso = true;
     this.apiService.salvaConcorso(parametri)
     .map((response: any) => response)
     .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {

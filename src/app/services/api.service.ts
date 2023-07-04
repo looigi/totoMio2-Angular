@@ -82,19 +82,16 @@ export class ApiService {
   }
 
   login() {
-    this.variabiliGlobali.CaricamentoInCorso = true;
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsTotoMio2.asmx/RitornaDatiGenerali?idAnno=' + this.variabiliGlobali.idAnno;
       // 'Password=' + this.sistemaTesto(params.Password;
     // console.log('Login:', url);
     const ritorno = this.httpclient.get(url);
     // console.log(ritorno);
-    this.variabiliGlobali.CaricamentoInCorso = false;
     return ritorno;
   }
 
   effettuaLogin(params) {
-    this.variabiliGlobali.CaricamentoInCorso = true;
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/RitornaUtentePerLogin?' +
       'idAnno=' + this.variabiliGlobali.idAnno + '&' +
@@ -105,12 +102,10 @@ export class ApiService {
     // console.log('Login:', url);
     const ritorno = this.httpclient.get(url);
     // console.log(ritorno);
-    this.variabiliGlobali.CaricamentoInCorso = false;
     return ritorno;
   }
 
   creaNuovoUtente(params) {
-    this.variabiliGlobali.CaricamentoInCorso = true;
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/AggiungeUtente?' +
       'idAnno=' + this.variabiliGlobali.idAnno + '&' +
@@ -125,12 +120,10 @@ export class ApiService {
     // console.log('Login:', url);
     const ritorno = this.httpclient.get(url);
     // console.log(ritorno);
-    this.variabiliGlobali.CaricamentoInCorso = false;
     return ritorno;
   }
 
   ritornaConcorso(idAnno, idConcorso) {
-    this.variabiliGlobali.CaricamentoInCorso = true;
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/RitornoConcorso?' +
       'idAnno=' + idAnno + '&' +
@@ -140,12 +133,10 @@ export class ApiService {
     // console.log('Login:', url);
     const ritorno = this.httpclient.get(url);
     // console.log(ritorno);
-    this.variabiliGlobali.CaricamentoInCorso = false;
     return ritorno;
   }
 
   salvaConcorso(parametri) {
-    this.variabiliGlobali.CaricamentoInCorso = true;
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/ModificaConcorso?' +
       'idAnno=' + parametri.idAnno + '&' +
@@ -156,12 +147,10 @@ export class ApiService {
     // console.log('Login:', url);
     const ritorno = this.httpclient.get(url);
     // console.log(ritorno);
-    this.variabiliGlobali.CaricamentoInCorso = false;
     return ritorno;
   }
 
   apreConcorso(parametri) {
-    this.variabiliGlobali.CaricamentoInCorso = true;
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/ApreConcorso?' +
       'idAnno=' + parametri.idAnno
@@ -170,12 +159,10 @@ export class ApiService {
     // console.log('Login:', url);
     const ritorno = this.httpclient.get(url);
     // console.log(ritorno);
-    this.variabiliGlobali.CaricamentoInCorso = false;
     return ritorno;
   }
 
   ritornaDatiCoppa(parametri) {
-    this.variabiliGlobali.CaricamentoInCorso = true;
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/RitornaClassificaCoppe?' +
       'idAnno=' + parametri.idAnno + '&' +
@@ -186,12 +173,10 @@ export class ApiService {
     // console.log('Login:', url);
     const ritorno = this.httpclient.get(url);
     // console.log(ritorno);
-    this.variabiliGlobali.CaricamentoInCorso = false;
     return ritorno;
   }
 
   impostaConcorsoPerControllo(parametri) {
-    this.variabiliGlobali.CaricamentoInCorso = true;
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/impostaConcorsoPerControllo?' +
       'idAnno=' + parametri.idAnno
@@ -205,7 +190,6 @@ export class ApiService {
   }
 
   impostaConcorsoControllato(parametri) {
-    this.variabiliGlobali.CaricamentoInCorso = true;
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/ChiudeConcorso?' +
       'idAnno=' + parametri.idAnno
@@ -214,12 +198,10 @@ export class ApiService {
     // console.log('Login:', url);
     const ritorno = this.httpclient.get(url);
     // console.log(ritorno);
-    this.variabiliGlobali.CaricamentoInCorso = false;
     return ritorno;
   }
 
   salvaPronosticoUtente(Dati) {
-    this.variabiliGlobali.CaricamentoInCorso = true;
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/SalvaPronosticoUtente?' +
       'idAnno=' + this.variabiliGlobali.idAnno +
@@ -236,7 +218,6 @@ export class ApiService {
   }
 
   ritornaPronosticoUtente() {
-    this.variabiliGlobali.CaricamentoInCorso = true;
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/RitornaPronosticoUtente?' +
       'idAnno=' + this.variabiliGlobali.idAnno +
@@ -247,12 +228,10 @@ export class ApiService {
     // console.log('Login:', url);
     const ritorno = this.httpclient.get(url);
     // console.log(ritorno);
-    this.variabiliGlobali.CaricamentoInCorso = false;
     return ritorno;
   }
 
   controllaConcorso(parametri) {
-    this.variabiliGlobali.CaricamentoInCorso = true;
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/controllaConcorso?' +
       'idAnno=' + parametri.idAnno +
@@ -263,12 +242,10 @@ export class ApiService {
     // console.log('Login:', url);
     const ritorno = this.httpclient.get(url);
     // console.log(ritorno);
-    this.variabiliGlobali.CaricamentoInCorso = false;
     return ritorno;
   }
 
   leggeClassifica(parametri) {
-    this.variabiliGlobali.CaricamentoInCorso = true;
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/RitornaClassifica?' +
       'idAnno=' + parametri.idAnno +
@@ -278,7 +255,6 @@ export class ApiService {
     // console.log('Login:', url);
     const ritorno = this.httpclient.get(url);
     // console.log(ritorno);
-    this.variabiliGlobali.CaricamentoInCorso = false;
     return ritorno;
   }
 

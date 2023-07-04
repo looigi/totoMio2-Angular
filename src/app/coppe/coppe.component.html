@@ -68,7 +68,9 @@
               <td style="text-align: center;">{{classif.Numero}}</td>
               <td>{{classif.Casa}}</td>
               <td>{{classif.Fuori}}</td>
-              <td *ngIf="classif.Vincente > -1" style="text-align: center;">{{classif.Vincente}}</td>
+              <td *ngIf="classif.Vincente == 1" style="text-align: center;">{{classif.Casa}}</td>
+              <td *ngIf="classif.Vincente == 2" style="text-align: center;">{{classif.Fuori}}</td>
+              <td *ngIf="classif.Vincente == 0" style="text-align: center;">Pareggio</td>
               <td *ngIf="classif.Vincente == -1" style="text-align: center;">--</td>
             </tr>
           </table>

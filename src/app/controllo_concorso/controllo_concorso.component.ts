@@ -36,9 +36,11 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
       idUtente: this.variabiliGlobali.idUser,
       ModalitaConcorso: this.ModalitaConcorso
     }
+    this.variabiliGlobali.CaricamentoInCorso = true;
     this.apiService.controllaConcorso(parametri)
     .map((response: any) => response)
     .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {
@@ -117,9 +119,11 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
     const parametri = {
       idAnno: this.idAnno
     }
+    this.variabiliGlobali.CaricamentoInCorso = true;
     this.apiService.impostaConcorsoControllato(parametri)
     .map((response: any) => response)
     .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {

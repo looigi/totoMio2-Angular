@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class VariabiliGlobali {
-  CaricamentoInCorso = false;
+  CaricamentoInCorso = true;
   urlWS = 'http://looigi.ddns.net:1081/';
   urlImmagini = 'http://192.168.0.205:1080/Immagini/';
   idAnno = 1;

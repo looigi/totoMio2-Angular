@@ -33,9 +33,11 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
   }
 
   leggeConcorso() {
+    this.variabiliGlobali.CaricamentoInCorso = true;
     this.apiService.ritornaConcorso(this.idAnno2, this.NumeroConcorso2)
     .map((response: any) => response)
     .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {
@@ -135,9 +137,11 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
       idConcorso: this.NumeroConcorso2,
       Dati: dati
     }
+    this.variabiliGlobali.CaricamentoInCorso = true;
     this.apiService.salvaConcorso(parametri)
     .map((response: any) => response)
     .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {
@@ -158,9 +162,11 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
     const parametri = {
       idAnno: this.idAnno2
     }
+    this.variabiliGlobali.CaricamentoInCorso = true;
     this.apiService.apreConcorso(parametri)
     .map((response: any) => response)
     .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {

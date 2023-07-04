@@ -33,9 +33,11 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   leggeConcorso() {
+    this.variabiliGlobali.CaricamentoInCorso = true;
     this.apiService.ritornaConcorso(this.idAnno2, this.NumeroConcorso2)
     .map((response: any) => response)
     .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {
@@ -82,9 +84,11 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   leggePronostico() {
+    this.variabiliGlobali.CaricamentoInCorso = true;
     this.apiService.ritornaPronosticoUtente()
     .map((response: any) => response)
     .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {
@@ -141,9 +145,11 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
       const ris = element.Risultato1 + '-' + element.Risultato2;
       Dati += element.idPartita + ';' + ris + ';' + element.Segno + '§';
     });
+    this.variabiliGlobali.CaricamentoInCorso = true;
     this.apiService.salvaPronosticoUtente(Dati)
     .map((response: any) => response)
     .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {
