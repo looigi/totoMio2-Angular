@@ -81,7 +81,6 @@ export class AppComponent implements OnInit {
         this.pronosticiVisibile = false;
         this.chiusuraConcorso = false;
         this.gestioneConcorso = false;
-        this.controlloConcorso = false;
         this.coppeVisibile = false;
         break;
       case 1: // CLASSIFICA
@@ -91,7 +90,6 @@ export class AppComponent implements OnInit {
         this.pronosticiVisibile = false;
         this.chiusuraConcorso = false;
         this.gestioneConcorso = false;
-        this.controlloConcorso = false;
         this.coppeVisibile = false;
         break;
       case 2: // RISULTATI
@@ -101,7 +99,6 @@ export class AppComponent implements OnInit {
         this.pronosticiVisibile = false;
         this.chiusuraConcorso = false;
         this.gestioneConcorso = false;
-        this.controlloConcorso = false;
         this.coppeVisibile = false;
         break;
       case 3: // PRONOSTICI
@@ -111,7 +108,6 @@ export class AppComponent implements OnInit {
         this.pronosticiVisibile = true;
         this.chiusuraConcorso = false;
         this.gestioneConcorso = false;
-        this.controlloConcorso = false;
         this.coppeVisibile = false;
         break;
       case 6: // CHIUSURA CONCORSO
@@ -121,7 +117,6 @@ export class AppComponent implements OnInit {
         this.pronosticiVisibile = false;
         this.chiusuraConcorso = true;
         this.gestioneConcorso = false;
-        this.controlloConcorso = false;
         this.coppeVisibile = false;
         break;
       case 4: // GESTIONE CONCORSO
@@ -131,17 +126,15 @@ export class AppComponent implements OnInit {
         this.pronosticiVisibile = false;
         this.chiusuraConcorso = false;
         this.gestioneConcorso = true;
-        this.controlloConcorso = false;
         this.coppeVisibile = false;
         break;
       case 5: // CONTROLLO CONCORSO
         this.nuovoConcorsoVisibile = false;
         this.classifica = false;
-        this.controlloConcorso = false;
+        this.controlloConcorso = true;
         this.pronosticiVisibile = false;
         this.chiusuraConcorso = false;
         this.gestioneConcorso = false;
-        this.controlloConcorso = true;
         this.coppeVisibile = false;
         break;
       case 7: // TORNEI
@@ -151,7 +144,6 @@ export class AppComponent implements OnInit {
         this.pronosticiVisibile = false;
         this.chiusuraConcorso = false;
         this.gestioneConcorso = false;
-        this.controlloConcorso = false;
         this.coppeVisibile = true;
         break;
     }

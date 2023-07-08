@@ -162,6 +162,17 @@ export class ApiService {
     return ritorno;
   }
 
+  ritornaNomiCoppe() {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/ritornaNomiCoppe'
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    return ritorno;
+  }
+
   ritornaDatiCoppa(parametri) {
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/RitornaClassificaCoppe?' +

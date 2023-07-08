@@ -77,6 +77,13 @@ export class VariabiliGlobali {
       Pagina: 'Tornei',
       idTipologia: -1
     },
+    {
+      idTasto: 8,
+      Icona: 'info.png',
+      Titolo: 'Info',
+      Pagina: 'Info',
+      idTipologia: -1
+    },
   ]
 
   sistemaStringaPerPassaggio(stringa) {

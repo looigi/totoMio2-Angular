@@ -16,12 +16,13 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Output() chiusuraFinestra: EventEmitter<string> = new EventEmitter<string>();
 
-  coppaScelta = 1;
+  coppaScelta = 0;
   idAnno2;
   idConcorso2 = 1;
   errore;
   classifica;
   partite;
+  coppe;
 
   constructor(
     private apiService: ApiService,
@@ -47,13 +48,44 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnInit(): void {
-
+    this.leggeNomiCoppe();
   }
 
   ngAfterViewInit(): void {
 
   }
 
+  leggeNomiCoppe() {
+    this.variabiliGlobali.CaricamentoInCorso = true;
+    this.apiService.ritornaNomiCoppe()
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            const righe = data.split('§');
+            const coppe = new Array();
+            righe.forEach(element => {
+              if (element) {
+                const c = element.split(';');
+                const r = {
+                  idCoppa: +c[0],
+                  NomeCoppa: c[1]
+                }
+                coppe.push(r);
+              }
+            });
+            this.coppe = coppe;
+          } else {
+
+          }
+        } else {
+
+        }
+      }
+    );
+  }
   indietro() {
     if (this.idConcorso2 > 1) {
       this.idConcorso2--;
@@ -70,19 +102,19 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
     let Torneo = '';
     switch (this.coppaScelta) {
       case 1:
-        Torneo = 'Rotolo';
+        Torneo = '1';
         break;
       case 2:
-        Torneo = 'Coppata';
+        Torneo = '2';
         break;
       case 3:
-        Torneo = 'TotoMIO';
+        Torneo = '3';
         break;
       case 4:
-        Torneo = 'Settimini';
+        Torneo = '4';
         break;
       case 5:
-        Torneo = 'Pippettero';
+        Torneo = '5';
         break;
     }
     this.errore  = '';

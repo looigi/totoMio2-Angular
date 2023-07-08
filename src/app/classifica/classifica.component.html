@@ -26,16 +26,16 @@
       </tr>
       <tr *ngFor="let classifica_utente of classifica; let i2 = index" [attr.data-index]="i2"
         [style.background-color]="classifica_utente.Pari ? '#cecefd' : 'transparent'">
-        <td style="text-align: center; border-right: 1px solid #aaa;">{{classifica_utente.Posizione}}</td>
-        <td style="text-align: left; border-right: 1px solid #aaa;">{{classifica_utente.NickName}}</td>
-        <td style="text-align: right; border-right: 1px solid #aaa;">{{classifica_utente.Punti}}</td>
-        <td style="text-align: right; border-right: 1px solid #aaa;">{{classifica_utente.Giocate}}</td>
-        <td style="text-align: right; border-right: 1px solid #aaa;">{{classifica_utente.RisultatiEsatti}}</td>
-        <td style="text-align: right; border-right: 1px solid #aaa;">{{classifica_utente.RisCasaTot}}</td>
-        <td style="text-align: right; border-right: 1px solid #aaa;">{{classifica_utente.RisFuoriTot}}</td>
-        <td style="text-align: right; border-right: 1px solid #aaa;">{{classifica_utente.Segni}}</td>
-        <td style="text-align: right; border-right: 1px solid #aaa;">{{classifica_utente.SommaGoal}}</td>
-        <td style="text-align: right; border-right: 1px solid #aaa;">{{classifica_utente.DifferenzeGoal}}</td>
+        <td style="text-align: center; border-right: 1px solid #aaa;" [style.color]="classifica_utente.NickName == variabiliGlobali.Utente ? 'red' : 'black'">{{classifica_utente.Posizione}}</td>
+        <td style="text-align: left; border-right: 1px solid #aaa;" [style.color]="classifica_utente.NickName == variabiliGlobali.Utente ? 'red' : 'black'">{{classifica_utente.NickName}}</td>
+        <td style="text-align: right; border-right: 1px solid #aaa;" [style.color]="classifica_utente.NickName == variabiliGlobali.Utente ? 'red' : 'black'">{{classifica_utente.Punti}}</td>
+        <td style="text-align: right; border-right: 1px solid #aaa;" [style.color]="classifica_utente.NickName == variabiliGlobali.Utente ? 'red' : 'black'">{{classifica_utente.Giocate}}</td>
+        <td style="text-align: right; border-right: 1px solid #aaa;" [style.color]="classifica_utente.NickName == variabiliGlobali.Utente ? 'red' : 'black'">{{classifica_utente.RisultatiEsatti}}</td>
+        <td style="text-align: right; border-right: 1px solid #aaa;" [style.color]="classifica_utente.NickName == variabiliGlobali.Utente ? 'red' : 'black'">{{classifica_utente.RisCasaTot}}</td>
+        <td style="text-align: right; border-right: 1px solid #aaa;" [style.color]="classifica_utente.NickName == variabiliGlobali.Utente ? 'red' : 'black'">{{classifica_utente.RisFuoriTot}}</td>
+        <td style="text-align: right; border-right: 1px solid #aaa;" [style.color]="classifica_utente.NickName == variabiliGlobali.Utente ? 'red' : 'black'">{{classifica_utente.Segni}}</td>
+        <td style="text-align: right; border-right: 1px solid #aaa;" [style.color]="classifica_utente.NickName == variabiliGlobali.Utente ? 'red' : 'black'">{{classifica_utente.SommaGoal}}</td>
+        <td style="text-align: right; border-right: 1px solid #aaa;" [style.color]="classifica_utente.NickName == variabiliGlobali.Utente ? 'red' : 'black'">{{classifica_utente.DifferenzeGoal}}</td>
       </tr>
     </table>
   </div>

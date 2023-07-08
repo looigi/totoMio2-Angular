@@ -21,7 +21,7 @@ export class ClassificaComponent implements OnInit, AfterViewInit, OnChanges {
 
   constructor(
     private apiService: ApiService,
-    private variabiliGlobali: VariabiliGlobali
+    public variabiliGlobali: VariabiliGlobali
   ) {
 
   }

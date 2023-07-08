@@ -8,11 +8,12 @@
   </div>
   <div class="contenitoreInterno">
     <div style="width: 100%; height: 35px; float: left; white-space: nowrap; overflow: hidden;">
-      <div class="tab scritta" [style.border-bottom]="coppaScelta == 1 ? '2px solid #a9a9a9' : '0px'" (click)="coppaScelta=1; leggeDatiCoppa()">Rotolo di coppa</div>
-      <div class="tab scritta" [style.border-bottom]="coppaScelta == 2 ? '2px solid #a9a9a9' : '0px'" (click)="coppaScelta=2; leggeDatiCoppa()">Coppa Coppata</div>
-      <div class="tab scritta" [style.border-bottom]="coppaScelta == 3 ? '2px solid #a9a9a9' : '0px'" (click)="coppaScelta=3; leggeDatiCoppa()">TotoMIO</div>
-      <div class="tab scritta" [style.border-bottom]="coppaScelta == 4 ? '2px solid #a9a9a9' : '0px'" (click)="coppaScelta=4; leggeDatiCoppa()">Coppa dei Settimini</div>
-      <div class="tab scritta" [style.border-bottom]="coppaScelta == 5 ? '2px solid #a9a9a9' : '0px'" (click)="coppaScelta=5; leggeDatiCoppa()">Pippettero</div>
+      <div *ngFor="let coppa of coppe; let i = index;" [attr.data-index]="i" class="tab scritta"
+        [style.border-bottom]="coppaScelta == i ? '2px solid #a9a9a9' : '0px'"
+        (click)="coppaScelta=i; leggeDatiCoppa()"
+      >
+        {{coppa.NomeCoppa}}
+      </div>
     </div>
     <div class="contenitoreTab scritta">
       <!-- {{coppaScelta}} -->
