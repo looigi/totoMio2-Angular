@@ -98,22 +98,28 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
     this.leggeDatiCoppa();
   }
 
+  leggeCoppa(i) {
+    console.log('Coppa scelta: ', i);
+    this.coppaScelta = i;
+    this.leggeDatiCoppa();
+  }
+
   leggeDatiCoppa() {
     let Torneo = '';
     switch (this.coppaScelta) {
-      case 1:
+      case 0:
         Torneo = '1';
         break;
-      case 2:
+      case 1:
         Torneo = '2';
         break;
-      case 3:
+      case 2:
         Torneo = '3';
         break;
-      case 4:
+      case 3:
         Torneo = '4';
         break;
-      case 5:
+      case 4:
         Torneo = '5';
         break;
     }

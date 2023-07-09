@@ -10,7 +10,7 @@
     <div style="width: 100%; height: 35px; float: left; white-space: nowrap; overflow: hidden;">
       <div *ngFor="let coppa of coppe; let i = index;" [attr.data-index]="i" class="tab scritta"
         [style.border-bottom]="coppaScelta == i ? '2px solid #a9a9a9' : '0px'"
-        (click)="coppaScelta=i; leggeDatiCoppa()"
+        (click)="leggeCoppa(i)"
       >
         {{coppa.NomeCoppa}}
       </div>

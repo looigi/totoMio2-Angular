@@ -84,6 +84,13 @@ export class VariabiliGlobali {
       Pagina: 'Info',
       idTipologia: -1
     },
+    {
+      idTasto: 9,
+      Icona: 'admin.png',
+      Titolo: 'Admin',
+      Pagina: 'Admin',
+      idTipologia: 0
+    },
   ]
 
   sistemaStringaPerPassaggio(stringa) {
