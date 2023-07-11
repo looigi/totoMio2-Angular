@@ -3,7 +3,7 @@
     <div style="width: 50%; float: left;">
     </div>
     <div class="scritta" style="width: 50%; float: left; margin-top: 5px; font-weight: bold; white-space: nowrap;">
-      Coppe Anno {{idAnno}} - {{DescrizioneAnno}} Concorso {{idConcorso2}}
+      Coppe Anno {{idAnno}} - {{DescrizioneAnno}} Concorso {{idConcorso2[coppaScelta]}}
     </div>
   </div>
   <div class="contenitoreInterno">
@@ -25,7 +25,7 @@
               <span *ngIf="errore">&nbsp;</span>
           </div>
           <div style="width: 80%; float: left;">
-            Giornata {{idConcorso2}}
+            Giornata {{idConcorso2[coppaScelta]}}
           </div>
           <div style="width: 10%; float: left; text-align: center;">
             <img *ngIf="!errore" class="immagineIcona" style="margin-left: 5px;" title="Avanti"

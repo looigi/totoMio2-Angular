@@ -18,7 +18,7 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
 
   coppaScelta = 0;
   idAnno2;
-  idConcorso2 = 1;
+  idConcorso2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   errore;
   classifica;
   partite;
@@ -39,10 +39,10 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
     if (changes.idAnno && changes.idAnno.currentValue) {
       this.idAnno2 = changes.idAnno.currentValue;
     }
-    if (changes.NumeroConcorso && changes.NumeroConcorso.currentValue) {
+    /* if (changes.NumeroConcorso && changes.NumeroConcorso.currentValue) {
       this.idConcorso2 = changes.NumeroConcorso.currentValue;
-    }
-    if (this.idAnno2 && this.idConcorso2) {
+    } */
+    if (this.idAnno2) {
       this.leggeDatiCoppa();
     }
   }
@@ -87,14 +87,14 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
     );
   }
   indietro() {
-    if (this.idConcorso2 > 1) {
-      this.idConcorso2--;
+    if (this.idConcorso2[this.coppaScelta] > 1) {
+      this.idConcorso2[this.coppaScelta]--;
       this.leggeDatiCoppa();
     }
   }
 
   avanti() {
-    this.idConcorso2++;
+    this.idConcorso2[this.coppaScelta]++;
     this.leggeDatiCoppa();
   }
 
@@ -127,9 +127,38 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
     this.classifica = undefined;
     this.partite = undefined;
 
+    if (this.idConcorso2[this.coppaScelta] > 0) {
+      this.leggeDatiCoppa2(Torneo);
+    } else {
+      const params = {
+        idAnno: this.idAnno2,
+        idCoppa: Torneo
+      }
+
+      this.variabiliGlobali.CaricamentoInCorso = true;
+      this.apiService.ritornaMaxGiornataCoppe(params)
+      .map((response: any) => response)
+      .subscribe((data2: string | string[]) => {
+          this.variabiliGlobali.CaricamentoInCorso = false;
+          if (data2) {
+            const data = this.apiService.SistemaStringaRitornata(data2);
+            if (data.indexOf('ERROR') === -1) {
+              this.idConcorso2[this.coppaScelta] = +data;
+              // alert(this.coppaScelta + ': ' + this.idConcorso2[this.coppaScelta]);
+              this.leggeDatiCoppa2(Torneo);
+            } else {
+            }
+          } else {
+          }
+        }
+      );
+    }
+  }
+
+  leggeDatiCoppa2(Torneo) {
     const params = {
       idAnno: this.idAnno2,
-      idGiornata: this.idConcorso2,
+      idGiornata: this.idConcorso2[this.coppaScelta],
       Torneo: Torneo
     }
 

@@ -162,6 +162,19 @@ export class ApiService {
     return ritorno;
   }
 
+  ritornaMaxGiornataCoppe(params) {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/RitornaMaxGiornataCoppa?' +
+      'idAnno=' + params.idAnno + '&' +
+      'idCoppa=' + params.idCoppa
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    return ritorno;
+  }
+
   ritornaNomiCoppe() {
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/ritornaNomiCoppe'
