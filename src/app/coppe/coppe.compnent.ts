@@ -23,6 +23,8 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
   classifica;
   partite;
   coppe;
+  pannelloSemifinale = false;
+  pannelloFinale = false;
 
   constructor(
     private apiService: ApiService,
@@ -71,7 +73,9 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
                 const c = element.split(';');
                 const r = {
                   idCoppa: +c[0],
-                  NomeCoppa: c[1]
+                  NomeCoppa: c[1],
+                  Semifinale: c[2] === 'S',
+                  Finale: c[3] === 'S'
                 }
                 coppe.push(r);
               }
