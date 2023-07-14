@@ -27,6 +27,10 @@
   height: 40px;
 }
 
+table {
+  border-collapse: collapse;
+}
+
 .contenitoreInterno {
   width: 100%;
   height: calc(100% - 40px);

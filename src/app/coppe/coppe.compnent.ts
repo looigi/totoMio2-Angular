@@ -212,7 +212,9 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
                   Casa: cc[0],
                   Fuori: cc[1],
                   Vincente: +cc[2],
-                  Pari: pari
+                  Pari: pari,
+                  Risultato1: cc[3],
+                  Risultato2: cc[4]
                 }
                 pari = !pari;
                 partit.push(c);
