@@ -22,6 +22,8 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
   errore;
   classifica;
   partite;
+  semifinale;
+  finale;
   coppe;
   pannelloSemifinale = false;
   pannelloFinale = false;
@@ -177,6 +179,8 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
             const dati = data.split('|');
             const classifica = dati[0].split('§');
             const partite = dati[1].split('§');
+            const semifinale = dati[2].split('§');
+            const finale = dati[3].split('§');
 
             const classif = new Array();
             let pari = false;
@@ -224,6 +228,47 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
 
             this.classifica = classif;
             this.partite = partit;
+
+            const semif = new Array();
+            pari = false;
+            semifinale.forEach(element => {
+              if (element) {
+                const cc = element.split(';');
+                const c = {
+                  Numero: +cc[0],
+                  Casa: cc[1],
+                  Fuori: cc[2],
+                  Risultato1: cc[3],
+                  Risultato2: cc[4],
+                  Vincente: +cc[5],
+                  Pari: pari,
+                }
+                pari = !pari;
+                semif.push(c);
+              }
+            });
+            this.semifinale = semif;
+
+            const fin = new Array();
+            pari = false;
+            finale.forEach(element => {
+              if (element) {
+                const cc = element.split(';');
+                const c = {
+                  Numero: +cc[0],
+                  Casa: cc[1],
+                  Fuori: cc[2],
+                  Risultato1: cc[3],
+                  Risultato2: cc[4],
+                  Vincente: +cc[5],
+                  Pari: pari,
+                }
+                pari = !pari;
+                fin.push(c);
+              }
+            });
+            this.finale = fin;
+
             console.log('Dati coppa', classif, partit);
 
             this.errore = undefined;
