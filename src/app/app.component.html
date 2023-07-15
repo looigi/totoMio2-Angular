@@ -6,6 +6,7 @@
       <div class="casellaIntestazione">
         <span *ngIf="VariabiliGlobali.Utente">
           {{VariabiliGlobali.Tipologia}} {{VariabiliGlobali.Utente}} ({{VariabiliGlobali.Cognome}} {{VariabiliGlobali.Nome}})
+          <span *ngIf="scadenzaConcorso2" style="color: red;"><br />Scadenza concorso: {{scadenzaConcorso2}}</span>
         </span>
       </div>
       <!-- <div class="casellaIntestazione">
@@ -31,11 +32,24 @@
 
   <div class="divCentrale">
     <div class="contenitoreMaschere">
+      <amministrazione_component
+      *ngIf="adminVisibile"
+
+      (chiusuraFinestra)="adminVisibile = false; ritornaDatiGlobali()"
+      />
+
+      <info_component
+      *ngIf="infoVisibile"
+
+      (chiusuraFinestra)="infoVisibile = false; ritornaDatiGlobali()"
+      />
+
       <nuovo-concorso-component
         *ngIf="nuovoConcorsoVisibile"
         [idAnno]="VariabiliGlobali.idAnno"
         [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
         [NumeroConcorso]="VariabiliGlobali.idConcorso + 1"
+        [scadenza]="scadenzaConcorso"
 
         (chiusuraFinestra)="nuovoConcorsoVisibile = false; ritornaDatiGlobali()"
       />

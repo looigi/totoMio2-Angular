@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VariabiliGlobali } from './VariabiliGlobali.component';
 import { ApiService } from './services/api.service';
 import 'rxjs/add/operator/map';
+import { DatePipe } from "@angular/common";
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,8 @@ export class AppComponent implements OnInit {
   eMail = '';
   ricordami = false;
   eventi;
+  scadenzaConcorso = undefined;
+  scadenzaConcorso2 = '';
 
   nuovoConcorsoVisibile = false;
   pronosticiVisibile = false;
@@ -33,10 +36,13 @@ export class AppComponent implements OnInit {
   controlloConcorso = false;
   classifica = false;
   coppeVisibile = false;
+  infoVisibile = false;
+  adminVisibile = false;
 
   constructor(
     public VariabiliGlobali: VariabiliGlobali,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private datePipe: DatePipe,
   ) {
   }
 
@@ -82,6 +88,8 @@ export class AppComponent implements OnInit {
         this.chiusuraConcorso = false;
         this.gestioneConcorso = false;
         this.coppeVisibile = false;
+        this.infoVisibile = false;
+        this.adminVisibile = false;
         break;
       case 1: // CLASSIFICA
         this.nuovoConcorsoVisibile = false;
@@ -91,6 +99,8 @@ export class AppComponent implements OnInit {
         this.chiusuraConcorso = false;
         this.gestioneConcorso = false;
         this.coppeVisibile = false;
+        this.infoVisibile = false;
+        this.adminVisibile = false;
         break;
       case 2: // RISULTATI
         this.nuovoConcorsoVisibile = false;
@@ -100,8 +110,16 @@ export class AppComponent implements OnInit {
         this.chiusuraConcorso = false;
         this.gestioneConcorso = false;
         this.coppeVisibile = false;
+        this.infoVisibile = false;
+        this.adminVisibile = false;
         break;
       case 3: // PRONOSTICI
+        const oggi = new Date().getTime();
+        const scadenza = new Date(this.scadenzaConcorso + ' 23:59:59').getTime();
+        if (oggi > scadenza) {
+          alert('Il concorso è scaduto.\nNon è più possibile partecipare');
+          return;
+        }
         this.nuovoConcorsoVisibile = false;
         this.classifica = false;
         this.controlloConcorso = false;
@@ -109,6 +127,8 @@ export class AppComponent implements OnInit {
         this.chiusuraConcorso = false;
         this.gestioneConcorso = false;
         this.coppeVisibile = false;
+        this.infoVisibile = false;
+        this.adminVisibile = false;
         break;
       case 6: // CHIUSURA CONCORSO
         this.nuovoConcorsoVisibile = false;
@@ -118,6 +138,8 @@ export class AppComponent implements OnInit {
         this.chiusuraConcorso = true;
         this.gestioneConcorso = false;
         this.coppeVisibile = false;
+        this.infoVisibile = false;
+        this.adminVisibile = false;
         break;
       case 4: // GESTIONE CONCORSO
         this.nuovoConcorsoVisibile = false;
@@ -127,6 +149,8 @@ export class AppComponent implements OnInit {
         this.chiusuraConcorso = false;
         this.gestioneConcorso = true;
         this.coppeVisibile = false;
+        this.infoVisibile = false;
+        this.adminVisibile = false;
         break;
       case 5: // CONTROLLO CONCORSO
         this.nuovoConcorsoVisibile = false;
@@ -136,6 +160,8 @@ export class AppComponent implements OnInit {
         this.chiusuraConcorso = false;
         this.gestioneConcorso = false;
         this.coppeVisibile = false;
+        this.infoVisibile = false;
+        this.adminVisibile = false;
         break;
       case 7: // TORNEI
         this.nuovoConcorsoVisibile = false;
@@ -145,6 +171,30 @@ export class AppComponent implements OnInit {
         this.chiusuraConcorso = false;
         this.gestioneConcorso = false;
         this.coppeVisibile = true;
+        this.infoVisibile = false;
+        this.adminVisibile = false;
+        break;
+      case 8: // INFO
+        this.nuovoConcorsoVisibile = false;
+        this.classifica = false;
+        this.controlloConcorso = false;
+        this.pronosticiVisibile = false;
+        this.chiusuraConcorso = false;
+        this.gestioneConcorso = false;
+        this.coppeVisibile = false;
+        this.infoVisibile = true;
+        this.adminVisibile = false;
+        break;
+      case 9: // ADMIN
+        this.nuovoConcorsoVisibile = false;
+        this.classifica = false;
+        this.controlloConcorso = false;
+        this.pronosticiVisibile = false;
+        this.chiusuraConcorso = false;
+        this.gestioneConcorso = false;
+        this.coppeVisibile = false;
+        this.infoVisibile = false;
+        this.adminVisibile = true;
         break;
     }
   }
@@ -330,6 +380,14 @@ export class AppComponent implements OnInit {
             this.VariabiliGlobali.idConcorso = +primaParte[0];
             this.VariabiliGlobali.idModalitaConcorso = +primaParte[1];
             this.VariabiliGlobali.ModalitaConcorso = primaParte[2];
+            if (primaParte[3] !== '') {
+              this.scadenzaConcorso = primaParte[3];
+              const scadenza = new Date(this.scadenzaConcorso);
+              this.scadenzaConcorso2 = this.datePipe.transform(scadenza, 'dd/MM/yyyy');
+            } else{
+              this.scadenzaConcorso = undefined;
+              this.scadenzaConcorso2 = '';
+            }
 
             const secondaParte = parti[1].split('§');
             const anni = new Array();

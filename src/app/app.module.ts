@@ -15,6 +15,10 @@ import { ControlloConcorsoComponent } from './controllo_concorso/controllo_conco
 import { ClassificaComponent } from './classifica/classifica.component';
 import { CoppeComponent } from './coppe/coppe.compnent';
 import {MatTabsModule} from '@angular/material/tabs';
+import { DatepickerModule } from 'ng2-datepicker';
+import { DatePipe } from '@angular/common';
+import { InfoComponent } from './info/info.component';
+import { AmministrazioneComponent } from './amministrazione/amministrazione.component';
 
 @NgModule({
   declarations: [
@@ -25,17 +29,21 @@ import {MatTabsModule} from '@angular/material/tabs';
     GestioneConcorsoComponent,
     ControlloConcorsoComponent,
     ClassificaComponent,
-    CoppeComponent
+    CoppeComponent,
+    InfoComponent,
+    AmministrazioneComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    DatepickerModule
   ],
   providers: [
     HttpClientService,
     ApiService,
-    VariabiliGlobali
+    VariabiliGlobali,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

@@ -19,6 +19,7 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
   coppaScelta = 0;
   idAnno2;
   idConcorso2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  maxGiornata = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   errore;
   classifica;
   partite;
@@ -92,6 +93,7 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
       }
     );
   }
+
   indietro() {
     if (this.idConcorso2[this.coppaScelta] > 1) {
       this.idConcorso2[this.coppaScelta]--;
@@ -100,12 +102,16 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   avanti() {
-    this.idConcorso2[this.coppaScelta]++;
-    this.leggeDatiCoppa();
+    if (this.idConcorso2[this.coppaScelta] < this.maxGiornata[this.coppaScelta]) {
+      this.idConcorso2[this.coppaScelta]++;
+      this.leggeDatiCoppa();
+    }
   }
 
   leggeCoppa(i) {
     console.log('Coppa scelta: ', i);
+    this.pannelloSemifinale = false;
+    this.pannelloFinale = false;
     this.coppaScelta = i;
     this.leggeDatiCoppa();
   }
@@ -149,7 +155,9 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
           if (data2) {
             const data = this.apiService.SistemaStringaRitornata(data2);
             if (data.indexOf('ERROR') === -1) {
-              this.idConcorso2[this.coppaScelta] = +data;
+              const d = data.split(';');
+              this.idConcorso2[this.coppaScelta] = +d[0];
+              this.maxGiornata[this.coppaScelta] = + d[1];
               // alert(this.coppaScelta + ': ' + this.idConcorso2[this.coppaScelta]);
               this.leggeDatiCoppa2(Torneo);
             } else {
@@ -182,6 +190,8 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
             const semifinale = dati[2].split('§');
             const finale = dati[3].split('§');
 
+            // console.log(partite, finale);
+
             const classif = new Array();
             let pari = false;
             let pos = 0;
@@ -205,6 +215,8 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
               }
             });
 
+            this.classifica = classif;
+
             const partit = new Array();
             let numero = 1;
             pari = false;
@@ -225,8 +237,6 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
                 numero++;
               }
             });
-
-            this.classifica = classif;
             this.partite = partit;
 
             const semif = new Array();
@@ -269,7 +279,7 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
             });
             this.finale = fin;
 
-            console.log('Dati coppa', classif, partit);
+            // console.log('Dati coppa', classif, partit, semif, fin);
 
             this.errore = undefined;
           } else {

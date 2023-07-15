@@ -53,7 +53,7 @@
           </div>
           <div *ngIf="coppe[coppaScelta].Finale" class="tasto"
             [style.background-color]="pannelloFinale ? '#ededed' : 'transparent'"
-            style="width: calc(25% - 9px);" ù
+            style="width: calc(25% - 9px);"
             (click)="pannelloFinale = true; pannelloSemifinale = false;">
             Finale
           </div>
@@ -63,7 +63,7 @@
           <div *ngIf="pannelloSemifinale" style="width: 100%; height: 100%; float: left;">
             <span *ngIf="errore" style="color: red;">{{errore}}</span>
             <span *ngIf="!errore" style="width: 100%; float: left; height: 20px; text-align: center;">
-              Finale
+              Semifinali
             </span>
             <table *ngIf="!errore" style="width: 100%; float: left;" cellpadding="0" cellspacing="0">
               <tr style="border-bottom: 1px solid #999; margin-top: 5px;">
@@ -92,7 +92,7 @@
           <div *ngIf="pannelloFinale" style="width: 100%; height: 100%; float: left;">
             <span *ngIf="errore" style="color: red;">{{errore}}</span>
             <span *ngIf="!errore" style="width: 100%; float: left; height: 20px; text-align: center;">
-              Semifinale
+              Finale
             </span>
             <table *ngIf="!errore" style="width: 100%; float: left;" cellpadding="0" cellspacing="0">
               <tr style="border-bottom: 1px solid #999; margin-top: 5px;">

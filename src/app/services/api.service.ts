@@ -153,7 +153,8 @@ export class ApiService {
   apreConcorso(parametri) {
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/ApreConcorso?' +
-      'idAnno=' + parametri.idAnno
+      'idAnno=' + parametri.idAnno + '&' +
+      'Scadenza=' + parametri.Scadenza
       ;
       // 'Password=' + this.sistemaTesto(params.Password;
     // console.log('Login:', url);

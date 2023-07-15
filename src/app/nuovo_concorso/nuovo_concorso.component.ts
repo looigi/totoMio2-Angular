@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, Output, EventEmitter, OnChanges, OnInit, SimpleChanges, Input } from "@angular/core";
 import { ApiService } from "../services/api.service";
 import { VariabiliGlobali } from "../VariabiliGlobali.component";
+import { DatepickerOptions } from 'ng2-datepicker';
+import { DatePipe } from "@angular/common";
 
 @Component({
   templateUrl: 'nuovo_concorso.component.html',
@@ -12,6 +14,7 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
   @Input() idAnno;
   @Input() NumeroConcorso;
   @Input() DescrizioneAnno;
+  @Input() scadenza: Date = new Date();
 
   @Output() chiusuraFinestra: EventEmitter<string> = new EventEmitter<string>();
 
@@ -21,10 +24,15 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
   NumeroConcorso2;
   tastoSalvataggio = false;
   tastoConferma = false;
+  options: DatepickerOptions = {
+    format: 'dd/MM/yyyy',
+    placeholder: 'Scegliere la data',
+  }
 
   constructor(
     private apiService: ApiService,
-    private variabiliGlobali: VariabiliGlobali
+    private variabiliGlobali: VariabiliGlobali,
+    private datePipe: DatePipe,
   ) {
 
   }
@@ -159,8 +167,30 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
   }
 
   pubblicaConcorso() {
+    if (!this.scadenza) {
+      const giorno = new Date().getDay();
+      // alert(giorno)
+      let aumento = 0;
+      if (giorno === 5) {
+        aumento = 7 * 24 * 60 * 60 * 1000;
+      } else {
+        if (giorno === 6) {
+          aumento = 6 * 24 * 60 * 60 * 1000;
+        } else {
+          const diff = (6 - giorno) - 1;
+          // alert(diff);
+          aumento = diff * 24 * 60 * 60 * 1000;
+        }
+      }
+      this.scadenza = new Date(new Date().getTime() + aumento);
+      // return;
+    }
+    const scadenza = new Date(this.scadenza);
+    const tms = this.datePipe.transform(scadenza, 'yyyy-MM-dd');
+
     const parametri = {
-      idAnno: this.idAnno2
+      idAnno: this.idAnno2,
+      Scadenza: tms
     }
     this.variabiliGlobali.CaricamentoInCorso = true;
     this.apiService.apreConcorso(parametri)
