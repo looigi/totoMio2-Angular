@@ -38,6 +38,7 @@ export class AppComponent implements OnInit {
   coppeVisibile = false;
   infoVisibile = false;
   adminVisibile = false;
+  vincitoriVisibile = false;
 
   constructor(
     public VariabiliGlobali: VariabiliGlobali,
@@ -90,6 +91,7 @@ export class AppComponent implements OnInit {
         this.coppeVisibile = false;
         this.infoVisibile = false;
         this.adminVisibile = false;
+        this.vincitoriVisibile = false;
         break;
       case 1: // CLASSIFICA
         this.nuovoConcorsoVisibile = false;
@@ -101,6 +103,7 @@ export class AppComponent implements OnInit {
         this.coppeVisibile = false;
         this.infoVisibile = false;
         this.adminVisibile = false;
+        this.vincitoriVisibile = false;
         break;
       case 2: // RISULTATI
         this.nuovoConcorsoVisibile = false;
@@ -112,6 +115,7 @@ export class AppComponent implements OnInit {
         this.coppeVisibile = false;
         this.infoVisibile = false;
         this.adminVisibile = false;
+        this.vincitoriVisibile = false;
         break;
       case 3: // PRONOSTICI
         const oggi = new Date().getTime();
@@ -129,6 +133,7 @@ export class AppComponent implements OnInit {
         this.coppeVisibile = false;
         this.infoVisibile = false;
         this.adminVisibile = false;
+        this.vincitoriVisibile = false;
         break;
       case 6: // CHIUSURA CONCORSO
         this.nuovoConcorsoVisibile = false;
@@ -140,6 +145,7 @@ export class AppComponent implements OnInit {
         this.coppeVisibile = false;
         this.infoVisibile = false;
         this.adminVisibile = false;
+        this.vincitoriVisibile = false;
         break;
       case 4: // GESTIONE CONCORSO
         this.nuovoConcorsoVisibile = false;
@@ -151,6 +157,7 @@ export class AppComponent implements OnInit {
         this.coppeVisibile = false;
         this.infoVisibile = false;
         this.adminVisibile = false;
+        this.vincitoriVisibile = false;
         break;
       case 5: // CONTROLLO CONCORSO
         this.nuovoConcorsoVisibile = false;
@@ -162,6 +169,7 @@ export class AppComponent implements OnInit {
         this.coppeVisibile = false;
         this.infoVisibile = false;
         this.adminVisibile = false;
+        this.vincitoriVisibile = false;
         break;
       case 7: // TORNEI
         this.nuovoConcorsoVisibile = false;
@@ -173,6 +181,7 @@ export class AppComponent implements OnInit {
         this.coppeVisibile = true;
         this.infoVisibile = false;
         this.adminVisibile = false;
+        this.vincitoriVisibile = false;
         break;
       case 8: // INFO
         this.nuovoConcorsoVisibile = false;
@@ -184,6 +193,7 @@ export class AppComponent implements OnInit {
         this.coppeVisibile = false;
         this.infoVisibile = true;
         this.adminVisibile = false;
+        this.vincitoriVisibile = false;
         break;
       case 9: // ADMIN
         this.nuovoConcorsoVisibile = false;
@@ -195,6 +205,19 @@ export class AppComponent implements OnInit {
         this.coppeVisibile = false;
         this.infoVisibile = false;
         this.adminVisibile = true;
+        this.vincitoriVisibile = false;
+        break;
+      case 10: // VINCITORI
+        this.nuovoConcorsoVisibile = false;
+        this.classifica = false;
+        this.controlloConcorso = false;
+        this.pronosticiVisibile = false;
+        this.chiusuraConcorso = false;
+        this.gestioneConcorso = false;
+        this.coppeVisibile = false;
+        this.infoVisibile = false;
+        this.adminVisibile = false;
+        this.vincitoriVisibile = true;
         break;
     }
   }

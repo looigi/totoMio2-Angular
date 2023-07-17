@@ -1,0 +1,30 @@
+<div class="finestra">
+  <div class="barraSuperiore">
+    <div style="width: 50%; float: left;">
+    </div>
+    <div class="scritta" style="width: 50%; float: left; margin-top: 5px; font-weight: bold; white-space: nowrap;">
+      Vincitori alla giornata {{variabiliGlobali.idConcorso}}
+    </div>
+  </div>
+  <div class="contenitoreInterno scritta" style="font-size: 20px;">
+    <table style="width: 100%;">
+      <tr>
+        <th>Trofeo</th>
+        <th>Vincitore</th>
+      </tr>
+      <tr *ngFor="let vincitore of vincitori; let i2 = index" [attr.data-index]="i2"
+        [style.background-color]="vincitore.Pari ? '#cecefd' : 'transparent'"
+        style="border-bottom: 1px solid #999; margin-top: 5px;">
+        <td>
+          {{vincitore.Trofeo}}
+        </td>
+        <td>
+          {{vincitore.Vincitore}}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="chiusura" (click)="chiusura()" title="Chiusura finestra">
+</div>

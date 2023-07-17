@@ -19,6 +19,7 @@ import { DatepickerModule } from 'ng2-datepicker';
 import { DatePipe } from '@angular/common';
 import { InfoComponent } from './info/info.component';
 import { AmministrazioneComponent } from './amministrazione/amministrazione.component';
+import { VincitoriComponent } from './vincitori/vincitori.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AmministrazioneComponent } from './amministrazione/amministrazione.comp
     ClassificaComponent,
     CoppeComponent,
     InfoComponent,
-    AmministrazioneComponent
+    AmministrazioneComponent,
+    VincitoriComponent
   ],
   imports: [
     BrowserModule,

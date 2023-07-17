@@ -33,15 +33,21 @@
   <div class="divCentrale">
     <div class="contenitoreMaschere">
       <amministrazione_component
-      *ngIf="adminVisibile"
+        *ngIf="adminVisibile"
 
-      (chiusuraFinestra)="adminVisibile = false; ritornaDatiGlobali()"
+        (chiusuraFinestra)="adminVisibile = false; ritornaDatiGlobali()"
       />
 
       <info_component
-      *ngIf="infoVisibile"
+        *ngIf="infoVisibile"
 
-      (chiusuraFinestra)="infoVisibile = false; ritornaDatiGlobali()"
+        (chiusuraFinestra)="infoVisibile = false; ritornaDatiGlobali()"
+      />
+
+      <vincitori_component
+        *ngIf="vincitoriVisibile"
+
+        (chiusuraFinestra)="vincitoriVisibile = false; ritornaDatiGlobali()"
       />
 
       <nuovo-concorso-component
