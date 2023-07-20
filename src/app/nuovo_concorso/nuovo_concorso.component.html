@@ -4,7 +4,7 @@
       <img class="immagineIcona" style="margin-left: 5px; float: left;" title="Nuovo Incontro"
         src="../../assets/Immagini/aggiungi.png" (click)="aggiungePartita()" />
       <img *ngIf="tastoSalvataggio" class="immagineIcona" style="margin-left: 5px; float: left;" title="Salva Concorso"
-        src="../../assets/Immagini/save.png" (click)="salvaConcorso()" />
+        src="../../assets/Immagini/save.png" (click)="salvaConcorso(false, '')" />
       <img *ngIf="tastoConferma" class="immagineIcona" style="margin-left: 5px; float: left;" title="Pubblica Concorso"
         src="../../assets/Immagini/invia.png" (click)="pubblicaConcorso()" />
     </div>
@@ -21,25 +21,34 @@
         &nbsp;
       </div>
       <div style="width: 5%; float: left; margin-top: 10px;">N°</div>
-      <div style="width: 35%; float: left; margin-top: 10px;">Casa</div>
-      <div style="width: 35%; float: left; margin-top: 10px;">Fuori</div>
-      <div style="width: 15%; float: left; margin-top: 10px;">Ris.</div>
+      <div style="width: 32%; float: left; margin-top: 10px;">Casa</div>
+      <div style="width: 32%; float: left; margin-top: 10px;">Fuori</div>
+      <div style="width: 16%; float: left; margin-top: 10px;">Ris.</div>
       <div style="width: 5%; float: left; margin-top: 10px;">S.</div>
+      <div style="width: 5%; float: left; margin-top: 10px;">J.</div>
     </div>
-    <div *ngFor="let partita of partite; let i = index" [attr.data-index]="i" class="rigaIncontro scritta">
+    <div *ngFor="let partita of partite; let i = index" [attr.data-index]="i" class="rigaIncontro scritta"
+        [style.background-color]="partita.Pari ? '#cecefd' : 'transparent'"
+        style="border-bottom: 1px solid #999;">
       <div style="width: 5%; float: left;">
         <img class="immagineIcona" title="Elimina Incontro"
           src="../../assets/Immagini/elimina.png" (click)="eliminaPartita(partita.idPartita)" />
       </div>
       <div style="width: 5%; float: left; margin-top: 10px;">{{partita.idPartita}}</div>
-      <div style="width: 35%; float: left; margin-top: 10px;">
+      <div style="width: 32%; float: left; margin-top: 10px;">
         <input type="text" [(ngModel)]="partita.Prima" (focusout)="controllaTasti()" class="scritta" style="width: 95%;">
       </div>
-      <div style="width: 35%; float: left; margin-top: 10px;">
+      <div style="width: 32%; float: left; margin-top: 10px;">
         <input type="text" [(ngModel)]="partita.Seconda" (focusout)="controllaTasti()" class="scritta" style="width: 95%;">
       </div>
-      <div style="width: 15%; float: left; margin-top: 10px;">{{partita.Risultato}}</div>
+      <div style="width: 16%; float: left; margin-top: 10px;">{{partita.Risultato}}</div>
       <div style="width: 5%; float: left; margin-top: 10px;">{{partita.Segno}}</div>
+      <div style="width: 5%; float: left; margin-top: 10px;">
+        <img *ngIf="partita.Jolly" class="immagineIcona" title="Partita Jolly"
+          style="margin-top: -10px"
+          src="../../assets/Immagini/joker.png" />
+        <span *ngIf="!partita.Jolly">&nbsp;</span>
+      </div>
     </div>
   </div>
 </div>

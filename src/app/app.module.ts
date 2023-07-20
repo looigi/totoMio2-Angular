@@ -20,6 +20,7 @@ import { DatePipe } from '@angular/common';
 import { InfoComponent } from './info/info.component';
 import { AmministrazioneComponent } from './amministrazione/amministrazione.component';
 import { VincitoriComponent } from './vincitori/vincitori.component';
+import { BilancioComponent } from './bilancio/bilancio.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { VincitoriComponent } from './vincitori/vincitori.component';
     CoppeComponent,
     InfoComponent,
     AmministrazioneComponent,
-    VincitoriComponent
+    VincitoriComponent,
+    BilancioComponent
   ],
   imports: [
     BrowserModule,

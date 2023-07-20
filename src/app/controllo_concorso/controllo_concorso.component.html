@@ -40,6 +40,7 @@
             <th style="border-right: 1px solid #aaa;">Somma</th>
             <th style="border-right: 1px solid #aaa;">Diff.</th>
             <th>Punti</th>
+            <th>Jolly</th>
           </tr>
           <tr *ngFor="let partita of risultato.Dettaglio; let i2 = index" [attr.data-index]="i2"
             [style.background-color]="partita.Pari ? '#cecefd' : 'transparent'">
@@ -57,6 +58,7 @@
             <td style="text-align: center; border-right: 1px solid #aaa;">{{partita.SommaGoal == 1 ? 'O' : '-'}}</td>
             <td style="text-align: center; border-right: 1px solid #aaa;">{{partita.DifferenzaGoal == 1 ? 'O' : '-'}}</td>
             <td style="text-align: right;">{{partita.Punti}}</td>
+            <td style="text-align: right;">{{partita.Jolly}}</td>
           </tr>
           <tr>
             <td></td>
@@ -73,6 +75,7 @@
             <td></td>
             <td></td>
             <td style="text-align: right;">{{risultato.PuntiTotali}}</td>
+            <td style="text-align: right;">{{risultato.PuntiTotaliJolly}}</td>
           </tr>
         </table>
       </div>

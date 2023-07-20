@@ -41,37 +41,54 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {
-            const c = data.split('§');
-            const p = new Array();
-            c.forEach(element => {
-              if (element) {
-                const cc = element.split(';');
-                let pr, Ris1, Ris2;
-                if (cc[3].indexOf('-') > -1) {
-                  pr = cc[3].split('-');
-                  Ris1 = pr[0];
-                  Ris2 = pr[1];
-                } else {
-                  Ris1 = '';
-                  Ris2 = '';
-                }
-                this.risu1.push('');
-                this.risu2.push('');
-                const ccc = {
-                  idPartita: +cc[0],
-                  Prima: this.variabiliGlobali.sistemaStringaDaPassaggio(cc[1]),
-                  Seconda: this.variabiliGlobali.sistemaStringaDaPassaggio(cc[2]),
-                  Risultato: cc[3],
-                  Risultato1: Ris1,
-                  Risultato2: Ris2,
-                  Segno: cc[4]
-                }
-                p.push(ccc);
-              }
-            });
-            this.partite = p;
 
-            this.leggePronostico();
+            this.apiService.leggePartitaJolly({ idAnno: this.idAnno2, idConcorso: this.NumeroConcorso2 })
+            .map((response: any) => response)
+            .subscribe((data3: string | string[]) => {
+                this.variabiliGlobali.CaricamentoInCorso = false;
+                if (data3) {
+                  let data4 = this.apiService.SistemaStringaRitornata(data3);
+                  if (data4.indexOf('ERROR') > -1) {
+                    data4 = -1;
+                  }
+                  const c = data.split('§');
+                  const p = new Array();
+                  let pari = true;
+                  c.forEach(element => {
+                    if (element) {
+                      const cc = element.split(';');
+                      let pr, Ris1, Ris2;
+                      if (cc[3].indexOf('-') > -1) {
+                        pr = cc[3].split('-');
+                        Ris1 = pr[0];
+                        Ris2 = pr[1];
+                      } else {
+                        Ris1 = '';
+                        Ris2 = '';
+                      }
+                      this.risu1.push('');
+                      this.risu2.push('');
+                      const ccc = {
+                        idPartita: +cc[0],
+                        Prima: this.variabiliGlobali.sistemaStringaDaPassaggio(cc[1]),
+                        Seconda: this.variabiliGlobali.sistemaStringaDaPassaggio(cc[2]),
+                        Risultato: cc[3],
+                        Risultato1: Ris1,
+                        Risultato2: Ris2,
+                        Segno: cc[4],
+                        Jolly: +cc[0] === +data4,
+                        Pari: pari
+                      }
+                      pari = !pari;
+                      p.push(ccc);
+                    }
+                  });
+                  this.partite = p;
+
+                  this.leggePronostico();
+                }
+              }
+            );
           } else {
             this.partite = new Array();
           }

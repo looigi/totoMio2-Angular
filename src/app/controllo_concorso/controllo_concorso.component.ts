@@ -59,17 +59,14 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
                 const idUtente = +Intest[0];
                 const nickName = Intest[1];
                 const PuntiTotali = +Intest[2];
+                let jolly = 0;
                 const Risultati = parti[1].split('§');
                 // console.log('Risultati', Risultati);
                 const DettaglioArray = new Array();
                 Risultati.forEach(element2 => {
                   if (element2) {
                     const Dettaglio = element2.split(';');
-
-  // idPartita & ";" & Squadra1 & ";" & Squadra2 & ";" & Risultato & ";" & RisultatoSegno & ";" & Pronostico2 & ";" & PronosticoSegno & ";" &
-	// SegnoPreso & ";" & RisultatoEsattoPartita & ";" & RisultatoCasaPartita & ";" & RisultatoFuoriPartita & ";" & SommaGoalPartita & ";" &
-	// DifferenzaGoalPartita & ";"
-	// 				Ritorno &= Punti
+                    // console.log('Dettaglio', Dettaglio);
                     const dett = {
                       Pari: pari,
                       idPartita: +Dettaglio[0],
@@ -86,18 +83,21 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
                       SommaGoal: +Dettaglio[11],
                       DifferenzaGoal: +Dettaglio[12],
                       Punti: +Dettaglio[13],
+                      Jolly: +Dettaglio[14]
                     };
+                    jolly += +Dettaglio[14];
                     DettaglioArray.push(dett);
-                    // console.log(DettaglioArray);
                   }
                   pari = !pari;
                 });
+                // console.log(DettaglioArray);
                 const finale = {
                   idUtente: idUtente,
                   NickName: nickName,
                   PuntiTotali: PuntiTotali,
                   Espanso: false,
-                  Dettaglio: DettaglioArray
+                  Dettaglio: DettaglioArray,
+                  PuntiTotaliJolly: jolly
                 }
                 RisultatiFinali.push(finale);
                 // console.log(RisultatiFinali);

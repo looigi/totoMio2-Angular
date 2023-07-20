@@ -45,34 +45,56 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
     this.apiService.ritornaConcorso(this.idAnno2, this.NumeroConcorso2)
     .map((response: any) => response)
     .subscribe((data2: string | string[]) => {
-        this.variabiliGlobali.CaricamentoInCorso = false;
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {
-            const c = data.split('§');
-            const p = new Array();
-            c.forEach(element => {
-              if (element) {
-                const cc = element.split(';');
-                const ccc = {
-                  idPartita: +cc[0],
-                  Prima: this.variabiliGlobali.sistemaStringaDaPassaggio(cc[1]),
-                  Seconda: this.variabiliGlobali.sistemaStringaDaPassaggio(cc[2]),
-                  Risultato: cc[3],
-                  Segno: cc[4]
+            this.apiService.leggePartitaJolly({ idAnno: this.idAnno2, idConcorso: this.NumeroConcorso2 })
+            .map((response: any) => response)
+            .subscribe((data3: string | string[]) => {
+                this.variabiliGlobali.CaricamentoInCorso = false;
+                if (data3) {
+                  let data4 = this.apiService.SistemaStringaRitornata(data3);
+                  if (data4.indexOf('ERROR') > -1) {
+                    data4 = -1;
+                  }
+                  // if (data4.indexOf('ERROR') === -1) {
+                    const c = data.split('§');
+                    const p = new Array();
+                    let pari = true;
+                    c.forEach(element => {
+                      if (element) {
+                        const cc = element.split(';');
+                        const ccc = {
+                          idPartita: +cc[0],
+                          Prima: this.variabiliGlobali.sistemaStringaDaPassaggio(cc[1]),
+                          Seconda: this.variabiliGlobali.sistemaStringaDaPassaggio(cc[2]),
+                          Risultato: cc[3],
+                          Segno: cc[4],
+                          Jolly: +cc[0] === +data4,
+                          Pari: pari
+                        }
+                        pari = !pari;
+                        p.push(ccc);
+                      }
+                    });
+                    this.partite = p;
+                    console.log('Partite: ', p)
+                  /* } else {
+                    this.partite = new Array();
+                  } */
                 }
-                p.push(ccc);
               }
-            });
-            this.partite = p;
+            );
           } else {
             this.partite = new Array();
           }
 
+          this.variabiliGlobali.CaricamentoInCorso = false;
           this.vecchiePartite = this.partite;
 
           this.controllaTasti();
         } else {
+          this.variabiliGlobali.CaricamentoInCorso = false;
           this.vecchiePartite = new Array();
 
           this.controllaTasti();
@@ -132,7 +154,7 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
     this.controllaTasti();
   }
 
-  salvaConcorso() {
+  salvaConcorso(pubblica, tms) {
     let dati = '';
     this.partite.forEach(element => {
       dati += element.idPartita + ';' +
@@ -153,11 +175,16 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {
-            this.vecchiePartite = this.partite;
+            if (!pubblica) {
+              this.vecchiePartite = this.partite;
 
-            this.controllaTasti();
+              this.controllaTasti();
 
-            alert('Concorso salvato');
+              this.leggeConcorso();
+              alert('Concorso salvato');
+            } else {
+              this.pubblicaConcorso2(tms);
+            }
           } else {
             alert(data);
           }
@@ -188,6 +215,10 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
     const scadenza = new Date(this.scadenza);
     const tms = this.datePipe.transform(scadenza, 'yyyy-MM-dd');
 
+    this.salvaConcorso(true, tms);
+  }
+
+  pubblicaConcorso2(tms) {
     const parametri = {
       idAnno: this.idAnno2,
       Scadenza: tms

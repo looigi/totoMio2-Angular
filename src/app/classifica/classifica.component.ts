@@ -86,7 +86,10 @@ export class ClassificaComponent implements OnInit, AfterViewInit, OnChanges {
                   Segni: +c[6],
                   SommaGoal: +c[7],
                   DifferenzeGoal: +c[8],
-                  Giocate: +c[9]
+                  Giocate: +c[9],
+                  Vittorie: +c[10],
+                  Ultimo: +c[11],
+                  Jolly: +c[12]
                 }
                 pari = !pari
                 posizione++;

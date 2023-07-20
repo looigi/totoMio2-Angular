@@ -44,6 +44,12 @@
         (chiusuraFinestra)="infoVisibile = false; ritornaDatiGlobali()"
       />
 
+      <bilancio_component
+        *ngIf="bilancioVisibile"
+
+        (chiusuraFinestra)="bilancioVisibile = false; ritornaDatiGlobali()"
+      />
+
       <vincitori_component
         *ngIf="vincitoriVisibile"
 

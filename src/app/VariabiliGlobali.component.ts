@@ -97,6 +97,13 @@ export class VariabiliGlobali {
       Titolo: 'Vincitori',
       Pagina: 'Vincitori',
       idTipologia: -1
+    },
+    {
+      idTasto: 11,
+      Icona: 'bilancio.png',
+      Titolo: 'Bilancio',
+      Pagina: 'Bilancio',
+      idTipologia: -1
     }
   ]
 

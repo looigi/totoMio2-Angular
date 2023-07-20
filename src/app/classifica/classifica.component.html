@@ -21,8 +21,11 @@
         <th style="border-right: 1px solid #aaa;">G. Casa</th>
         <th style="border-right: 1px solid #aaa;">G. Fuori</th>
         <th style="border-right: 1px solid #aaa;">Segni</th>
-        <th style="border-right: 1px solid #aaa;">Somma</th>
-        <th style="border-right: 1px solid #aaa;">Diff.</th>
+        <th style="border-right: 1px solid #aaa;">+ G.</th>
+        <th style="border-right: 1px solid #aaa;">- G.</th>
+        <th style="border-right: 1px solid #aaa;">V.</th>
+        <th style="border-right: 1px solid #aaa;">U.</th>
+        <th style="border-right: 1px solid #aaa;">J.</th>
       </tr>
       <tr *ngFor="let classifica_utente of classifica; let i2 = index" [attr.data-index]="i2"
         [style.background-color]="classifica_utente.Pari ? '#cecefd' : 'transparent'">
@@ -36,6 +39,9 @@
         <td style="text-align: right; border-right: 1px solid #aaa;" [style.color]="classifica_utente.NickName == variabiliGlobali.Utente ? 'red' : 'black'">{{classifica_utente.Segni}}</td>
         <td style="text-align: right; border-right: 1px solid #aaa;" [style.color]="classifica_utente.NickName == variabiliGlobali.Utente ? 'red' : 'black'">{{classifica_utente.SommaGoal}}</td>
         <td style="text-align: right; border-right: 1px solid #aaa;" [style.color]="classifica_utente.NickName == variabiliGlobali.Utente ? 'red' : 'black'">{{classifica_utente.DifferenzeGoal}}</td>
+        <td style="text-align: right; border-right: 1px solid #aaa;" [style.color]="classifica_utente.NickName == variabiliGlobali.Utente ? 'red' : 'black'">{{classifica_utente.Vittorie}}</td>
+        <td style="text-align: right; border-right: 1px solid #aaa;" [style.color]="classifica_utente.NickName == variabiliGlobali.Utente ? 'red' : 'black'">{{classifica_utente.Ultimo}}</td>
+        <td style="text-align: right; border-right: 1px solid #aaa;" [style.color]="classifica_utente.NickName == variabiliGlobali.Utente ? 'red' : 'black'">{{classifica_utente.Jolly}}</td>
       </tr>
     </table>
   </div>
