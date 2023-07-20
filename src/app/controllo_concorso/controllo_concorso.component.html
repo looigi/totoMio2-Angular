@@ -11,15 +11,34 @@
     </div>
   </div>
   <div class="contenitoreInterno">
-    <div *ngFor="let risultato of risultati; let i = index" [attr.data-index]="i"
-      [style.background-color]="risultato.NickName == variabiliGlobali.Utente ? '#b2b4ff' : 'transparent'">
+    <div style="width: 100%; height: 30px; border: 1px solid #999;">
+      <div style="width: 20%; float: left; text-align: center;">
+        <img class="immagineIcona" style="margin-left: 5px;" title="Controlla Concorso"
+          src="../../assets/Immagini/indietro.png" (click)="indietreggia()" />
+      </div>
+      <div style="width: 20%; float: left; text-align: center">
+        <img class="immagineIcona" style="margin-left: 5px;" title="Controlla Concorso"
+          src="../../assets/Immagini/visualizza.png" (click)="svela()" /> &nbsp;
+      </div>
+      <div style="width: 40%; float: left; text-align: center; margin-top: 5px;">
+        <span class="scritta" style="font-weight: bold;">{{mancanti}}</span>
+      </div>
+      <div style="width: 20%; float: left; text-align: center">
+        <img class="immagineIcona" style="margin-left: 5px;" title="Controlla Concorso"
+          src="../../assets/Immagini/avanti.png" (click)="avanza()" />
+      </div>
+    </div>
+    <div *ngFor="let risultato of risultati2; let i = index" [attr.data-index]="i"
+      [style.background-color]="ritornaColoreBarra(risultato)">
       <div  class="rigaGenerale">
         <div class="rigaIntestazione scritta">
+          Posizione: <span *ngIf="risultato.idUtente > -1" style="font-weight: bold;">{{quanti - risultato.Posizione}}</span>
           Utente: <span style="font-weight: bold;">{{risultato.NickName}}</span>
-          Punti Totali: <span style="font-weight: bold;">{{risultato.PuntiTotali}}</span>
+          Punti Totali: <span *ngIf="risultato.idUtente > -1" style="font-weight: bold;">{{risultato.PuntiTotali}}</span>
+          <span *ngIf="risultato.idUtente == -1"  style="font-weight: bold;">XX</span>
         </div>
         <div style="width: 10%; float: left; text-align: right;">
-          <img class="immagineIcona" style="margin-left: 5px;" title="Mostra dettaglio"
+          <img *ngIf="risultato.idUtente > -1" class="immagineIcona" style="margin-left: 5px;" title="Mostra dettaglio"
             src="../../assets/Immagini/dettaglio.png" (click)="risultato.Espanso = !risultato.Espanso" />
         </div>
       </div>

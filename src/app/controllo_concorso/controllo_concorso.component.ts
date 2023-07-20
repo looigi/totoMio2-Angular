@@ -17,6 +17,9 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
   @Output() chiusuraFinestra: EventEmitter<string> = new EventEmitter<string>();
 
   risultati;
+  risultati2;
+  quale = 0;
+  quanti = 0;
   arrivatiDati = false;
 
   constructor(
@@ -92,6 +95,7 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
                 });
                 // console.log(DettaglioArray);
                 const finale = {
+                  Posizione: -1,
                   idUtente: idUtente,
                   NickName: nickName,
                   PuntiTotali: PuntiTotali,
@@ -99,13 +103,23 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
                   Dettaglio: DettaglioArray,
                   PuntiTotaliJolly: jolly
                 }
+                this.quanti++;
                 RisultatiFinali.push(finale);
                 // console.log(RisultatiFinali);
               }
             });
             RisultatiFinali.sort((a, b) => a.PuntiTotali - b.PuntiTotali);
+            let posizione = 0;
+            RisultatiFinali.forEach(element => {
+              element.Posizione = posizione;
+              posizione++;
+            });
             this.risultati = RisultatiFinali;
-            console.log(this.risultati);
+            this.risultati2 = new Array();
+            this.quale = 0;
+            this.scriveMancanti();
+            // console.log(this.risultati2);
+            console.log('Risultati', this.risultati);
             this.arrivatiDati = true;
           } else {
             alert(data);
@@ -113,6 +127,106 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
         }
       }
     );
+  }
+
+  ritornaColoreBarra(r) {
+    if (this.quale === this.quanti - 1 && r.Posizione === 1) {
+      return '#f9bbbb';
+    } else {
+      if (this.quale === this.quanti - 1 && r.Posizione === this.quanti - 1) {
+        return '#c3efc3';
+      } else {
+        if (r.NickName == this.variabiliGlobali.Utente) {
+          return '#b2b4ff';
+        } else {
+          return 'transparent';
+        }
+      }
+    }
+  }
+
+  mancanti;
+
+  scriveMancanti() {
+    const minimo = this.quanti * 2 / 4;
+    const massimo = this.quanti * 3 / 4;
+    const quanti = (this.quanti - 1) - this.quale;
+    // console.log('Dove: ', quanti);
+    // console.log('Minimo: ', minimo);
+    // console.log('Massimo:', massimo);
+    if (quanti === 0) {
+      this.mancanti = 'Ce l\'hai fatta secco!';
+    } else {
+      if (quanti === 1) {
+        this.mancanti = 'Daje, al prossimo finisci';
+      } else {
+        if (quanti === 2) {
+          this.mancanti = 'Ci sei quasi, ne mancano 2';
+        } else {
+          if (quanti >= minimo && quanti <= massimo) {
+            this.mancanti = 'Daje così... Ancora ' + quanti;
+          } else {
+            if (quanti > massimo) {
+              this.mancanti = 'La strada è ancora lunga: ' + quanti;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  creaArray() {
+    // console.log(this.quale, this.quanti);
+    this.scriveMancanti();
+
+    const r = new Array();
+    let q = 0;
+    let primo = true;
+    this.risultati.forEach(element => {
+      if (q === 0 && this.quale < this.quanti - 1) {
+        const finale = {
+          Posizione: -999,
+          idUtente: -1,
+          NickName: 'XXXXXXX',
+          PuntiTotali: -999,
+          Espanso: false,
+          Dettaglio: undefined,
+          PuntiTotaliJolly: -1
+        }
+        r.push(finale);
+      } else {
+        if (q <= this.quale) {
+          if (!primo) {
+            r.push(element);
+          } else {
+            primo = false;
+          }
+        }
+      }
+      q++;
+    });
+    console.log(r);
+    r.sort((a, b) => b.Posizione - a.Posizione);
+    this.risultati2 = r;
+  }
+
+  avanza() {
+    if (this.quale < this.quanti) {
+      this.quale++;
+      this.creaArray();
+    }
+  }
+
+  indietreggia() {
+    if (this.quale > 0) {
+      this.quale--;
+      this.creaArray();
+    }
+  }
+
+  svela() {
+    this.quale = this.quanti - 1;
+    this.creaArray();
   }
 
   chiudeConcorso() {
