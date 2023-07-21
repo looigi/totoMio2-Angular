@@ -101,7 +101,8 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
                   PuntiTotali: PuntiTotali,
                   Espanso: false,
                   Dettaglio: DettaglioArray,
-                  PuntiTotaliJolly: jolly
+                  PuntiTotaliJolly: jolly,
+                  Squadra23: ''
                 }
                 this.quanti++;
                 RisultatiFinali.push(finale);
@@ -115,18 +116,59 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
               posizione++;
             });
             this.risultati = RisultatiFinali;
+
+            this.prendeRisultati23();
+         } else {
+            alert(data);
+          }
+        }
+      }
+    );
+  }
+
+  prendeRisultati23() {
+    const parametri = {
+      idAnno: this.idAnno,
+      idGiornata: this.variabiliGlobali.idConcorso
+    }
+    this.variabiliGlobali.CaricamentoInCorso = true;
+    this.apiService.ritornaSquadre23(parametri)
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            const torneo23 = data.split('§');
+            console.log('Punti 23', torneo23);
+            torneo23.forEach(element2 => {
+              if (element2) {
+                const t23 = element2.split(';');
+                // console.log('idUtente ' + t23[0] + ' Punti23: ', t23[1]);
+                const idUtente = +t23[0];
+                const punti = +t23[1];
+                const squadra = t23[2];
+                this.risultati.forEach(element3 => {
+                  if (+element3.idUtente === +idUtente) {
+                    element3.Punti23 = punti;
+                    element3.Squadra23 = squadra;
+                  }
+                });
+              }
+            });
+
             this.risultati2 = new Array();
             this.quale = 0;
             this.scriveMancanti();
             // console.log(this.risultati2);
             console.log('Risultati', this.risultati);
             this.arrivatiDati = true;
-          } else {
-            alert(data);
           }
         }
       }
     );
+
+
   }
 
   ritornaColoreBarra(r) {

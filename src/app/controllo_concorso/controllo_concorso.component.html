@@ -16,11 +16,11 @@
         <img class="immagineIcona" style="margin-left: 5px;" title="Controlla Concorso"
           src="../../assets/Immagini/indietro.png" (click)="indietreggia()" />
       </div>
-      <div style="width: 20%; float: left; text-align: center">
+      <!-- <div style="width: 20%; float: left; text-align: center">
         <img class="immagineIcona" style="margin-left: 5px;" title="Controlla Concorso"
           src="../../assets/Immagini/visualizza.png" (click)="svela()" /> &nbsp;
-      </div>
-      <div style="width: 40%; float: left; text-align: center; margin-top: 5px;">
+      </div> -->
+      <div style="width: 60%; float: left; text-align: center; margin-top: 5px;" (click)="svela()">
         <span class="scritta" style="font-weight: bold;">{{mancanti}}</span>
       </div>
       <div style="width: 20%; float: left; text-align: center">
@@ -78,6 +78,10 @@
             <td style="text-align: center; border-right: 1px solid #aaa;">{{partita.DifferenzaGoal == 1 ? 'O' : '-'}}</td>
             <td style="text-align: right;">{{partita.Punti}}</td>
             <td style="text-align: right;">{{partita.Jolly}}</td>
+          </tr>
+          <tr>
+            <td colspan="13" style="text-align: right;">Squadra per 23: {{risultato.Squadra23}}</td>
+            <td style="text-align: right;">{{risultato.Punti23}}</td>
           </tr>
           <tr>
             <td></td>

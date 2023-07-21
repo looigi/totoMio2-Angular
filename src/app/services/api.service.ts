@@ -191,7 +191,7 @@ export class ApiService {
 
   ritornaNomiCoppe() {
     this.controlloPresenzaUtente();
-    const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/ritornaNomiCoppe'
+    const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/RitornaNomiCoppe'
       ;
       // 'Password=' + this.sistemaTesto(params.Password;
     // console.log('Login:', url);
@@ -214,9 +214,22 @@ export class ApiService {
     return ritorno;
   }
 
+  ritornaSquadre23(parametri) {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/RitornaSquadre23?' +
+      'idAnno=' + parametri.idAnno + '&' +
+      'idConcorso=' + parametri.idGiornata
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    return ritorno;
+  }
+
   impostaConcorsoPerControllo(parametri) {
     this.controlloPresenzaUtente();
-    const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/impostaConcorsoPerControllo?' +
+    const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/ImpostaConcorsoPerControllo?' +
       'idAnno=' + parametri.idAnno
       ;
       // 'Password=' + this.sistemaTesto(params.Password;
@@ -284,7 +297,7 @@ export class ApiService {
 
   controllaConcorso(parametri) {
     this.controlloPresenzaUtente();
-    const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/controllaConcorso?' +
+    const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/ControllaConcorso?' +
       'idAnno=' + parametri.idAnno +
       '&idUtente=' + parametri.idUtente +
       '&ModalitaConcorso=' + parametri.ModalitaConcorso
