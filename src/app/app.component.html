@@ -79,6 +79,7 @@
       <coppe_component
         *ngIf="coppeVisibile"
         [idAnno]="VariabiliGlobali.idAnno"
+        [NumeroConcorso]="VariabiliGlobali.idConcorso"
         [DescrizioneAnno]="VariabiliGlobali.descrizioneAnno"
 
         (chiusuraFinestra)="coppeVisibile = false; ritornaDatiGlobali()"

@@ -172,7 +172,7 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
   }
 
   ritornaColoreBarra(r) {
-    if (this.quale === this.quanti - 1 && r.Posizione === 1) {
+    if (this.quale === this.quanti - 1 && r.Posizione === 0) {
       return '#f9bbbb';
     } else {
       if (this.quale === this.quanti - 1 && r.Posizione === this.quanti - 1) {
@@ -224,6 +224,9 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
     const r = new Array();
     let q = 0;
     let primo = true;
+    if (this.quale === this.quanti - 1) {
+      primo = false;
+    }
     this.risultati.forEach(element => {
       if (q === 0 && this.quale < this.quanti - 1) {
         const finale = {

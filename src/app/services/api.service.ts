@@ -214,6 +214,19 @@ export class ApiService {
     return ritorno;
   }
 
+  ritorna23(parametri) {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/RitornaClassifica23?' +
+      'idAnno=' + parametri.idAnno + '&' +
+      'idConcorso=' + parametri.idConcorso
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    return ritorno;
+  }
+
   ritornaSquadre23(parametri) {
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/RitornaSquadre23?' +

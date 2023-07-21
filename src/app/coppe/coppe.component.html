@@ -17,7 +17,7 @@
     </div>
     <div class="contenitoreTab scritta">
       <!-- {{coppaScelta}} -->
-      <div style="width: 100%; height: 100%;">
+      <div *ngIf="coppaScelta != 1 && coppe" style="width: 100%; height: 100%;">
         <div style="width: 100%; height: 20px; float: left; margin-top: -8px; text-align: center; border-bottom: 1px solid #999;">
           <div class="tasto"
             [style.background-color]="!pannelloSemifinale && !pannelloFinale ? '#ededed' : 'transparent'"
@@ -166,6 +166,73 @@
           </div>
         </div>
       </div>
+
+      <div *ngIf="coppaScelta == 1 && coppe" style="width: 100%; height: 100%;">
+        <div style="width: 100%; height: 20px; float: left; margin-top: -8px; text-align: center; border-bottom: 1px solid #999;">
+          <div class="tasto"
+            style="width: calc(33% - 5px); height: 17px; float: left; text-align: center;">
+            <img *ngIf="!errore" class="immagineIcona" style="margin-left: 5px;" title="Indietro"
+              src="../../assets/Immagini/indietro.png" (click)="indietro23()" />
+              <span *ngIf="errore">&nbsp;</span>
+          </div>
+          <div style="float: left; width: 33%; float: left;"
+            class="tasto"
+          >
+            Giornata {{idConcorso23}}
+          </div>
+          <div class="tasto"
+            style="width: calc(33% - 5px); height: 17px; float: left; text-align: center;">
+            <img *ngIf="!errore" class="immagineIcona" style="margin-left: 5px;" title="Avanti"
+              src="../../assets/Immagini/avanti.png" (click)="avanti23()" />
+            <span *ngIf="errore">&nbsp;</span>
+          </div>
+        </div>
+
+        <div style="width: calc(100% - 5px); height: calc(100% - 22px); float: left; margin-top: 3px;">
+          <div style="width: calc(50% - 5px); height: 100%; float: left;">
+            <span *ngIf="errore" style="color: red;">{{errore}}</span>
+            <span *ngIf="!errore" style="width: 100%; float: left; height: 20px; text-align: center;">
+              Classifica
+            </span>
+            <table *ngIf="!errore" style="width: 100%; float: left;" cellpadding="0" cellspacing="0">
+              <tr style="border-bottom: 1px solid #999; margin-top: 5px;">
+                <th>Pos.</th>
+                <th>Utente</th>
+                <th>Punti</th>
+              </tr>
+              <tr *ngFor="let classif of classifica23; let i2 = index" [attr.data-index]="i2"
+                [style.background-color]="classif.Pari ? '#cecefd' : 'transparent'"
+                style="border-bottom: 1px solid #999; margin-top: 5px;">
+                <td style="text-align: center;">{{classif.Numero}}</td>
+                <td>{{classif.NickName}}</td>
+                <td style="text-align: right;">{{classif.Punti}}</td>
+              </tr>
+            </table>
+
+          </div>
+          <div style="width: calc(50% - 5px); height: 100%; float: left; border-left: 1px solid #999;">
+            <span *ngIf="errore">&nbsp;</span>
+            <span *ngIf="!errore" style="width: 100%; float: left; height: 20px; text-align: center;">
+              Partite
+            </span>
+            <table *ngIf="!errore" style="width: 100%; float: left;" cellpadding="0" cellspacing="0">
+              <tr style="border-bottom: 1px solid #999; margin-top: 5px;">
+                <th>N°</th>
+                <th>Utente</th>
+                <th>Squadra</th>
+                <th>Punti</th>
+              </tr>
+              <tr *ngFor="let classif of giornata23; let i2 = index" [attr.data-index]="i2"
+                [style.background-color]="classif.Pari ? '#cecefd' : 'transparent'"
+                style="border-bottom: 1px solid #999; margin-top: 5px;">
+                <td style="text-align: center;">{{classif.Numero}}</td>
+                <td>{{classif.NickName}}</td>
+                <td>{{classif.Squadra}}</td>
+                <td style="text-align: right;">{{classif.Punti}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
     </div>
   </div>
 </div>

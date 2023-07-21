@@ -13,7 +13,7 @@ import { GestioneConcorsoComponent } from './gestione_concorso/gestione_concorso
 import { ChiusuraConcorsoComponent } from './chiusura_concorso/chiusura_concorso.component';
 import { ControlloConcorsoComponent } from './controllo_concorso/controllo_concorso.component';
 import { ClassificaComponent } from './classifica/classifica.component';
-import { CoppeComponent } from './coppe/coppe.compnent';
+import { CoppeComponent } from './coppe/coppe.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { DatepickerModule } from 'ng2-datepicker';
 import { DatePipe } from '@angular/common';

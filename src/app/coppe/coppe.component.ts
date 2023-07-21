@@ -11,13 +11,14 @@ import { VariabiliGlobali } from "../VariabiliGlobali.component";
 export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() idAnno;
   @Input() DescrizioneAnno;
-  // @Input() NumeroConcorso;
+  @Input() NumeroConcorso;
   @Input() ModalitaConcorso;
 
   @Output() chiusuraFinestra: EventEmitter<string> = new EventEmitter<string>();
 
   coppaScelta = 0;
   idAnno2;
+  idConcorso23;
   idConcorso2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   maxGiornata = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   errore;
@@ -28,6 +29,8 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
   coppe;
   pannelloSemifinale = false;
   pannelloFinale = false;
+  classifica23;
+  giornata23;
 
   constructor(
     private apiService: ApiService,
@@ -44,9 +47,10 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
     if (changes.idAnno && changes.idAnno.currentValue) {
       this.idAnno2 = changes.idAnno.currentValue;
     }
-    /* if (changes.NumeroConcorso && changes.NumeroConcorso.currentValue) {
-      this.idConcorso2 = changes.NumeroConcorso.currentValue;
-    } */
+    if (changes.NumeroConcorso && changes.NumeroConcorso.currentValue) {
+      this.idConcorso23 = changes.NumeroConcorso.currentValue;
+      // alert(this.idConcorso23);
+    }
     if (this.idAnno2) {
       this.leggeDatiCoppa();
     }
@@ -108,12 +112,113 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
+  indietro23() {
+    if (this.idConcorso23 > 1) {
+      this.idConcorso23--;
+      this.legge23();
+    }
+  }
+
+  avanti23() {
+    if (this.idConcorso23 < 38) {
+      this.idConcorso23++;
+      this.legge23();
+    }
+  }
+
   leggeCoppa(i) {
     console.log('Coppa scelta: ', i);
-    this.pannelloSemifinale = false;
-    this.pannelloFinale = false;
-    this.coppaScelta = i;
-    this.leggeDatiCoppa();
+    if (i !== 1) {
+      this.pannelloSemifinale = false;
+      this.pannelloFinale = false;
+      this.coppaScelta = i;
+      this.leggeDatiCoppa();
+    } else {
+      this.coppaScelta = 1;
+      this.legge23();
+    }
+  }
+
+  legge23() {
+    const params = {
+      idAnno: this.idAnno2,
+      idConcorso: this.idConcorso23
+    }
+
+    this.variabiliGlobali.CaricamentoInCorso = true;
+    this.apiService.ritorna23(params)
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            // console.log(data);
+            const parti = data.split('|');
+            const classifica = parti[0].split('§');
+            const giornata = parti[1].split('§');
+            // console.log(classifica, giornata);
+
+            const c = new Array();
+            let pos = 1;
+            let pari = true;
+            classifica.forEach(element => {
+              if (element) {
+                const cc = element.split(';');
+                const ccc = {
+                  Numero: pos,
+                  idUtente: +cc[0],
+                  NickName: cc[1],
+                  Punti: +cc[2],
+                  Pari: pari
+                }
+                c.push(ccc);
+              }
+            });
+            c.sort((a, b) => b.Punti - a.Punti);
+            c.forEach(element => {
+              element.Pari = pari;
+              element.Numero = pos;
+              pari = !pari;
+              pos++;
+            });
+            this.classifica23 = c;
+
+            const p = new Array();
+            let n = 1;
+            pari = true;
+            giornata.forEach(element => {
+              if (element) {
+                const cc = element.split(';');
+                const ccc = {
+                  Numero: n,
+                  idUtente: +cc[0],
+                  NickName: cc[1],
+                  Squadra: cc[2],
+                  Punti: +cc[3],
+                  Pari: pari
+                }
+                p.push(ccc);
+              }
+            });
+            p.sort((a, b) => b.Punti - a.Punti);
+            n = 1;
+            p.forEach(element => {
+              element.Numero = n;
+              element.Pari = pari;
+              pari = !pari;
+              n++;
+            });
+            this.giornata23 = p;
+
+            console.log('Classifica 23', this.classifica23);
+            console.log('Giornata 23', this.giornata23);
+
+            this.errore = '';
+          }
+        }
+      }
+    );
   }
 
   leggeDatiCoppa() {
