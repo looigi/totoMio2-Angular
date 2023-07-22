@@ -75,7 +75,7 @@
                 <th>Vincente</th>
               </tr>
               <tr *ngFor="let classif of semifinale; let i2 = index" [attr.data-index]="i2"
-                [style.background-color]="classif.Pari ? '#cecefd' : 'transparent'"
+                [style.background-color]="classif.Pari ? '#c9c9cd' : 'transparent'"
                 style="border-bottom: 1px solid #999; margin-top: 5px;">
                 <td style="text-align: center;">{{classif.Numero}}</td>
                 <td>{{classif.Casa}}</td>
@@ -104,7 +104,7 @@
                 <th>Vincente</th>
               </tr>
               <tr *ngFor="let classif of finale; let i2 = index" [attr.data-index]="i2"
-                [style.background-color]="classif.Pari ? '#cecefd' : 'transparent'"
+                [style.background-color]="classif.Pari ? '#c9c9cd' : 'transparent'"
                 style="border-bottom: 1px solid #999; margin-top: 5px;">
                 <td style="text-align: center;">{{classif.Numero}}</td>
                 <td>{{classif.Casa}}</td>
@@ -131,7 +131,7 @@
                 <th>Punti</th>
               </tr>
               <tr *ngFor="let classif of classifica; let i2 = index" [attr.data-index]="i2"
-                [style.background-color]="classif.Pari ? '#cecefd' : 'transparent'"
+                [style.background-color]="classif.Pari ? '#c9c9cd' : 'transparent'"
                 style="border-bottom: 1px solid #999; margin-top: 5px;">
                 <td style="text-align: center;">{{classif.Posizione}}</td>
                 <td>{{classif.NickName}}</td>
@@ -152,7 +152,7 @@
                 <th>Vincente</th>
               </tr>
               <tr *ngFor="let classif of partite; let i2 = index" [attr.data-index]="i2"
-                [style.background-color]="classif.Pari ? '#cecefd' : 'transparent'"
+                [style.background-color]="classif.Pari ? '#c9c9cd' : 'transparent'"
                 style="border-bottom: 1px solid #999; margin-top: 5px;">
                 <td style="text-align: center;">{{classif.Numero}}</td>
                 <td>{{classif.Casa}}<br />{{classif.Risultato1}}</td>
@@ -197,13 +197,18 @@
             <table *ngIf="!errore" style="width: 100%; float: left;" cellpadding="0" cellspacing="0">
               <tr style="border-bottom: 1px solid #999; margin-top: 5px;">
                 <th>Pos.</th>
+                <th></th>
                 <th>Utente</th>
                 <th>Punti</th>
               </tr>
               <tr *ngFor="let classif of classifica23; let i2 = index" [attr.data-index]="i2"
-                [style.background-color]="classif.Pari ? '#cecefd' : 'transparent'"
+                [style.background-color]="classif.Pari ? '#c9c9cd' : 'transparent'"
                 style="border-bottom: 1px solid #999; margin-top: 5px;">
                 <td style="text-align: center;">{{classif.Numero}}</td>
+                <td>
+                  <img class="immagineSquadra" title="{{classif.NickName}}"
+                    [src]="classif.Avatar" (error)="variabiliGlobali.handleMissingImage($event)" />
+                </td>
                 <td>{{classif.NickName}}</td>
                 <td style="text-align: right;">{{classif.Punti}}</td>
               </tr>
@@ -218,14 +223,19 @@
             <table *ngIf="!errore" style="width: 100%; float: left;" cellpadding="0" cellspacing="0">
               <tr style="border-bottom: 1px solid #999; margin-top: 5px;">
                 <th>N°</th>
+                <th></th>
                 <th>Utente</th>
                 <th>Squadra</th>
                 <th>Punti</th>
               </tr>
               <tr *ngFor="let classif of giornata23; let i2 = index" [attr.data-index]="i2"
-                [style.background-color]="classif.Pari ? '#cecefd' : 'transparent'"
+                [style.background-color]="classif.Pari ? '#c9c9cd' : 'transparent'"
                 style="border-bottom: 1px solid #999; margin-top: 5px;">
                 <td style="text-align: center;">{{classif.Numero}}</td>
+                <td>
+                  <img class="immagineSquadra" title="{{classif.NickName}}"
+                    [src]="classif.Avatar" (error)="variabiliGlobali.handleMissingImage($event)" />
+                </td>
                 <td>{{classif.NickName}}</td>
                 <td>{{classif.Squadra}}</td>
                 <td style="text-align: right;">{{classif.Punti}}</td>

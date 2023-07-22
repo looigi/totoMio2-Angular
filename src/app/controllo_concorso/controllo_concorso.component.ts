@@ -102,7 +102,8 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
                   Espanso: false,
                   Dettaglio: DettaglioArray,
                   PuntiTotaliJolly: jolly,
-                  Squadra23: ''
+                  Squadra23: '',
+                  Avatar: this.variabiliGlobali.ritornaImmagineGiocatore(idUtente.toString())
                 }
                 this.quanti++;
                 RisultatiFinali.push(finale);

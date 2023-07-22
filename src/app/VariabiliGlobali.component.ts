@@ -4,7 +4,8 @@ import { Injectable } from '@angular/core';
 export class VariabiliGlobali {
   CaricamentoInCorso = true;
   urlWS = 'http://looigi.ddns.net:1081/';
-  urlImmagini = 'http://192.168.0.205:1080/Immagini/';
+  urlImmagini = 'http://looigi.ddns.net:1080/TotoMIO/Immagini/Stemmi/';
+  urlAvatar = 'http://looigi.ddns.net:1081/Avatars/';
   idAnno = 1;
   idConcorso = -1;
   descrizioneAnno = '';
@@ -106,6 +107,20 @@ export class VariabiliGlobali {
       idTipologia: -1
     }
   ]
+
+  ritornaImmagineSquadra(imm) {
+    const imm2 = this.sistemaStringaDaPassaggio(imm).toUpperCase();
+    return this.urlImmagini + imm2 +'_Tonda.Jpg';
+  }
+
+  ritornaImmagineGiocatore(id) {
+    const imm2 = this.sistemaStringaDaPassaggio(id).toUpperCase();
+    return this.urlAvatar + this.idAnno + '/' + imm2 +'.png';
+  }
+
+  handleMissingImage($event) {
+    (event.target as HTMLImageElement).style.visibility = 'hidden';
+  }
 
   sistemaStringaPerPassaggio(stringa) {
     let s = stringa;

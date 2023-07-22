@@ -39,6 +39,13 @@
   cursor: pointer;
 }
 
+.immagineSquadra {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  /* filter: grayscale(1); */
+}
+
 .scritta {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 14px;

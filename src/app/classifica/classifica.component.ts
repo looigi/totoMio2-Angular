@@ -74,6 +74,7 @@ export class ClassificaComponent implements OnInit, AfterViewInit, OnChanges {
             righe.forEach(element => {
               if (element) {
                 const c = element.split(';');
+                // console.log(c);
                 const cc = {
                   Pari: pari,
                   Posizione: posizione,
@@ -89,7 +90,8 @@ export class ClassificaComponent implements OnInit, AfterViewInit, OnChanges {
                   Giocate: +c[9],
                   Vittorie: +c[10],
                   Ultimo: +c[11],
-                  Jolly: +c[12]
+                  Jolly: +c[12],
+                  Avatar: this.variabiliGlobali.ritornaImmagineGiocatore(c[0])
                 }
                 pari = !pari
                 posizione++;

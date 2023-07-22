@@ -24,7 +24,7 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
 
   constructor(
     private apiService: ApiService,
-    private variabiliGlobali: VariabiliGlobali
+    public variabiliGlobali: VariabiliGlobali
   ) {
 
   }
@@ -77,7 +77,9 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
                         Risultato2: Ris2,
                         Segno: cc[4],
                         Jolly: +cc[0] === +data4,
-                        Pari: pari
+                        Pari: pari,
+                        ImmagineCasa: this.variabiliGlobali.ritornaImmagineSquadra(cc[1]),
+                        ImmagineFuori: this.variabiliGlobali.ritornaImmagineSquadra(cc[2])
                       }
                       pari = !pari;
                       p.push(ccc);

@@ -170,7 +170,8 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
                   idUtente: +cc[0],
                   NickName: cc[1],
                   Punti: +cc[2],
-                  Pari: pari
+                  Pari: pari,
+                  Avatar: this.variabiliGlobali.ritornaImmagineGiocatore(cc[0])
                 }
                 c.push(ccc);
               }
@@ -196,7 +197,8 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
                   NickName: cc[1],
                   Squadra: cc[2],
                   Punti: +cc[3],
-                  Pari: pari
+                  Pari: pari,
+                  Avatar: this.variabiliGlobali.ritornaImmagineGiocatore(cc[0])
                 }
                 p.push(ccc);
               }
@@ -211,8 +213,8 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
             });
             this.giornata23 = p;
 
-            console.log('Classifica 23', this.classifica23);
-            console.log('Giornata 23', this.giornata23);
+            // console.log('Classifica 23', this.classifica23);
+            // console.log('Giornata 23', this.giornata23);
 
             this.errore = '';
           }
@@ -313,7 +315,8 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
                   idGiocatore: +cc[0],
                   NickName: cc[1],
                   Punti: +cc[2],
-                  Pari: pari
+                  Pari: pari,
+                  Avatar: this.variabiliGlobali.ritornaImmagineGiocatore(cc[0])
                 }
                 pari = !pari;
                 classif.push(c);

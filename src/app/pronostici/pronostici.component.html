@@ -12,31 +12,44 @@
   <div class="contenitoreInterno">
     <div class="rigaIncontro scritta" style="font-weight: bold;">
       <div style="width: 5%; float: left; margin-top: 10px;">N°</div>
-      <div style="width: 32%; float: left; margin-top: 10px;">Casa</div>
-      <div style="width: 32%; float: left; margin-top: 10px;">Fuori</div>
+      <div style="width: 35px; float: left;">&nbsp;</div>
+      <div style="width: calc(32% - 35px); float: left; margin-top: 10px;">Casa</div>
+      <div style="width: 35px; float: left;">&nbsp;</div>
+      <div style="width: calc(32% - 35px); float: left; margin-top: 10px;">Fuori</div>
       <div style="width: 16%; float: left; margin-top: 10px; text-align: center;">Risultato</div>
       <div style="width: 5%; float: left; margin-top: 10px; text-align: center;">Segno</div>
-      <div style="width: 5%; float: left; margin-top: 10px; text-align: center;">Segno</div>
+      <div style="width: 5%; float: left; margin-top: 10px; text-align: center;">J.</div>
     </div>
     <div *ngFor="let partita of partite; let i = index" [attr.data-index]="i" class="rigaIncontro scritta"
-      [style.background-color]="partita.Pari ? '#cecefd' : 'transparent'"
+      [style.background-color]="partita.Pari ? '#c9c9cd' : 'transparent'"
       style="border-bottom: 1px solid #999;">
       <div style="width: 5%; float: left; margin-top: 10px;">{{partita.idPartita}}</div>
-      <div style="width: 32%; float: left; margin-top: 10px;">
-        <span class="scritta">{{partita.Prima}}</span>
+
+      <div style="width: 35px; float: left;">
+        <img class="immagineSquadra" title="{{partita.Prima}}"
+          [src]="partita.ImmagineCasa" (error)="variabiliGlobali.handleMissingImage($event)" />
       </div>
-      <div style="width: 32%; float: left; margin-top: 10px;">
-        <span class="scritta">{{partita.Seconda}}</span>
+      <div style="width: calc(32% - 35px); float: left; margin-top: 10px;">
+        <span class="scritta" style="margin-left: 5px;">{{partita.Prima}}</span>
       </div>
+
+      <div style="width: 35px; float: left;">
+        <img class="immagineSquadra" title="{{partita.Seconda}}"
+          [src]="partita.ImmagineFuori" (error)="variabiliGlobali.handleMissingImage($event)" />
+      </div>
+      <div style="width:  calc(32% - 35px); float: left; margin-top: 10px;">
+        <span class="scritta" style="margin-left: 5px;">{{partita.Seconda}}</span>
+      </div>
+
       <div style="width: 16%; float: left; margin-top: 10px; text-align: center;">
         <input type="number" min="0" max="50" [(ngModel)]="partita.Risultato1" class="scritta" style="width: 20%;" (keypress)="handleKey1(i, $event)">
         -
         <input type="number" min="0" max="50" [(ngModel)]="partita.Risultato2" class="scritta" style="width: 20%;" (keypress)="handleKey2(i, $event)">
       </div>
       <div style="width: 5%; float: left; margin-top: 10px; text-align: center;">{{partita.Segno}}</div>
-      <div style="width: 5%; float: left; margin-top: 10px;">
+
+      <div style="width: 5%; float: left;">
         <img *ngIf="partita.Jolly" class="immagineIcona" title="Partita Jolly"
-          style="margin-top: -10px"
           src="../../assets/Immagini/joker.png" />
         <span *ngIf="!partita.Jolly">&nbsp;</span>
       </div>

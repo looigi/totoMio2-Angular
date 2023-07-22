@@ -24,7 +24,7 @@ export class GestioneConcorsoComponent implements OnInit, AfterViewInit, OnChang
 
   constructor(
     private apiService: ApiService,
-    private variabiliGlobali: VariabiliGlobali
+    public variabiliGlobali: VariabiliGlobali
   ) {
 
   }
@@ -64,7 +64,9 @@ export class GestioneConcorsoComponent implements OnInit, AfterViewInit, OnChang
                   Risultato: cc[3],
                   Risultato1: Ris1,
                   Risultato2: Ris2,
-                  Segno: cc[4]
+                  Segno: cc[4],
+                  ImmagineCasa: this.variabiliGlobali.ritornaImmagineSquadra(cc[1]),
+                  ImmagineFuori: this.variabiliGlobali.ritornaImmagineSquadra(cc[2])
                 }
                 p.push(ccc);
               }

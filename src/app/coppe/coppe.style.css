@@ -48,6 +48,14 @@ table {
   font-size: 14px;
 }
 
+.immagineSquadra {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  /* filter: grayscale(1); */
+  margin-top: 3px;
+}
+
 .tab {
   float: left;
   width: calc(20% - 15px);

@@ -49,3 +49,10 @@
   height: 35px;
   float: left;
 }
+
+.immagineSquadra {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  /* filter: grayscale(1); */
+}

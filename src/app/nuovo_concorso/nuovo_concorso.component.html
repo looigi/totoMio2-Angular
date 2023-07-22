@@ -21,31 +21,44 @@
         &nbsp;
       </div>
       <div style="width: 5%; float: left; margin-top: 10px;">N°</div>
-      <div style="width: 32%; float: left; margin-top: 10px;">Casa</div>
-      <div style="width: 32%; float: left; margin-top: 10px;">Fuori</div>
+      <div style="width: 35px; float: left;">&nbsp;</div>
+      <div style="width: calc(32% - 35px); float: left; margin-top: 10px;">Casa</div>
+      <div style="width: 35px; float: left;">&nbsp;</div>
+      <div style="width: calc(32% - 35px); float: left; margin-top: 10px;">Fuori</div>
       <div style="width: 16%; float: left; margin-top: 10px;">Ris.</div>
       <div style="width: 5%; float: left; margin-top: 10px;">S.</div>
       <div style="width: 5%; float: left; margin-top: 10px;">J.</div>
     </div>
     <div *ngFor="let partita of partite; let i = index" [attr.data-index]="i" class="rigaIncontro scritta"
-        [style.background-color]="partita.Pari ? '#cecefd' : 'transparent'"
+        [style.background-color]="partita.Pari ? '#c9c9cd' : 'transparent'"
         style="border-bottom: 1px solid #999;">
       <div style="width: 5%; float: left;">
-        <img class="immagineIcona" title="Elimina Incontro"
+        <img class="immagineICona" title="Elimina Incontro"
           src="../../assets/Immagini/elimina.png" (click)="eliminaPartita(partita.idPartita)" />
       </div>
       <div style="width: 5%; float: left; margin-top: 10px;">{{partita.idPartita}}</div>
-      <div style="width: 32%; float: left; margin-top: 10px;">
-        <input type="text" [(ngModel)]="partita.Prima" (focusout)="controllaTasti()" class="scritta" style="width: 95%;">
+
+      <div style="width: 35px; float: left;">
+        <img class="immagineSquadra" title="{{partita.Prima}}"
+          [src]="partita.ImmagineCasa" (error)="variabiliGlobali.handleMissingImage($event)" />
       </div>
-      <div style="width: 32%; float: left; margin-top: 10px;">
-        <input type="text" [(ngModel)]="partita.Seconda" (focusout)="controllaTasti()" class="scritta" style="width: 95%;">
+      <div style="width: calc(30% - 35px); float: left; margin-top: 10px;">
+        <input type="text" [(ngModel)]="partita.Prima" (focusout)="controllaTasti()" class="scritta" style="margin-left: 5px; margin-right: 5px; width: calc(95% - 10px);">
       </div>
+
+      <div style="width: 35px; float: left;">
+        <img class="immagineSquadra" title="{{partita.Seconda}}"
+          [src]="partita.ImmagineFuori" (error)="variabiliGlobali.handleMissingImage($event)" />
+      </div>
+      <div style="width: calc(30% - 35px); float: left; margin-top: 10px;">
+        <input type="text" [(ngModel)]="partita.Seconda" (focusout)="controllaTasti()" class="scritta" style="margin-left: 5px; margin-right: 5px; width: calc(95% - 10px);">
+      </div>
+
       <div style="width: 16%; float: left; margin-top: 10px;">{{partita.Risultato}}</div>
       <div style="width: 5%; float: left; margin-top: 10px;">{{partita.Segno}}</div>
-      <div style="width: 5%; float: left; margin-top: 10px;">
+
+      <div style="width: 5%; float: left;">
         <img *ngIf="partita.Jolly" class="immagineIcona" title="Partita Jolly"
-          style="margin-top: -10px"
           src="../../assets/Immagini/joker.png" />
         <span *ngIf="!partita.Jolly">&nbsp;</span>
       </div>
