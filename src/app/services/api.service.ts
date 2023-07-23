@@ -123,11 +123,43 @@ export class ApiService {
     return ritorno;
   }
 
+ modificaUtente(params) {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/ModificaUtente?' +
+      'idAnno=' + this.variabiliGlobali.idAnno + '&' +
+      'idUtente=' + this.variabiliGlobali.idUser + '&' +
+      'NickName=' + params.NickName + '&' +
+      'Cognome=' + params.Cognome + '&' +
+      'Nome=' + params.Nome + '&' +
+      'Password=' + params.Password + '&' +
+      'Mail=' + params.Mail + '&' +
+      'idTipologia=' + params.idTipologia
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    return ritorno;
+  }
+
   ritornaConcorso(idAnno, idConcorso) {
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/RitornoConcorso?' +
       'idAnno=' + idAnno + '&' +
       'idConcorso=' + idConcorso
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    return ritorno;
+  }
+
+  CreaImmagineStandard() {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/CreaImmagineStandard?' +
+      'idAnno=' + this.variabiliGlobali.idAnno + '&' +
+      'idUtente=' + this.variabiliGlobali.idUser
       ;
       // 'Password=' + this.sistemaTesto(params.Password;
     // console.log('Login:', url);

@@ -18,12 +18,23 @@ export class GestioneUtenteComponent implements OnInit, AfterViewInit, OnChanges
   classifica;
   idAnno2;
   idConcorso2;
+  immagineUtente;
+  nickName;
+  cognome;
+  nome;
+  email;
+  password;
 
   constructor(
     private apiService: ApiService,
     public variabiliGlobali: VariabiliGlobali
   ) {
-
+    this.immagineUtente = this.variabiliGlobali.ritornaImmagineGiocatore(this.variabiliGlobali.idUser.toString());
+    this.nickName = this.variabiliGlobali.Utente;
+    this.cognome = this.variabiliGlobali.Cognome;
+    this.nome = this.variabiliGlobali.Nome;
+    this.email = this.variabiliGlobali.EMail;
+    this.password = this.variabiliGlobali.Password;
   }
 
   chiusura() {
@@ -41,4 +52,53 @@ export class GestioneUtenteComponent implements OnInit, AfterViewInit, OnChanges
 
   }
 
+  resetImmagine() {
+    this.apiService.CreaImmagineStandard()
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            this.immagineUtente = this.variabiliGlobali.ritornaImmagineGiocatore(this.variabiliGlobali.idUser.toString()) + '?d=' + new Date().toString();;
+            alert('Immagine utente resettata')
+          } else {
+            alert(data);
+          }
+        }
+      }
+    );
+  }
+
+  salva() {
+    const params = {
+      NickName: this.nickName,
+      Cognome: this.cognome,
+      Nome: this.nome,
+      Password: this.password,
+      Mail: this.email,
+      idTipologia: this.variabiliGlobali.idTipologia
+    }
+    this.variabiliGlobali.CaricamentoInCorso = true;
+
+    this.apiService.modificaUtente(params)
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            this.variabiliGlobali.Utente = this.nickName;
+            this.variabiliGlobali.Cognome = this.cognome;
+            this.variabiliGlobali.Nome = this.nome;
+            this.variabiliGlobali.Password = this.password;
+            this.variabiliGlobali.EMail = this.email;
+            alert('Utente modificato');
+          } else {
+            alert(data);
+          }
+        }
+      }
+    );
+  }
 }

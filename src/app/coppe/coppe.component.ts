@@ -338,7 +338,9 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
                   Vincente: +cc[2],
                   Pari: pari,
                   Risultato1: cc[3],
-                  Risultato2: cc[4]
+                  Risultato2: cc[4],
+                  Avatar1: this.variabiliGlobali.ritornaImmagineGiocatore(cc[5]),
+                  Avatar2: this.variabiliGlobali.ritornaImmagineGiocatore(cc[6])
                 }
                 pari = !pari;
                 partit.push(c);
@@ -360,6 +362,7 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
                   Risultato2: cc[4],
                   Vincente: +cc[5],
                   Pari: pari,
+                  Avatar: this.variabiliGlobali.ritornaImmagineGiocatore(cc[0])
                 }
                 pari = !pari;
                 semif.push(c);
@@ -380,6 +383,7 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
                   Risultato2: cc[4],
                   Vincente: +cc[5],
                   Pari: pari,
+                  Avatar: this.variabiliGlobali.ritornaImmagineGiocatore(cc[0])
                 }
                 pari = !pari;
                 fin.push(c);

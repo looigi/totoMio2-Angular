@@ -128,6 +128,7 @@
             <table *ngIf="!errore" style="width: 100%; float: left;" cellpadding="0" cellspacing="0">
               <tr style="border-bottom: 1px solid #999; margin-top: 5px;">
                 <th>Pos.</th>
+                <th></th>
                 <th>Utente</th>
                 <th>Punti</th>
               </tr>
@@ -135,6 +136,10 @@
                 [style.background-color]="classif.Pari ? '#c9c9cd' : 'transparent'"
                 style="border-bottom: 1px solid #999; margin-top: 5px;">
                 <td style="text-align: center;">{{classif.Posizione}}</td>
+                <td>
+                  <img class="immagineSquadra" title="{{classif.NickName}}"
+                    [src]="classif.Avatar" (error)="variabiliGlobali.handleMissingImage($event)" />
+                </td>
                 <td>{{classif.NickName}}</td>
                 <td style="text-align: right;">{{classif.Punti}}</td>
               </tr>
@@ -148,16 +153,30 @@
             <table *ngIf="!errore" style="width: 100%; float: left;" cellpadding="0" cellspacing="0">
               <tr style="border-bottom: 1px solid #999; margin-top: 5px;">
                 <th>N°</th>
+                <th></th>
                 <th>Casa</th>
+                <th>Risultato</th>
+                <th></th>
                 <th>Fuori</th>
+                <th>Risultato</th>
                 <th>Vincente</th>
               </tr>
               <tr *ngFor="let classif of partite; let i2 = index" [attr.data-index]="i2"
                 [style.background-color]="classif.Pari ? '#c9c9cd' : 'transparent'"
                 style="border-bottom: 1px solid #999; margin-top: 5px;">
                 <td style="text-align: center;">{{classif.Numero}}</td>
-                <td>{{classif.Casa}}<br />{{classif.Risultato1}}</td>
-                <td>{{classif.Fuori}}<br />{{classif.Risultato2}}</td>
+                <td>
+                  <img class="immagineSquadra" title="{{classif.Casa}}"
+                    [src]="classif.Avatar1" (error)="variabiliGlobali.handleMissingImage($event)" />
+                </td>
+                <td>{{classif.Casa}}</td>
+                <td>{{classif.Risultato1}}</td>
+                <td>
+                  <img class="immagineSquadra" title="{{classif.Fuori}}"
+                    [src]="classif.Avatar2" (error)="variabiliGlobali.handleMissingImage($event)" />
+                </td>
+                <td>{{classif.Fuori}}</td>
+                <td>{{classif.Risultato2}}</td>
                 <td *ngIf="classif.Vincente == 1" style="text-align: center;">{{classif.Casa}}</td>
                 <td *ngIf="classif.Vincente == 2" style="text-align: center;">{{classif.Fuori}}</td>
                 <td *ngIf="classif.Vincente == 0" style="text-align: center;">Pareggio</td>

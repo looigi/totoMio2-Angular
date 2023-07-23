@@ -1,6 +1,7 @@
 <div class="barraSuperiore">
   <div style="width: 100%; text-align: right; margin-top: -1px;">
     <div class="immagineIcona" title="Login" style="float: right; background-image: url('../assets/Immagini/login.png'); background-size: contain;" (click)="apreLogin()"></div>
+    <div *ngIf="VariabiliGlobali.Utente" class="immagineIcona" title="Modifica utente" style="float: right; background-image: url('../assets/Immagini/modifica_utente.png'); background-size: contain;" (click)="gestioneUtenteVisibile = true"></div>
     <div class="immagineIcona" title="Registrazione nuovo utente" style="float: right; background-image: url('../assets/Immagini/signin.png'); background-size: contain;" (click)="apreNuovoUtente()"></div>
     <div class="barraSuperioreTesto scritta">
       <div class="casellaIntestazione">

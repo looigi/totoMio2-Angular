@@ -36,7 +36,7 @@ body {
 
 .barraSuperioreTesto {
   float: right;
-  width: calc(100% - 320px);
+  width: calc(100% - 360px);
   margin-top: 1px;
   height: 18px;
   vertical-align: middle;

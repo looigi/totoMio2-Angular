@@ -1,7 +1,7 @@
 .finestra {
   position: absolute;
   width: 50%;
-  height: 50%;
+  height: auto;
   top: 50%;
   left: 50%;
   opacity: .75;
@@ -10,6 +10,10 @@
   background-color: white;
   margin-left: -24%;
   margin-top: -16%;
+  -webkit-box-shadow: 0px 3px 7px -4px #545454;
+  -moz-box-shadow: 0px 3px 7px -4px #545454;
+  -o-box-shadow: 0px 3px 7px -4px #545454;
+  box-shadow: 0px 3px 7px -4px #545454;
 }
 
 .chiusura {
@@ -40,6 +44,12 @@
 .immagineIcona {
   width: 35px;
   height: 35px;
+  cursor: pointer;
+}
+
+.immagineGiocatore {
+  width: 100px;
+  height: 100px;
   cursor: pointer;
 }
 
