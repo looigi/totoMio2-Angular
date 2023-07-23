@@ -76,7 +76,9 @@ table {
 .contenitoreTab {
   margin-top: 25px;
   width: calc(100% - 10px);
-  height: calc(100% - 35px);
+  height: auto; /* calc(100% - 35px); */
+  min-height: calc(100% - 45px);
+  display: flex;
   border: 1px solid #999;
   border-radius: 3px;
   background-color: white;

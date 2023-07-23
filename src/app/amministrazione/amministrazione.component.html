@@ -6,8 +6,15 @@
       Amministrazione
     </div>
   </div>
-  <div class="contenitoreInterno">
-    - Avviso chiusura concorso (Schedine mancanti)
+  <div class="contenitoreInterno scritta">
+    <div class="riga">
+      Stato concorso: {{variabiliGlobali.idModalitaConcorso}}-{{variabiliGlobali.ModalitaConcorso}}
+    </div>
+    <div *ngIf="variabiliGlobali.idModalitaConcorso == 1" class="riga">
+      <img class="immagineIcona" style="margin-left: 5px;" title="Invia promemoria"
+        src="../../assets/Immagini/avviso.png" (click)="InviaPromemoria()" />
+        &nbsp;Invia Promemoria per gli inadempienti
+    </div>
   </div>
 </div>
 

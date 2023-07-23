@@ -21,6 +21,7 @@ import { InfoComponent } from './info/info.component';
 import { AmministrazioneComponent } from './amministrazione/amministrazione.component';
 import { VincitoriComponent } from './vincitori/vincitori.component';
 import { BilancioComponent } from './bilancio/bilancio.component';
+import { GestioneUtenteComponent } from './gestione_utente/gestione_utente.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { BilancioComponent } from './bilancio/bilancio.component';
     InfoComponent,
     AmministrazioneComponent,
     VincitoriComponent,
-    BilancioComponent
+    BilancioComponent,
+    GestioneUtenteComponent
   ],
   imports: [
     BrowserModule,

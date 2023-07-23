@@ -53,8 +53,10 @@ export class VincitoriComponent implements OnInit, AfterViewInit, OnChanges {
               const vvv = element.split(';');
               const vvvv = {
                 Trofeo: vvv[0],
-                Vincitore: vvv[1],
-                Pari: p
+                idVincitore: vvv[1],
+                Vincitore: vvv[2],
+                Pari: p,
+                ImmagineGiocatore: this.variabiliGlobali.ritornaImmagineGiocatore(vvv[1])
               }
               vv.push(vvvv);
               p = !p;

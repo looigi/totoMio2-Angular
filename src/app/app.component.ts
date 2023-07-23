@@ -40,6 +40,7 @@ export class AppComponent implements OnInit {
   adminVisibile = false;
   vincitoriVisibile = false;
   bilancioVisibile = false;
+  gestioneUtenteVisibile = false;
 
   constructor(
     public VariabiliGlobali: VariabiliGlobali,

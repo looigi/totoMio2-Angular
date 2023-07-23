@@ -6,10 +6,11 @@
       Vincitori alla giornata {{variabiliGlobali.idConcorso}}
     </div>
   </div>
-  <div class="contenitoreInterno scritta" style="font-size: 20px;">
+  <div class="contenitoreInterno scritta" style="font-size: 16px;">
     <table style="width: 100%;">
       <tr>
         <th>Trofeo</th>
+        <th></th>
         <th>Vincitore</th>
       </tr>
       <tr *ngFor="let vincitore of vincitori; let i2 = index" [attr.data-index]="i2"
@@ -17,6 +18,10 @@
         style="border-bottom: 1px solid #999; margin-top: 5px;">
         <td>
           {{vincitore.Trofeo}}
+        </td>
+        <td>
+          <img class="immagineSquadra" title="{{vincitore.Vincitore}}"
+            [src]="vincitore.ImmagineGiocatore" (error)="variabiliGlobali.handleMissingImage($event)" />
         </td>
         <td>
           {{vincitore.Vincitore}}

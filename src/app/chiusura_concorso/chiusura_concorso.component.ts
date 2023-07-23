@@ -45,7 +45,7 @@ export class ChiusuraConcorsoComponent implements OnInit, AfterViewInit, OnChang
     this.apiService.impostaConcorsoPerControllo(parametri)
     .map((response: any) => response)
     .subscribe((data2: string | string[]) => {
-        this.variabiliGlobali.CaricamentoInCorso = true;
+        this.variabiliGlobali.CaricamentoInCorso = false;
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {

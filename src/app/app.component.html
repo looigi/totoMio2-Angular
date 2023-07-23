@@ -201,4 +201,11 @@
   </div>
 </div>
 
+<gestione_utente_component
+  *ngIf="gestioneUtenteVisibile"
+
+  (chiusuraFinestra)="gestioneUtenteVisibile = false; ritornaDatiGlobali()"
+>
+</gestione_utente_component>
+
 <div *ngIf="VariabiliGlobali.CaricamentoInCorso" class="caricamentoInCorso"></div>
