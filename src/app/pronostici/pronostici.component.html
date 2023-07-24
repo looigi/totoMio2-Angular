@@ -13,12 +13,13 @@
     <div class="rigaIncontro scritta" style="font-weight: bold;">
       <div style="width: 5%; float: left; margin-top: 10px;">N°</div>
       <div style="width: 35px; float: left;">&nbsp;</div>
-      <div style="width: calc(32% - 35px); float: left; margin-top: 10px;">Casa</div>
+      <div style="width: calc(27% - 35px); float: left; margin-top: 10px;">Casa</div>
       <div style="width: 35px; float: left;">&nbsp;</div>
-      <div style="width: calc(32% - 35px); float: left; margin-top: 10px;">Fuori</div>
-      <div style="width: 16%; float: left; margin-top: 10px; text-align: center;">Risultato</div>
+      <div style="width: calc(27% - 35px); float: left; margin-top: 10px;">Fuori</div>
+      <div style="width: 21%; float: left; margin-top: 10px; text-align: center;">Risultato</div>
       <div style="width: 5%; float: left; margin-top: 10px; text-align: center;">Segno</div>
       <div style="width: 5%; float: left; margin-top: 10px; text-align: center;">J.</div>
+      <div style="width: 5%; float: left; margin-top: 10px; text-align: center;">Sc.</div>
     </div>
     <div *ngFor="let partita of partite; let i = index" [attr.data-index]="i" class="rigaIncontro scritta"
       [style.background-color]="partita.Pari ? '#c9c9cd' : 'transparent'"
@@ -29,7 +30,7 @@
         <img class="immagineSquadra" title="{{partita.Prima}}"
           [src]="partita.ImmagineCasa" (error)="variabiliGlobali.handleMissingImage($event)" />
       </div>
-      <div style="width: calc(32% - 35px); float: left; margin-top: 10px;">
+      <div style="width: calc(27% - 35px); float: left; margin-top: 10px;">
         <span class="scritta" style="margin-left: 5px;">{{partita.Prima}}</span>
       </div>
 
@@ -37,11 +38,11 @@
         <img class="immagineSquadra" title="{{partita.Seconda}}"
           [src]="partita.ImmagineFuori" (error)="variabiliGlobali.handleMissingImage($event)" />
       </div>
-      <div style="width:  calc(32% - 35px); float: left; margin-top: 10px;">
+      <div style="width:  calc(27% - 35px); float: left; margin-top: 10px;">
         <span class="scritta" style="margin-left: 5px;">{{partita.Seconda}}</span>
       </div>
 
-      <div style="width: 16%; float: left; margin-top: 10px; text-align: center;">
+      <div style="width: 21%; float: left; margin-top: 10px; text-align: center;">
         <input type="number" min="0" max="50" [(ngModel)]="partita.Risultato1" class="scritta" style="width: 20%;" (keypress)="handleKey1(i, $event)">
         -
         <input type="number" min="0" max="50" [(ngModel)]="partita.Risultato2" class="scritta" style="width: 20%;" (keypress)="handleKey2(i, $event)">
@@ -52,6 +53,10 @@
         <img *ngIf="partita.Jolly" class="immagineIcona" title="Partita Jolly"
           src="../../assets/Immagini/joker.png" />
         <span *ngIf="!partita.Jolly">&nbsp;</span>
+      </div>
+
+      <div style="width: 5%; float: left; margin-top: 9px; text-align: center;">
+        <input type="checkbox" [checked]="partita.idPartitaScelta" (change)="clickSuPartitaScelta(i)"/>        
       </div>
     </div>
   </div>

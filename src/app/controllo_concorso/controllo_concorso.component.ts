@@ -63,6 +63,7 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
                 const nickName = Intest[1];
                 const PuntiTotali = +Intest[2];
                 let jolly = 0;
+                let pps = 0;
                 const Risultati = parti[1].split('§');
                 // console.log('Risultati', Risultati);
                 const DettaglioArray = new Array();
@@ -86,9 +87,11 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
                       SommaGoal: +Dettaglio[11],
                       DifferenzaGoal: +Dettaglio[12],
                       Punti: +Dettaglio[13],
-                      Jolly: +Dettaglio[14]
+                      Jolly: +Dettaglio[14],
+                      PuntiPartitaScelta: +Dettaglio[15]
                     };
                     jolly += +Dettaglio[14];
+                    pps += +Dettaglio[15];
                     DettaglioArray.push(dett);
                   }
                   pari = !pari;
@@ -102,6 +105,7 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
                   Espanso: false,
                   Dettaglio: DettaglioArray,
                   PuntiTotaliJolly: jolly,
+                  PuntiTotaliPartitaScelta: pps,
                   Squadra23: '',
                   Avatar: this.variabiliGlobali.ritornaImmagineGiocatore(idUtente.toString())
                 }

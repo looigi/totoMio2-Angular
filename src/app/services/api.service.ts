@@ -310,13 +310,14 @@ export class ApiService {
     return ritorno;
   }
 
-  salvaPronosticoUtente(Dati) {
+  salvaPronosticoUtente(Dati, idPartitaScelta) {
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/SalvaPronosticoUtente?' +
       'idAnno=' + this.variabiliGlobali.idAnno +
       '&idUtente=' + this.variabiliGlobali.idUser +
       '&idConcorso=' + this.variabiliGlobali.idConcorso +
-      '&Dati=' + Dati
+      '&Dati=' + Dati + '&' +
+      '&idPartitaScelta=' + idPartitaScelta
       ;
       // 'Password=' + this.sistemaTesto(params.Password;
     // console.log('Login:', url);

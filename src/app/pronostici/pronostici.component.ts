@@ -21,6 +21,7 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
   risu1 = new Array();
   risu2 = new Array();
   tastoSalvataggio = false;
+  idPartitaScelta = -1;
 
   constructor(
     private apiService: ApiService,
@@ -111,7 +112,9 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {
-            const r = data.split('§');
+            const data2 = data.split('|');
+            const idPartitaScelta = +data2[1];
+            const r = data2[0].split('§');
             r.forEach(element => {
               if (element !== '') {
                 const c = element.split(';');
@@ -122,6 +125,7 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
                     const rr = c[1].split('-');
                     element2.Risultato1 = +rr[0];
                     element2.Risultato2 = +rr[1];
+                    element2.idPartitaScelta = ((+element2.idPartita) === idPartitaScelta)
 
                     this.risu1[element2.idPartita - 1] = +rr[0];
                     this.risu2[element2.idPartita - 1] = +rr[1];
@@ -135,6 +139,20 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
         }
       }
     );
+  }
+
+  clickSuPartitaScelta(i) {
+    console.log(this.partite, i);
+    this.idPartitaScelta = i + 1;
+    let n = 1;
+    this.partite.forEach(element => {
+      if (n === this.idPartitaScelta) {
+        element.idPartitaScelta = true;
+      } else {
+        element.idPartitaScelta = false;
+      }
+      n++;
+    });
   }
 
   ngAfterViewInit(): void {
@@ -165,7 +183,7 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
       Dati += element.idPartita + ';' + ris + ';' + element.Segno + '§';
     });
     this.variabiliGlobali.CaricamentoInCorso = true;
-    this.apiService.salvaPronosticoUtente(Dati)
+    this.apiService.salvaPronosticoUtente(Dati, this.idPartitaScelta)
     .map((response: any) => response)
     .subscribe((data2: string | string[]) => {
         this.variabiliGlobali.CaricamentoInCorso = false;

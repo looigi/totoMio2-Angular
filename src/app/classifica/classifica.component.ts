@@ -91,6 +91,7 @@ export class ClassificaComponent implements OnInit, AfterViewInit, OnChanges {
                   Vittorie: +c[10],
                   Ultimo: +c[11],
                   Jolly: +c[12],
+                  PuntiPartitaScelta: +c[13],
                   Avatar: this.variabiliGlobali.ritornaImmagineGiocatore(c[0])
                 }
                 pari = !pari
