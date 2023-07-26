@@ -41,6 +41,7 @@ export class AppComponent implements OnInit {
   vincitoriVisibile = false;
   bilancioVisibile = false;
   gestioneUtenteVisibile = false;
+  uploadVisibile = false;
 
   constructor(
     public VariabiliGlobali: VariabiliGlobali,
@@ -474,5 +475,17 @@ export class AppComponent implements OnInit {
         }
       }
     )
+  }
+
+  tipologiaUL;
+  refreshImmagine;
+
+  apreUpload(Cosa) {
+    this.tipologiaUL = Cosa;
+    this.uploadVisibile = true;
+  }
+
+  fRefreshImmagine() {
+    this.refreshImmagine = new Date().toString();
   }
 }

@@ -1,0 +1,38 @@
+.attenderePrego {
+  width: 40%;
+  height: auto;
+  border: 1px solid #999;
+  left: 32%;
+  top: 32%;
+  border-radius: 5px;
+  background-color: #fff9b0;
+  text-align: center;
+  z-index: 1002;
+  position: absolute;
+  padding: 35px;
+}
+
+.scritta {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+}
+
+.immagineIcona {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.finestra {
+  position: absolute;
+  top: 45%;
+  left: 35%;
+  width: 30%;
+  padding: 3px;
+  height: auto;
+  opacity: .95;
+  border: 1px solid #999;
+  border-radius: 5px;
+  background-color: #fdff9c;
+  z-index: 51;
+}

@@ -204,9 +204,22 @@
 
 <gestione_utente_component
   *ngIf="gestioneUtenteVisibile"
+  [refreshImmagine]="refreshImmagine"
 
   (chiusuraFinestra)="gestioneUtenteVisibile = false; ritornaDatiGlobali()"
+  (apreUploadEmit)="apreUpload('Avatars')"
 >
 </gestione_utente_component>
+
+<app-uploaddownload
+  *ngIf="uploadVisibile"
+  [id]="VariabiliGlobali.idUser"
+  [tipologia]='tipologiaUL'
+  [arrotonda]='"SI"'
+
+  (chiusuraFinestra)="uploadVisibile = false;"
+  (refreshImmagine)="fRefreshImmagine()"
+>
+</app-uploaddownload>
 
 <div *ngIf="VariabiliGlobali.CaricamentoInCorso" class="caricamentoInCorso"></div>

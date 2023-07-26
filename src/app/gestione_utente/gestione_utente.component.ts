@@ -12,8 +12,10 @@ export class GestioneUtenteComponent implements OnInit, AfterViewInit, OnChanges
   @Input() idAnno;
   @Input() DescrizioneAnno;
   @Input() NumeroConcorso;
+  @Input() refreshImmagine;
 
   @Output() chiusuraFinestra: EventEmitter<string> = new EventEmitter<string>();
+  @Output() apreUploadEmit: EventEmitter<string> = new EventEmitter<string>();
 
   classifica;
   idAnno2;
@@ -42,6 +44,10 @@ export class GestioneUtenteComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes.refreshImmagine && changes.refreshImmagine.currentValue) {
+      this.immagineUtente = this.variabiliGlobali.ritornaImmagineGiocatore(this.variabiliGlobali.idUser.toString()) +
+        '?d=' + new Date().toString();
+    }
   }
 
   ngOnInit(): void {
@@ -50,6 +56,10 @@ export class GestioneUtenteComponent implements OnInit, AfterViewInit, OnChanges
 
   ngAfterViewInit(): void {
 
+  }
+
+  apreUpload() {
+    this.apreUploadEmit.emit(new Date().toString());
   }
 
   resetImmagine() {

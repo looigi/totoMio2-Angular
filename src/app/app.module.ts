@@ -22,6 +22,8 @@ import { AmministrazioneComponent } from './amministrazione/amministrazione.comp
 import { VincitoriComponent } from './vincitori/vincitori.component';
 import { BilancioComponent } from './bilancio/bilancio.component';
 import { GestioneUtenteComponent } from './gestione_utente/gestione_utente.component';
+import { UploadDownloadComponent } from './upload_download/ud.component';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -37,13 +39,15 @@ import { GestioneUtenteComponent } from './gestione_utente/gestione_utente.compo
     AmministrazioneComponent,
     VincitoriComponent,
     BilancioComponent,
-    GestioneUtenteComponent
+    GestioneUtenteComponent,
+    UploadDownloadComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    DatepickerModule
+    DatepickerModule,
+    HttpModule
   ],
   providers: [
     HttpClientService,
