@@ -72,6 +72,8 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
                           Segno: cc[4],
                           Jolly: +cc[0] === +data4,
                           Pari: pari,
+                          idPrima: cc[1],
+                          idSeconda: cc[2],
                           ImmagineCasa: this.variabiliGlobali.ritornaImmagineSquadra(cc[1]),
                           ImmagineFuori: this.variabiliGlobali.ritornaImmagineSquadra(cc[2])
                         }
@@ -273,5 +275,33 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
         this.tastoConferma = true;
       } */
     }
+  }
+
+  uploadVisibile = false;
+  qualeImmagine;
+  casaFuori;
+  nomeSquadra;
+
+  uploadImmagine(partita, Dove) {
+    this.qualeImmagine = partita;
+    this.casaFuori = Dove;
+    let ii = 0;
+    let ok = false;
+    let quale;
+    if (Dove === 'CASA') {
+      this.nomeSquadra = partita.Prima;
+    } else {
+      this.nomeSquadra = partita.Seconda;
+    }
+    // console.log(partita, this.nomeSquadra);
+    this.uploadVisibile = true;
+  }
+
+  fRefreshImmagine() {
+        if (this.casaFuori === 'CASA') {
+          this.qualeImmagine.ImmagineCasa = this.variabiliGlobali.ritornaImmagineSquadra(this.qualeImmagine.idPrima) + '?d=' + new Date().toString()
+        } else {
+          this.qualeImmagine.ImmagineFuori = this.variabiliGlobali.ritornaImmagineSquadra(this.qualeImmagine.idSeconda) + '?d=' + new Date().toString()
+        }
   }
 }

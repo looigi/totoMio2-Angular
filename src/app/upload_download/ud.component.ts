@@ -14,6 +14,7 @@ export class UploadDownloadComponent implements OnInit, OnChanges, AfterViewInit
     @Input() id;
     @Input() tipologia;
     @Input() arrotonda;
+    @Input() scriveLog = 'SI';
 
     @Output() chiusuraFinestra: EventEmitter<string> = new EventEmitter<string>();
     @Output() refreshImmagine: EventEmitter<string> = new EventEmitter<string>();
@@ -46,6 +47,9 @@ export class UploadDownloadComponent implements OnInit, OnChanges, AfterViewInit
       if (changes.id && changes.id.currentValue) {
         this.id2 = changes.id.currentValue;
       }
+      if (changes.tipologia && changes.tipologia.currentValue) {
+        this.tipologia2 = changes.tipologia.currentValue;
+      }
       if (changes.arrotonda && changes.arrotonda.currentValue) {
         this.arrotonda2 = changes.arrotonda.currentValue;
       }
@@ -56,6 +60,8 @@ export class UploadDownloadComponent implements OnInit, OnChanges, AfterViewInit
     }
 
     inviaUpload() {
+      let nomeFile = this.id2;
+
       const inputEl: HTMLInputElement = this.inputEl.nativeElement;
       const fileCount: number = inputEl.files.length;
       const formData = new FormData();
@@ -79,8 +85,8 @@ export class UploadDownloadComponent implements OnInit, OnChanges, AfterViewInit
         // formData.append('cartella', Cartella);
         formData.append('arrotonda', this.arrotonda2);
         // formData.append('uplodadedfile', fileName);
-        formData.append('nomefile', this.id2);
-        formData.append('scrivelog', 'SI');
+        formData.append('nomefile', nomeFile);
+        formData.append('scrivelog', this.scriveLog);
         formData.append('anno', idAnno.toString());
         // formData.append('nomesquadra', this.variabiliGlobali.CodAnnoSquadra);
         // formData.append('allegato', this.allegato);
