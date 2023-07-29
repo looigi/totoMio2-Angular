@@ -111,16 +111,24 @@ export class VariabiliGlobali {
 
   ritornaImmagineSquadra(imm) {
     const imm2 = this.sistemaStringaDaPassaggio(imm).toUpperCase();
-    return this.urlImmagini + imm2 +'_Tonda.Jpg';
+    return this.urlImmagini + imm2 +'_Tonda.Jpg?d=' + new Date().toString();
   }
 
   ritornaImmagineGiocatore(id) {
     const imm2 = this.sistemaStringaDaPassaggio(id).toUpperCase();
-    return this.urlAvatar + this.idAnno + '/' + imm2 +'.png';
+    return this.urlAvatar + this.idAnno + '/' + imm2 +'.png?d=' + new Date().toString();
   }
 
   handleMissingImage($event) {
     (event.target as HTMLImageElement).style.visibility = 'hidden';
+  }
+
+  mettePrimaLetteraMaiuscola(s) {
+    let ritorno = s.toLowerCase().trim();
+    let prima = ritorno.substring(0, 1);
+    ritorno = ritorno.substring(1, ritorno.length);
+    ritorno = prima.toUpperCase() + ritorno;
+    return ritorno;
   }
 
   sistemaStringaPerPassaggio(stringa) {

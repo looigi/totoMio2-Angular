@@ -48,6 +48,14 @@
   margin-top: 3px;
 }
 
+.immagineGiocatore {
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+  /* filter: grayscale(1);*/
+  margin-top: 3px;
+}
+
 .scritta {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 15px;

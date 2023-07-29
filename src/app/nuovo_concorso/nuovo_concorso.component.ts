@@ -75,7 +75,9 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
                           idPrima: cc[1],
                           idSeconda: cc[2],
                           ImmagineCasa: this.variabiliGlobali.ritornaImmagineSquadra(cc[1]),
-                          ImmagineFuori: this.variabiliGlobali.ritornaImmagineSquadra(cc[2])
+                          ImmagineFuori: this.variabiliGlobali.ritornaImmagineSquadra(cc[2]),
+                          refreshImmagineCasa: true,
+                          refreshImmagineFuori: true
                         }
                         pari = !pari;
                         p.push(ccc);
@@ -252,8 +254,27 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
   }
 
   controllaTasti() {
+    this.partite.forEach(element => {
+      if (element.Prima) {
+        element.Prima = this.variabiliGlobali.mettePrimaLetteraMaiuscola(element.Prima)
+        element.ImmagineCasa = this.variabiliGlobali.ritornaImmagineSquadra(element.Prima);
+        element.refreshImmagineCasa = false;
+      }
+      if (element.Seconda) {
+        element.Seconda = this.variabiliGlobali.mettePrimaLetteraMaiuscola(element.Seconda)
+        element.ImmagineFuori = this.variabiliGlobali.ritornaImmagineSquadra(element.Seconda);
+        element.refreshImmagineFuori = false;
+      }
+    });
+    setTimeout(() => {
+      this.partite.forEach(element => {
+        element.refreshImmagineCasa = true;
+        element.refreshImmagineFuori = true;
+      });
+    }, 100);
     console.log('Partite', this.partite.length);
     console.log('Confronto', this.vecchiePartite, this.partite);
+
     // console.log('Diff', JSON.stringify(this.vecchiePartite) === JSON.stringify(this.partite));
     if (this.partite.length === 0) {
       // console.log('Ritorno 1');

@@ -9,6 +9,25 @@
   background-color: white;
 }
 
+.mascheraScelta {
+  width: auto;
+  height: auto;
+  border: 1px solid #999;
+  background-color: #f5e597;
+  border-radius: 5px;
+  padding: 5px;
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  margin: auto;
+}
+
+.casella {
+  width: auto;
+  height: 40px;
+  float: left;
+}
+
 .chiusura {
   position: absolute;
   right: 10px;

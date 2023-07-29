@@ -34,6 +34,10 @@ export class AmministrazioneComponent implements OnInit, AfterViewInit, OnChange
 
   }
 
+  CreazioneNuovoAnno() {
+
+  }
+
   InviaPromemoria() {
     const parametri = {
       idAnno: this.variabiliGlobali.idAnno

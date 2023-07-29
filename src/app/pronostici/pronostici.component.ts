@@ -177,6 +177,16 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   salvaPronostico() {
+    let ok = false;
+    this.partite.forEach(element => {
+      if (element.idPartitaScelta) {
+        ok = true;
+      }
+    });
+    if (!ok) {
+      alert('Selezionare una partita scelta');
+      return;
+    }
     let Dati = '';
     this.partite.forEach(element => {
       const ris = element.Risultato1 + '-' + element.Risultato2;

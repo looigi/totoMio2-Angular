@@ -33,7 +33,7 @@
         [style.background-color]="classifica_utente.Pari ? '#c9c9cd' : 'transparent'">
         <td style="text-align: center; border-right: 1px solid #aaa;" [style.color]="classifica_utente.NickName == variabiliGlobali.Utente ? 'red' : 'black'">{{classifica_utente.Posizione}}</td>
         <td style="border-right: 1px solid #aaa; text-align: center;">
-          <img class="immagineSquadra" title="{{classifica_utente.NickName}}"
+          <img class="immagineGiocatore" title="{{classifica_utente.NickName}}"
             [src]="classifica_utente.Avatar" (error)="variabiliGlobali.handleMissingImage($event)" />
         </td>
         <td style="text-align: left; border-right: 1px solid #aaa;" [style.color]="classifica_utente.NickName == variabiliGlobali.Utente ? 'red' : 'black'">{{classifica_utente.NickName}}</td>

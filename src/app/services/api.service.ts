@@ -327,6 +327,64 @@ export class ApiService {
     return ritorno;
   }
 
+  letturaMovimenti() {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsBilancio.asmx/RitornaMovimenti'
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    this.variabiliGlobali.CaricamentoInCorso = false;
+    return ritorno;
+  }
+
+  letturaBilancio() {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsBilancio.asmx/RitornaBilancio?' +
+      'idAnno=' + this.variabiliGlobali.idAnno + '&' +
+      'idUtente=' + this.variabiliGlobali.idUser
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    this.variabiliGlobali.CaricamentoInCorso = false;
+    return ritorno;
+  }
+
+  salvaMovimento(params) {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsBilancio.asmx/ScriveModificaMovimento?' +
+      'idAnno=' + this.variabiliGlobali.idAnno + '&' +
+      'idUtente=' + params.idUtente + '&' +
+      'idMovimento=' + params.idMovimento + '&' +
+      'Importo=' + params.Importo + '&' +
+      'Data=' + params.Data + '&' +
+      'Note=' + params.Note + '&' +
+      'Progressivo=' + params.Progressivo
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    this.variabiliGlobali.CaricamentoInCorso = false;
+    return ritorno;
+  }
+
+  letturaUtenti() {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/RitornaTuttiGliUtenti?' +
+      'idAnno=' + this.variabiliGlobali.idAnno
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    this.variabiliGlobali.CaricamentoInCorso = false;
+    return ritorno;
+  }
+
   ritornaVincitori() {
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/RitornaVincitori?' +
