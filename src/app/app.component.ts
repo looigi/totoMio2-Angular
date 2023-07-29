@@ -267,6 +267,13 @@ export class AppComponent implements OnInit {
     if (id === -1) {
       // TASTO CON IDTIPOLOGIA -1 (TUTTI)
       switch (idTasto) {
+        case 1:
+          if (this.loginEffettuato) {
+            return true;
+          } else {
+            return false;
+          }
+          break;
         case 2: // RISULTATI
           if (this.VariabiliGlobali.idModalitaConcorso === 3) { // ID CONCORSO CONTROLLATO
             // SI POSSONO VEDERE I RISULTATI
@@ -283,6 +290,27 @@ export class AppComponent implements OnInit {
             // PRONOSTICI NON ATTIVI
             return false;
           }
+        case 7:
+          if (this.loginEffettuato) {
+            return true;
+          } else {
+            return false;
+          }
+          break;
+        case 10:
+          if (this.loginEffettuato) {
+            return true;
+          } else {
+            return false;
+          }
+          break;
+        case 11:
+          if (this.loginEffettuato) {
+            return true;
+          } else {
+            return false;
+          }
+          break;
         default:
           return true;
       }

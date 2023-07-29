@@ -18,7 +18,7 @@
 </div>
 
 <div class="corpoCentrale">
-  <div *ngIf="loginEffettuato" class="menuSinistra" [style.width]="menuVisibile ? '30%' : '40px'">
+  <div class="menuSinistra" [style.width]="menuVisibile ? '30%' : '40px'">
     <div class="immagineIcona" title="Apre Chiude Menù" (click)="apreChiudeMenu()" style="z-index: 30; position: absolute; width: 40px; height: 40px; right: 0px; top: 0px; background-image: url('../assets/Immagini/hamburger.png'); background-size: contain;"></div>
     <div style="position: absolute; left: 0px; top: 0px; width: 100%; height: calc(100% - 35px); padding-top: 35px;">
       <div *ngFor="let pagina of VariabiliGlobali.pagine; let i = index;">
@@ -127,11 +127,12 @@
 
 <div class="barraInferiore">
   <div [title]="eventi ? 'Eventi: ' + eventi : ''" style="width: 74%; float: left; margin-top: 6px; height: 20px; white-space: nowrap; border-right: 1px solid #ccc; overflow: hidden;">
-    <span class="scritta">
+    <span *ngIf="loginEffettuato" class="scritta">
       Anno {{VariabiliGlobali.idAnno}} {{VariabiliGlobali.descrizioneAnno}}
       Concorso {{VariabiliGlobali.idConcorso}} {{VariabiliGlobali.ModalitaConcorso}}
       <span *ngIf="eventi"> - Eventi: {{eventi}}</span>
     </span>
+    <span *ngIf="!loginEffettuato">&nbsp;</span>
   </div>
   <div style="width: 25%; float: left; padding-left: 3px; text-align: right; margin-top: 6px; overflow: hidden; height: 23px; white-space: nowrap;">
     <span class="scritta">TotoMIO 2 - Copyright looigi227</span>

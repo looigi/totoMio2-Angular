@@ -33,6 +33,10 @@
   overflow: auto;
 }
 
+.neretto {
+  font-weight: bold;
+}
+
 .immagineIcona {
   width: 35px;
   height: 35px;
@@ -42,4 +46,9 @@
 .scritta {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 14px;
+}
+
+.scritta {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 18px;
 }

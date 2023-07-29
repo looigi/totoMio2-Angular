@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class VariabiliGlobali {
   CaricamentoInCorso = true;
   urlWS = 'http://looigi.ddns.net:1081/';
-  urlImmagini = 'http://looigi.ddns.net:1080/TotoMIO/Immagini/Stemmi/';
+  urlImmagini = 'http://looigi.ddns.net:1080/Immagini/Stemmi/';
   urlAvatar = 'http://looigi.ddns.net:1081/Avatars/';
   urlPerUpload = 'http://looigi.ddns.net:1082/Default.aspx';
   idAnno = 1;
