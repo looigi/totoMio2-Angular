@@ -4,13 +4,13 @@
     <div *ngIf="VariabiliGlobali.Utente" class="immagineIcona" title="Modifica utente" style="float: right; background-image: url('../assets/Immagini/modifica_utente.png'); background-size: contain;" (click)="gestioneUtenteVisibile = true"></div>
     <div class="immagineIcona" title="Registrazione nuovo utente" style="float: right; background-image: url('../assets/Immagini/signin.png'); background-size: contain;" (click)="apreNuovoUtente()"></div>
     <div class="barraSuperioreTesto scritta">
-      <div class="casellaIntestazione">
+      <!-- <div class="casellaIntestazione">
         <span *ngIf="VariabiliGlobali.Utente">
           {{VariabiliGlobali.Tipologia}} {{VariabiliGlobali.Utente}} ({{VariabiliGlobali.Cognome}} {{VariabiliGlobali.Nome}})
           <span *ngIf="scadenzaConcorso2" style="color: red;"><br />Scadenza concorso: {{scadenzaConcorso2}}</span>
         </span>
       </div>
-      <!-- <div class="casellaIntestazione">
+      <div class="casellaIntestazione">
       </div> -->
       <!-- RIEPILOGO INFORMAZIONI UTENTE -->
     </div>

@@ -1,15 +1,88 @@
 <div class="finestra">
   <div class="barraSuperiore">
-    <div style="width: 50%; float: left;">
+    <div style="width: 40px; float: left;">
       <img *ngIf="tastoSalvataggio" class="immagineIcona" style="margin-left: 5px;" title="Salva Pronostico"
         src="../../assets/Immagini/save.png" (click)="salvaPronostico()" />
       <span *ngIf="!tastoSalvataggio">&nbsp;</span>
     </div>
-    <div class="scritta" style="width: 50%; float: left; margin-top: 5px; font-weight: bold; white-space: nowrap;">
+    <div class="scritta" style="width: calc(100% - 80px); overflow: hidden; float: left; margin-top: 5px; font-weight: bold; white-space: nowrap;">
       Anno {{idAnno2}} - {{DescrizioneAnno}} Concorso {{NumeroConcorso2}} Partite {{partite.length}}
     </div>
   </div>
-  <div class="contenitoreInterno">
+  <div class="contenitoreInterno scritta">
+    <table style="min-width: 100%;">
+      <tr>
+        <th>
+          N°
+        </th>
+        <th>
+          &nbsp;
+        </th>
+        <th>
+          Casa
+        </th>
+        <th>
+
+        </th>
+        <th>
+          Fuori
+        </th>
+        <th>
+          Ris. Casa
+        </th>
+        <th>
+          Ris. Fuori
+        </th>
+        <th>
+          Segno
+        </th>
+        <th>
+          Jolly
+        </th>
+        <th>
+          Scelta
+        </th>
+      </tr>
+      <tr *ngFor="let partita of partite; let i = index" [attr.data-index]="i" class="scritta"
+        [style.background-color]="partita.Pari ? '#c9c9cd' : 'transparent'"
+        style="border-bottom: 1px solid #999;">
+        <td>
+          {{partita.idPartita}}
+        </td>
+        <td>
+          <img class="immagineSquadra" title="{{partita.Prima}}"
+            [src]="partita.ImmagineCasa" (error)="variabiliGlobali.handleMissingImage($event)" />
+        </td>
+        <td>
+          {{partita.Prima}}
+        </td>
+        <td>
+          <img class="immagineSquadra" title="{{partita.Prima}}"
+            [src]="partita.ImmagineCasa" (error)="variabiliGlobali.handleMissingImage($event)" />
+        </td>
+        <td>
+          {{partita.Seconda}}
+        </td>
+        <td style="text-align: center;">
+          <input type="number" min="0" max="50" [(ngModel)]="partita.Risultato1" class="scritta" style="width: 30px;" (keypress)="handleKey1(i, $event)">
+        </td>
+        <td style="text-align: center;">
+          <input type="number" min="0" max="50" [(ngModel)]="partita.Risultato2" class="scritta" style="width: 30px;" (keypress)="handleKey2(i, $event)">
+        </td>
+        <td style="text-align: center;">
+          {{partita.Segno}}
+        </td>
+        <td style="text-align: center;">
+          <img *ngIf="partita.Jolly" class="immagineIcona" title="Partita Jolly"
+            src="../../assets/Immagini/joker.png" />
+          <span *ngIf="!partita.Jolly">&nbsp;</span>
+        </td>
+        <td style="text-align: center;">
+          <input type="checkbox" [checked]="partita.idPartitaScelta" (change)="clickSuPartitaScelta(i)"/>
+        </td>
+      </tr>
+    </table>
+<!--
     <div class="rigaIncontro scritta" style="font-weight: bold;">
       <div style="width: 5%; float: left; margin-top: 10px;">N°</div>
       <div style="width: 35px; float: left;">&nbsp;</div>
@@ -56,10 +129,11 @@
       </div>
 
       <div style="width: 5%; float: left; margin-top: 9px; text-align: center;">
-        <input type="checkbox" [checked]="partita.idPartitaScelta" (change)="clickSuPartitaScelta(i)"/>        
+        <input type="checkbox" [checked]="partita.idPartitaScelta" (change)="clickSuPartitaScelta(i)"/>
       </div>
     </div>
   </div>
+-->
 </div>
 
 <div class="chiusura" (click)="chiusura()" title="Chiusura finestra">

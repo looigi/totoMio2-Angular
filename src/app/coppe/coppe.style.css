@@ -75,7 +75,7 @@ table {
 
 .contenitoreTab {
   /* margin-top: 25px; */
-  width: calc(100% - 162px);
+  width: calc(100% - 130px);
   height: calc(100% - 12px);
   float: left;
   /* min-height: calc(100% - 45px); */
@@ -92,6 +92,8 @@ table {
   float: left;
   text-align: center;
   border: 1px solid #999;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .tasto:hover {
   background-color: #ededed;

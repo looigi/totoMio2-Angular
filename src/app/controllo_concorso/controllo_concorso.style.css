@@ -31,7 +31,7 @@
   width: 100%;
   height: calc(100% - 40px);
   margin-top: 40px;
-  overflow: auto;
+  /* overflow: auto; */
 }
 
 .immagineIcona {
@@ -45,27 +45,31 @@
   font-size: 14px;
 }
 
-.immagineSquadra {
-  width: 30px;
-  height: 30px;
+.immagineGiocatore {
+  width: 45px;
+  height: 45px;
   cursor: pointer;
   /* filter: grayscale(1); */
 }
 
 .rigaGenerale {
-  width: calc(100% - 6px);
-  height: 30px;
+  /* width: calc(100% - 6px); */
+  height: 45px;
   border: 1px solid #999;
   margin: 3px;
   /* margin-top: 3px; */
   border-radius: 5px;
+  padding-top: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
 }
 
 .rigaIntestazione {
-  width: calc(90% - 5px);
+  /* width: calc(90% - 5px); */
   float: left;
   font-size: 16px;
-  margin-top: 5px;
+  margin-top: 7px;
   margin-left: 5px;
 }
 
@@ -77,4 +81,5 @@
   margin-top: -2px;
   border-radius: 5px;
   margin-left: 3px;
+  display: inline-block;
 }
