@@ -167,7 +167,22 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   eliminaMovimento(m) {
-
+    this.variabiliGlobali.CaricamentoInCorso = true;
+    this.apiService.eliminaMovimento(m.Progressivo)
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            alert('Movimento eliminato');
+            this.letturaBilancio();
+          } else {
+            alert(data);
+          }
+        }
+      }
+    );
   }
 
   modificaMovimento(m) {

@@ -353,6 +353,20 @@ export class ApiService {
     return ritorno;
   }
 
+  eliminaMovimento(progressivo) {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsBilancio.asmx/EliminaMovimento?' +
+      'idAnno=' + this.variabiliGlobali.idAnno + '&' +
+      'Progressivo=' + progressivo
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    this.variabiliGlobali.CaricamentoInCorso = false;
+    return ritorno;
+  }
+
   salvaMovimento(params) {
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsBilancio.asmx/ScriveModificaMovimento?' +

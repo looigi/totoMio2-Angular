@@ -1,11 +1,15 @@
 <div class="finestra scritta">
   <div class="barraSuperiore">
-    <span style="font-weight: bold;">Bilancio</span>
-    <img *ngIf="variabiliGlobali.idTipologia == 0" style="position: absolute; left: 50px; top: 30px;" class="immagineIcona" title="Aggiunge" (click)="aggiungeMovimento()"
-      src="../../assets/Immagini/aggiungi.png" (error)="variabiliGlobali.handleMissingImage($event)" />
-</div>
+    <div style="width: 40px; float: left;">
+      <img *ngIf="variabiliGlobali.idTipologia == 0" class="immagineIcona" title="Aggiunge" (click)="aggiungeMovimento()"
+        src="../../assets/Immagini/aggiungi.png" (error)="variabiliGlobali.handleMissingImage($event)" />
+    </div>
+    <div style="width: calc(100% - 70px); margin-top: 7px; float: left; font-weight: bold;">
+      Bilancio
+    </div>
+  </div>
   <div class="contenitoreInterno scritta" style="overflow: hidden;">
-    <div style="width: 99%; height: 70%; float: left; border-bottom: 1px solid #999;">
+    <div style="width: 99%; height: 50%; float: left; border-bottom: 1px solid #999;">
       <table style="width: 100%;">
         <tr>
           <th>
@@ -66,7 +70,8 @@
         </tr>
       </table>
     </div>
-    <div *ngIf="modificaDati && variabiliGlobali.idTipologia == 0" style="width: 99%; height: auto; margin-top: 10px; float: left; overflow: auto;">
+    <div *ngIf="modificaDati && variabiliGlobali.idTipologia == 0"
+      style="width: 99%; height: 50%; float: left; overflow: auto;">
       <div class="casella">
         <div style="width: calc(100% - 40px); float: left; margin-top: 6px;">
           <span style="font-weight: bold;">NickName:</span>&nbsp;
@@ -74,48 +79,70 @@
             style="margin-left: 5px; margin-right: 5px; width: 100px;">&nbsp;
         </div>
         <div style="width: 40px; float: left;">
-          <img class="immagineIcona" title="Elimina" (click)="apreScelta(1)"
+          <img class="immagineIcona" title="Sceglie utente" (click)="apreScelta(1)"
           src="../../assets/Immagini/gestione_concorso.png" (error)="variabiliGlobali.handleMissingImage($event)" />
         </div>
       </div>
+      <div style="clear: both;"></div>
       <div class="casella">
-        <div style="width: 100%; float: left; margin-top: 6px;">
-          <span style="font-weight: bold;">Importo:</span>&nbsp;
-          <input type="number" [(ngModel)]="Importo" class="scritta"
-            style="margin-left: 5px; margin-right: 5px; width: 200px;">
+        <div style="width: 99%; float: left; margin-top: 6px;">
+          <div style="width: 100px; float: left; font-weight: bold;">
+            Importo
+          </div>
+          <div style="width: calc(100% - 110px); float: left; font-weight: bold;">
+            <input type="number" [(ngModel)]="Importo" class="scritta"
+              style="margin-left: 5px; margin-right: 5px; width: 100%; max-width: 90px;">
         </div>
       </div>
+      <div style="clear: both;"></div>
       <div class="casella">
         <div style="width: calc(100% - 40px); float: left; margin-top: 6px;">
-          <span style="font-weight: bold;">Tipologia:</span>&nbsp;
-          <input disabled="true" type="text" [(ngModel)]="Tipologia" class="scritta"
-            style="margin-left: 5px; margin-right: 5px; width: 150px;">&nbsp;
+          <div style="width: 100px; float: left; font-weight: bold;">
+            Tipologia
+          </div>
+          <div style="width: calc(100% - 110px); float: left; font-weight: bold;">
+            <input disabled="true" type="text" [(ngModel)]="Tipologia" class="scritta"
+              style="margin-left: 5px; margin-right: 5px; width: 100px;">&nbsp;
+          </div>
         </div>
         <div style="width: 40px; float: left;">
           <img class="immagineIcona" title="Elimina" (click)="apreScelta(2)"
             src="../../assets/Immagini/gestione_concorso.png" (error)="variabiliGlobali.handleMissingImage($event)" />
         </div>
       </div>
+      <div style="clear: both;"></div>
       <div class="casella">
         <div style="width: 100%; float: left; margin-top: 6px;">
-          <span style="font-weight: bold;">Data:</span>&nbsp;
-          <input type="text" [(ngModel)]="Data" class="scritta"
-            style="margin-left: 5px; margin-right: 5px; width: 100px;">
+          <div style="width: 100px; float: left; font-weight: bold;">
+            Data
+          </div>
+          <div style="width: calc(99% - 110px); float: left;">
+            <input type="text" [(ngModel)]="Data" class="scritta"
+              style="margin-left: 5px; margin-right: 5px; width: 100px;">
+          </div>
         </div>
       </div>
+      <div style="clear: both;"></div>
       <div class="casella">
         <div style="width: 100%; float: left; margin-top: 6px;">
-          <span style="font-weight: bold;">Note:</span>&nbsp;
-          <input type="text" [(ngModel)]="Note" class="scritta"
-            style="margin-left: 5px; margin-right: 5px; width: 500px;">
+          <div style="width: 100px; float: left; font-weight: bold;">
+            Note:
+          </div>
+          <div style="width: calc(99% - 110px); float: left;">
+            <input type="text" [(ngModel)]="Note" class="scritta"
+              style="width: 99%;">
+          </div>
         </div>
       </div>
+      <div style="clear: both;"></div>
+      <br />
       <div style="width: 100%; float: left; height: auto; border-top: 1px solid #999; text-align: right;">
         <img class="immagineIcona" title="Annulla" (click)="annulla()"
           src="../../assets/Immagini/chiusura.png" (error)="variabiliGlobali.handleMissingImage($event)" />
         <img class="immagineIcona" title="Salva" (click)="salva()"
           src="../../assets/Immagini/save.png" (error)="variabiliGlobali.handleMissingImage($event)" />
       </div>
+      <br />
     </div>
   </div>
 </div>
@@ -134,7 +161,7 @@
       </th>
     </tr>
     <tr *ngFor="let scelta of scelte; let i2 = index" [attr.data-index]="i2"
-      [style.background-color]="scelta.Pari ? '#c9c9cd' : 'transparent'">
+      [style.background-color]="scelta.Pari ? '#ebd35f' : 'transparent'">
       <td>
         <img class="immagineIcona" title="Modifica" (click)="impostaScelta(scelta)"
           src="../../assets/Immagini/modifica_utente.png" (error)="variabiliGlobali.handleMissingImage($event)" />

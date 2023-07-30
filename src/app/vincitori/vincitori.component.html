@@ -3,15 +3,17 @@
     <div style="width: 50%; float: left;">
     </div>
     <div class="scritta" style="width: 50%; float: left; margin-top: 5px; font-weight: bold; white-space: nowrap;">
-      Vincitori alla giornata {{variabiliGlobali.idConcorso}}
+      Vincitori alla giornata {{variabiliGlobali.idConcorso}}<br />Montepremi: €{{montePremi}}
     </div>
   </div>
   <div class="contenitoreInterno scritta" style="font-size: 16px;">
-    <table style="width: 100%;">
+    <table style="min-width: 100%;">
       <tr>
         <th>Trofeo</th>
         <th></th>
         <th>Vincitore</th>
+        <th>Perc.</th>
+        <th>Vincita</th>
       </tr>
       <tr *ngFor="let vincitore of vincitori; let i2 = index" [attr.data-index]="i2"
         [style.background-color]="vincitore.Pari ? '#cecefd' : 'transparent'"
@@ -25,6 +27,12 @@
         </td>
         <td>
           {{vincitore.Vincitore}}
+        </td>
+        <td style="text-align: right;">
+          {{vincitore.Percentuale}}
+        </td>
+        <td style="text-align: right;">
+          {{vincitore.Vincita}}
         </td>
       </tr>
     </table>
