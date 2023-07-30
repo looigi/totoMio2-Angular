@@ -10,12 +10,18 @@
     <div class="riga">
       Stato concorso: {{variabiliGlobali.idModalitaConcorso}}-{{variabiliGlobali.ModalitaConcorso}}
     </div>
+    <div *ngIf="inadempienti">
+      <span style="font-weight: bold;">Inadempienti per il concorso attuale</span><br />
+      <div *ngFor="let ina of inadempienti; let i2 = index" [attr.data-index]="i2">
+        {{ina}}
+      </div>
+    </div>
     <div *ngIf="variabiliGlobali.idModalitaConcorso == 1" class="riga">
       <img class="immagineIcona" style="margin-left: 5px;" title="Invia promemoria"
         src="../../assets/Immagini/avviso.png" (click)="InviaPromemoria()" />
         &nbsp;Invia Promemoria per gli inadempienti
     </div>
-    <div class="riga" style="margin-top: 10px;">
+    <div class="riga" style="margin-top: 20px;">
       <img class="immagineIcona" style="margin-left: 5px;" title="Creazione nuovo anno"
         src="../../assets/Immagini/nuovo_concorso.png" (click)="CreazioneNuovoAnno()" />
         &nbsp;Creazione nuovo anno

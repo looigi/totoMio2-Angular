@@ -103,6 +103,12 @@
         (chiusuraFinestra)="classifica = false; ritornaDatiGlobali()"
       />
 
+      <chat_component
+        *ngIf="chatVisibile"
+
+        (chiusuraFinestra)="chatVisibile = false;"
+      />
+
       <controllo_concorsocomponent
         *ngIf="controlloConcorso"
         [idAnno]="VariabiliGlobali.idAnno"

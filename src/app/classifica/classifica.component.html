@@ -30,7 +30,7 @@
         <th style="border-right: 1px solid #aaa;">Scelte</th>
       </tr>
       <tr *ngFor="let classifica_utente of classifica; let i2 = index" [attr.data-index]="i2"
-        [style.background-color]="classifica_utente.Pari ? '#c9c9cd' : 'transparent'">
+        [style.background-color]="classifica_utente.Pari ? '#cecefd' : 'transparent'">
         <td style="text-align: center; border-right: 1px solid #aaa;" [style.color]="classifica_utente.NickName == variabiliGlobali.Utente ? 'red' : 'black'">{{classifica_utente.Posizione}}</td>
         <td style="border-right: 1px solid #aaa; text-align: center;">
           <img class="immagineGiocatore" title="{{classifica_utente.NickName}}"

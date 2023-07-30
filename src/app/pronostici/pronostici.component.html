@@ -44,7 +44,7 @@
         </th>
       </tr>
       <tr *ngFor="let partita of partite; let i = index" [attr.data-index]="i" class="scritta"
-        [style.background-color]="partita.Pari ? '#c9c9cd' : 'transparent'"
+        [style.background-color]="partita.Pari ? '#cecefd' : 'transparent'"
         style="border-bottom: 1px solid #999;">
         <td>
           {{partita.idPartita}}
@@ -95,7 +95,7 @@
       <div style="width: 5%; float: left; margin-top: 10px; text-align: center;">Sc.</div>
     </div>
     <div *ngFor="let partita of partite; let i = index" [attr.data-index]="i" class="rigaIncontro scritta"
-      [style.background-color]="partita.Pari ? '#c9c9cd' : 'transparent'"
+      [style.background-color]="partita.Pari ? '#cecefd' : 'transparent'"
       style="border-bottom: 1px solid #999;">
       <div style="width: 5%; float: left; margin-top: 10px;">{{partita.idPartita}}</div>
 

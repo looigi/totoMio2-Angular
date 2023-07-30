@@ -24,6 +24,7 @@ import { BilancioComponent } from './bilancio/bilancio.component';
 import { GestioneUtenteComponent } from './gestione_utente/gestione_utente.component';
 import { UploadDownloadComponent } from './upload_download/ud.component';
 import { HttpModule } from '@angular/http';
+import { ChatComponent } from './info copy/chat.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { HttpModule } from '@angular/http';
     VincitoriComponent,
     BilancioComponent,
     GestioneUtenteComponent,
-    UploadDownloadComponent
+    UploadDownloadComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

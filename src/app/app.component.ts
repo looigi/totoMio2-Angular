@@ -42,6 +42,7 @@ export class AppComponent implements OnInit {
   bilancioVisibile = false;
   gestioneUtenteVisibile = false;
   uploadVisibile = false;
+  chatVisibile = false;
 
   constructor(
     public VariabiliGlobali: VariabiliGlobali,
@@ -96,6 +97,7 @@ export class AppComponent implements OnInit {
         this.adminVisibile = false;
         this.vincitoriVisibile = false;
         this.bilancioVisibile = false;
+        this.chatVisibile = false;
         break;
       case 1: // CLASSIFICA
         this.nuovoConcorsoVisibile = false;
@@ -109,6 +111,7 @@ export class AppComponent implements OnInit {
         this.adminVisibile = false;
         this.vincitoriVisibile = false;
         this.bilancioVisibile = false;
+        this.chatVisibile = false;
         break;
       case 2: // RISULTATI
         this.nuovoConcorsoVisibile = false;
@@ -122,6 +125,7 @@ export class AppComponent implements OnInit {
         this.adminVisibile = false;
         this.vincitoriVisibile = false;
         this.bilancioVisibile = false;
+        this.chatVisibile = false;
         break;
       case 3: // PRONOSTICI
         const oggi = new Date().getTime();
@@ -141,6 +145,7 @@ export class AppComponent implements OnInit {
         this.adminVisibile = false;
         this.vincitoriVisibile = false;
         this.bilancioVisibile = false;
+        this.chatVisibile = false;
         break;
       case 6: // CHIUSURA CONCORSO
         this.nuovoConcorsoVisibile = false;
@@ -154,6 +159,7 @@ export class AppComponent implements OnInit {
         this.adminVisibile = false;
         this.vincitoriVisibile = false;
         this.bilancioVisibile = false;
+        this.chatVisibile = false;
         break;
       case 4: // GESTIONE CONCORSO
         this.nuovoConcorsoVisibile = false;
@@ -167,6 +173,7 @@ export class AppComponent implements OnInit {
         this.adminVisibile = false;
         this.vincitoriVisibile = false;
         this.bilancioVisibile = false;
+        this.chatVisibile = false;
         break;
       case 5: // CONTROLLO CONCORSO
         this.nuovoConcorsoVisibile = false;
@@ -180,6 +187,7 @@ export class AppComponent implements OnInit {
         this.adminVisibile = false;
         this.vincitoriVisibile = false;
         this.bilancioVisibile = false;
+        this.chatVisibile = false;
         break;
       case 7: // TORNEI
         this.nuovoConcorsoVisibile = false;
@@ -193,6 +201,7 @@ export class AppComponent implements OnInit {
         this.adminVisibile = false;
         this.vincitoriVisibile = false;
         this.bilancioVisibile = false;
+        this.chatVisibile = false;
         break;
       case 8: // INFO
         this.nuovoConcorsoVisibile = false;
@@ -206,6 +215,7 @@ export class AppComponent implements OnInit {
         this.adminVisibile = false;
         this.vincitoriVisibile = false;
         this.bilancioVisibile = false;
+        this.chatVisibile = false;
         break;
       case 9: // ADMIN
         this.nuovoConcorsoVisibile = false;
@@ -219,6 +229,7 @@ export class AppComponent implements OnInit {
         this.adminVisibile = true;
         this.vincitoriVisibile = false;
         this.bilancioVisibile = false;
+        this.chatVisibile = false;
         break;
       case 10: // VINCITORI
         this.nuovoConcorsoVisibile = false;
@@ -232,6 +243,7 @@ export class AppComponent implements OnInit {
         this.adminVisibile = false;
         this.vincitoriVisibile = true;
         this.bilancioVisibile = false;
+        this.chatVisibile = false;
         break;
       case 11: // BILANCIO
         this.nuovoConcorsoVisibile = false;
@@ -245,6 +257,21 @@ export class AppComponent implements OnInit {
         this.adminVisibile = false;
         this.vincitoriVisibile = false;
         this.bilancioVisibile = true;
+        this.chatVisibile = false;
+        break;
+      case 12: // CHAT
+        this.nuovoConcorsoVisibile = false;
+        this.classifica = false;
+        this.controlloConcorso = false;
+        this.pronosticiVisibile = false;
+        this.chiusuraConcorso = false;
+        this.gestioneConcorso = false;
+        this.coppeVisibile = false;
+        this.infoVisibile = false;
+        this.adminVisibile = false;
+        this.vincitoriVisibile = false;
+        this.bilancioVisibile = false;
+        this.chatVisibile = true;
         break;
     }
   }

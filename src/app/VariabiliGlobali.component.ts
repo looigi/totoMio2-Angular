@@ -106,6 +106,13 @@ export class VariabiliGlobali {
       Titolo: 'Bilancio',
       Pagina: 'Bilancio',
       idTipologia: -1
+    },
+    {
+      idTasto: 12,
+      Icona: 'chat.png',
+      Titolo: 'Chat',
+      Pagina: 'Chat',
+      idTipologia: -1
     }
   ]
 

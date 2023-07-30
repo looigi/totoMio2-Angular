@@ -11,6 +11,8 @@ import { ApiService } from "../services/api.service";
 export class AmministrazioneComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() chiusuraFinestra: EventEmitter<string> = new EventEmitter<string>();
 
+  inadempienti;
+
   constructor(
     private apiService: ApiService,
     public variabiliGlobali: VariabiliGlobali
@@ -27,7 +29,9 @@ export class AmministrazioneComponent implements OnInit, AfterViewInit, OnChange
   }
 
   ngOnInit(): void {
-
+    if (this.variabiliGlobali.idModalitaConcorso === 1) {
+      this.LeggeInadempienti();
+    }
   }
 
   ngAfterViewInit(): void {
@@ -36,6 +40,27 @@ export class AmministrazioneComponent implements OnInit, AfterViewInit, OnChange
 
   CreazioneNuovoAnno() {
 
+  }
+
+  LeggeInadempienti() {
+    const parametri = {
+      idAnno: this.variabiliGlobali.idAnno
+    }
+    this.variabiliGlobali.CaricamentoInCorso = true;
+    this.apiService.LeggeInadempienti()
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            this.inadempienti = data.split('§');
+          } else {
+            alert(data);
+          }
+        }
+      }
+    );
   }
 
   InviaPromemoria() {

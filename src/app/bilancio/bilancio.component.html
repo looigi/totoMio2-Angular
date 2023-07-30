@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="contenitoreInterno scritta" style="overflow: hidden;">
-    <div style="width: 99%; height: 50%; float: left; border-bottom: 1px solid #999;">
+    <div style="width: 99%; height: 50%; overflow: auto; float: left; border-bottom: 1px solid #999;">
       <table style="width: 100%;">
         <tr>
           <th>
@@ -38,7 +38,7 @@
           </th>
         </tr>
         <tr *ngFor="let bilancetto of bilancio; let i2 = index" [attr.data-index]="i2"
-          [style.background-color]="bilancetto.Pari ? '#c9c9cd' : 'transparent'">
+          [style.background-color]="bilancetto.Pari ? '#cecefd' : 'transparent'">
           <td>
             <img *ngIf="variabiliGlobali.idTipologia == 0" class="immagineIcona" title="Elimina" (click)="eliminaMovimento(bilancetto)"
               src="../../assets/Immagini/elimina.png" (error)="variabiliGlobali.handleMissingImage($event)" />
