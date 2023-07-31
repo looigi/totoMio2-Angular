@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
   eventi;
   scadenzaConcorso = undefined;
   scadenzaConcorso2 = '';
+  messaggiRicevuti = 0;
 
   nuovoConcorsoVisibile = false;
   pronosticiVisibile = false;
@@ -61,13 +62,14 @@ export class AppComponent implements OnInit {
     if (anno !== null) {
       this.VariabiliGlobali.idAnno = +anno;
     }
-    this.ritornaDatiGlobali();
 
     if (this.ricordami) {
       const login = localStorage.getItem('login');
       if (login !== null) {
         const r = login.split(';');
         this.splittaCampiLogin(r);
+
+        this.ritornaDatiGlobali();
       }
     }
   }
@@ -338,6 +340,13 @@ export class AppComponent implements OnInit {
             return false;
           }
           break;
+        case 12:
+          if (this.loginEffettuato) {
+            return true;
+          } else {
+            return false;
+          }
+          break;
         default:
           return true;
       }
@@ -415,6 +424,8 @@ export class AppComponent implements OnInit {
 
             const parametri = data;
             localStorage.setItem('login', parametri);
+
+            this.ritornaDatiGlobali();
           } else {
             alert(data);
           }
@@ -470,6 +481,23 @@ export class AppComponent implements OnInit {
   }
 
   ritornaDatiGlobali() {
+    this.VariabiliGlobali.CaricamentoInCorso = true;
+    this.apiService.leggeMessaggi()
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        this.VariabiliGlobali.CaricamentoInCorso = false;
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            this.messaggiRicevuti = +data;
+            this.ritornaDatiGlobali2();
+          }
+        }
+      }
+    );
+  }
+
+  ritornaDatiGlobali2() {
     this.VariabiliGlobali.CaricamentoInCorso = true;
     this.apiService.login()
     .map((response: any) => response)

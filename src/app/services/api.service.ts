@@ -105,6 +105,19 @@ export class ApiService {
     return ritorno;
   }
 
+  segnaComeLetto(progressivo) {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsChat.asmx/SegnaComeLetto?' +
+      'idAnno=' + this.variabiliGlobali.idAnno + '&' +
+      'Progressivo=' + progressivo
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    return ritorno;
+  }
+
   creaNuovoUtente(params) {
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/AggiungeUtente?' +
@@ -358,6 +371,50 @@ export class ApiService {
     const url = this.variabiliGlobali.urlWS + 'wsBilancio.asmx/EliminaMovimento?' +
       'idAnno=' + this.variabiliGlobali.idAnno + '&' +
       'Progressivo=' + progressivo
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    this.variabiliGlobali.CaricamentoInCorso = false;
+    return ritorno;
+  }
+
+  leggeMessaggi() {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsChat.asmx/LeggeNuoviMessaggi?' +
+      'idAnno=' + this.variabiliGlobali.idAnno + '&' +
+      'idUtente=' + this.variabiliGlobali.idUser
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    this.variabiliGlobali.CaricamentoInCorso = false;
+    return ritorno;
+  }
+
+  ritornaTuttiIMessaggi() {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsChat.asmx/RitornaTuttiIMessaggi?' +
+      'idAnno=' + this.variabiliGlobali.idAnno + '&' +
+      'idUtente=' + this.variabiliGlobali.idUser
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    this.variabiliGlobali.CaricamentoInCorso = false;
+    return ritorno;
+  }
+
+  scriveMessaggi(params) {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsChat.asmx/InviaMessaggio?' +
+      'idAnno=' + this.variabiliGlobali.idAnno + '&' +
+      'Destinatari=' + params.Destinatari + '&' +
+      'idMittente=' + this.variabiliGlobali.idUser + '&' +
+      'Messaggio=' + params.Messaggio
       ;
       // 'Password=' + this.sistemaTesto(params.Password;
     // console.log('Login:', url);

@@ -1,0 +1,97 @@
+<div class="finestra">
+  <div class="barraSuperiore">
+    <div style="width: 40px; float: left;">
+      <img *ngIf="variabiliGlobali.idTipologia == 0" class="immagineIcona" title="Aggiunge" (click)="aggiunge()"
+        src="../../assets/Immagini/aggiungi.png" (error)="variabiliGlobali.handleMissingImage($event)" />
+    </div>
+    <div class="scritta" style="width: calc(100% - 70px); margin-top: 7px; float: left; font-weight: bold;">
+      Bilancio
+    </div>
+  </div>
+  <div class="contenitoreInterno scritta" style="font-weight: normal;">
+    <div style="width: 99%; height: 50%; overflow: auto; float: left; border-bottom: 1px solid #999;">
+      <table style="width: 100%;">
+        <tr>
+          <th>
+            &nbsp;
+          </th>
+          <th>
+            Progressivo
+          </th>
+          <th>
+            &nbsp;
+          </th>
+          <th>
+            Mittente
+          </th>
+          <th>
+            Messaggio
+          </th>
+          <th>
+            Data
+          </th>
+        </tr>
+        <tr *ngFor="let messaggio of messaggi; let i2 = index" [attr.data-index]="i2"
+          [style.background-color]="messaggio.Pari ? '#cecefd' : 'transparent'">
+          <td style="text-align: center;">
+            <img *ngIf="!messaggio.Letto" class="immagineIcona" title="'Segna come letto'" (click)="segnaComeLetto(messaggio.Progressivo)"
+              src="../../assets/Immagini/segna.png" (error)="variabiliGlobali.handleMissingImage($event)" />
+          </td>
+          <td>
+            {{messaggio.Progressivo}}
+          </td>
+          <td>
+            <img class="immagineGiocatore" title="{{messaggio.Mittente}}"
+              [src]="messaggio.Avatar" (error)="variabiliGlobali.handleMissingImage($event)" />
+          </td>
+          <td>
+            {{messaggio.Mittente}}
+          </td>
+          <td>
+            {{messaggio.Messaggio}}
+          </td>
+          <td>
+            {{messaggio.Data}}
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf="modificaDati" style="width: 99%; height: calc(50% - 3px); float: left; overflow: auto;">
+      <div style="width: 100%; height: calc(100% - 40px); float: left; overflow: hidden;">
+        <div style="width: 30%; height: 100%; float: left; overflow: auto;">
+          <span class="scritta" style="font-weight: bold;">Destinatari</span><hr />
+          <input type="checkbox" [checked]="tutti" (change)="clickSuTutti()"/>&nbsp;
+          <span class="scritta" style="font-weight: bold;">Tutti</span>
+
+          <table style="width: 100%;">
+            <tr *ngFor="let utente of utenti; let i2 = index" [attr.data-index]="i2"
+              [style.background-color]="utente.Pari ? '#cecefd' : 'transparent'">
+              <td>
+                <input type="checkbox" [checked]="utente.Scelto" (change)="clickSuScelto(utente.idUtente)"/>
+              </td>
+              <td>
+                <img class="immagineGiocatore" title="{{utente.NickName}}"
+                  [src]="utente.Avatar" (error)="variabiliGlobali.handleMissingImage($event)" />
+              </td>
+              <td>
+                {{utente.NickName}}
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div style="width: calc(70% - 8px); height: 100%; text-align: center; float: left; border-left: 1px solid #999; overflow: auto;">
+          <textarea [(ngModel)]="messaggio" style="width: calc(100% - 10px); height: calc(100% - 10px);"></textarea>
+        </div>
+      </div>
+      <div style="width: 100%; height: 30px; float: left; border-top: 1px solid #999; text-align: right;">
+        <img class="immagineIcona" title="Annulla" (click)="annulla()"
+          src="../../assets/Immagini/chiusura.png" (error)="variabiliGlobali.handleMissingImage($event)" />
+        <img class="immagineIcona" title="Salva" (click)="invia()"
+          src="../../assets/Immagini/save.png" (error)="variabiliGlobali.handleMissingImage($event)" />
+      </div>
+    </div>
+ </div>
+</div>
+
+<div class="chiusura" (click)="chiusura()" title="Chiusura finestra">
+</div>

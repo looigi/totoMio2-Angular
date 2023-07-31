@@ -33,6 +33,8 @@
 
   <div class="divCentrale">
     <div class="contenitoreMaschere">
+      <span *ngIf="messaggiRicevuti>0" class="scritta" style="position: absolute; font-weight: bold; color: red;">Messaggi ricevuti: {{messaggiRicevuti}}</span>
+
       <amministrazione_component
         *ngIf="adminVisibile"
 
