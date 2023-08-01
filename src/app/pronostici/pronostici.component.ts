@@ -114,6 +114,8 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
           if (data.indexOf('ERROR') === -1) {
             const data2 = data.split('|');
             const idPartitaScelta = +data2[1];
+            this.idPartitaScelta = idPartitaScelta;
+            // alert('Partita scelta: ' + idPartitaScelta);
             const r = data2[0].split('§');
             r.forEach(element => {
               if (element !== '') {
@@ -185,6 +187,22 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
     });
     if (!ok) {
       alert('Selezionare una partita scelta');
+      return;
+    }
+    let q = 1;
+    this.partite.forEach(element => {
+      if (+element.Risultato1 < 0) {
+        alert('Risultato della partita ' + q + ' in casa non valido: ' + element.Risultato1);
+        return;
+      }
+      if (+element.Risultato2 < 0) {
+        alert('Risultato della partita ' + q + ' fuori casa non valido: ' + element.Risultato2);
+        return;
+      }
+      q++;
+    });
+    if (this.idPartitaScelta === -1) {
+      alert('Partita scelta non valida: ' + this.idPartitaScelta);
       return;
     }
     let Dati = '';
