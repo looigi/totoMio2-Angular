@@ -65,9 +65,81 @@
       </div>
     </div>
     <div style="width: 100%; height: auto; float: left; text-align: right; margin-top: 10px; border-top: 1px solid #999;">
+      <img class="immagineIcona" title="Settaggi"
+        src="../../assets/Immagini/settaggi.png" (click)="settaggi = true;"
+        (error)="variabiliGlobali.handleMissingImage($event)" />
       <img class="immagineIcona" title="Salva le modifiche"
         src="../../assets/Immagini/save.png" (click)="salva()"
         (error)="variabiliGlobali.handleMissingImage($event)" />
     </div>
+  </div>
+</div>
+
+<div *ngIf="settaggi" class="finestraSetup scritta">
+  <div style="width: auto; height: auto; border: 1px solid #999; border-radius: 5px;">
+    <span style="font-weight: bold;">Ricezione Mails</span><hr />
+    <table style="width: 100%;">
+      <tr>
+        <td>
+          Apertura
+        </td>
+        <td style="text-align: right;">
+          <input type="checkbox" [checked]="Apertura" (change)="clickSuApertura()"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Reminder
+        </td>
+        <td style="text-align: right;">
+          <input type="checkbox" [checked]="Reminder" (change)="clickSuReminder()"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Chiusura
+        </td>
+        <td style="text-align: right;">
+          <input type="checkbox" [checked]="Chiusura" (change)="clickSuChiusura()"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Controllo
+        </td>
+        <td style="text-align: right;">
+          <input type="checkbox" [checked]="Controllo" (change)="clickSuControllo()"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Chat
+        </td>
+        <td style="text-align: right;">
+          <input type="checkbox" [checked]="Chat" (change)="clickSuChat()"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Giocata
+        </td>
+        <td style="text-align: right;">
+          <input type="checkbox" [checked]="Giocata" (change)="clickSuGiocata()"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+
+        </td>
+        <td style="text-align: right;">
+          <img class="immagineIcona" title="Chiude"
+            src="../../assets/Immagini/chiusura.png" (click)="settaggi = false;"
+            (error)="variabiliGlobali.handleMissingImage($event)" />
+          <img class="immagineIcona" title="Salva i settaggi"
+            src="../../assets/Immagini/save.png" (click)="scriveSettaggi()"
+            (error)="variabiliGlobali.handleMissingImage($event)" />
+        </td>
+      </tr>
+    </table>
   </div>
 </div>

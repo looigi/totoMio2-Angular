@@ -26,6 +26,13 @@ export class GestioneUtenteComponent implements OnInit, AfterViewInit, OnChanges
   nome;
   email;
   password;
+  Apertura = true;
+  Chiusura = true;
+  Controllo = true;
+  Chat = true;
+  Reminder = true;
+  Giocata = true;
+  settaggi = false;
 
   constructor(
     private apiService: ApiService,
@@ -40,6 +47,8 @@ export class GestioneUtenteComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   chiusura() {
+    this.settaggi = false;
+
     this.chiusuraFinestra.emit(new Date().toString());
   }
 
@@ -51,7 +60,7 @@ export class GestioneUtenteComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   ngOnInit(): void {
-
+    this.leggeSettaggi();
   }
 
   ngAfterViewInit(): void {
@@ -111,4 +120,79 @@ export class GestioneUtenteComponent implements OnInit, AfterViewInit, OnChanges
       }
     );
   }
+
+  leggeSettaggi() {
+    this.variabiliGlobali.CaricamentoInCorso = true;
+    this.apiService.leggeSettaggi()
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            const c = data.split(';');
+            this.Apertura = c[0] === 'S';
+            this.Reminder = c[1] === 'S';
+            this.Controllo = c[2] === 'S';
+            this.Chiusura = c[3] === 'S';
+            this.Chat = c[4] === 'S';
+            this.Giocata = c[4] === 'S';
+          } else {
+            alert(data);
+          }
+        }
+      }
+    );
+  }
+
+  scriveSettaggi() {
+    this.variabiliGlobali.CaricamentoInCorso = true;
+    const params = {
+      Apertura: this.Apertura ? 'S' : 'N',
+      Reminder: this.Reminder ? 'S' : 'N',
+      Controllo: this.Controllo ? 'S' : 'N',
+      Chiusura: this.Chiusura ? 'S' : 'N',
+      Chat: this.Chat ? 'S' : 'N',
+      Giocata: this.Giocata ? 'S' : 'N',
+    }
+    this.apiService.scriveSettaggi(params)
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            alert('Settaggi salvati');
+          } else {
+            alert(data);
+          }
+        }
+      }
+    );
+  }
+
+  clickSuApertura() {
+    this.Apertura = !this.Apertura
+  }
+
+  clickSuChiusura() {
+    this.Chiusura = !this.Chiusura;
+  }
+
+  clickSuControllo() {
+    this.Controllo = !this.Controllo;
+  }
+
+  clickSuChat() {
+    this.Chat = !this.Chat;
+  }
+
+  clickSuReminder() {
+    this.Reminder = !this.Reminder;
+  }
+
+  clickSuGiocata() {
+    this.Giocata = !this.Giocata;
+  }
+
 }

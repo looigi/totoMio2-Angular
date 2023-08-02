@@ -406,6 +406,40 @@ export class ApiService {
     return ritorno;
   }
 
+  leggeSettaggi() {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/RitornaUtentiMails?' +
+      'idAnno=' + this.variabiliGlobali.idAnno + '&' +
+      'idUtente=' + this.variabiliGlobali.idUser
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    this.variabiliGlobali.CaricamentoInCorso = false;
+    return ritorno;
+  }
+
+  scriveSettaggi(params) {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/ImpostaUtentiMails?' +
+      'idAnno=' + this.variabiliGlobali.idAnno + '&' +
+      'idUtente=' + this.variabiliGlobali.idUser + '&' +
+      'Apertura=' + params.Apertura + '&' +
+      'Reminder=' + params.Reminder + '&' +
+      'Controllo=' + params.Controllo + '&' +
+      'Chiusura=' + params.Chiusura + '&' +
+      'Chat=' + params.Chat + '&' +
+      'Giocata=' + params.Giocata
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    this.variabiliGlobali.CaricamentoInCorso = false;
+    return ritorno;
+  }
+
   ritornaTuttiIMessaggi() {
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsChat.asmx/RitornaTuttiIMessaggi?' +

@@ -84,3 +84,21 @@
   border-radius: 5px;
   margin-left: 3px;
 }
+
+.finestraSetup {
+  position: absolute;
+  width: auto;
+  height: auto;
+  min-width: 250px;
+  top: 50%;
+  padding: 5px;
+  left: 50%;
+  opacity: .75;
+  border: 1px solid #999;
+  border-radius: 5px;
+  background-color: rgb(245, 252, 189);
+  transform: translate(-50%, -50%);
+  -o-box-shadow: 0px 3px 7px -4px #545454;
+  box-shadow: 0px 3px 7px -4px #545454;
+  z-index: 60;
+}
