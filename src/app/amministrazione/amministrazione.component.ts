@@ -9,6 +9,8 @@ import { ApiService } from "../services/api.service";
 })
 
 export class AmministrazioneComponent implements OnInit, AfterViewInit, OnChanges {
+  @Input() refresh;
+
   @Output() chiusuraFinestra: EventEmitter<string> = new EventEmitter<string>();
 
   inadempienti;
@@ -25,13 +27,14 @@ export class AmministrazioneComponent implements OnInit, AfterViewInit, OnChange
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-
+    if (changes.refresh && changes.refresh.currentValue) {
+      if (this.variabiliGlobali.idModalitaConcorso === 1) {
+        this.LeggeInadempienti();
+      }
+    }
   }
 
   ngOnInit(): void {
-    if (this.variabiliGlobali.idModalitaConcorso === 1) {
-      this.LeggeInadempienti();
-    }
   }
 
   ngAfterViewInit(): void {
@@ -82,5 +85,27 @@ export class AmministrazioneComponent implements OnInit, AfterViewInit, OnChange
         }
       }
     );
+  }
+
+  effettuaBackup() {
+    this.variabiliGlobali.CaricamentoInCorso = true;
+    this.apiService.effettuaBackup()
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            alert('Backup Effettuato: ' + data);
+          } else {
+            alert(data);
+          }
+        }
+      }
+    );
+  }
+
+  effettuaRestore() {
+
   }
 }

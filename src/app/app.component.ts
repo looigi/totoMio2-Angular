@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
   scadenzaConcorso = undefined;
   scadenzaConcorso2 = '';
   messaggiRicevuti = 0;
+  refreshAdmin = '';
 
   nuovoConcorsoVisibile = false;
   pronosticiVisibile = false;
@@ -63,6 +64,7 @@ export class AppComponent implements OnInit {
       this.VariabiliGlobali.idAnno = +anno;
     }
 
+    this.VariabiliGlobali.CaricamentoInCorso = false;
     if (this.ricordami) {
       const login = localStorage.getItem('login');
       if (login !== null) {
@@ -220,6 +222,7 @@ export class AppComponent implements OnInit {
         this.chatVisibile = false;
         break;
       case 9: // ADMIN
+        this.refreshAdmin = new Date().toString();
         this.nuovoConcorsoVisibile = false;
         this.classifica = false;
         this.controlloConcorso = false;

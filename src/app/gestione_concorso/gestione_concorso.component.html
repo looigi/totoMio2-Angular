@@ -46,14 +46,14 @@
             [src]="partita.ImmagineCasa" (error)="variabiliGlobali.handleMissingImage($event)" />
         </td>
         <td style="text-align: center;">
-          <input type="text" [(ngModel)]="partita.Prima"  class="scritta" style="margin-left: 5px; margin-right: 5px; width: 150px;">
+          <input type="text" disabled="true" [(ngModel)]="partita.Prima"  class="scritta" style="margin-left: 5px; margin-right: 5px; width: 150px;">
         </td>
         <td style="text-align: center;">
           <img class="immagineSquadra" title="{{partita.Seconda}}"
             [src]="partita.ImmagineFuori" (error)="variabiliGlobali.handleMissingImage($event)" />
         </td>
         <td style="text-align: center;">
-          <input type="text" [(ngModel)]="partita.Seconda" class="scritta" style="margin-left: 5px; margin-right: 5px; width: 150px;">
+          <input type="text" disabled="true" [(ngModel)]="partita.Seconda" class="scritta" style="margin-left: 5px; margin-right: 5px; width: 150px;">
         </td>
         <td style="text-align: center;">
           <input type="number" min="0" max="50" [(ngModel)]="partita.Risultato1" class="scritta" style="width: 30px;" (keypress)="handleKey1(i, $event)">

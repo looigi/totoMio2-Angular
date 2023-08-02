@@ -37,6 +37,7 @@
 
       <amministrazione_component
         *ngIf="adminVisibile"
+        [refresh]="refreshAdmin"
 
         (chiusuraFinestra)="adminVisibile = false; ritornaDatiGlobali()"
       />

@@ -394,6 +394,18 @@ export class ApiService {
     return ritorno;
   }
 
+  effettuaBackup() {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsDB.asmx/EffettuaBackup'
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    this.variabiliGlobali.CaricamentoInCorso = false;
+    return ritorno;
+  }
+
   ritornaTuttiIMessaggi() {
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsChat.asmx/RitornaTuttiIMessaggi?' +
