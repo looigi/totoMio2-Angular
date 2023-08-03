@@ -116,6 +116,7 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
             const idPartitaScelta = +data2[1];
             this.idPartitaScelta = idPartitaScelta;
             // alert('Partita scelta: ' + idPartitaScelta);
+            let i = 0;
             const r = data2[0].split('§');
             r.forEach(element => {
               if (element !== '') {
@@ -133,6 +134,13 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
                     this.risu2[element2.idPartita - 1] = +rr[1];
                   }
                 });
+
+                const numberC = document.getElementById('pronCasa_' + i);
+                numberC.onchange = this.clickCasa.bind(null, this);
+                const numberF = document.getElementById('pronFuori_' + i);
+                numberF.onchange = this.clickFuori.bind(null, this);
+
+                i++;
               }
             });
           } else {
@@ -142,6 +150,24 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
       }
     );
   }
+
+  clickCasa = function(t, event) {
+    let id = event['srcElement']['id'];
+    const i = id.split('_');
+    id = +i[1];
+    // const numero = event['srcElement']['value'];
+    // console.log(id, numero);
+    t.handleKey1(id)
+  };
+
+  clickFuori = function(t, event) {
+    let id = event['srcElement']['id'];
+    const i = id.split('_');
+    id = +i[1];
+    // const numero = event['srcElement']['value'];
+    // console.log(id, numero);
+    t.handleKey2(id)
+  };
 
   clickSuPartitaScelta(i) {
     console.log(this.partite, i);
@@ -158,7 +184,6 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngAfterViewInit(): void {
-
   }
 
   ngOnChanges(changes: SimpleChanges): void {

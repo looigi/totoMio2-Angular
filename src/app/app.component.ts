@@ -30,6 +30,7 @@ export class AppComponent implements OnInit {
   scadenzaConcorso2 = '';
   messaggiRicevuti = 0;
   refreshAdmin = '';
+  novita = true;
 
   nuovoConcorsoVisibile = false;
   pronosticiVisibile = false;
@@ -54,6 +55,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    const novita = localStorage.getItem('novita');
+    if (novita !== null) {
+      this.novita = novita === 'S';
+    }
     const ric = localStorage.getItem('ricordami');
     if (ric !== null) {
       this.ricordami = ric === 'S' ? true : false;
@@ -74,6 +79,11 @@ export class AppComponent implements OnInit {
         this.ritornaDatiGlobali();
       }
     }
+  }
+
+  chiudeNovita() {
+    this.novita = false;
+    localStorage.setItem('novita', 'N');
   }
 
   cambioRicordami() {

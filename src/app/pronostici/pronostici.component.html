@@ -64,10 +64,10 @@
           {{partita.Seconda}}
         </td>
         <td style="text-align: center;">
-          <input type="number" min="0" max="50" [(ngModel)]="partita.Risultato1" class="scritta" style="width: 30px;" (keypress)="handleKey1(i, $event)">
+          <input id="pronCasa_{{i}}" type="number" min="0" max="50" [(ngModel)]="partita.Risultato1" class="scritta" style="width: 30px;" (keypress)="handleKey1(i, $event)">
         </td>
         <td style="text-align: center;">
-          <input type="number" min="0" max="50" [(ngModel)]="partita.Risultato2" class="scritta" style="width: 30px;" (keypress)="handleKey2(i, $event)">
+          <input id="pronFuori_{{i}}" type="number" min="0" max="50" [(ngModel)]="partita.Risultato2" class="scritta" style="width: 30px;" (keypress)="handleKey2(i, $event)">
         </td>
         <td style="text-align: center;">
           {{partita.Segno}}

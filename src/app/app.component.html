@@ -35,6 +35,21 @@
     <div class="contenitoreMaschere">
       <span *ngIf="messaggiRicevuti>0" class="scritta" style="position: absolute; font-weight: bold; color: red;">Messaggi ricevuti: {{messaggiRicevuti}}</span>
 
+      <div *ngIf="novita" class="novita scritta">
+        <div style="font-weight: bold; text-align: center;">
+          <div style="width: calc(100% - 35px); margin-top: 5px; float: left;">NOVITA'</div>
+          <div style="width: 35px; float: left;">
+            <img style="width: 30px; height: 30px; cursor: pointer;" title="Chiusura" (click)="chiudeNovita()"
+              src="../../assets/Immagini/chiusura.png" />
+          </div>
+        </div>
+        <div style="clear: both;"></div>
+        <hr />
+        - Ora è possibile impostare la ricezione o meno delle varie mail. Basta andare sulla
+        impostazione dell'utente, premere sull'ingranaggio e scegliere la tipologia di posta che
+        si vuole ricevere.
+      </div>
+
       <amministrazione_component
         *ngIf="adminVisibile"
         [refresh]="refreshAdmin"

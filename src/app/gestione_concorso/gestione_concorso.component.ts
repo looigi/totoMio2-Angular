@@ -43,6 +43,7 @@ export class GestioneConcorsoComponent implements OnInit, AfterViewInit, OnChang
           if (data.indexOf('ERROR') === -1) {
             const c = data.split('§');
             const p = new Array();
+            let i = 0;
             c.forEach(element => {
               if (element) {
                 const cc = element.split(';');
@@ -69,9 +70,22 @@ export class GestioneConcorsoComponent implements OnInit, AfterViewInit, OnChang
                   ImmagineFuori: this.variabiliGlobali.ritornaImmagineSquadra(cc[2])
                 }
                 p.push(ccc);
+
+                i++;
               }
             });
             this.partite = p;
+
+            setTimeout(() => {
+              for (let i2 = 0; i2 < i; i2++) {
+                // console.log(i2);
+
+                const numberC = document.getElementById('pronCasa_' + i2);
+                numberC.onchange = this.clickCasa.bind(null, this);
+                const numberF = document.getElementById('pronFuori_' + i2);
+                numberF.onchange = this.clickFuori.bind(null, this);
+              }
+            }, 3000);
 
             this.controllaTastoSalvataggio();
           } else {
@@ -90,6 +104,24 @@ export class GestioneConcorsoComponent implements OnInit, AfterViewInit, OnChang
     )
 
   }
+
+  clickCasa = function(t, event) {
+    let id = event['srcElement']['id'];
+    const i = id.split('_');
+    id = +i[1];
+    // const numero = event['srcElement']['value'];
+    // console.log(id, numero);
+    t.handleKey1(id)
+  };
+
+  clickFuori = function(t, event) {
+    let id = event['srcElement']['id'];
+    const i = id.split('_');
+    id = +i[1];
+    // const numero = event['srcElement']['value'];
+    // console.log(id, numero);
+    t.handleKey2(id)
+  };
 
   ngAfterViewInit(): void {
 

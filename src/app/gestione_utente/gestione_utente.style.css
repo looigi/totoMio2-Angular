@@ -5,7 +5,7 @@
   min-width: 250px;
   top: 50%;
   left: 50%;
-  opacity: .75;
+  opacity: .85;
   border: 1px solid #999;
   border-radius: 5px;
   background-color: white;
@@ -93,7 +93,7 @@
   top: 50%;
   padding: 5px;
   left: 50%;
-  opacity: .75;
+  opacity: .85;
   border: 1px solid #999;
   border-radius: 5px;
   background-color: rgb(245, 252, 189);
