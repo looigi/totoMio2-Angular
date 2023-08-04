@@ -1,21 +1,24 @@
 <div class="finestra">
   <div class="barraSuperiore">
     <div class="scritta" style="width: calc(100% - 40px); overflow: hidden; float: left; margin-top: 5px; font-weight: bold; white-space: nowrap;">
-      Coppe Anno {{idAnno}} - {{DescrizioneAnno}} Concorso {{idConcorso2[coppaScelta]}}
+      Coppe Anno {{idAnno}} - {{DescrizioneAnno}}
+      Concorso
+      <span *ngIf="coppe && coppe[coppaScelta2].VentiTre == false">{{idConcorso2[coppaScelta]}}</span>
+      <span *ngIf="coppe && coppe[coppaScelta2].VentiTre == true">{{variabiliGlobali.idConcorso}}</span>
     </div>
   </div>
   <div class="contenitoreInterno">
     <div style="height: 100%; width: 120px; float: left; white-space: nowrap; overflow: hidden;">
       <div *ngFor="let coppa of coppe; let i = index;" [attr.data-index]="i" class="tab scritta"
-        [style.border-bottom]="coppaScelta == i ? '2px solid #a9a9a9' : '0px'"
-        (click)="leggeCoppa(i)"
+        [style.border-bottom]="coppaScelta == coppa.idCoppa ? '2px solid #a9a9a9' : '0px'"
+        (click)="leggeCoppa(i, coppa)"
       >
         {{coppa.NomeCoppa}}
       </div>
     </div>
     <div class="contenitoreTab scritta">
       <!-- {{coppaScelta}} -->
-      <div *ngIf="coppaScelta != 1 && coppe" style="width: 100%; height: 100%;">
+      <div *ngIf="coppe && coppe[coppaScelta2].VentiTre == false" style="width: 100%; height: 100%;">
         <!-- margin-top: -8px; -->
         <div style="width: 100%; height: 20px; float: left; text-align: center; border-bottom: 1px solid #999;">
           <div class="tasto"
@@ -29,9 +32,9 @@
           <div style="float: left;"
             class="tasto"
             [style.background-color]="!pannelloSemifinale && !pannelloFinale ? '#ededed' : 'transparent'"
-            [style.width.%]="coppe[coppaScelta].Semifinale && coppe[coppaScelta].Finale ? '30' :
-              ((coppe[coppaScelta].Semifinale && !coppe[coppaScelta].Finale) ||
-              (!coppe[coppaScelta].Semifinale && coppe[coppaScelta].Finale)) ? '54' : '79'"
+            [style.width.%]="coppe[coppaScelta2].Semifinale && coppe[coppaScelta2].Finale ? '30' :
+              ((coppe[coppaScelta2].Semifinale && !coppe[coppaScelta2].Finale) ||
+              (!coppe[coppaScelta2].Semifinale && coppe[coppaScelta2].Finale)) ? '54' : '79'"
               (click)="pannelloSemifinale = false; pannelloFinale = false;"
           >
             Giornata {{idConcorso2[coppaScelta]}}
@@ -44,13 +47,13 @@
               src="../../assets/Immagini/avanti.png" />
             <span *ngIf="errore">&nbsp;</span>
           </div>
-          <div *ngIf="coppe[coppaScelta].Semifinale" class="tasto"
+          <div *ngIf="coppe[coppaScelta2].Semifinale" class="tasto"
             style="width: calc(25% - 9px);"
             [style.background-color]="pannelloSemifinale ? '#ededed' : 'transparent'"
             (click)="pannelloSemifinale = true; pannelloFinale = false;">
             Semifinali
           </div>
-          <div *ngIf="coppe[coppaScelta].Finale" class="tasto"
+          <div *ngIf="coppe[coppaScelta2].Finale" class="tasto"
             [style.background-color]="pannelloFinale ? '#ededed' : 'transparent'"
             style="width: calc(25% - 9px);"
             (click)="pannelloFinale = true; pannelloSemifinale = false;">
@@ -121,7 +124,7 @@
           <div *ngIf="!pannelloSemifinale && !pannelloFinale" style="width: calc(100% - 5px); height: 100%; float: left; overflow: hidden;">
             <div style="width: 100%; height: 50%; overflow: auto; float: left;">
               <span *ngIf="errore" style="color: red;">{{errore}}</span>
-              <span *ngIf="!errore" style="background-color: #aaa; width: calc(100% - 5px); float: left; height: 20px; text-align: center; border: 1px solid #999;">
+              <span *ngIf="!errore" style="background-color: #9f9ff9; width: calc(100% - 5px); float: left; height: 20px; text-align: center; border: 1px solid #999;">
                 Classifica
               </span>
               <table *ngIf="!errore" style="width: 100%; float: left;" cellpadding="0" cellspacing="0">
@@ -140,13 +143,13 @@
                       [src]="classif.Avatar" (error)="variabiliGlobali.handleMissingImage($event)" />
                   </td>
                   <td>{{classif.NickName}}</td>
-                  <td style="text-align: right;">{{classif.Punti}}</td>
+                  <td style="text-align: center;">{{classif.Punti}}</td>
                 </tr>
               </table>
             </div>
             <div style="width: 100%; height: calc(50% - 5px); padding-top: 3px; border-top: 1px solid #999; overflow: auto; float: left; margin-top: 5px; ">
               <span *ngIf="errore">&nbsp;</span>
-              <span *ngIf="!errore" style="background-color: #aaa; width: calc(100% - 5px); float: left; height: 20px; text-align: center; border: 1px solid #999;">
+              <span *ngIf="!errore" style="background-color: #9f9ff9; width: calc(100% - 5px); float: left; height: 20px; text-align: center; border: 1px solid #999;">
                 Partite
               </span>
               <table *ngIf="!errore" style="width: 100%; float: left;" cellpadding="0" cellspacing="0">
@@ -187,7 +190,7 @@
         </div>
       </div>
 
-      <div *ngIf="coppaScelta == 1 && coppe" style="width: 100%; height: 100%;">
+      <div *ngIf="coppe && coppe[coppaScelta2].VentiTre == true" style="width: 100%; height: 100%;">
         <!-- margin-top: -8px; -->
         <div style="width: 100%; height: 20px; float: left; text-align: center; border-bottom: 1px solid #999;">
           <div class="tasto" (click)="indietro23()"
@@ -212,7 +215,7 @@
         <div style="width: calc(100% - 5px); height: calc(100% - 22px); float: left; margin-top: 3px; overflow: hidden;">
           <div style="width: 100%; height: 50%; overflow: auto; float: left;">
             <span *ngIf="errore" style="color: red;">{{errore}}</span>
-            <span *ngIf="!errore" style="background-color: #aaa; width: calc(100% - 5px); float: left; height: 20px; text-align: center; border: 1px solid #999;">
+            <span *ngIf="!errore" style="background-color: #9f9ff9; width: calc(100% - 5px); float: left; height: 20px; text-align: center; border: 1px solid #999;">
               Classifica
             </span>
             <table *ngIf="!errore" style="width: 100%; float: left;" cellpadding="0" cellspacing="0">
@@ -231,13 +234,13 @@
                     [src]="classif.Avatar" (error)="variabiliGlobali.handleMissingImage($event)" />
                 </td>
                 <td>{{classif.NickName}}</td>
-                <td style="text-align: right;">{{classif.Punti}}</td>
+                <td style="text-align: center;">{{classif.Punti}}</td>
               </tr>
             </table>
           </div>
           <div style="width: 100%; height: calc(50% - 5px); padding-top: 3px; border-top: 1px solid #999; overflow: auto; float: left; margin-top: 5px; ">
             <span *ngIf="errore">&nbsp;</span>
-            <span *ngIf="!errore" style="background-color: #aaa; width: calc(100% - 5px); float: left; height: 20px; text-align: center; border: 1px solid #999;">
+            <span *ngIf="!errore" style="background-color: #9f9ff9; width: calc(100% - 5px); float: left; height: 20px; text-align: center; border: 1px solid #999;">
               Partite
             </span>
             <table *ngIf="!errore" style="width: 100%; float: left;" cellpadding="0" cellspacing="0">
@@ -258,7 +261,7 @@
                 </td>
                 <td>{{classif.NickName}}</td>
                 <td>{{classif.Squadra}}</td>
-                <td style="text-align: right;">{{classif.Punti}}</td>
+                <td style="text-align: center;">{{classif.Punti}}</td>
               </tr>
             </table>
           </div>

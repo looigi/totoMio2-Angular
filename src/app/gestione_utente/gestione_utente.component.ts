@@ -136,7 +136,7 @@ export class GestioneUtenteComponent implements OnInit, AfterViewInit, OnChanges
             this.Controllo = c[2] === 'S';
             this.Chiusura = c[3] === 'S';
             this.Chat = c[4] === 'S';
-            this.Giocata = c[4] === 'S';
+            this.Giocata = c[5] === 'S';
           } else {
             alert(data);
           }

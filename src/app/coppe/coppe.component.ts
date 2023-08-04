@@ -16,7 +16,8 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Output() chiusuraFinestra: EventEmitter<string> = new EventEmitter<string>();
 
-  coppaScelta = 0;
+  coppaScelta = 1;
+  coppaScelta2 = 0;
   idAnno2;
   idConcorso23;
   idConcorso2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -75,18 +76,38 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
           if (data.indexOf('ERROR') === -1) {
             const righe = data.split('§');
             const coppe = new Array();
+            let c23;
+            let p = 0;
             righe.forEach(element => {
               if (element) {
                 const c = element.split(';');
-                const r = {
-                  idCoppa: +c[0],
-                  NomeCoppa: c[1],
-                  Semifinale: c[2] === 'S',
-                  Finale: c[3] === 'S'
+                if (c[1].indexOf('23 ') === -1) {
+                  const r = {
+                    Progressivo: p,
+                    idCoppa: +c[0],
+                    NomeCoppa: c[1],
+                    Semifinale: c[2] === 'S',
+                    Finale: c[3] === 'S',
+                    VentiTre: false
+                  }
+                  coppe.push(r);
+                } else {
+                  c23 = {
+                    Progressivo: p,
+                    idCoppa: +c[0],
+                    NomeCoppa: c[1],
+                    Semifinale: c[2] === 'S',
+                    Finale: c[3] === 'S',
+                    VentiTre: true
+                  }
                 }
-                coppe.push(r);
+                p++;
               }
             });
+            if (c23) {
+              c23.Progressivo = p;
+              coppe.push(c23);
+            }
             this.coppe = coppe;
           } else {
 
@@ -126,15 +147,18 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  leggeCoppa(i) {
-    console.log('Coppa scelta: ', i);
-    if (i !== 1) {
+  leggeCoppa(i, coppa) {
+    console.log('Coppa scelta: ', coppa, coppa.idCoppa);
+    // return;
+    if (coppa.VentiTre === false) {
       this.pannelloSemifinale = false;
       this.pannelloFinale = false;
-      this.coppaScelta = i;
+      this.coppaScelta = coppa.idCoppa;
+      this.coppaScelta2 = i;
       this.leggeDatiCoppa();
     } else {
-      this.coppaScelta = 1;
+      this.coppaScelta = coppa.idCoppa;
+      this.coppaScelta2 = i;
       this.legge23();
     }
   }
@@ -224,34 +248,34 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   leggeDatiCoppa() {
-    let Torneo = '';
+    /* let Torneo = '';
     switch (this.coppaScelta) {
       case 0:
         Torneo = '1';
         break;
-      case 1:
+      case 3:
         Torneo = '2';
         break;
-      case 2:
+      case 4:
         Torneo = '3';
         break;
-      case 3:
+      case 5:
         Torneo = '4';
         break;
-      case 4:
+      case 6:
         Torneo = '5';
         break;
-    }
+    } */
     this.errore  = '';
     this.classifica = undefined;
     this.partite = undefined;
 
     if (this.idConcorso2[this.coppaScelta] > 0) {
-      this.leggeDatiCoppa2(Torneo);
+      this.leggeDatiCoppa2();
     } else {
       const params = {
         idAnno: this.idAnno2,
-        idCoppa: Torneo
+        idCoppa: this.coppaScelta
       }
 
       this.variabiliGlobali.CaricamentoInCorso = true;
@@ -266,7 +290,7 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
               this.idConcorso2[this.coppaScelta] = +d[0];
               this.maxGiornata[this.coppaScelta] = + d[1];
               // alert(this.coppaScelta + ': ' + this.idConcorso2[this.coppaScelta]);
-              this.leggeDatiCoppa2(Torneo);
+              this.leggeDatiCoppa2();
             } else {
             }
           } else {
@@ -276,11 +300,11 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  leggeDatiCoppa2(Torneo) {
+  leggeDatiCoppa2() {
     const params = {
       idAnno: this.idAnno2,
       idGiornata: this.idConcorso2[this.coppaScelta],
-      Torneo: Torneo
+      Torneo: this.coppaScelta
     }
 
     this.variabiliGlobali.CaricamentoInCorso = true;
