@@ -6,6 +6,7 @@ export class VariabiliGlobali {
   urlWS = 'http://looigi.ddns.net:1081/';
   urlImmagini = 'http://looigi.ddns.net:1080/Immagini/Stemmi/';
   urlAvatar = 'http://looigi.ddns.net:1081/Avatars/';
+  urlSfondo = 'http://looigi.ddns.net:1081/Sfondi/';
   urlPerUpload = 'http://looigi.ddns.net:1082/Default.aspx';
   idAnno = 1;
   idConcorso = -1;

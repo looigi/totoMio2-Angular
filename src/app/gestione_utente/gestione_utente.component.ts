@@ -16,11 +16,13 @@ export class GestioneUtenteComponent implements OnInit, AfterViewInit, OnChanges
 
   @Output() chiusuraFinestra: EventEmitter<string> = new EventEmitter<string>();
   @Output() apreUploadEmit: EventEmitter<string> = new EventEmitter<string>();
+  @Output() apreUploadEmitSfondi: EventEmitter<string> = new EventEmitter<string>();
 
   classifica;
   idAnno2;
   idConcorso2;
   immagineUtente;
+  immagineSfondo;
   nickName;
   cognome;
   nome;
@@ -39,6 +41,7 @@ export class GestioneUtenteComponent implements OnInit, AfterViewInit, OnChanges
     public variabiliGlobali: VariabiliGlobali
   ) {
     this.immagineUtente = this.variabiliGlobali.ritornaImmagineGiocatore(this.variabiliGlobali.idUser.toString());
+    this.immagineSfondo = this.variabiliGlobali.urlSfondo + this.variabiliGlobali.idAnno + '/' + this.variabiliGlobali.idUser + '.png';
     this.nickName = this.variabiliGlobali.Utente;
     this.cognome = this.variabiliGlobali.Cognome;
     this.nome = this.variabiliGlobali.Nome;
@@ -56,6 +59,8 @@ export class GestioneUtenteComponent implements OnInit, AfterViewInit, OnChanges
     if (changes.refreshImmagine && changes.refreshImmagine.currentValue) {
       this.immagineUtente = this.variabiliGlobali.ritornaImmagineGiocatore(this.variabiliGlobali.idUser.toString()) +
         '?d=' + new Date().toString();
+      this.immagineSfondo = this.variabiliGlobali.urlSfondo + this.variabiliGlobali.idAnno + '/' + this.variabiliGlobali.idUser + '.png' +
+        '?d=' + new Date().toString();
     }
   }
 
@@ -69,6 +74,10 @@ export class GestioneUtenteComponent implements OnInit, AfterViewInit, OnChanges
 
   apreUpload() {
     this.apreUploadEmit.emit(new Date().toString());
+  }
+
+  apreUpload2() {
+    this.apreUploadEmitSfondi.emit(new Date().toString());
   }
 
   resetImmagine() {
@@ -87,6 +96,10 @@ export class GestioneUtenteComponent implements OnInit, AfterViewInit, OnChanges
         }
       }
     );
+  }
+
+  resetImmagine2() {
+
   }
 
   salva() {

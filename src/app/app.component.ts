@@ -31,6 +31,7 @@ export class AppComponent implements OnInit {
   messaggiRicevuti = 0;
   refreshAdmin = '';
   novita = true;
+  immagineDiSfondo = '';
 
   nuovoConcorsoVisibile = false;
   pronosticiVisibile = false;
@@ -460,6 +461,13 @@ export class AppComponent implements OnInit {
     this.VariabiliGlobali.EMail = r[5];
     this.VariabiliGlobali.idTipologia = +r[6];
     this.VariabiliGlobali.Tipologia = r[7];
+
+    this.immagineDiSfondo = this.VariabiliGlobali.urlSfondo + this.VariabiliGlobali.idAnno + '/' + this.VariabiliGlobali.idUser + '.png';
+  }
+
+  handleMissingImageSfondo($event) {
+    this.immagineDiSfondo = '../../assets/Immagini/sfondo.jpg';
+    // (event.target as HTMLImageElement).style.background = 'url("../assets/Immagini/sfondo.jpg")';
   }
 
   effettuaSalvataggio() {
@@ -575,13 +583,20 @@ export class AppComponent implements OnInit {
 
   tipologiaUL;
   refreshImmagine;
+  arrotonda;
 
   apreUpload(Cosa) {
+    if (Cosa === 'Sfondi') {
+      this.arrotonda = 'NO';
+    } else {
+      this.arrotonda = 'SI';
+    }
     this.tipologiaUL = Cosa;
     this.uploadVisibile = true;
   }
 
   fRefreshImmagine() {
     this.refreshImmagine = new Date().toString();
+    this.immagineDiSfondo = this.VariabiliGlobali.urlSfondo + this.VariabiliGlobali.idAnno + '/' + this.VariabiliGlobali.idUser + '.png?d=' + new Date().toString();
   }
 }
