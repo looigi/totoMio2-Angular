@@ -9,6 +9,7 @@
   <div class="contenitoreInterno scritta" style="font-size: 16px;">
     <table style="min-width: 100%;">
       <tr>
+        <th></th>
         <th>Trofeo</th>
         <th></th>
         <th>Vincitore</th>
@@ -18,6 +19,10 @@
       <tr *ngFor="let vincitore of vincitori; let i2 = index" [attr.data-index]="i2"
         [style.background-color]="vincitore.Pari ? '#cecefd' : 'transparent'"
         style="border-bottom: 1px solid #999; margin-top: 5px;">
+        <td>
+          <img class="immagineSquadra" title="{{vincitore.Vincitore}}" style="width: 70px; height: 70px;"
+            [src]="vincitore.ImmagineCoppa" (error)="variabiliGlobali.handleMissingImage($event)" />
+        </td>
         <td>
           {{vincitore.Trofeo}}
         </td>

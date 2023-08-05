@@ -69,6 +69,7 @@ export class VincitoriComponent implements OnInit, AfterViewInit, OnChanges {
                   }
                 }
               });
+              const immCoppa = this.prendeImmCoppa(vvv[0]);
               const vvvv = {
                 Trofeo: vvv[0],
                 idVincitore: +vvv[1],
@@ -78,7 +79,8 @@ export class VincitoriComponent implements OnInit, AfterViewInit, OnChanges {
                 idTorneo: +vvv[3],
                 Percentuale: perc2,
                 Totale: totale,
-                Vincita: vincita ? '€' + vincita : ''
+                Vincita: vincita ? '€' + vincita : '',
+                ImmagineCoppa: immCoppa
               }
               vv.push(vvvv);
               p = !p;
@@ -93,5 +95,54 @@ export class VincitoriComponent implements OnInit, AfterViewInit, OnChanges {
         }
       }
     );
+  }
+
+  prendeImmCoppa(n) {
+    // nomiCoppe = [ 'toto_mio', 'pijo', 'pippa', 'inutile', 'rotolo_di_coppa', '23' ]
+    let nome = '';
+    switch(n) {
+      case 'Cucchiarella de legno':
+        nome = 'cucchiarella';
+        break;
+      case 'Secondo':
+        nome = 'secondo';
+        break;
+      case 'Terzo':
+        nome = 'terzo';
+        break;
+      case 'Campione di TotoMIO':
+        nome = 'campione';
+        break;
+      case 'TotoMio CUP':
+        nome = 'toto_mio';
+        break;
+      case 'Pijo CUP':
+        nome = 'pijo';
+        break;
+      case 'Pippa League':
+        nome = 'pippa';
+        break;
+      case 'Coppa Inutile':
+        nome = 'inutile';
+        break;
+      case 'Rotolo di Coppa':
+        nome = 'rotolo_di_coppa';
+        break;
+      case '23 Aiutame Te':
+        nome = '2';
+        break;
+    }
+    if (nome !== '') {
+      nome = '../assets/Immagini/' + nome + '.jpg';
+    } else {
+      if (n.indexOf('Pippone dei pipponi') > -1) {
+        nome = '../assets/Immagini/pippone.jpg';
+      } else {
+        if (n.indexOf('Campione dei campioni') > -1) {
+          nome = '../assets/Immagini/campionissimo.jpg';
+        }
+      }
+    }
+    return nome
   }
 }

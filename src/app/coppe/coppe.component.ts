@@ -32,12 +32,14 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
   pannelloFinale = false;
   classifica23;
   giornata23;
+  immagineCoppa;
+  nomiCoppe = [ 'toto_mio', 'pijo', 'pippa', 'inutile', 'rotolo_di_coppa', '23' ]
 
   constructor(
     private apiService: ApiService,
     public variabiliGlobali: VariabiliGlobali
   ) {
-
+    this.immagineCoppa = '../assets/Immagini/' + this.nomiCoppe[this.coppaScelta2] + '.jpg';
   }
 
   chiusura() {
@@ -151,12 +153,14 @@ export class CoppeComponent implements OnInit, AfterViewInit, OnChanges {
     console.log('Coppa scelta: ', coppa, coppa.idCoppa);
     // return;
     if (coppa.VentiTre === false) {
+      this.immagineCoppa = '../assets/Immagini/' + this.nomiCoppe[i] + '.jpg';
       this.pannelloSemifinale = false;
       this.pannelloFinale = false;
       this.coppaScelta = coppa.idCoppa;
       this.coppaScelta2 = i;
       this.leggeDatiCoppa();
     } else {
+      this.immagineCoppa = '../assets/Immagini/23.jpg';
       this.coppaScelta = coppa.idCoppa;
       this.coppaScelta2 = i;
       this.legge23();

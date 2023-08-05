@@ -56,6 +56,11 @@
   margin-top: 3px;
 }
 
+.immaginePopup {
+  width: 150px;
+  height: 150px;
+}
+
 .scritta {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 15px;
@@ -87,4 +92,14 @@
   margin-top: -2px;
   border-radius: 5px;
   margin-left: 3px;
+}
+
+.popupImmagine {
+  position: absolute;
+  width: auto;
+  height: auto;
+  padding: 1px;
+  background-color: #c4ddf3;
+  border: 1px solid #999;
+  border-radius: 3px;
 }

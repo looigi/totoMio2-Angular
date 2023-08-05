@@ -7,8 +7,16 @@
       <span *ngIf="coppe && coppe[coppaScelta2].VentiTre == true">{{variabiliGlobali.idConcorso}}</span>
     </div>
   </div>
-  <div class="contenitoreInterno">
-    <div style="height: 100%; width: 120px; float: left; white-space: nowrap; overflow: hidden;">
+  <div class="contenitoreInterno"
+  >
+    <div style="
+      height: 100%; width: 120px; float: left; white-space: nowrap; overflow: hidden;
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-blend-mode: luminosity;"
+      [ngStyle]="{'background-image': 'url(' + immagineCoppa + ')'}"
+    >
       <div *ngFor="let coppa of coppe; let i = index;" [attr.data-index]="i" class="tab scritta"
         [style.border-bottom]="coppaScelta == coppa.idCoppa ? '2px solid #a9a9a9' : '0px'"
         (click)="leggeCoppa(i, coppa)"
@@ -16,7 +24,8 @@
         {{coppa.NomeCoppa}}
       </div>
     </div>
-    <div class="contenitoreTab scritta">
+    <div class="contenitoreTab scritta"
+      >
       <!-- {{coppaScelta}} -->
       <div *ngIf="coppe && coppe[coppaScelta2].VentiTre == false" style="width: 100%; height: 100%;">
         <!-- margin-top: -8px; -->

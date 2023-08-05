@@ -32,7 +32,9 @@
       <tr *ngFor="let classifica_utente of classifica; let i2 = index" [attr.data-index]="i2"
         [style.background-color]="classifica_utente.Pari ? '#cecefd' : 'transparent'">
         <td style="text-align: center; border-right: 1px solid #aaa;" [style.color]="classifica_utente.NickName == variabiliGlobali.Utente ? 'red' : 'black'">{{classifica_utente.Posizione}}</td>
-        <td style="border-right: 1px solid #aaa; text-align: center;">
+        <td style="border-right: 1px solid #aaa; text-align: center;"
+          (mouseleave)="popupSpento()"
+          (mouseover)="popupShow(i2, $event)">
           <img class="immagineGiocatore" title="{{classifica_utente.NickName}}"
             [src]="classifica_utente.Avatar" (error)="variabiliGlobali.handleMissingImage($event)" />
         </td>
@@ -55,4 +57,15 @@
 </div>
 
 <div class="chiusura" (click)="chiusura()" title="Chiusura finestra">
+</div>
+
+<div *ngIf="popupVisibile" class="popupImmagine" [style.left.px]="popupX" [style.top.px]="popupY">
+  <div style="float: left;">
+    <img class="immaginePopup"
+      [src]="immaginePopup" (error)="variabiliGlobali.handleMissingImage($event)" />
+  </div>
+  <div style="float: left;">
+    <img class="immaginePopup"
+      [src]="immaginePopup2" (error)="variabiliGlobali.handleMissingImage($event)" />
+  </div>
 </div>

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
+import { AfterViewInit, Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
 import { ApiService } from "../services/api.service";
 import { VariabiliGlobali } from "../VariabiliGlobali.component";
 
@@ -17,13 +17,44 @@ export class ClassificaComponent implements OnInit, AfterViewInit, OnChanges {
 
   classifica;
   idAnno2;
-  idConcorso2;
+  idConcorso2 = 0;
+
+  popupVisibile = false;
+  popupX = 100;
+  popupY = 100;
+  immaginePopup;
+  immaginePopup2;
+  screenHeight;
+  screenWidth;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event?) {
+     this.screenHeight = window.innerHeight;
+     this.screenWidth = window.innerWidth;
+  }
 
   constructor(
     private apiService: ApiService,
     public variabiliGlobali: VariabiliGlobali
   ) {
+    this.onResize();
+  }
 
+  popupShow(q, e) {
+    // console.log(e, this.screenWidth, this.screenHeight);
+    this.immaginePopup = this.classifica[q].Avatar;
+    this.immaginePopup2 = this.classifica[q].Sfondo;
+    this.popupVisibile = true;
+    this.popupX = e.x + 50;
+    if (e.y + 220 > this.screenHeight) {
+      this.popupY = e.y - 220;
+    } else {
+      this.popupY = e.y - 30;
+    }
+  }
+
+  popupSpento() {
+    this.popupVisibile = false;
   }
 
   chiusura() {
@@ -37,7 +68,7 @@ export class ClassificaComponent implements OnInit, AfterViewInit, OnChanges {
     if (changes.NumeroConcorso && changes.NumeroConcorso.currentValue) {
       this.idConcorso2 = changes.NumeroConcorso.currentValue;
     }
-    if (this.idAnno2 && this.idConcorso2) {
+    if (this.idAnno2) {
       this.leggeClassifica();
     }
   }
@@ -92,7 +123,9 @@ export class ClassificaComponent implements OnInit, AfterViewInit, OnChanges {
                   Ultimo: +c[11],
                   Jolly: +c[12],
                   PuntiPartitaScelta: +c[13],
-                  Avatar: this.variabiliGlobali.ritornaImmagineGiocatore(c[0])
+                  Avatar: this.variabiliGlobali.ritornaImmagineGiocatore(c[0]),
+                  Sfondo: this.variabiliGlobali.urlSfondo + this.variabiliGlobali.idAnno + '/' +
+                    c[0] + '.png?d=' + new Date().toString()
                 }
                 pari = !pari
                 posizione++;
