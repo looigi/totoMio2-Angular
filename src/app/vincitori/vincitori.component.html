@@ -20,7 +20,7 @@
         [style.background-color]="vincitore.Pari ? '#cecefd' : 'transparent'"
         style="border-bottom: 1px solid #999; margin-top: 5px;">
         <td>
-          <img class="immagineSquadra" title="{{vincitore.Vincitore}}" style="width: 70px; height: 70px;"
+          <img class="immagineSquadra" title="{{vincitore.Vincitore}}"
             [src]="vincitore.ImmagineCoppa" (error)="variabiliGlobali.handleMissingImage($event)" />
         </td>
         <td>

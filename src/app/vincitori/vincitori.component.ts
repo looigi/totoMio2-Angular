@@ -64,8 +64,8 @@ export class VincitoriComponent implements OnInit, AfterViewInit, OnChanges {
                   if (+pp[0] === +vvv[3]) {
                     perc2 = +pp[1];
                     totale = +pp[2];
-                    vincita = +pp[3];
-                    tottot += +pp[3];
+                    vincita = pp[3] ? +pp[3] : 0;
+                    tottot += pp[3] ? +pp[3] : 0;
                   }
                 }
               });
@@ -79,7 +79,8 @@ export class VincitoriComponent implements OnInit, AfterViewInit, OnChanges {
                 idTorneo: +vvv[3],
                 Percentuale: perc2,
                 Totale: totale,
-                Vincita: vincita ? '€' + vincita : '',
+                Vincita: vincita ? '€' + vincita : '€0',
+                VincitaValore: vincita ? +vincita : 0,
                 ImmagineCoppa: immCoppa
               }
               vv.push(vvvv);
@@ -88,7 +89,72 @@ export class VincitoriComponent implements OnInit, AfterViewInit, OnChanges {
             });
             this.vincitori = vv;
             this.montePremi = tottot;
-            console.log('Vincitori:', this.vincitori);
+
+            const incassatori = new Array();
+            this.vincitori.forEach(element => {
+              if (element.idVincitore > -1) {
+                let ok = false;
+                incassatori.forEach(element2 => {
+                  if (+element2.idVincitore === +element.idVincitore) {
+                    ok = true;
+                    element2['VincitaValore'] += element.VincitaValore;
+                    // console.log('Aggiungo ad array', incassatori, element2, element);
+                  }
+                });
+                if (!ok) {
+                  incassatori.push(element);
+                  incassatori['VincitaValore'] = +element.VincitaValore;
+                  // console.log(element.VincitaValore); return;
+                  // console.log('Creo array', incassatori, element);
+                }
+              }
+            });
+
+            let preso = false;
+            this.vincitori.forEach(element => {
+              if (!preso && element.idVincitore > -1) {
+                if (element.VincitaValore === 0) {
+                  incassatori.push(element);
+                  // incassatori['Totalone'] = +element.VincitaValore;
+                  preso = true;
+                }
+              }
+            });
+            incassatori.sort((a, b) => b.VincitaValore - a.VincitaValore);
+            // console.log(incassatori, incassatori[0].idVincitore);
+
+            const vvvv = {
+              Trofeo: 'Miglior Incassatore',
+              idVincitore: incassatori[0].idVincitore,
+              Vincitore: incassatori[0].Vincitore,
+              Pari: p,
+              ImmagineGiocatore: this.variabiliGlobali.ritornaImmagineGiocatore(incassatori[0].idVincitore.toString()),
+              idTorneo: -1,
+              Percentuale: 0,
+              Totale: 0,
+              Vincita: incassatori[0]['VincitaValore'],
+              VincitaValore: 0,
+              ImmagineCoppa: '../assets/Immagini/incassatore.jpg'
+            }
+            this.vincitori.push(vvvv);
+            p = !p;
+            const ultimo = incassatori.length - 2;
+            const vvvv2 = {
+              Trofeo: 'Miglior Perdente',
+              idVincitore: incassatori[ultimo].idVincitore,
+              Vincitore: incassatori[ultimo].Vincitore,
+              Pari: p,
+              ImmagineGiocatore: this.variabiliGlobali.ritornaImmagineGiocatore(incassatori[ultimo].idVincitore.toString()),
+              idTorneo: -1,
+              Percentuale: 0,
+              Totale: 0,
+              Vincita: incassatori[ultimo]['VincitaValore'],
+              VincitaValore: 0,
+              ImmagineCoppa: '../assets/Immagini/perdente.jpg'
+            }
+            this.vincitori.push(vvvv2);
+
+            console.log('Vincitori:', this.vincitori, incassatori);
           } else {
             alert(data);
           }
@@ -129,7 +195,7 @@ export class VincitoriComponent implements OnInit, AfterViewInit, OnChanges {
         nome = 'rotolo_di_coppa';
         break;
       case '23 Aiutame Te':
-        nome = '2';
+        nome = '23';
         break;
     }
     if (nome !== '') {
