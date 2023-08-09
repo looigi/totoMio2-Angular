@@ -88,7 +88,8 @@ export class ClassificaComponent implements OnInit, AfterViewInit, OnChanges {
   leggeClassifica() {
     const parametri = {
       idAnno: this.idAnno2,
-      idConcorso: this.idConcorso2
+      idConcorso: this.idConcorso2,
+      MostraFinto: 'S'
     }
     this.variabiliGlobali.CaricamentoInCorso = true;
     this.apiService.leggeClassifica(parametri)
@@ -106,6 +107,11 @@ export class ClassificaComponent implements OnInit, AfterViewInit, OnChanges {
               if (element) {
                 const c = element.split(';');
                 // console.log(c);
+                let avatar;
+                avatar = this.variabiliGlobali.ritornaImmagineGiocatore(c[0]);
+                if (c[1] === 'Fintone') {
+                  avatar = '../assets/Immagini/finto.png';
+                }
                 const cc = {
                   Pari: pari,
                   Posizione: posizione,
@@ -123,7 +129,7 @@ export class ClassificaComponent implements OnInit, AfterViewInit, OnChanges {
                   Ultimo: +c[11],
                   Jolly: +c[12],
                   PuntiPartitaScelta: +c[13],
-                  Avatar: this.variabiliGlobali.ritornaImmagineGiocatore(c[0]),
+                  Avatar: avatar,
                   Sfondo: this.variabiliGlobali.urlSfondo + this.variabiliGlobali.idAnno + '/' +
                     c[0] + '.png?d=' + new Date().toString()
                 }

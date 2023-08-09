@@ -105,6 +105,24 @@ export class AmministrazioneComponent implements OnInit, AfterViewInit, OnChange
     );
   }
 
+  creaUtenteFinto() {
+    this.variabiliGlobali.CaricamentoInCorso = true;
+    this.apiService.creaUtenteFinto()
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            alert('Utente finto creato: ' + data);
+          } else {
+            alert(data);
+          }
+        }
+      }
+    );
+  }
+
   effettuaRestore() {
 
   }

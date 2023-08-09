@@ -97,6 +97,11 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
                   pari = !pari;
                 });
                 // console.log(DettaglioArray);
+                let avatar;
+                avatar = this.variabiliGlobali.ritornaImmagineGiocatore(idUtente.toString());
+                if (nickName === 'Fintone') {
+                  avatar = '../assets/Immagini/finto.png';
+                }
                 const finale = {
                   Posizione: -1,
                   idUtente: idUtente,
@@ -107,7 +112,7 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
                   PuntiTotaliJolly: jolly,
                   PuntiTotaliPartitaScelta: pps,
                   Squadra23: '',
-                  Avatar: this.variabiliGlobali.ritornaImmagineGiocatore(idUtente.toString())
+                  Avatar: avatar
                 }
                 this.quanti++;
                 RisultatiFinali.push(finale);

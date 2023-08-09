@@ -47,6 +47,7 @@ export class AppComponent implements OnInit {
   gestioneUtenteVisibile = false;
   uploadVisibile = false;
   chatVisibile = false;
+  statisticheVisibile = false;
 
   constructor(
     public VariabiliGlobali: VariabiliGlobali,
@@ -113,6 +114,7 @@ export class AppComponent implements OnInit {
         this.vincitoriVisibile = false;
         this.bilancioVisibile = false;
         this.chatVisibile = false;
+        this.statisticheVisibile = false;
         break;
       case 1: // CLASSIFICA
         this.nuovoConcorsoVisibile = false;
@@ -127,6 +129,7 @@ export class AppComponent implements OnInit {
         this.vincitoriVisibile = false;
         this.bilancioVisibile = false;
         this.chatVisibile = false;
+        this.statisticheVisibile = false;
         break;
       case 2: // RISULTATI
         this.nuovoConcorsoVisibile = false;
@@ -141,6 +144,7 @@ export class AppComponent implements OnInit {
         this.vincitoriVisibile = false;
         this.bilancioVisibile = false;
         this.chatVisibile = false;
+        this.statisticheVisibile = false;
         break;
       case 3: // PRONOSTICI
         const oggi = new Date().getTime();
@@ -161,6 +165,7 @@ export class AppComponent implements OnInit {
         this.vincitoriVisibile = false;
         this.bilancioVisibile = false;
         this.chatVisibile = false;
+        this.statisticheVisibile = false;
         break;
       case 6: // CHIUSURA CONCORSO
         this.nuovoConcorsoVisibile = false;
@@ -175,6 +180,7 @@ export class AppComponent implements OnInit {
         this.vincitoriVisibile = false;
         this.bilancioVisibile = false;
         this.chatVisibile = false;
+        this.statisticheVisibile = false;
         break;
       case 4: // GESTIONE CONCORSO
         this.nuovoConcorsoVisibile = false;
@@ -189,6 +195,7 @@ export class AppComponent implements OnInit {
         this.vincitoriVisibile = false;
         this.bilancioVisibile = false;
         this.chatVisibile = false;
+        this.statisticheVisibile = false;
         break;
       case 5: // CONTROLLO CONCORSO
         this.nuovoConcorsoVisibile = false;
@@ -203,6 +210,7 @@ export class AppComponent implements OnInit {
         this.vincitoriVisibile = false;
         this.bilancioVisibile = false;
         this.chatVisibile = false;
+        this.statisticheVisibile = false;
         break;
       case 7: // TORNEI
         this.nuovoConcorsoVisibile = false;
@@ -217,6 +225,7 @@ export class AppComponent implements OnInit {
         this.vincitoriVisibile = false;
         this.bilancioVisibile = false;
         this.chatVisibile = false;
+        this.statisticheVisibile = false;
         break;
       case 8: // INFO
         this.nuovoConcorsoVisibile = false;
@@ -231,6 +240,7 @@ export class AppComponent implements OnInit {
         this.vincitoriVisibile = false;
         this.bilancioVisibile = false;
         this.chatVisibile = false;
+        this.statisticheVisibile = false;
         break;
       case 9: // ADMIN
         this.refreshAdmin = new Date().toString();
@@ -246,6 +256,7 @@ export class AppComponent implements OnInit {
         this.vincitoriVisibile = false;
         this.bilancioVisibile = false;
         this.chatVisibile = false;
+        this.statisticheVisibile = false;
         break;
       case 10: // VINCITORI
         this.nuovoConcorsoVisibile = false;
@@ -260,6 +271,7 @@ export class AppComponent implements OnInit {
         this.vincitoriVisibile = true;
         this.bilancioVisibile = false;
         this.chatVisibile = false;
+        this.statisticheVisibile = false;
         break;
       case 11: // BILANCIO
         this.nuovoConcorsoVisibile = false;
@@ -274,6 +286,7 @@ export class AppComponent implements OnInit {
         this.vincitoriVisibile = false;
         this.bilancioVisibile = true;
         this.chatVisibile = false;
+        this.statisticheVisibile = false;
         break;
       case 12: // CHAT
         this.nuovoConcorsoVisibile = false;
@@ -288,6 +301,22 @@ export class AppComponent implements OnInit {
         this.vincitoriVisibile = false;
         this.bilancioVisibile = false;
         this.chatVisibile = true;
+        this.statisticheVisibile = false;
+        break;
+      case 13: // STATISTICHE
+        this.nuovoConcorsoVisibile = false;
+        this.classifica = false;
+        this.controlloConcorso = false;
+        this.pronosticiVisibile = false;
+        this.chiusuraConcorso = false;
+        this.gestioneConcorso = false;
+        this.coppeVisibile = false;
+        this.infoVisibile = false;
+        this.adminVisibile = false;
+        this.vincitoriVisibile = false;
+        this.bilancioVisibile = false;
+        this.chatVisibile = false;
+        this.statisticheVisibile = true;
         break;
     }
   }

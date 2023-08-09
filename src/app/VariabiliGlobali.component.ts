@@ -95,6 +95,13 @@ export class VariabiliGlobali {
       idTipologia: 0
     },
     {
+      idTasto: 13,
+      Icona: 'statistiche.png',
+      Titolo: 'Statistiche',
+      Pagina: 'Statistiche',
+      idTipologia: -1
+    },
+    {
       idTasto: 10,
       Icona: 'vincitori.png',
       Titolo: 'Vincitori',

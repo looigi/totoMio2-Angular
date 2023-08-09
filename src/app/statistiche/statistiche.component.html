@@ -1,0 +1,105 @@
+<div class="finestra">
+  <div class="barraSuperiore">
+    <div style="width: 50%; float: left;">
+    </div>
+    <div class="scritta" style="width: 50%; float: left; margin-top: 5px; font-weight: bold; white-space: nowrap;">
+      Statistiche
+    </div>
+  </div>
+  <div class="contenitoreInterno scritta">
+    <div class="intestazione">
+      <div class="tasto" (click)="cambiaTipologia('Annuale')" [style.background-color]="tipologia == 'Annuale' ? '#d1d1ff' : 'white'">
+        Annuale
+      </div>
+      <div class="tasto" (click)="cambiaTipologia('Storico')" [style.background-color]="tipologia == 'Storico' ? '#d1d1ff' : 'white'">
+        Storico
+      </div>
+    </div>
+    <div class="corpoDati">
+      <div class="tastiLaterali">
+        <div class="tastoLaterale"
+          [style.background-color]="modalita == 'GENERALE' ? '#d1d1ff' : 'white'"
+          (click)="modalita='GENERALE'">
+          Generale
+        </div>
+        <div class="tastoLaterale"
+          [style.background-color]="modalita == 'BILANCIO' ? '#d1d1ff' : 'white'"
+          (click)="modalita='BILANCIO'">
+          Bilancio
+        </div>
+        <div class="tastoLaterale"
+          [style.background-color]="modalita == 'PRONOSTICI' ? '#d1d1ff' : 'white'"
+          (click)="modalita='PRONOSTICI'">
+          Pronostici
+        </div>
+        <div class="tastoLaterale"
+          [style.background-color]="modalita == 'RISULTATI' ? '#d1d1ff' : 'white'"
+          (click)="modalita='RISULTATI'">
+          Risultati
+        </div>
+        <div class="tastoLaterale"
+          [style.background-color]="modalita == 'ALTRO' ? '#d1d1ff' : 'white'"
+          (click)="modalita='ALTRO'">
+          Ris. Altro
+        </div>
+        <div class="tastoLaterale"
+          [style.background-color]="modalita == 'SCONTRI' ? '#d1d1ff' : 'white'"
+          (click)="modalita='SCONTRI'">
+          Scontri Dir.
+        </div>
+        <div class="tastoLaterale"
+          [style.background-color]="modalita == 'PRESE' ? '#d1d1ff' : 'white'"
+          (click)="modalita='PRESE'">
+          Squadre Prese
+        </div>
+      </div>
+      <div class="corpoCentrale">
+        <div *ngIf="datiDaVisualizzare && modalita=='GENERALE'" style="width: 100%;">
+          Anno: {{datiDaVisualizzare.Anno}}<br />
+          <span *ngIf="tipologia=='Storico'">Anni: {{datiDaVisualizzare.Anni}}<br /></span>
+          Concorsi Aperti: {{datiDaVisualizzare.ConcorsiAperti}}<br />
+          <span *ngIf="tipologia=='Annuale'">Giornata Attuale: {{datiDaVisualizzare.Giornata}}</span>
+        </div>
+
+        <div *ngIf="datiDaVisualizzare && modalita=='BILANCIO'" style="width: 100%;">
+          <table style="width: 100%;">
+            <tr>
+              <th></th>
+              <th>Utente</th>
+              <th>Entrate</th>
+              <th>Uscite</th>
+              <th>Vincite</th>
+              <th>Bilancio</th>
+            </tr>
+            <tr *ngFor="let dati of datiDaVisualizzare.Bilancio; let i = index" [attr.data-index]="i" class="scritta"
+              [style.background-color]="dati.Pari ? '#cecefd' : 'transparent'"
+              style="border-bottom: 1px solid #999;">
+              <td style="text-align: center;">
+                <img class="immagineGiocatore" title="{{dati.NickName}}"
+                  [src]="prendeImmagineGiocatore(dati.idUtente)" (error)="variabiliGlobali.handleMissingImage($event)" />
+              </td>
+              <td>
+                {{dati.NickName}}
+              </td>
+              <td style="text-align: right;">
+                {{dati.Entrate}}
+              </td>
+              <td style="text-align: right;">
+                {{dati.Uscite}}
+              </td>
+              <td style="text-align: right;">
+                {{dati.Vincite}}
+              </td>
+              <td style="text-align: right;">
+                {{dati.Bilancio}}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="chiusura" (click)="chiusura()" title="Chiusura finestra">
+</div>

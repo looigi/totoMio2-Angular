@@ -25,6 +25,7 @@ import { GestioneUtenteComponent } from './gestione_utente/gestione_utente.compo
 import { UploadDownloadComponent } from './upload_download/ud.component';
 import { HttpModule } from '@angular/http';
 import { ChatComponent } from './chat/chat.component';
+import { StatisticheComponent } from './statistiche/statistiche.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ChatComponent } from './chat/chat.component';
     BilancioComponent,
     GestioneUtenteComponent,
     UploadDownloadComponent,
-    ChatComponent
+    ChatComponent,
+    StatisticheComponent
   ],
   imports: [
     BrowserModule,

@@ -67,6 +67,12 @@
         (chiusuraFinestra)="infoVisibile = false; ritornaDatiGlobali()"
       />
 
+      <statistiche_component
+        *ngIf="statisticheVisibile"
+
+        (chiusuraFinestra)="statisticheVisibile = false; ritornaDatiGlobali()"
+      />
+
       <bilancio_component
         *ngIf="bilancioVisibile"
 
