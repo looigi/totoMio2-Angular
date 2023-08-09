@@ -49,6 +49,7 @@ export class VincitoriComponent implements OnInit, AfterViewInit, OnChanges {
             const campi = data.split('|');
             const perc = campi[0].split('§');
             const v = campi[1].split('§');
+            const premiati = campi[2].split('§');
             const vv = new Array();
             let p = false;
             let tottot = 0;
@@ -120,6 +121,36 @@ export class VincitoriComponent implements OnInit, AfterViewInit, OnChanges {
                 }
               }
             });
+
+            // Aggiunge i premi settimanali
+            premiati.forEach(element => {
+              const c = element.split(';');
+              let ok = false;
+              incassatori.forEach(element2 => {
+                if (+element2.idVincitore === +c[0]) {
+                  element.VincitaValore += +c[2];
+                  ok = true;
+                }
+              });
+              if (!ok) {
+                incassatori.push({
+                  Trofeo: 'Nessuno',
+                  idVincitore: +c[0],
+                  Vincitore: c[1],
+                  Pari: p,
+                  ImmagineGiocatore: this.variabiliGlobali.ritornaImmagineGiocatore(c[0]),
+                  idTorneo: -1,
+                  Percentuale: 0,
+                  Totale: 0,
+                  Vincita: 0,
+                  VincitaValore: +c[2],
+                  ImmagineCoppa: ''
+                });
+                p = !p;
+              }
+            });
+            // Aggiunge i premi settimanali
+
             incassatori.sort((a, b) => b.VincitaValore - a.VincitaValore);
             // console.log(incassatori, incassatori[0].idVincitore);
 
