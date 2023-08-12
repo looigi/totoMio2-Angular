@@ -561,32 +561,7 @@ export class ApiService {
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/RitornaClassifica?' +
       'idAnno=' + parametri.idAnno +
-      '&idConcorso=' + parametri.idConcorso +
-      '&MostraFinto=' + parametri.MostraFinto
-      ;
-      // 'Password=' + this.sistemaTesto(params.Password;
-    // console.log('Login:', url);
-    const ritorno = this.httpclient.get(url);
-    // console.log(ritorno);
-    return ritorno;
-  }
-
-  leggeStatistiche() {
-    this.controlloPresenzaUtente();
-    const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/Statistiche?' +
-      'idAnno=' + this.variabiliGlobali.idAnno
-      ;
-      // 'Password=' + this.sistemaTesto(params.Password;
-    // console.log('Login:', url);
-    const ritorno = this.httpclient.get(url);
-    // console.log(ritorno);
-    return ritorno;
-  }
-
-  creaUtenteFinto() {
-    this.controlloPresenzaUtente();
-    const url = this.variabiliGlobali.urlWS + 'wsAmministrazione.asmx/CreaFintone?' +
-      'idAnno=' + this.variabiliGlobali.idAnno
+      '&idConcorso=' + parametri.idConcorso
       ;
       // 'Password=' + this.sistemaTesto(params.Password;
     // console.log('Login:', url);
