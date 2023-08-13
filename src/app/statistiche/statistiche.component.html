@@ -72,7 +72,7 @@
               <th>Bilancio</th>
             </tr>
             <tr *ngFor="let dati of datiDaVisualizzare.Bilancio; let i = index" [attr.data-index]="i" class="scritta"
-              [style.background-color]="dati.Pari ? '#cecefd' : 'transparent'"
+              [style.background-color]="dati.Pari == 'True' ? '#cecefd' : 'transparent'"
               style="border-bottom: 1px solid #999;">
               <td style="text-align: center;">
                 <img class="immagineGiocatore" title="{{dati.NickName}}"
@@ -92,6 +92,179 @@
               </td>
               <td style="text-align: right;">
                 {{dati.Bilancio}}
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div *ngIf="datiDaVisualizzare && modalita=='PRONOSTICI'" style="width: 100%;">
+          <table style="width: 100%;">
+            <tr>
+              <th></th>
+              <th>Utente</th>
+              <th>Giocate</th>
+            </tr>
+            <tr *ngFor="let dati of datiDaVisualizzare.Pronostici; let i = index" [attr.data-index]="i" class="scritta"
+              [style.background-color]="dati.Pari == 'True' ? '#cecefd' : 'transparent'"
+              style="border-bottom: 1px solid #999;">
+              <td style="text-align: center;">
+                <img class="immagineGiocatore" title="{{dati.NickName}}"
+                  [src]="prendeImmagineGiocatore(dati.idUtente)" (error)="variabiliGlobali.handleMissingImage($event)" />
+              </td>
+              <td>
+                {{dati.NickName}}
+              </td>
+              <td style="text-align: right;">
+                {{dati.Giocate}}
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div *ngIf="datiDaVisualizzare && modalita=='RISULTATI'" style="width: 100%;">
+          <table style="width: 100%;">
+            <tr>
+              <th></th>
+              <th>Utente</th>
+              <th>Punti</th>
+              <th>Media Punti</th>
+              <th>Segni</th>
+              <th>Media Segni</th>
+              <th>Punti PS</th>
+              <th>Media Punti PS</th>
+              <th>Ris. Esatti</th>
+              <th>Media Ris. Esatti</th>
+              <th>Ris. Casa</th>
+              <th>Media R. Casa</th>
+              <th>Ris. Fuori</th>
+              <th>Media R. Fuori</th>
+              <th>Somma G.</th>
+              <th>Media Somma G.</th>
+              <th>Diff. G.</th>
+              <th>Media Diff. G.</th>
+            </tr>
+            <tr *ngFor="let dati of datiDaVisualizzare.Risultati; let i = index" [attr.data-index]="i" class="scritta"
+              [style.background-color]="dati.Pari == 'True' ? '#cecefd' : 'transparent'"
+              style="border-bottom: 1px solid #999;">
+              <td style="text-align: center;">
+                <img class="immagineGiocatore" title="{{dati.NickName}}"
+                  [src]="prendeImmagineGiocatore(dati.idUtente)" (error)="variabiliGlobali.handleMissingImage($event)" />
+              </td>
+              <td>{{dati.NickName}}</td>
+              <td style="text-align: right;">{{dati.SommaPunti}}</td>
+              <td style="text-align: right;">{{dati.MediaPunti}}</td>
+              <td style="text-align: right;">{{dati.SommaSegni}}</td>
+              <td style="text-align: right;">{{dati.MediaSegni}}</td>
+              <td style="text-align: right;">{{dati.SommaPuntiPS}}</td>
+              <td style="text-align: right;">{{dati.MediaPuntiPS}}</td>
+              <td style="text-align: right;">{{dati.SommaRisEsatti}}</td>
+              <td style="text-align: right;">{{dati.MediaRisEsatti}}</td>
+              <td style="text-align: right;">{{dati.SommaRisCasa}}</td>
+              <td style="text-align: right;">{{dati.MediaRisCasa}}</td>
+              <td style="text-align: right;">{{dati.SommaRisFuori}}</td>
+              <td style="text-align: right;">{{dati.MediaRisFuori}}</td>
+              <td style="text-align: right;">{{dati.SommaSomma}}</td>
+              <td style="text-align: right;">{{dati.MediaSomma}}</td>
+              <td style="text-align: right;">{{dati.SommaDiff}}</td>
+              <td style="text-align: right;">{{dati.MediaDiff}}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div *ngIf="datiDaVisualizzare && modalita=='ALTRO'" style="width: 100%;">
+          <table style="width: 100%;">
+            <tr>
+              <th></th>
+              <th>Utente</th>
+              <th>Jolly</th>
+              <th>Media Jolly</th>
+              <th>Vittorie</th>
+              <th>Media Vittorie</th>
+              <th>Ultimo</th>
+              <th>Media Ultimo</th>
+            </tr>
+            <tr *ngFor="let dati of datiDaVisualizzare.RisultatiAltro; let i = index" [attr.data-index]="i" class="scritta"
+              [style.background-color]="dati.Pari == 'True' ? '#cecefd' : 'transparent'"
+              style="border-bottom: 1px solid #999;">
+              <td style="text-align: center;">
+                <img class="immagineGiocatore" title="{{dati.NickName}}"
+                  [src]="prendeImmagineGiocatore(dati.idUtente)" (error)="variabiliGlobali.handleMissingImage($event)" />
+              </td>
+              <td>{{dati.NickName}}</td>
+              <td style="text-align: right;">{{dati.SommaJolly}}</td>
+              <td style="text-align: right;">{{dati.MediaJolly}}</td>
+              <td style="text-align: right;">{{dati.SommaVittorie}}</td>
+              <td style="text-align: right;">{{dati.MediaVittorie}}</td>
+              <td style="text-align: right;">{{dati.SommaUltimo}}</td>
+              <td style="text-align: right;">{{dati.MediaUltimo}}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div *ngIf="datiDaVisualizzare && modalita=='SCONTRI'" style="width: 100%;">
+          <table style="width: 100%;">
+            <tr>
+              <th></th>
+              <th>Utente</th>
+              <th>Giocate</th>
+              <th>Vinte</th>
+              <th>Media Vinte</th>
+              <th>Pareggiate</th>
+              <th>Media Pareggiate</th>
+              <th>Perse</th>
+              <th>Media Perse</th>
+            </tr>
+            <tr *ngFor="let dati of datiDaVisualizzare.ScontriDiretti; let i = index" [attr.data-index]="i" class="scritta"
+              [style.background-color]="dati.Pari == 'True' ? '#cecefd' : 'transparent'"
+              style="border-bottom: 1px solid #999;">
+              <td style="text-align: center;">
+                <img class="immagineGiocatore" title="{{dati.NickName}}"
+                  [src]="prendeImmagineGiocatore(dati.idUtente)" (error)="variabiliGlobali.handleMissingImage($event)" />
+              </td>
+              <td>{{dati.NickName}}</td>
+              <td style="text-align: right;">{{dati.Giocate}}</td>
+              <td style="text-align: right;">{{dati.Vinte}}</td>
+              <td style="text-align: right;">{{dati.MediaVinte}}</td>
+              <td style="text-align: right;">{{dati.Pareggiate}}</td>
+              <td style="text-align: right;">{{dati.MediaPareggiate}}</td>
+              <td style="text-align: right;">{{dati.Perse}}</td>
+              <td style="text-align: right;">{{dati.MediaPerse}}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div *ngIf="datiDaVisualizzare && modalita=='PRESE'" style="width: 100%;">
+          <table style="width: 100%;">
+            <tr *ngFor="let dati of datiDaVisualizzare.SquadrePrese; let i = index" [attr.data-index]="i" class="scritta"
+              [style.background-color]="dati.Pari == 'True' ? '#cecefd' : 'white'"
+              style="border-bottom: 1px solid #999;">
+              <td style="text-align: center; vertical-align: top;">
+                <img class="immagineGiocatore" title="{{dati.NickName}}"
+                  [src]="prendeImmagineGiocatore(dati.idUtente)" (error)="variabiliGlobali.handleMissingImage($event)" />
+              </td>
+              <td style="vertical-align: top;">{{dati.NickName}}</td>
+              <td style="text-align: center;">
+                <table *ngIf="dati.Visibile == 'True'" style="width: calc(100% - 30px); float: left;">
+                  <tr>
+                    <th></th>
+                    <th>Squadra</th>
+                    <th>Presa</th>
+                    <th>Totale</th>
+                  </tr>
+                  <tr *ngFor="let dati2 of dati.Prese; let i = index" [attr.data-index]="i" class="scritta"
+                    [style.background-color]="dati2.Pari == 'True' ? '#cecefd' : 'transparent'"
+                    style="border-bottom: 1px solid #999;">
+                    <td>
+                      <img class="immagineGiocatore" title="{{dati.NickName}}"
+                        [src]="prendeImmagineSquadra(dati2.Squadra)" (error)="variabiliGlobali.handleMissingImage($event)" />
+                    </td>
+                    <td style="text-align: left;">{{dati2.Squadra}}</td>
+                    <td style="text-align: right;">{{dati2.Prese}}</td>
+                    <td style="text-align: right;">{{dati2.Totale}}</td>
+                  </tr>
+                </table>
+                <img class="immagineIcona" style="float: left; width: 30px; height: 30px;" title="Mostra dettaglio"
+                  src="../../assets/Immagini/dettaglio.png" (click)="mostraDettaglio(dati)" />
               </td>
             </tr>
           </table>

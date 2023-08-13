@@ -219,7 +219,7 @@ export class VincitoriComponent implements OnInit, AfterViewInit, OnChanges {
       case 'Pippa League':
         nome = 'pippa';
         break;
-      case 'Coppa Inutile':
+      case 'Ciapa No':
         nome = 'inutile';
         break;
       case 'Rotolo di Coppa':

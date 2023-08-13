@@ -69,7 +69,19 @@ export class StatisticheComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
+  prendeImmagineSquadra(s) {
+    return this.variabiliGlobali.ritornaImmagineSquadra(s);
+  }
+
   prendeImmagineGiocatore(i) {
     return this.variabiliGlobali.ritornaImmagineGiocatore(i.toString());
+  }
+
+  mostraDettaglio(d) {
+    if (d.Visibile === 'True') {
+      d.Visibile = 'False';
+    } else {
+      d.Visibile = 'True';
+    }
   }
 }

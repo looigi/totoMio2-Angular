@@ -573,7 +573,7 @@ export class ApiService {
 
   leggeStatistiche() {
     this.controlloPresenzaUtente();
-    const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/RitornaClassifica?' +
+    const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/Statistiche?' +
       'idAnno=' + this.variabiliGlobali.idAnno
       ;
       // 'Password=' + this.sistemaTesto(params.Password;
