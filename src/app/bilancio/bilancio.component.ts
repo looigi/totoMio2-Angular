@@ -20,6 +20,7 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
   posizioni;
   utenti;
   bilancio;
+  bilancioUtenti;
   idAnno2;
   idConcorso2;
   NickName;
@@ -150,6 +151,7 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
   uscite = 0;
   vincite = 0;
   bilancione = 0;
+  presentati = 0;
   posizioniLista = new Array();
 
   letturaBilancio() {
@@ -165,10 +167,13 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
           this.uscite = 0;
           this.vincite = 0;
           this.bilancione = 0;
+          this.presentati = 0;
           this.posizioniLista = new Array();
 
           if (data.indexOf('ERROR') === -1) {
-            const righe = data.split('§');
+            const tutto = data.split('|');
+
+            const righe = tutto[0].split('§');
             const m = new Array();
             let pari = true;
             righe.forEach(element => {
@@ -184,6 +189,10 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
                 }
                 if (c[1].toUpperCase().trim() === 'VINCITA') {
                   this.vincite += +c[4];
+                  this.bilancione -= +c[4];
+                }
+                if (c[1].toUpperCase().trim() === 'PRESENTAZIONE') {
+                  this.presentati += +c[4];
                   this.bilancione -= +c[4];
                 }
                 let ok = false;
@@ -214,6 +223,7 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
                   Note: c[6],
                   idPosizione: +c[8],
                   Posizione: c[9],
+                  Presentati: +c[10],
                   Pari: pari
                 }
                 pari = !pari;
@@ -221,12 +231,34 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
               }
             });
             this.bilancio = m;
+
+            const righe2 = tutto[1].split('§');
+            const bbb = new Array();
+            pari = true;
+            righe2.forEach(element => {
+              if (element) {
+                const b = element.split(';');
+                const bb = {
+                  idUtente: +b[0],
+                  NickName: b[1],
+                  Importo: +b[2].replace(',', '.'),
+                  Pari: pari
+                }
+                pari = !pari;
+                bbb.push(bb);
+              }
+            });
+            this.bilancioUtenti = bbb;
           } else {
             // alert(data);
           }
         }
       }
     );
+  }
+
+  prendeImmagineGiocatore(id) {
+    return this.variabiliGlobali.ritornaImmagineGiocatore(id.toString());
   }
 
   eliminaMovimento(m) {
@@ -304,7 +336,7 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
       alert('Selezionare una tipologia di movimento');
       return;
     }
-    if (!this.idModalita) {
+    if (!this.idModalita && this.idModalita !== 0) {
       alert('Selezionare una modalità di pagamento');
       return;
     }
@@ -317,6 +349,7 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
       Progressivo: this.Progressivo,
       idPosizione: this.idModalita
     }
+    console.log(params);
     this.variabiliGlobali.CaricamentoInCorso = true;
     this.apiService.salvaMovimento(params)
     .map((response: any) => response)

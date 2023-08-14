@@ -206,6 +206,21 @@
       <input type="text" [(ngModel)]="eMail" class="scritta grassetto" style="width: 100%; background-color: white;" />
     </div>
     <div class="pulisce"></div>
+    <div class="scritta grassetto" style="width: 40%; float: left;">Presentatore</div>
+    <div style="width: 55%; float: left;">
+      <select [(ngModel)]="presentatore" style="width: 104%; height: 20px; font-size: 16px;"
+        (ngModelChange)="onChangePresentatore($event)">
+        <option *ngFor="let title of utenti" [value]="title.idUtente" >
+          {{title.Utente}}<span *ngIf="title.idUtente > 0">&nbsp;({{title.Cognome}} {{title.Nome}})</span>
+        </option>
+      </select>
+    </div>
+    <div class="pulisce"></div>
+
+    <div *ngIf="presentatore > 0" class="scritta" style="color: red; font-weight: bold; width: 100%; float: left; text-align: right;">
+      Il presentatore avrà dei vantaggi
+    </div>
+    <div class="pulisce"></div>
 
     <div style="width: 100%; text-align: right;">
       <div class="immagineIcona" title="Crea nuovo utente" (click)="effettuaSalvataggio()" style="float: right; background-image: url('../assets/Immagini/save.png'); background-size: contain; background-repeat: no-repeat;"></div>

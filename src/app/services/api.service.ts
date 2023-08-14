@@ -127,7 +127,8 @@ export class ApiService {
       'Nome=' + params.Nome + '&' +
       'Password=' + params.Password + '&' +
       'Mail=' + params.Mail + '&' +
-      'idTipologia=' + params.idTipologia
+      'idTipologia=' + params.idTipologia + '&' +
+      'Presentatore=' + params.Presentatore
       ;
       // 'Password=' + this.sistemaTesto(params.Password;
     // console.log('Login:', url);
@@ -493,7 +494,8 @@ export class ApiService {
       'Importo=' + params.Importo + '&' +
       'Data=' + params.Data + '&' +
       'Note=' + params.Note + '&' +
-      'Progressivo=' + params.Progressivo
+      'Progressivo=' + params.Progressivo + '&' +
+      'idPosizione=' + params.idPosizione
       ;
       // 'Password=' + this.sistemaTesto(params.Password;
     // console.log('Login:', url);

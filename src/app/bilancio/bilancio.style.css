@@ -32,6 +32,12 @@
   float: left;
 }
 
+.immagineGiocatore {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
 .chiusura {
   position: absolute;
   right: 10px;

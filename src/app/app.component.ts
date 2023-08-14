@@ -32,6 +32,8 @@ export class AppComponent implements OnInit {
   refreshAdmin = '';
   novita = true;
   immagineDiSfondo = '';
+  utenti;
+  presentatore = 0;
 
   nuovoConcorsoVisibile = false;
   pronosticiVisibile = false;
@@ -81,6 +83,48 @@ export class AppComponent implements OnInit {
         this.ritornaDatiGlobali();
       }
     }
+
+    this.leggeUtenti();
+  }
+
+  leggeUtenti() {
+    this.VariabiliGlobali.CaricamentoInCorso = true;
+
+    this.apiService.letturaUtenti()
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        this.VariabiliGlobali.CaricamentoInCorso = false;
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            const u = data.split('§');
+            const ut = new Array();
+            ut.push({idUtente: 0, Utente: 'Nessuno'});
+            u.forEach(element => {
+              if (element) {
+                const uu = element.split(';');
+                const uuu = {
+                  idUtente: +uu[0],
+                  Utente: uu[1],
+                  Cognome: uu[2],
+                  Nome: uu[3]
+                }
+                ut.push(uuu);
+              }
+            });
+            this.utenti = ut;
+            this.presentatore = 0;
+            console.log('Utenti: ', ut);
+          } else {
+            alert(data);
+          }
+        }
+      }
+    )
+  }
+
+  onChangePresentatore(e) {
+    // this.presentatore = e;
   }
 
   chiudeNovita() {
@@ -513,8 +557,10 @@ export class AppComponent implements OnInit {
       Nome: this.nome,
       Password: this.passwordNU,
       Mail: this.eMail,
-      idTipologia: 1
+      idTipologia: 1,
+      Presentatore: this.presentatore
     }
+    console.log(params);
     this.VariabiliGlobali.CaricamentoInCorso = true;
 
     this.apiService.creaNuovoUtente(params)
