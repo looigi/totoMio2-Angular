@@ -108,7 +108,7 @@ export class ClassificaComponent implements OnInit, AfterViewInit, OnChanges {
                 const c = element.split(';');
                 // console.log(c);
                 let avatar;
-                avatar = this.variabiliGlobali.ritornaImmagineGiocatore(c[0]);
+                avatar = this.variabiliGlobali.ritornaImmagineGiocatore(c[0]) + '?d=' + new Date().toString();
                 if (c[1] === 'Fintone') {
                   avatar = '../assets/Immagini/finto.png';
                 }

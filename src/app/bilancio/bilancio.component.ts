@@ -146,6 +146,12 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
     );
   }
 
+  entrate = 0;
+  uscite = 0;
+  vincite = 0;
+  bilancione = 0;
+  posizioniLista = new Array();
+
   letturaBilancio() {
     this.variabiliGlobali.CaricamentoInCorso = true;
     this.apiService.letturaBilancio()
@@ -154,6 +160,13 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
         this.variabiliGlobali.CaricamentoInCorso = false;
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
+
+          this.entrate = 0;
+          this.uscite = 0;
+          this.vincite = 0;
+          this.bilancione = 0;
+          this.posizioniLista = new Array();
+
           if (data.indexOf('ERROR') === -1) {
             const righe = data.split('§');
             const m = new Array();
@@ -161,6 +174,35 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
             righe.forEach(element => {
               if (element) {
                 const c = element.split(';');
+                if (c[1].toUpperCase().trim() === 'ENTRATA') {
+                  this.entrate += +c[4];
+                  this.bilancione += +c[4];
+                }
+                if (c[1].toUpperCase().trim() === 'USCITA') {
+                  this.uscite += +c[4];
+                  this.bilancione -= +c[4];
+                }
+                if (c[1].toUpperCase().trim() === 'VINCITA') {
+                  this.vincite += +c[4];
+                  this.bilancione -= +c[4];
+                }
+                let ok = false;
+                this.posizioniLista.forEach(element2 => {
+                  if (+element2.idPosizione === +c[8]) {
+                    ok = true;
+                    element2.Quanti += +c[4];
+                    return;
+                  }
+                });
+                if (!ok) {
+                  const pp = {
+                    idPosizione: +c[8],
+                    Posizione: c[9],
+                    Quanti: +c[4]
+                  }
+                  this.posizioniLista.push(pp);
+                }
+
                 const cc = {
                   Progressivo: +c[7],
                   idMovimento: +c[0],

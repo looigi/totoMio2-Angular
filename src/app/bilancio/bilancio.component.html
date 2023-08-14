@@ -4,12 +4,16 @@
       <img *ngIf="variabiliGlobali.idTipologia == 0" class="immagineIcona" title="Aggiunge" (click)="aggiungeMovimento()"
         src="../../assets/Immagini/aggiungi.png" (error)="variabiliGlobali.handleMissingImage($event)" />
     </div>
-    <div style="width: calc(100% - 70px); margin-top: 7px; float: left; font-weight: bold;">
-      Bilancio
+    <div style="width: calc(100% - 80px); float: left; font-weight: bold; white-space: nowrap; overflow: hidden;">
+      Bilancio. Entrate: €{{entrate}} - Uscite: €{{uscite}} - Vincite: €{{vincite}} - Bilancio: €{{bilancione}}<br />
+      Modalità:&nbsp;<span *ngFor="let posiz of posizioniLista; let i2 = index" [attr.data-index]="i2"
+        style="width: auto; margin-right: 10px;">
+        {{posiz.Posizione}}: €{{posiz.Quanti}}
+      </span>
     </div>
   </div>
   <div class="contenitoreInterno scritta" style="overflow: hidden;">
-    <div style="width: 99%; height: 50%; overflow: auto; float: left; border-bottom: 1px solid #999;">
+    <div style="width: 99%; height: 50%; overflow: auto; float: left; border-top: 1px solid #999; border-bottom: 1px solid #999;">
       <table style="width: 100%;">
         <tr>
           <th>
