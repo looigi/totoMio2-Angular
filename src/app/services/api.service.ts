@@ -583,6 +583,19 @@ export class ApiService {
     return ritorno;
   }
 
+  ricordaPassword(NickName) {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/RitornaPassword?' +
+      'idAnno=' + this.variabiliGlobali.idAnno + '&' +
+      'NickName=' + NickName
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    return ritorno;
+  }
+
   creaUtenteFinto() {
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsAmministrazione.asmx/CreaFintone?' +

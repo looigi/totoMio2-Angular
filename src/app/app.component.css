@@ -158,12 +158,21 @@ body {
   padding: 5px;
 }
 
+.pwd {
+  width: 100%;
+  text-align: right;
+  cursor: pointer;
+}
+.pwd:hover {
+  color: red;
+}
+
 .mascheraLogin {
   right: 2px;
   top: 42px;
   position: absolute;
-  width: 250px;
-  height: 85px;
+  width: 300px;
+  height: 105px;
   background-color: #ccfdbf;
   border: 1px solid black;
   border-radius: 5px;

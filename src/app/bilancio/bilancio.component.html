@@ -36,6 +36,9 @@
           <th>
             Note
           </th>
+          <th>
+            Modalità
+          </th>
         </tr>
         <tr *ngFor="let bilancetto of bilancio; let i2 = index" [attr.data-index]="i2"
           [style.background-color]="bilancetto.Pari ? '#cecefd' : 'transparent'">
@@ -66,6 +69,9 @@
           </td>
           <td>
             {{bilancetto.Note}}
+          </td>
+          <td>
+            {{bilancetto.Posizione}}
           </td>
         </tr>
       </table>
@@ -107,6 +113,22 @@
         </div>
         <div style="width: 40px; float: left;">
           <img class="immagineIcona" title="Elimina" (click)="apreScelta(2)"
+            src="../../assets/Immagini/gestione_concorso.png" (error)="variabiliGlobali.handleMissingImage($event)" />
+        </div>
+      </div>
+      <div style="clear: both;"></div>
+      <div class="casella">
+        <div style="width: calc(100% - 40px); float: left; margin-top: 6px;">
+          <div style="width: 100px; float: left; font-weight: bold;">
+            Modalità
+          </div>
+          <div style="width: calc(100% - 110px); float: left; font-weight: bold;">
+            <input disabled="true" type="text" [(ngModel)]="Modalita" class="scritta"
+              style="margin-left: 5px; margin-right: 5px; width: 100px;">&nbsp;
+          </div>
+        </div>
+        <div style="width: 40px; float: left;">
+          <img class="immagineIcona" title="Elimina" (click)="apreScelta(3)"
             src="../../assets/Immagini/gestione_concorso.png" (error)="variabiliGlobali.handleMissingImage($event)" />
         </div>
       </div>

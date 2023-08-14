@@ -17,6 +17,7 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() chiusuraFinestra: EventEmitter<string> = new EventEmitter<string>();
 
   movimenti;
+  posizioni;
   utenti;
   bilancio;
   idAnno2;
@@ -24,6 +25,7 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
   NickName;
   Importo;
   idTipologia;
+  idModalita;
   idUtente;
   Data;
   Note;
@@ -32,6 +34,7 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
   scelte;
   sceltaNumero;
   Tipologia;
+  Modalita;
   Progressivo;
 
   constructor(
@@ -72,7 +75,9 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
         if (data2) {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {
-            const righe = data.split('§');
+            const tutto = data.split('|');
+
+            const righe = tutto[0].split('§');
             const m = new Array();
             righe.forEach(element => {
               if (element) {
@@ -85,6 +90,20 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
               }
             });
             this.movimenti = m;
+
+            const righe2 = tutto[1].split('§');
+            const m2 = new Array();
+            righe2.forEach(element => {
+              if (element) {
+                const c = element.split(';');
+                const cc = {
+                  idPosizione: +c[0],
+                  Posizione: c[1]
+                }
+                m2.push(cc);
+              }
+            });
+            this.posizioni = m2;
 
             this.letturaUtenti();
           } else {
@@ -151,6 +170,8 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
                   Importo: +c[4],
                   Data: c[5],
                   Note: c[6],
+                  idPosizione: +c[8],
+                  Posizione: c[9],
                   Pari: pari
                 }
                 pari = !pari;
@@ -192,10 +213,16 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
     this.Data = m.Data;
     this.Note = m.Note;
     this.idTipologia = m.idMovimento;
+    this.idModalita = m.idPosizione;
     this.Progressivo = m.Progressivo;
     this.movimenti.forEach(element => {
       if (element.idMovimento === this.idTipologia) {
         this.Tipologia = element.Movimento;
+      }
+    });
+    this.posizioni.forEach(element => {
+      if (element.idPosizione === this.idModalita) {
+        this.Modalita = element.Posizione;
       }
     });
     this.modificaDati = true;
@@ -235,13 +262,18 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
       alert('Selezionare una tipologia di movimento');
       return;
     }
+    if (!this.idModalita) {
+      alert('Selezionare una modalità di pagamento');
+      return;
+    }
     const params = {
       idUtente: this.idUtente,
       idMovimento: this.idTipologia,
       Importo: this.Importo.toString().replace('.', ','),
       Data: this.Data,
       Note: this.Note,
-      Progressivo: this.Progressivo
+      Progressivo: this.Progressivo,
+      idPosizione: this.idModalita
     }
     this.variabiliGlobali.CaricamentoInCorso = true;
     this.apiService.salvaMovimento(params)
@@ -270,15 +302,19 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
     if (n === 1) {
       cosa = this.utenti;
     } else {
-      cosa = this.movimenti;
+      if (n === 2) {
+        cosa = this.movimenti;
+      } else {
+        cosa = this.posizioni;
+      }
     }
     const nn = new Array();
     let pari = true;
     cosa.forEach(element => {
       if (element) {
         const nnn = {
-          id: this.sceltaNumero === 1 ? element.idUtente : element.idMovimento,
-          Descrizione: this.sceltaNumero === 1 ? element.NickName : element.Movimento,
+          id: this.sceltaNumero === 1 ? element.idUtente : this.sceltaNumero === 2 ? element.idMovimento : element.idPosizione,
+          Descrizione: this.sceltaNumero === 1 ? element.NickName : this.sceltaNumero ===2 ? element.Movimento : element.Posizione,
           Pari: pari
         }
         pari = !pari;
@@ -294,8 +330,13 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
       this.NickName = s.Descrizione;
       this.idUtente = s.id;
     } else {
-      this.Tipologia = s.Descrizione;
-      this.idTipologia = s.id;
+      if (this.sceltaNumero === 2) {
+        this.Tipologia = s.Descrizione;
+        this.idTipologia = s.id;
+      } else {
+        this.Modalita = s.Descrizione;
+        this.idModalita = s.id;
+      }
     }
     this.mascheraScelta = false;
   }

@@ -390,6 +390,13 @@ export class AppComponent implements OnInit {
             return false;
           }
           break;
+        case 13:
+          if (this.loginEffettuato) {
+            return true;
+          } else {
+            return false;
+          }
+          break;
         default:
           return true;
       }
@@ -491,7 +498,7 @@ export class AppComponent implements OnInit {
     this.VariabiliGlobali.idTipologia = +r[6];
     this.VariabiliGlobali.Tipologia = r[7];
 
-    this.immagineDiSfondo = this.VariabiliGlobali.urlSfondo + this.VariabiliGlobali.idAnno + '/' + this.VariabiliGlobali.idUser + '.png';
+    this.immagineDiSfondo = this.VariabiliGlobali.urlSfondo + this.VariabiliGlobali.idAnno + '/' + this.VariabiliGlobali.idUser + '.png?d=' + new Date().toString();
   }
 
   handleMissingImageSfondo($event) {
@@ -627,5 +634,28 @@ export class AppComponent implements OnInit {
   fRefreshImmagine() {
     this.refreshImmagine = new Date().toString();
     this.immagineDiSfondo = this.VariabiliGlobali.urlSfondo + this.VariabiliGlobali.idAnno + '/' + this.VariabiliGlobali.idUser + '.png?d=' + new Date().toString();
+  }
+
+  passwordDimenticata() {
+    if (!this.user) {
+      alert('Inserire il nome utente');
+      return;
+    }
+    this.VariabiliGlobali.CaricamentoInCorso = true;
+
+    this.apiService.ricordaPassword(this.user)
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        this.VariabiliGlobali.CaricamentoInCorso = false;
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            alert('Password inviata');
+          } else {
+            alert(data);
+          }
+        }
+      }
+    )
   }
 }
