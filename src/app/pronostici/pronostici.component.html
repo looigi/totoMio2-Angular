@@ -1,9 +1,11 @@
 <div class="finestra">
   <div class="barraSuperiore">
-    <div style="width: 40px; float: left;">
+    <div style="width: 80px; float: left;">
       <img *ngIf="tastoSalvataggio" class="immagineIcona" style="margin-left: 5px;" title="Salva Pronostico"
         src="../../assets/Immagini/save.png" (click)="salvaPronostico()" />
       <span *ngIf="!tastoSalvataggio">&nbsp;</span>
+      <img class="immagineIcona" style="margin-left: 5px;" title="Crea Random"
+        src="../../assets/Immagini/random.png" (click)="creaRandom()" />
     </div>
     <div class="scritta" style="width: calc(100% - 80px); overflow: hidden; float: left; margin-top: 5px; font-weight: bold; white-space: nowrap;">
       Anno {{idAnno2}} - {{DescrizioneAnno}} Concorso {{NumeroConcorso2}} Partite {{partite.length}}
@@ -12,9 +14,9 @@
   <div class="contenitoreInterno scritta">
     <table style="min-width: 100%;">
       <tr>
-        <th>
+        <!-- <th>
           N°
-        </th>
+        </th> -->
         <th>
           &nbsp;
         </th>
@@ -46,9 +48,9 @@
       <tr *ngFor="let partita of partite; let i = index" [attr.data-index]="i" class="scritta"
         [style.background-color]="partita.Pari ? '#cecefd' : 'transparent'"
         style="border-bottom: 1px solid #999;">
-        <td>
+        <!-- <td style="text-align: center;">
           {{partita.idPartita}}
-        </td>
+        </td> -->
         <td>
           <img class="immagineSquadra" title="{{partita.Prima}}"
             [src]="partita.ImmagineCasa" (error)="variabiliGlobali.handleMissingImage($event)" />

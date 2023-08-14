@@ -309,4 +309,28 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
       this.tastoSalvataggio = false;
     }
   }
+
+  creaRandom() {
+    if (confirm('Si vogliono sovrascrivere i pronostici con valori random ?')) {
+      let n = 0;
+      this.partite.forEach(element => {
+        this.risu1[n] = Math.round(Math.random() * 4);
+        this.risu2[n] = Math.round(Math.random() * 4);
+        this.partite[n].Risultato1 = this.risu1[n];
+        this.partite[n].Risultato2 = this.risu2[n];
+        if (this.risu1[n] > this.risu2[n]) {
+          this.partite[n].Segno = '1';
+        } else {
+          if (this.risu1[n] < this.risu2[n]) {
+            this.partite[n].Segno = '2';
+          } else {
+            this.partite[n].Segno = 'X';
+          }
+        }
+        n++;
+      });
+      const ps = Math.round(Math.random() * n);
+      this.clickSuPartitaScelta(ps);
+    }
+  }
 }

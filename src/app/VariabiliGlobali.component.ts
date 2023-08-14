@@ -81,13 +81,6 @@ export class VariabiliGlobali {
       idTipologia: -1
     },
     {
-      idTasto: 8,
-      Icona: 'info.png',
-      Titolo: 'Info',
-      Pagina: 'Info',
-      idTipologia: -1
-    },
-    {
       idTasto: 9,
       Icona: 'admin.png',
       Titolo: 'Admin',
@@ -121,7 +114,14 @@ export class VariabiliGlobali {
       Titolo: 'Chat',
       Pagina: 'Chat',
       idTipologia: -1
-    }
+    },
+    {
+      idTasto: 8,
+      Icona: 'info.png',
+      Titolo: 'Info',
+      Pagina: 'Info',
+      idTipologia: -1
+    },
   ]
 
   ritornaImmagineSquadra(imm) {
