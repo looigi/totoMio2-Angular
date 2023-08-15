@@ -128,7 +128,7 @@ export class VincitoriComponent implements OnInit, AfterViewInit, OnChanges {
               let ok = false;
               incassatori.forEach(element2 => {
                 if (+element2.idVincitore === +c[0]) {
-                  element.VincitaValore += +c[2];
+                  element2.VincitaValore += +c[2];
                   ok = true;
                 }
               });

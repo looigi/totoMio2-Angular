@@ -1,13 +1,15 @@
 <div class="finestra">
   <div class="barraSuperiore">
-    <div style="width: 80px; float: left;">
+    <div style="width: 120px; float: left;">
       <img *ngIf="tastoSalvataggio" class="immagineIcona" style="margin-left: 5px;" title="Salva Pronostico"
         src="../../assets/Immagini/save.png" (click)="salvaPronostico()" />
       <span *ngIf="!tastoSalvataggio">&nbsp;</span>
       <img class="immagineIcona" style="margin-left: 5px;" title="Crea Random"
         src="../../assets/Immagini/random.png" (click)="creaRandom()" />
+      <img class="immagineIcona" style="margin-left: 5px;" title="Statistiche"
+        src="../../assets/Immagini/statistiche.png" (click)="ritornaStatistichePartite()" />
     </div>
-    <div class="scritta" style="width: calc(100% - 80px); overflow: hidden; float: left; margin-top: 5px; font-weight: bold; white-space: nowrap;">
+    <div class="scritta" style="width: calc(100% - 160px); overflow: hidden; float: left; margin-top: 5px; font-weight: bold; white-space: nowrap;">
       Anno {{idAnno2}} - {{DescrizioneAnno}} Concorso {{NumeroConcorso2}} Partite {{partite.length}}
     </div>
   </div>
@@ -136,6 +138,67 @@
     </div>
   </div>
 -->
+</div>
+
+<div *ngIf="statisticheVisibile" class="statistiche scritta">
+  <div style="width: calc(100% - 40px); float: left; font-weight: bold;">
+    Statistiche
+  </div>
+  <div style="width: 40px; text-align: right; float: left;">
+    <img class="immagineIcona" title="Chiude" (click)="statisticheVisibile = false"
+      src="../../assets/Immagini/chiusura.png" />
+  </div>
+  <hr />
+  <table style="width: 100%">
+    <tr>
+      <th>
+
+      </th>
+      <th>
+        Casa
+      </th>
+      <th>
+
+      </th>
+      <th>
+        Fuori
+      </th>
+      <th>
+        Segno
+      </th>
+      <th>
+        Quanti Giocati
+      </th>
+      <th>
+        Percentuale
+      </th>
+      <th>
+        Risultato Più Giocato
+      </th>
+      <th>
+        Risultato Meno Giocato
+      </th>
+    </tr>
+    <tr *ngFor="let stat of statistiche; let i = index" [attr.data-index]="i" class="scritta"
+      [style.background-color]="stat.Pari ? '#dfd773' : 'transparent'"
+      style="border-bottom: 1px solid #999;">
+      <td>
+        <img class="immagineSquadra" title="{{stat.Casa}}"
+          [src]="stat.ImmagineCasa" (error)="variabiliGlobali.handleMissingImage($event)" />
+      </td>
+      <td>{{stat.Casa}}</td>
+      <td>
+        <img class="immagineSquadra" title="{{stat.Fuori}}"
+          [src]="stat.ImmagineFuori" (error)="variabiliGlobali.handleMissingImage($event)" />
+      </td>
+      <td>{{stat.Fuori}}</td>
+      <td style="text-align: center;">{{stat.Segno}}</td>
+      <td style="text-align: center;">{{stat.QuantiSegni}}</td>
+      <td style="text-align: center;">{{stat.Percentuale}}</td>
+      <td style="text-align: center;">{{stat.RisultatoPiuGiocato}}</td>
+      <td style="text-align: center;">{{stat.RisultatoMenoGiocato}}</td>
+    </tr>
+  </table>
 </div>
 
 <div class="chiusura" (click)="chiusura()" title="Chiusura finestra">

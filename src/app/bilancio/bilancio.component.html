@@ -5,7 +5,7 @@
         src="../../assets/Immagini/aggiungi.png" (error)="variabiliGlobali.handleMissingImage($event)" />
     </div>
     <div style="width: calc(100% - 80px); float: left; font-weight: bold; white-space: nowrap; overflow: hidden;">
-      Bilancio. Entrate: €{{entrate}} - Uscite: €{{uscite}} - Vincite: €{{vincite}} - Presentati: €{{presentati}} - Bilancio: €{{bilancione}}<br />
+      Bilancio. Entrate: €{{entrate}} - Uscite: €{{uscite}} - Vincite: €{{vincite}} - Presentati: €{{presentati}} - Bilancio: €{{bilancione}} - Mancanti €{{Mancanti}}<br />
       Modalità:&nbsp;<span *ngFor="let posiz of posizioniLista; let i2 = index" [attr.data-index]="i2"
         style="width: auto; margin-right: 10px;">
         {{posiz.Posizione}}: €{{posiz.Quanti}}
@@ -13,7 +13,7 @@
     </div>
   </div>
   <div class="contenitoreInterno scritta" style="overflow: hidden;">
-    <div style="width: 69%; height: 50%; overflow: auto; float: left; border-top: 1px solid #999; border-bottom: 1px solid #999;">
+    <div style="width: 49%; height: 50%; overflow: auto; float: left; border-top: 1px solid #999; border-bottom: 1px solid #999;">
       <table style="width: 100%;">
         <tr>
           <th *ngIf="variabiliGlobali.idTipologia == 0">
@@ -91,7 +91,7 @@
         </tr>
       </table>
     </div>
-    <div style="width: 29%; height: 50%; overflow: auto; float: left; border-left: 1px solid #999; border-top: 1px solid #999; border-bottom: 1px solid #999;">
+    <div style="width: 49%; height: 50%; overflow: auto; float: left; border-left: 1px solid #999; border-top: 1px solid #999; border-bottom: 1px solid #999;">
       <table style="width: 100%;">
         <tr>
           <th>
@@ -121,95 +121,123 @@
         </tr>
       </table>
     </div>
-    <div *ngIf="modificaDati && variabiliGlobali.idTipologia == 0"
-      style="width: 99%; height: 50%; float: left; overflow: auto;">
-      <div class="casella">
-        <div style="width: calc(100% - 40px); float: left; margin-top: 6px;">
-          <span style="font-weight: bold;">NickName:</span>&nbsp;
-          <input disabled="true" type="text" [(ngModel)]="NickName" class="scritta"
-            style="margin-left: 5px; margin-right: 5px; width: 100px;">&nbsp;
+    <div style="clear: both;"></div>
+    <div style="width: 99%; height: 50%;">
+      <div style="width: 30%; height: 100%; float: left; overflow: auto;">
+        <div style="width: 100%; float: left; font-weight: bold; text-align: center; background-color: #f9abab;">Inadempienti</div><br />
+        <table style="width: 100%;">
+          <tr>
+            <th>
+              &nbsp;
+            </th>
+            <th>
+              Utente
+            </th>
+          </tr>
+          <tr *ngFor="let bilancetto of inadempienti; let i2 = index" [attr.data-index]="i2"
+            [style.background-color]="bilancetto.Pari ? '#f9abab' : 'transparent'">
+            <td>
+              <img class="immagineGiocatore" title="{{bilancetto.NickName}}"
+                [src]="prendeImmagineGiocatore(bilancetto.idUtente)" (error)="variabiliGlobali.handleMissingImage($event)" />
+            </td>
+            <td>
+              {{bilancetto.NickName}}
+            </td>
+          </tr>
+        </table>
         </div>
-        <div style="width: 40px; float: left;">
-          <img class="immagineIcona" title="Sceglie utente" (click)="apreScelta(1)"
-          src="../../assets/Immagini/gestione_concorso.png" (error)="variabiliGlobali.handleMissingImage($event)" />
+      <div style="width: calc(70% - 4px); height: 100%; float: left; border-left: 1px solid #999;">
+        <div *ngIf="modificaDati && variabiliGlobali.idTipologia == 0"
+          style="width: 99%; height: 100%; float: left; overflow: auto;">
+          <div class="casella">
+            <div style="width: calc(100% - 40px); float: left; margin-top: 6px;">
+              <span style="font-weight: bold;">NickName:</span>&nbsp;
+              <input disabled="true" type="text" [(ngModel)]="NickName" class="scritta"
+                style="margin-left: 5px; margin-right: 5px; width: 100px;">&nbsp;
+            </div>
+            <div style="width: 40px; float: left;">
+              <img class="immagineIcona" title="Sceglie utente" (click)="apreScelta(1)"
+              src="../../assets/Immagini/gestione_concorso.png" (error)="variabiliGlobali.handleMissingImage($event)" />
+            </div>
+          </div>
+          <div style="clear: both;"></div>
+          <div class="casella">
+            <div style="width: 99%; float: left; margin-top: 6px;">
+              <div style="width: 100px; float: left; font-weight: bold;">
+                Importo
+              </div>
+              <div style="width: calc(100% - 110px); float: left; font-weight: bold;">
+                <input type="number" [(ngModel)]="Importo" class="scritta"
+                  style="margin-left: 5px; margin-right: 5px; width: 100%; max-width: 90px;">
+            </div>
+          </div>
+          <div style="clear: both;"></div>
+          <div class="casella">
+            <div style="width: calc(100% - 40px); float: left; margin-top: 6px;">
+              <div style="width: 100px; float: left; font-weight: bold;">
+                Tipologia
+              </div>
+              <div style="width: calc(100% - 110px); float: left; font-weight: bold;">
+                <input disabled="true" type="text" [(ngModel)]="Tipologia" class="scritta"
+                  style="margin-left: 5px; margin-right: 5px; width: 100px;">&nbsp;
+              </div>
+            </div>
+            <div style="width: 40px; float: left;">
+              <img class="immagineIcona" title="Elimina" (click)="apreScelta(2)"
+                src="../../assets/Immagini/gestione_concorso.png" (error)="variabiliGlobali.handleMissingImage($event)" />
+            </div>
+          </div>
+          <div style="clear: both;"></div>
+          <div class="casella">
+            <div style="width: calc(100% - 40px); float: left; margin-top: 6px;">
+              <div style="width: 100px; float: left; font-weight: bold;">
+                Modalità
+              </div>
+              <div style="width: calc(100% - 110px); float: left; font-weight: bold;">
+                <input disabled="true" type="text" [(ngModel)]="Modalita" class="scritta"
+                  style="margin-left: 5px; margin-right: 5px; width: 100px;">&nbsp;
+              </div>
+            </div>
+            <div style="width: 40px; float: left;">
+              <img class="immagineIcona" title="Elimina" (click)="apreScelta(3)"
+                src="../../assets/Immagini/gestione_concorso.png" (error)="variabiliGlobali.handleMissingImage($event)" />
+            </div>
+          </div>
+          <div style="clear: both;"></div>
+          <div class="casella">
+            <div style="width: 100%; float: left; margin-top: 6px;">
+              <div style="width: 100px; float: left; font-weight: bold;">
+                Data
+              </div>
+              <div style="width: calc(99% - 110px); float: left;">
+                <input type="text" [(ngModel)]="Data" class="scritta"
+                  style="margin-left: 5px; margin-right: 5px; width: 100px;">
+              </div>
+            </div>
+          </div>
+          <div style="clear: both;"></div>
+          <div class="casella">
+            <div style="width: 100%; float: left; margin-top: 6px;">
+              <div style="width: 100px; float: left; font-weight: bold;">
+                Note:
+              </div>
+              <div style="width: calc(99% - 110px); float: left;">
+                <input type="text" [(ngModel)]="Note" class="scritta"
+                  style="width: 99%;">
+              </div>
+            </div>
+          </div>
+          <div style="clear: both;"></div>
+          <br />
+          <div style="width: 100%; float: left; height: auto; border-top: 1px solid #999; text-align: right;">
+            <img class="immagineIcona" title="Annulla" (click)="annulla()"
+              src="../../assets/Immagini/chiusura.png" (error)="variabiliGlobali.handleMissingImage($event)" />
+            <img class="immagineIcona" title="Salva" (click)="salva()"
+              src="../../assets/Immagini/save.png" (error)="variabiliGlobali.handleMissingImage($event)" />
+          </div>
+          <br />
         </div>
       </div>
-      <div style="clear: both;"></div>
-      <div class="casella">
-        <div style="width: 99%; float: left; margin-top: 6px;">
-          <div style="width: 100px; float: left; font-weight: bold;">
-            Importo
-          </div>
-          <div style="width: calc(100% - 110px); float: left; font-weight: bold;">
-            <input type="number" [(ngModel)]="Importo" class="scritta"
-              style="margin-left: 5px; margin-right: 5px; width: 100%; max-width: 90px;">
-        </div>
-      </div>
-      <div style="clear: both;"></div>
-      <div class="casella">
-        <div style="width: calc(100% - 40px); float: left; margin-top: 6px;">
-          <div style="width: 100px; float: left; font-weight: bold;">
-            Tipologia
-          </div>
-          <div style="width: calc(100% - 110px); float: left; font-weight: bold;">
-            <input disabled="true" type="text" [(ngModel)]="Tipologia" class="scritta"
-              style="margin-left: 5px; margin-right: 5px; width: 100px;">&nbsp;
-          </div>
-        </div>
-        <div style="width: 40px; float: left;">
-          <img class="immagineIcona" title="Elimina" (click)="apreScelta(2)"
-            src="../../assets/Immagini/gestione_concorso.png" (error)="variabiliGlobali.handleMissingImage($event)" />
-        </div>
-      </div>
-      <div style="clear: both;"></div>
-      <div class="casella">
-        <div style="width: calc(100% - 40px); float: left; margin-top: 6px;">
-          <div style="width: 100px; float: left; font-weight: bold;">
-            Modalità
-          </div>
-          <div style="width: calc(100% - 110px); float: left; font-weight: bold;">
-            <input disabled="true" type="text" [(ngModel)]="Modalita" class="scritta"
-              style="margin-left: 5px; margin-right: 5px; width: 100px;">&nbsp;
-          </div>
-        </div>
-        <div style="width: 40px; float: left;">
-          <img class="immagineIcona" title="Elimina" (click)="apreScelta(3)"
-            src="../../assets/Immagini/gestione_concorso.png" (error)="variabiliGlobali.handleMissingImage($event)" />
-        </div>
-      </div>
-      <div style="clear: both;"></div>
-      <div class="casella">
-        <div style="width: 100%; float: left; margin-top: 6px;">
-          <div style="width: 100px; float: left; font-weight: bold;">
-            Data
-          </div>
-          <div style="width: calc(99% - 110px); float: left;">
-            <input type="text" [(ngModel)]="Data" class="scritta"
-              style="margin-left: 5px; margin-right: 5px; width: 100px;">
-          </div>
-        </div>
-      </div>
-      <div style="clear: both;"></div>
-      <div class="casella">
-        <div style="width: 100%; float: left; margin-top: 6px;">
-          <div style="width: 100px; float: left; font-weight: bold;">
-            Note:
-          </div>
-          <div style="width: calc(99% - 110px); float: left;">
-            <input type="text" [(ngModel)]="Note" class="scritta"
-              style="width: 99%;">
-          </div>
-        </div>
-      </div>
-      <div style="clear: both;"></div>
-      <br />
-      <div style="width: 100%; float: left; height: auto; border-top: 1px solid #999; text-align: right;">
-        <img class="immagineIcona" title="Annulla" (click)="annulla()"
-          src="../../assets/Immagini/chiusura.png" (error)="variabiliGlobali.handleMissingImage($event)" />
-        <img class="immagineIcona" title="Salva" (click)="salva()"
-          src="../../assets/Immagini/save.png" (error)="variabiliGlobali.handleMissingImage($event)" />
-      </div>
-      <br />
     </div>
   </div>
 </div>

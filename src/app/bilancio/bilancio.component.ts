@@ -21,6 +21,8 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
   utenti;
   bilancio;
   bilancioUtenti;
+  inadempienti;
+  Mancanti;
   idAnno2;
   idConcorso2;
   NickName;
@@ -169,6 +171,7 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
           this.bilancione = 0;
           this.presentati = 0;
           this.posizioniLista = new Array();
+          this.Mancanti = 0;
 
           if (data.indexOf('ERROR') === -1) {
             const tutto = data.split('|');
@@ -249,6 +252,24 @@ export class BilancioComponent implements OnInit, AfterViewInit, OnChanges {
               }
             });
             this.bilancioUtenti = bbb;
+
+            const righe3 = tutto[2].split('§');
+            const iii = new Array();
+            pari = true;
+            righe3.forEach(element => {
+              if (element) {
+                const i = element.split(';');
+                const ii = {
+                  idUtente: +i[0],
+                  NickName: i[1],
+                  Pari: pari
+                }
+                pari = !pari;
+                iii.push(ii);
+                this.Mancanti += 10;
+              }
+            });
+            this.inadempienti = iii;
           } else {
             // alert(data);
           }

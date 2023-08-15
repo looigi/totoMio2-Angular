@@ -485,6 +485,20 @@ export class ApiService {
     return ritorno;
   }
 
+  ritornaStatistichePartite() {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/StatistichePartite?' +
+      'idAnno=' + this.variabiliGlobali.idAnno + '&' +
+      'idConcorso=' + this.variabiliGlobali.idConcorso
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    this.variabiliGlobali.CaricamentoInCorso = false;
+    return ritorno;
+  }
+
   salvaMovimento(params) {
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsBilancio.asmx/ScriveModificaMovimento?' +

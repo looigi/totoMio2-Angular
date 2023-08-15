@@ -22,6 +22,8 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
   risu2 = new Array();
   tastoSalvataggio = false;
   idPartitaScelta = -1;
+  statistiche;
+  statisticheVisibile = false;
 
   constructor(
     private apiService: ApiService,
@@ -332,5 +334,63 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
       const ps = Math.round(Math.random() * n);
       this.clickSuPartitaScelta(ps);
     }
+  }
+
+  ritornaStatistichePartite() {
+    this.statisticheVisibile = true;
+    this.variabiliGlobali.CaricamentoInCorso = true;
+    this.apiService.ritornaStatistichePartite()
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            const righe = data.split('§');
+            const sp = new Array();
+            let p = true;
+            let vecchiaCasa = '';
+            righe.forEach(element => {
+              if (element) {
+                const r = element.split(';');
+                if (r[1] !== vecchiaCasa) {
+                  p = !p;
+                  vecchiaCasa = r[1];
+                }
+                const rr = {
+                  idPartita: +r[0],
+                  Casa: r[1],
+                  Fuori: r[2],
+                  Segno: r[3],
+                  QuantiSegni: +r[4],
+                  Percentuale: r[5] + '%',
+                  RisultatoPiuGiocato: r[6],
+                  RisPiuGiocatoQuante: +r[7],
+                  RisultatoMenoGiocato: r[8],
+                  RisMenoGiocatoQuante: +r[9],
+                  GoalCasaPiuGiocato: +r[10],
+                  GoalCasaPiuGiocatoQuanti: +r[11],
+                  GoalCasaMenoGiocato: +r[12],
+                  GoalCasaMenoGiocatoQuanti: +r[13],
+                  GoalFuoriPiuGiocato: +r[14],
+                  GoalFuoriPiuGiocatoQuanti: +r[15],
+                  GoalFuoriMenoGiocato: +r[16],
+                  GoalFuoriMenoGiocatoQuanti: +r[17],
+                  ImmagineCasa: this.variabiliGlobali.ritornaImmagineSquadra(r[1]),
+                  ImmagineFuori: this.variabiliGlobali.ritornaImmagineSquadra(r[2]),
+                  Pari: p
+                }
+                sp.push(rr);
+              }
+            });
+            this.statistiche = sp;
+            console.log(this.statistiche);
+          } else {
+            alert(data);
+          }
+        }
+      }
+    );
+
   }
 }
