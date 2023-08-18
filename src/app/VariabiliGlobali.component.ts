@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class VariabiliGlobali {
-  CaricamentoInCorso = true;
-  urlWS = 'http://looigi.ddns.net:1081/';
+  CaricamentoInCorso = false;
+  collaudo: boolean = false;
+  urlWS; //  = 'http://looigi.ddns.net:1081/';
   urlImmagini = 'http://looigi.ddns.net:1080/Immagini/Stemmi/';
   urlAvatar = 'http://looigi.ddns.net:1081/Avatars/';
   urlSfondo = 'http://looigi.ddns.net:1081/Sfondi/';

@@ -3,6 +3,7 @@ import { VariabiliGlobali } from './VariabiliGlobali.component';
 import { ApiService } from './services/api.service';
 import 'rxjs/add/operator/map';
 import { DatePipe } from "@angular/common";
+import * as jsonData from '../assets/connessione.json';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,8 @@ import { DatePipe } from "@angular/common";
 })
 export class AppComponent implements OnInit {
   title = 'totoMio2';
+
+  connessione: any = jsonData;
 
   menuVisibile = false;
   mascheraNuovoUtente = false;
@@ -56,6 +59,9 @@ export class AppComponent implements OnInit {
     private apiService: ApiService,
     private datePipe: DatePipe,
   ) {
+    this.VariabiliGlobali.urlWS = this.connessione.indirizzoWS;
+    this.VariabiliGlobali.collaudo = this.connessione.Collaudo;
+    console.log('Indirizzo WS:', this.VariabiliGlobali.urlWS, this.connessione.Collaudo);
   }
 
   ngOnInit() {

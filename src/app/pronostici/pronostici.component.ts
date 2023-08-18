@@ -350,12 +350,14 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
             const sp = new Array();
             let p = true;
             let vecchiaCasa = '';
+            let nuovo = false;
             righe.forEach(element => {
               if (element) {
                 const r = element.split(';');
                 if (r[1] !== vecchiaCasa) {
                   p = !p;
                   vecchiaCasa = r[1];
+                  nuovo = true;
                 }
                 const rr = {
                   idPartita: +r[0],
@@ -364,22 +366,23 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
                   Segno: r[3],
                   QuantiSegni: +r[4],
                   Percentuale: r[5] + '%',
-                  RisultatoPiuGiocato: r[6],
-                  RisPiuGiocatoQuante: +r[7],
-                  RisultatoMenoGiocato: r[8],
-                  RisMenoGiocatoQuante: +r[9],
-                  GoalCasaPiuGiocato: +r[10],
-                  GoalCasaPiuGiocatoQuanti: +r[11],
-                  GoalCasaMenoGiocato: +r[12],
-                  GoalCasaMenoGiocatoQuanti: +r[13],
-                  GoalFuoriPiuGiocato: +r[14],
-                  GoalFuoriPiuGiocatoQuanti: +r[15],
-                  GoalFuoriMenoGiocato: +r[16],
-                  GoalFuoriMenoGiocatoQuanti: +r[17],
+                  RisultatoPiuGiocato: nuovo ? r[6] : '',
+                  RisPiuGiocatoQuante: nuovo ? +r[7] : '',
+                  RisultatoMenoGiocato: nuovo ? r[8] : '',
+                  RisMenoGiocatoQuante: nuovo ? +r[9] : '',
+                  GoalCasaPiuGiocato: nuovo ? +r[10] : '',
+                  GoalCasaPiuGiocatoQuanti: nuovo ? +r[11] : '',
+                  GoalCasaMenoGiocato: nuovo ? +r[12] : '',
+                  GoalCasaMenoGiocatoQuanti: nuovo ? +r[13] : '',
+                  GoalFuoriPiuGiocato: nuovo ? +r[14] : '',
+                  GoalFuoriPiuGiocatoQuanti: nuovo ? +r[15] : '',
+                  GoalFuoriMenoGiocato: nuovo ? +r[16] : '',
+                  GoalFuoriMenoGiocatoQuanti: nuovo ? +r[17] : '',
                   ImmagineCasa: this.variabiliGlobali.ritornaImmagineSquadra(r[1]),
                   ImmagineFuori: this.variabiliGlobali.ritornaImmagineSquadra(r[2]),
                   Pari: p
                 }
+                nuovo = false;
                 sp.push(rr);
               }
             });

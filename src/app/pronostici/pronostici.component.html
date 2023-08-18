@@ -176,7 +176,13 @@
         Risultato Più Giocato
       </th>
       <th>
+        Quante Volte
+      </th>
+      <th>
         Risultato Meno Giocato
+      </th>
+      <th>
+        Quante Volte
       </th>
     </tr>
     <tr *ngFor="let stat of statistiche; let i = index" [attr.data-index]="i" class="scritta"
@@ -196,7 +202,9 @@
       <td style="text-align: center;">{{stat.QuantiSegni}}</td>
       <td style="text-align: center;">{{stat.Percentuale}}</td>
       <td style="text-align: center;">{{stat.RisultatoPiuGiocato}}</td>
+      <td style="text-align: center;">{{stat.RisPiuGiocatoQuante}}</td>
       <td style="text-align: center;">{{stat.RisultatoMenoGiocato}}</td>
+      <td style="text-align: center;">{{stat.RisMenoGiocatoQuante}}</td>
     </tr>
   </table>
 </div>
