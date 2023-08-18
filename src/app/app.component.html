@@ -170,7 +170,7 @@
   </div>
   <div style="width: 30%; float: right; padding-left: 3px; text-align: right; margin-top: 6px; overflow: hidden; height: 23px; white-space: nowrap;">
     <!-- {{VariabiliGlobali.collaudo}} -->
-    <span class="scritta" style="font-weight: bold;">COLL. {{VariabiliGlobali.collaudo}}&nbsp;</span>
+    <span *ngIf="VariabiliGlobali.collaudo == true" class="scritta" style="color: red; font-weight: bold;">COLLAUDO&nbsp;</span>
     <span class="scritta">TotoMIO 2 - Copyright looigi227</span>
   </div>
 </div>

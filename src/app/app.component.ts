@@ -3,7 +3,7 @@ import { VariabiliGlobali } from './VariabiliGlobali.component';
 import { ApiService } from './services/api.service';
 import 'rxjs/add/operator/map';
 import { DatePipe } from "@angular/common";
-import * as jsonData from '../assets/connessione.json';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +12,6 @@ import * as jsonData from '../assets/connessione.json';
 })
 export class AppComponent implements OnInit {
   title = 'totoMio2';
-
-  connessione: any = jsonData;
 
   menuVisibile = false;
   mascheraNuovoUtente = false;
@@ -58,39 +56,46 @@ export class AppComponent implements OnInit {
     public VariabiliGlobali: VariabiliGlobali,
     private apiService: ApiService,
     private datePipe: DatePipe,
+    private http: HttpClient
   ) {
-    this.VariabiliGlobali.urlWS = this.connessione.indirizzoWS;
-    this.VariabiliGlobali.collaudo = this.connessione.Collaudo;
-    console.log('Indirizzo WS:', this.VariabiliGlobali.urlWS, this.connessione.Collaudo);
   }
 
   ngOnInit() {
-    const novita = localStorage.getItem('novita');
-    if (novita !== null) {
-      this.novita = novita === 'S';
-    }
-    const ric = localStorage.getItem('ricordami');
-    if (ric !== null) {
-      this.ricordami = ric === 'S' ? true : false;
-    }
+    const url: string = '/assets/connessione.json';
+    this.http.get(url).subscribe((response) => {
+      console.log(response);
 
-    const anno = localStorage.getItem('AnnoAttuale');
-    if (anno !== null) {
-      this.VariabiliGlobali.idAnno = +anno;
-    }
+      this.VariabiliGlobali.urlWS = response['indirizzoWS'];
+      this.VariabiliGlobali.collaudo = response['Collaudo'];
+      console.log('Indirizzo WS:', this.VariabiliGlobali.urlWS, this.VariabiliGlobali.collaudo);
 
-    this.VariabiliGlobali.CaricamentoInCorso = false;
-    if (this.ricordami) {
-      const login = localStorage.getItem('login');
-      if (login !== null) {
-        const r = login.split(';');
-        this.splittaCampiLogin(r);
-
-        this.ritornaDatiGlobali();
+      const novita = localStorage.getItem('novita');
+      if (novita !== null) {
+        this.novita = novita === 'S';
       }
-    }
+      const ric = localStorage.getItem('ricordami');
+      if (ric !== null) {
+        this.ricordami = ric === 'S' ? true : false;
+      }
 
-    this.leggeUtenti();
+      const anno = localStorage.getItem('AnnoAttuale');
+      if (anno !== null) {
+        this.VariabiliGlobali.idAnno = +anno;
+      }
+
+      this.VariabiliGlobali.CaricamentoInCorso = false;
+      if (this.ricordami) {
+        const login = localStorage.getItem('login');
+        if (login !== null) {
+          const r = login.split(';');
+          this.splittaCampiLogin(r);
+
+          this.ritornaDatiGlobali();
+        }
+      }
+
+      this.leggeUtenti();
+    });
   }
 
   leggeUtenti() {
