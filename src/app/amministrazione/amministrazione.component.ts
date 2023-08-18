@@ -14,6 +14,8 @@ export class AmministrazioneComponent implements OnInit, AfterViewInit, OnChange
   @Output() chiusuraFinestra: EventEmitter<string> = new EventEmitter<string>();
 
   inadempienti;
+  restore;
+  visualizzaRestore = false;
 
   constructor(
     private apiService: ApiService,
@@ -124,6 +126,59 @@ export class AmministrazioneComponent implements OnInit, AfterViewInit, OnChange
   }
 
   effettuaRestore() {
+    this.variabiliGlobali.CaricamentoInCorso = true;
+    this.apiService.ritornaBackups()
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            const righe = data.split('§');
+            const rr = new Array();
+            let p = true;
+            righe.forEach(element => {
+              if (element) {
+                const r = element.split(';');
+                const rrr = {
+                  idBackup: +r[0],
+                  Data: r[1],
+                  NomeFile: element,
+                  Pari: p
+                }
+                p = !p;
+                rr.push(rrr);
+              }
+            });
+            this.restore = rr;
+            this.visualizzaRestore = true;
+          } else {
+            alert(data);
+          }
+        }
+      }
+    );
+  }
 
+  effettuaRestore2(r) {
+    this.variabiliGlobali.CaricamentoInCorso = true;
+    const params = {
+      QualeBackup: r.NomeFile
+    }
+    this.apiService.effettuaRestore(params)
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            alert('Restore effettuato');
+            this.visualizzaRestore = false;
+          } else {
+            alert(data);
+          }
+        }
+      }
+    );
   }
 }

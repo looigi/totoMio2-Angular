@@ -44,5 +44,34 @@
   </div>
 </div>
 
+<div *ngIf="visualizzaRestore" class="listaRestore scritta">
+  <div style="width: calc(100% - 40px); float: left; font-weight: bold;">Lista Backups</div>
+  <div style="width: 40px; float: left;">
+    <img class="immagineIcona" style="margin-left: 5px;" title="Chiude maschera"
+      src="../../assets/Immagini/chiusura.png" (click)="visualizzaRestore = false;" />
+  </div>
+  <hr />
+  <table style="width: 100%;">
+    <tr>
+      <th></th>
+      <th>Id</th>
+      <th>Data</th>
+    </tr>
+    <tr *ngFor="let r of restore; let i2 = index" [attr.data-index]="i2"
+      [style.background-color]="r.Pari ? '#cecefd' : 'transparent'">
+      <td>
+        <img class="immagineIcona" style="margin-left: 5px;" title="Sceglie Backup"
+          src="../../assets/Immagini/invia.png" (click)="effettuaRestore2(r)" />
+      </td>
+      <td style="text-align: center;">
+        {{r.idBackup}}
+      </td>
+      <td>
+        {{r.Data}}
+      </td>
+    </tr>
+  </table>
+</div>
+
 <div class="chiusura" (click)="chiusura()" title="Chiusura finestra">
 </div>
