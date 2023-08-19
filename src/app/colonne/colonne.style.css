@@ -1,22 +1,21 @@
 .finestra {
   margin-top: 2px;
   margin-left: 2px;
-  width: calc(100% - 8px);
-  height: calc(100% - 10px);
+  width: calc(100% - 15px);
+  height: calc(100% - 15px);
   opacity: .85;
   border: 1px solid #999;
   border-radius: 5px;
   background-color: white;
   float: right;
+  padding: 3px;
 }
 
-th {
-  padding: 5px;
-  white-space: nowrap;
-}
-
-td {
-  padding: 5px;
+.immagineSquadra {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  /* filter: grayscale(1); */
 }
 
 .chiusura {
@@ -43,6 +42,10 @@ td {
   overflow: auto;
 }
 
+.neretto {
+  font-weight: bold;
+}
+
 .immagineIcona {
   width: 35px;
   height: 35px;
@@ -54,15 +57,7 @@ td {
   font-size: 14px;
 }
 
-.immagineSquadra {
-  width: 35px;
-  height: 35px;
-  cursor: pointer;
-  /* filter: grayscale(1); */
-}
-
-.rigaIncontro {
-  width: 100%;
-  height: 35px;
-  float: left;
+.scritta {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 18px;
 }

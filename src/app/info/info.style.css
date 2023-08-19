@@ -1,13 +1,14 @@
 .finestra {
   margin-top: 2px;
   margin-left: 2px;
-  width: calc(100% - 8px);
+  width: calc(100% - 15px);
   height: calc(100% - 10px);
   opacity: .85;
   border: 1px solid #999;
   border-radius: 5px;
   background-color: white;
   float: right;
+  padding: 3px;
 }
 
 .chiusura {

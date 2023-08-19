@@ -40,6 +40,13 @@ export class VariabiliGlobali {
       idTipologia: -1
     },
     {
+      idTasto: 14,
+      Icona: 'colonne.png',
+      Titolo: 'Colonne',
+      Pagina: 'Colonne',
+      idTipologia: -1
+    },
+    {
       idTasto: 4,
       Icona: 'gestione_concorso.png',
       Titolo: 'Gestione Concorso',

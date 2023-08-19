@@ -1,0 +1,52 @@
+<div class="finestra">
+  <div class="barraSuperiore">
+    <div style="width: 50%; float: left;">
+    </div>
+    <div class="scritta" style="width: 50%; float: left; margin-top: 5px; font-weight: bold; white-space: nowrap;">
+      Colonne
+    </div>
+  </div>
+  <div class="contenitoreInterno scritta" style="border-top: 1px solid #999; padding-top: 3px; overflow: hidden;">
+    <div style="width: calc(100% - 5px); height: 40px; border-bottom: 1px solid #999; float: left;">
+      Utente:
+      <select [(ngModel)]="idUtente" style="width: auto; height: 30px; font-size: 16px;"
+        (ngModelChange)="onChangePresentatore($event)">
+        <option *ngFor="let title of utenti" [value]="title.idUtente" >
+          {{title.Utente}}<span *ngIf="title.idUtente > 0">&nbsp;({{title.Cognome}} {{title.Nome}})</span>
+        </option>
+      </select>
+    </div>
+    <div style="width: calc(100% - 5px); height: calc(100% - 40px); float: left; overflow: auto;">
+      <table style="width: 100%;">
+        <tr>
+          <th>N°</th>
+          <th></th>
+          <th>Casa</th>
+          <th></th>
+          <th>Fuori</th>
+          <th>Pronostico</th>
+          <th>Segno</th>
+        </tr>
+        <tr *ngFor="let partita of colonna; let i2 = index" [attr.data-index]="i2"
+          [style.background-color]="partita.Pari ? '#cecefd' : 'transparent'">
+          <td>{{partita.idPartita}}</td>
+          <td>
+            <img class="immagineSquadra" title="{{partita.Casa}}"
+              [src]="partita.ImmagineCasa" (error)="variabiliGlobali.handleMissingImage($event)" />
+          </td>
+          <td>{{partita.Casa}}</td>
+          <td>
+            <img class="immagineSquadra" title="{{partita.Fuori}}"
+              [src]="partita.ImmagineFuori" (error)="variabiliGlobali.handleMissingImage($event)" />
+          </td>
+          <td>{{partita.Fuori}}</td>
+          <td style="text-align: center;">{{partita.Pronostico}}</td>
+          <td style="text-align: center;">{{partita.Segno}}</td>
+        </tr>
+      </table>
+    </div>
+ </div>
+</div>
+
+<div class="chiusura" (click)="chiusura()" title="Chiusura finestra">
+</div>

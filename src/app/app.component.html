@@ -67,6 +67,12 @@
         (chiusuraFinestra)="infoVisibile = false; ritornaDatiGlobali()"
       />
 
+      <colonne_component
+        *ngIf="colonneVisibile"
+
+        (chiusuraFinestra)="colonneVisibile = false; ritornaDatiGlobali()"
+      />
+
       <statistiche_component
         *ngIf="statisticheVisibile"
 

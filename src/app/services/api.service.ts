@@ -538,6 +538,21 @@ export class ApiService {
     return ritorno;
   }
 
+  ritornaColonna(utente) {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/RitornaColonnaUtente?' +
+      'idAnno=' + this.variabiliGlobali.idAnno + '&' +
+      'idGiornata=' + this.variabiliGlobali.idConcorso + '&' +
+      'idUtente=' + utente
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    this.variabiliGlobali.CaricamentoInCorso = false;
+    return ritorno;
+  }
+
   salvaMovimento(params) {
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsBilancio.asmx/ScriveModificaMovimento?' +

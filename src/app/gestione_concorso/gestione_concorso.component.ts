@@ -160,23 +160,30 @@ export class GestioneConcorsoComponent implements OnInit, AfterViewInit, OnChang
   salvaConcorso() {
     let dati = '';
     let i = 1;
+    let ok = true;
     this.partite.forEach(element => {
-      let ris = '';
-      if (element.Sospesa) {
-        ris = '';
-      } else {
-        if (element.Risultato1 === '' || element.Risultato2 === '')  {
-          alert('Risultato della partita ' + i + ' non valido');
-          return;
+      if (ok) {
+        let ris = '';
+        if (element.Sospesa) {
+          ris = '';
+        } else {
+          if (element.Risultato1 === '' || element.Risultato2 === '')  {
+            // alert('Risultato della partita ' + i + ' non valido');
+            // ok = false;
+            // return;
+          }
+          ris = element.Risultato1 + '-' + element.Risultato2;
         }
-        ris = element.Risultato1 + '-' + element.Risultato2;
+        dati += element.idPartita + ';' +
+          this.variabiliGlobali.sistemaStringaPerPassaggio(element.Prima) + ';' +
+          this.variabiliGlobali.sistemaStringaPerPassaggio(element.Seconda) + ';' +
+          ris + ';' + element.Segno + ';' + (element.Sospesa ? 'S' : 'N') + '§';
+        i++;
       }
-      dati += element.idPartita + ';' +
-        this.variabiliGlobali.sistemaStringaPerPassaggio(element.Prima) + ';' +
-        this.variabiliGlobali.sistemaStringaPerPassaggio(element.Seconda) + ';' +
-        ris + ';' + element.Segno + ';' + (element.Sospesa ? 'S' : 'N') + '§';
-      i++;
     });
+    if (!ok) {
+      return;
+    }
     const parametri = {
       idAnno: this.idAnno2,
       idConcorso: this.NumeroConcorso2,

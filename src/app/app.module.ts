@@ -26,6 +26,7 @@ import { UploadDownloadComponent } from './upload_download/ud.component';
 import { HttpModule } from '@angular/http';
 import { ChatComponent } from './chat/chat.component';
 import { StatisticheComponent } from './statistiche/statistiche.component';
+import { ColonneComponent } from './colonne/colonne.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { StatisticheComponent } from './statistiche/statistiche.component';
     GestioneUtenteComponent,
     UploadDownloadComponent,
     ChatComponent,
-    StatisticheComponent
+    StatisticheComponent,
+    ColonneComponent
   ],
   imports: [
     BrowserModule,
