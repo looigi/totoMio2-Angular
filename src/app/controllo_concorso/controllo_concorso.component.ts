@@ -64,6 +64,7 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
                 const PuntiTotali = +Intest[2];
                 let jolly = 0;
                 let pps = 0;
+                let ps = 0;
                 const Risultati = parti[1].split('§');
                 // console.log('Risultati', Risultati);
                 const DettaglioArray = new Array();
@@ -88,10 +89,13 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
                       DifferenzaGoal: +Dettaglio[12],
                       Punti: +Dettaglio[13],
                       Jolly: +Dettaglio[14],
-                      PuntiPartitaScelta: +Dettaglio[15]
+                      PuntiPartitaScelta: Dettaglio[15] ? +Dettaglio[15] : 0,
+                      PuntiSorpresa: Dettaglio[16] ? +Dettaglio[16] : 0
                     };
+                    // console.log(Dettaglio[1], Dettaglio[15]);
                     jolly += +Dettaglio[14];
-                    pps += +Dettaglio[15];
+                    pps += Dettaglio[15] ? +Dettaglio[15] : 0;
+                    ps += Dettaglio[16] ? +Dettaglio[16] : 0
                     DettaglioArray.push(dett);
                   }
                   pari = !pari;
@@ -111,6 +115,7 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
                   Dettaglio: DettaglioArray,
                   PuntiTotaliJolly: jolly,
                   PuntiTotaliPartitaScelta: pps,
+                  PuntiTotaliSorpresa: ps,
                   Squadra23: '',
                   Avatar: avatar
                 }

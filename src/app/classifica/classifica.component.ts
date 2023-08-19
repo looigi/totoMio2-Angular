@@ -129,6 +129,7 @@ export class ClassificaComponent implements OnInit, AfterViewInit, OnChanges {
                   Ultimo: +c[11],
                   Jolly: +c[12],
                   PuntiPartitaScelta: +c[13],
+                  PuntiSorpresa: +c[14],
                   Avatar: avatar,
                   Sfondo: this.variabiliGlobali.urlSfondo + this.variabiliGlobali.idAnno + '/' +
                     c[0] + '.png?d=' + new Date().toString()

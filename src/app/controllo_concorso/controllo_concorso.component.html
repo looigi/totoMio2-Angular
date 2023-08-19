@@ -55,19 +55,20 @@
             <th style="border-right: 1px solid #aaa;">N°</th>
             <th style="border-right: 1px solid #aaa;">Squadra 1</th>
             <th style="border-right: 1px solid #aaa;">Squadra 2</th>
-            <th style="border-right: 1px solid #aaa;">Risultato</th>
+            <th style="border-right: 1px solid #aaa;">Ris.</th>
             <th style="border-right: 1px solid #aaa;">Segno</th>
-            <th style="border-right: 1px solid #aaa;">Pronostico</th>
+            <th style="border-right: 1px solid #aaa;">Pron.</th>
             <th style="border-right: 1px solid #aaa;">Pron. Segno</th>
             <th style="border-right: 1px solid #aaa;">Segni</th>
             <th style="border-right: 1px solid #aaa;">Ris.Es.</th>
             <th style="border-right: 1px solid #aaa;">G. Casa</th>
             <th style="border-right: 1px solid #aaa;">G. Fuori</th>
-            <th style="border-right: 1px solid #aaa;">Somma</th>
-            <th style="border-right: 1px solid #aaa;">Diff.</th>
-            <th>Punti</th>
-            <th>Jolly</th>
-            <th>P.Sc.</th>
+            <th style="border-right: 1px solid #aaa;">+</th>
+            <th style="border-right: 1px solid #aaa;">-</th>
+            <th style="border-right: 1px solid #aaa;">Pt.</th>
+            <th style="border-right: 1px solid #aaa;">J.</th>
+            <th style="border-right: 1px solid #aaa;">P.Sc.</th>
+            <th style="border-right: 1px solid #aaa;">Sorpr.</th>
           </tr>
           <tr *ngFor="let partita of risultato.Dettaglio; let i2 = index" [attr.data-index]="i2"
             [style.background-color]="partita.Pari ? '#cecefd' : 'transparent'">
@@ -84,13 +85,10 @@
             <td style="text-align: center; border-right: 1px solid #aaa;">{{partita.RisultatoFuoriTot == 1 ? 'O' : '-'}}</td>
             <td style="text-align: center; border-right: 1px solid #aaa;">{{partita.SommaGoal == 1 ? 'O' : '-'}}</td>
             <td style="text-align: center; border-right: 1px solid #aaa;">{{partita.DifferenzaGoal == 1 ? 'O' : '-'}}</td>
-            <td style="text-align: right;">{{partita.Punti}}</td>
-            <td style="text-align: right;">{{partita.Jolly}}</td>
-            <td style="text-align: right;">{{partita.PuntiPartitaScelta}}</td>
-          </tr>
-          <tr>
-            <td colspan="13" style="text-align: right;">Squadra per '23 Aiutame Te': {{risultato.Squadra23}}</td>
-            <td style="text-align: right;">{{risultato.Punti23}}</td>
+            <td style="text-align: right; border-right: 1px solid #aaa;">{{partita.Punti}}</td>
+            <td style="text-align: right; border-right: 1px solid #aaa;">{{partita.Jolly}}</td>
+            <td style="text-align: right; border-right: 1px solid #aaa;">{{partita.PuntiPartitaScelta}}</td>
+            <td style="text-align: right; border-right: 1px solid #aaa;">{{partita.PuntiSorpresa}}</td>
           </tr>
           <tr>
             <td></td>
@@ -109,6 +107,11 @@
             <td style="text-align: right;">{{risultato.PuntiTotali}}</td>
             <td style="text-align: right;">{{risultato.PuntiTotaliJolly}}</td>
             <td style="text-align: right;">{{risultato.PuntiTotaliPartitaScelta}}</td>
+            <td style="text-align: right;">{{risultato.PuntiTotaliSorpresa}}</td>
+          </tr>
+          <tr>
+            <td colspan="16" style="text-align: right;">Squadra per '23 Aiutame Te': {{risultato.Squadra23}}</td>
+            <td style="text-align: right;">{{risultato.Punti23}}</td>
           </tr>
         </table>
       </div>

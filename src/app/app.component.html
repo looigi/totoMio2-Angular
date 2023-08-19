@@ -18,9 +18,9 @@
 </div>
 
 <div class="corpoCentrale">
-  <div class="menuSinistra" [style.width]="menuVisibile ? '30%' : '40px'">
+  <div class="menuSinistra" [style.width]="menuVisibile ? '30%' : '45px'">
     <!-- <div class="immagineIcona" title="Apre Chiude Menù" (click)="apreChiudeMenu()" style="z-index: 30; position: absolute; width: 40px; height: 40px; right: 0px; top: 0px; background-image: url('../assets/Immagini/hamburger.png'); background-size: contain;"></div> -->
-    <div style="position: absolute; left: 0px; top: 0px; width: 100%; height: calc(100% - 35px);">
+    <div style="position: absolute; left: 2px; top: 2px; width: 100%; height: calc(100% - 2px);">
       <div *ngFor="let pagina of VariabiliGlobali.pagine; let i = index;">
         <div *ngIf="ControllaVisibilitaMenu(i)" class="voceMenu" (click)="selezionePagina(i)">
           <div class="immagineIcona" title="{{pagina.Titolo}}" [style.background]="'url(../assets/Immagini/' + pagina.Icona + ')'" [style.background-size]="'contain'" style="float: left; background-repeat: no-repeat; background-size: contain;"></div>

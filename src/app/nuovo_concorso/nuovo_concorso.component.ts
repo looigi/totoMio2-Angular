@@ -166,7 +166,7 @@ export class NuovoConcorsoComponent implements OnInit, AfterViewInit, OnChanges 
       dati += element.idPartita + ';' +
         this.variabiliGlobali.sistemaStringaPerPassaggio(element.Prima) + ';' +
         this.variabiliGlobali.sistemaStringaPerPassaggio(element.Seconda) + ';' +
-        element.Risultato + ';' + element.Segno + '§';
+        element.Risultato + ';' + element.Segno + ';N§';
     });
     const parametri = {
       idAnno: this.idAnno2,

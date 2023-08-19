@@ -50,8 +50,19 @@ export class GestioneConcorsoComponent implements OnInit, AfterViewInit, OnChang
                 let pr, Ris1, Ris2;
                 if (cc[3].indexOf('-') > -1) {
                   pr = cc[3].split('-');
-                  Ris1 = pr[0];
-                  Ris2 = pr[1];
+                  Ris1 = +pr[0];
+                  Ris2 = +pr[1];
+                  if (cc[4] === '') {
+                    if (Ris1 > Ris2) {
+                      cc[4] = '1';
+                    } else {
+                      if (Ris1 < Ris2) {
+                        cc[4] = '2';
+                      } else {
+                        cc[4] = 'X';
+                      }
+                    }
+                  }
                 } else {
                   Ris1 = '';
                   Ris2 = '';
@@ -67,8 +78,12 @@ export class GestioneConcorsoComponent implements OnInit, AfterViewInit, OnChang
                   Risultato2: Ris2,
                   Segno: cc[4],
                   ImmagineCasa: this.variabiliGlobali.ritornaImmagineSquadra(cc[1]),
-                  ImmagineFuori: this.variabiliGlobali.ritornaImmagineSquadra(cc[2])
+                  ImmagineFuori: this.variabiliGlobali.ritornaImmagineSquadra(cc[2]),
+                  Sospesa: cc[5] === 'S' ? true : false
                 }
+                this.risu1[i] = Ris1;
+                this.risu2[i] = Ris2;
+
                 p.push(ccc);
 
                 i++;
@@ -78,8 +93,6 @@ export class GestioneConcorsoComponent implements OnInit, AfterViewInit, OnChang
 
             setTimeout(() => {
               for (let i2 = 0; i2 < i; i2++) {
-                // console.log(i2);
-
                 const numberC = document.getElementById('pronCasa_' + i2);
                 numberC.onchange = this.clickCasa.bind(null, this);
                 const numberF = document.getElementById('pronFuori_' + i2);
@@ -146,12 +159,23 @@ export class GestioneConcorsoComponent implements OnInit, AfterViewInit, OnChang
 
   salvaConcorso() {
     let dati = '';
+    let i = 1;
     this.partite.forEach(element => {
-      const ris = element.Risultato1 + '-' + element.Risultato2;
+      let ris = '';
+      if (element.Sospesa) {
+        ris = '';
+      } else {
+        if (element.Risultato1 === '' || element.Risultato2 === '')  {
+          alert('Risultato della partita ' + i + ' non valido');
+          return;
+        }
+        ris = element.Risultato1 + '-' + element.Risultato2;
+      }
       dati += element.idPartita + ';' +
         this.variabiliGlobali.sistemaStringaPerPassaggio(element.Prima) + ';' +
         this.variabiliGlobali.sistemaStringaPerPassaggio(element.Seconda) + ';' +
-        ris + ';' + element.Segno + '§';
+        ris + ';' + element.Segno + ';' + (element.Sospesa ? 'S' : 'N') + '§';
+      i++;
     });
     const parametri = {
       idAnno: this.idAnno2,

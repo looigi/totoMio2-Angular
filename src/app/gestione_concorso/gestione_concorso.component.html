@@ -1,9 +1,9 @@
 <div class="finestra">
   <div class="barraSuperiore">
     <div style="width: 40px; float: left;">
-      <img *ngIf="tastoSalvataggio" class="immagineIcona" style="margin-left: 5px;" title="Salva Concorso"
+      <img class="immagineIcona" style="margin-left: 5px;" title="Salva Concorso"
         src="../../assets/Immagini/save.png" (click)="salvaConcorso()" />
-      <span *ngIf="!tastoSalvataggio">&nbsp;</span>
+      <!-- <span *ngIf="!tastoSalvataggio">&nbsp;</span> -->
     </div>
     <div class="scritta" style="font-weight: bold; width: calc(100% - 80px); overflow: hidden; float: left; margin-top: 5px; font-weight: bold; white-space: nowrap;">
       Anno {{idAnno2}} - {{DescrizioneAnno}} Concorso {{NumeroConcorso2}} Partite {{partite.length}}
@@ -36,6 +36,9 @@
         <th>
           Segno
         </th>
+        <th>
+          Sospesa
+        </th>
       </tr>
       <tr *ngFor="let partita of partite; let i = index" [attr.data-index]="i" class="scritta">
         <td style="text-align: center;">
@@ -56,13 +59,16 @@
           <input type="text" disabled="true" [(ngModel)]="partita.Seconda" class="scritta" style="margin-left: 5px; margin-right: 5px; width: 150px;">
         </td>
         <td style="text-align: center;">
-          <input id="pronCasa_{{i}}" type="number" min="0" max="50" [(ngModel)]="partita.Risultato1" class="scritta" style="width: 30px;" (keypress)="handleKey1(i, $event)">
+          <input [disabled]="partita.Sospesa" id="pronCasa_{{i}}" type="number" min="0" max="15" [(ngModel)]="partita.Risultato1" class="scritta" style="width: 30px;" (keypress)="handleKey1(i, $event)">
         </td>
         <td style="text-align: center;">
-          <input id="pronFuori_{{i}}" type="number" min="0" max="50" [(ngModel)]="partita.Risultato2" class="scritta" style="width: 30px" (keypress)="handleKey2(i, $event)">
+          <input [disabled]="partita.Sospesa" id="pronFuori_{{i}}" type="number" min="0" max="15" [(ngModel)]="partita.Risultato2" class="scritta" style="width: 30px" (keypress)="handleKey2(i, $event)">
         </td>
         <td style="text-align: center;">
           {{partita.Segno}}
+        </td>
+        <td style="text-align: center;">
+          <input type="checkbox" [checked]="partita.Sospesa" (change)="partita.Sospesa = !partita.Sospesa"/>
         </td>
       </tr>
     </table>

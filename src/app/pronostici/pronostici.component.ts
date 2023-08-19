@@ -337,7 +337,6 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ritornaStatistichePartite() {
-    this.statisticheVisibile = true;
     this.variabiliGlobali.CaricamentoInCorso = true;
     this.apiService.ritornaStatistichePartite()
     .map((response: any) => response)
@@ -388,6 +387,7 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
             });
             this.statistiche = sp;
             console.log(this.statistiche);
+            this.statisticheVisibile = true;
           } else {
             alert(data);
           }

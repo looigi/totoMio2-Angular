@@ -142,6 +142,7 @@
               <th>Media Somma G.</th>
               <th>Diff. G.</th>
               <th>Media Diff. G.</th>
+              <th>Punti Sorpresa</th>
             </tr>
             <tr *ngFor="let dati of datiDaVisualizzare.Risultati; let i = index" [attr.data-index]="i" class="scritta"
               [style.background-color]="dati.Pari == 'True' ? '#cecefd' : 'transparent'"
@@ -167,6 +168,7 @@
               <td style="text-align: right;">{{dati.MediaSomma}}</td>
               <td style="text-align: right;">{{dati.SommaDiff}}</td>
               <td style="text-align: right;">{{dati.MediaDiff}}</td>
+              <td style="text-align: right;">{{dati.PuntiSorpresa}}</td>
             </tr>
           </table>
         </div>

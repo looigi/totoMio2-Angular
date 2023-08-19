@@ -16,6 +16,7 @@ export class AmministrazioneComponent implements OnInit, AfterViewInit, OnChange
   inadempienti;
   restore;
   visualizzaRestore = false;
+  ceFinto = false;
 
   constructor(
     private apiService: ApiService,
@@ -37,6 +38,7 @@ export class AmministrazioneComponent implements OnInit, AfterViewInit, OnChange
   }
 
   ngOnInit(): void {
+    this.ceFintone();
   }
 
   ngAfterViewInit(): void {
@@ -181,4 +183,27 @@ export class AmministrazioneComponent implements OnInit, AfterViewInit, OnChange
       }
     );
   }
+
+  ceFintone() {
+    this.variabiliGlobali.CaricamentoInCorso = true;
+    this.apiService.ceFintone()
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            if (data === 'OK') {
+              this.ceFinto = true;
+            } else {
+              this.ceFinto = false;
+            }
+          } else {
+            alert(data);
+          }
+        }
+      }
+    );
+  }
+
 }
