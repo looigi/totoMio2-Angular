@@ -1,12 +1,14 @@
 <div class="finestra">
   <div class="barraSuperiore">
-    <div style="width: 80px; float: left;">
+    <div style="width: 120px; float: left;">
+      <img *ngIf="ModalitaConcorso != 'Controllato'" class="immagineIcona" style="margin-left: 5px;" title="Simula il controllo del concorso"
+        src="../../assets/Immagini/simulazione.png" (click)="controllaConcorso('SI')" />
       <img *ngIf="ModalitaConcorso != 'Controllato'" class="immagineIcona" style="margin-left: 5px;" title="Controlla Concorso"
-        src="../../assets/Immagini/controllo.png" (click)="controllaConcorso()" />
+        src="../../assets/Immagini/controllo.png" (click)="controllaConcorso('NO')" />
       <img *ngIf="ModalitaConcorso != 'Controllato' && arrivatiDati" class="immagineIcona" style="margin-left: 5px;" title="Chiude Concorso"
         src="../../assets/Immagini/invia.png" (click)="chiudeConcorso()" />
     </div>
-    <div class="scritta" style="width: calc(100% - 125px); overflow: hidden; float: left; margin-top: 5px; font-weight: bold; white-space: nowrap;">
+    <div class="scritta" style="width: calc(100% - 145px); overflow: hidden; float: left; margin-top: 5px; font-weight: bold; white-space: nowrap;">
       Controllo concorso Anno {{idAnno}} - {{DescrizioneAnno}} Concorso {{NumeroConcorso}}
     </div>
   </div>

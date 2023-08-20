@@ -618,7 +618,9 @@ export class ApiService {
     const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/ControllaConcorso?' +
       'idAnno=' + parametri.idAnno +
       '&idUtente=' + parametri.idUtente +
-      '&ModalitaConcorso=' + parametri.ModalitaConcorso
+      '&ModalitaConcorso=' + parametri.ModalitaConcorso +
+      '&SoloControllo=' + parametri.SoloControllo +
+      '&InviaMailSoloControllo=' + parametri.InviaMailSoloControllo
       ;
       // 'Password=' + this.sistemaTesto(params.Password;
     // console.log('Login:', url);

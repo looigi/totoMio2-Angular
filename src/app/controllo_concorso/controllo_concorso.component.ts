@@ -33,11 +33,18 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
     this.chiusuraFinestra.emit(new Date().toString());
   }
 
-  controllaConcorso() {
+  controllaConcorso(Come) {
+    let inviaMail = 'NO';
+    if (confirm('Invio anche la mail a tutti?')) {
+      inviaMail = 'SI';
+    }
+
     const parametri = {
       idAnno: this.idAnno,
       idUtente: this.variabiliGlobali.idUser,
-      ModalitaConcorso: this.ModalitaConcorso
+      ModalitaConcorso: this.ModalitaConcorso,
+      SoloControllo: Come,
+      InviaMailSoloControllo: inviaMail
     }
     this.variabiliGlobali.CaricamentoInCorso = true;
     this.apiService.controllaConcorso(parametri)
@@ -132,7 +139,7 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
             });
             this.risultati = RisultatiFinali;
 
-            this.prendeRisultati23();
+            this.prendeRisultati23(Come);
          } else {
             alert(data);
           }
@@ -141,7 +148,7 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
     );
   }
 
-  prendeRisultati23() {
+  prendeRisultati23(Come) {
     const parametri = {
       idAnno: this.idAnno,
       idGiornata: this.variabiliGlobali.idConcorso
@@ -177,7 +184,9 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
             this.scriveMancanti();
             // console.log(this.risultati2);
             console.log('Risultati', this.risultati);
-            this.arrivatiDati = true;
+            if (Come !== 'SI') {
+              this.arrivatiDati = true;
+            }
           }
         }
       }
@@ -320,7 +329,7 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.ModalitaConcorso && changes.ModalitaConcorso.currentValue) {
       if (changes.ModalitaConcorso.currentValue === 'Controllato') {
-        this.controllaConcorso();
+        this.controllaConcorso('SI');
       }
     }
   }
