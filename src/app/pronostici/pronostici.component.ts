@@ -25,6 +25,14 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
   statistiche;
   statisticheVisibile = false;
 
+  statistichePartitaVisibile = false;
+  squadraCasa = '';
+  squadraFuori = '';
+  lista1;
+  lista2;
+  statistiche1;
+  statistiche2;
+
   constructor(
     private apiService: ApiService,
     public variabiliGlobali: VariabiliGlobali
@@ -395,5 +403,130 @@ export class PronosticiComponent implements OnInit, AfterViewInit, OnChanges {
       }
     );
 
+  }
+
+  leggeStatistichePartita(n) {
+    this.variabiliGlobali.CaricamentoInCorso = true;
+    const params = {
+      Casa: n.Prima,
+      Fuori: n.Seconda
+    }
+    this.squadraCasa = n.Prima;
+    this.squadraFuori = n.Seconda;
+    this.apiService.leggeStatisticheSquadre(params)
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            const Tutto = data.split('|');
+            const lista1 = Tutto[0].split('§');
+            const lista2 = Tutto[1].split('§');
+            const stat1 = Tutto[2].split(';');
+            const stat2 = Tutto[3].split(';');
+
+            let p = true;
+            const l1 = new Array();
+            lista1.forEach(element => {
+              if (element) {
+                const ll = element.split(';');
+                const lll = {
+                  idGiornata: +ll[0],
+                  idPartita: +ll[1],
+                  Casa: ll[2],
+                  Fuori: ll[3],
+                  Risultato: ll[4],
+                  Segno: ll[5],
+                  ImmagineCasa: this.variabiliGlobali.ritornaImmagineSquadra(ll[2]),
+                  ImmagineFuori: this.variabiliGlobali.ritornaImmagineSquadra(ll[3]),
+                  Pari: p
+                }
+                l1.push(lll);
+                p = !p;
+              }
+            });
+            this.lista1 = l1;
+
+            p = true;
+            const l2 = new Array();
+            lista2.forEach(element => {
+              if (element) {
+                const ll = element.split(';');
+                const lll = {
+                  idGiornata: +ll[0],
+                  idPartita: +ll[1],
+                  Casa: ll[2],
+                  Fuori: ll[3],
+                  Risultato: ll[4],
+                  Segno: ll[5],
+                  ImmagineCasa: this.variabiliGlobali.ritornaImmagineSquadra(ll[2]),
+                  ImmagineFuori: this.variabiliGlobali.ritornaImmagineSquadra(ll[3]),
+                  Pari: p
+                }
+                l2.push(lll);
+                p = !p;
+              }
+            });
+            this.lista2 = l2;
+
+            this.statistiche1 = {
+              Punti: +stat1[0],
+              Vittorie: +stat1[3],
+              Pareggi: +stat1[4],
+              Sconfitte: +stat1[5],
+              GoalFatti: +stat1[12],
+              GoalSubiti: +stat1[13],
+
+              PuntiCasa: +stat1[1],
+              VittorieCasa: +stat1[6],
+              PareggiCasa: +stat1[7],
+              SconfitteCasa: +stat1[8],
+              GoalFattiCasa: +stat1[14],
+              GoalSubitiCasa: +stat1[16],
+
+              PuntiFuori: +stat1[2],
+              VittorieFuori: +stat1[9],
+              PareggiFuori: +stat1[10],
+              SconfitteFuori: +stat1[11],
+              GoalFattiFuori: +stat1[15],
+              GoalSubitiFuori: +stat1[17],
+
+              Giocate: +stat1[18],
+              GiocateCasa: +stat1[19],
+              GiocateFuori: +stat1[20]
+            }
+
+            this.statistiche2 = {
+              Punti: +stat2[0],
+              Vittorie: +stat2[3],
+              Pareggi: +stat2[4],
+              Sconfitte: +stat2[5],
+              PuntiCasa: +stat2[1],
+              PuntiFuori: +stat2[2],
+              VittorieCasa: +stat2[6],
+              PareggiCasa: +stat2[7],
+              SconfitteCasa: +stat2[8],
+              VittorieFuori: +stat2[9],
+              PareggiFuori: +stat2[10],
+              SconfitteFuori: +stat2[11],
+              GoalFatti: +stat2[12],
+              GoalSubiti: +stat2[13],
+              GoalFattiCasa: +stat2[14],
+              GoalFattiFuori: +stat2[15],
+              GoalSubitiCasa: +stat2[16],
+              GoalSubitiFuori: +stat2[17],
+              Giocate: +stat2[18],
+              GiocateCasa: +stat2[19],
+              GiocateFuori: +stat2[20]
+            }
+
+            this.statistichePartitaVisibile = true;
+          } else {
+            alert(data);
+          }
+        }
+      }
+    );
   }
 }

@@ -643,6 +643,21 @@ export class ApiService {
     return ritorno;
   }
 
+  leggeStatisticheSquadre(params) {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsConcorsi.asmx/RitornaStatistiche?' +
+      'idAnno=' + this.variabiliGlobali.idAnno +
+      '&idGiornata=' + this.variabiliGlobali.idConcorso +
+      '&Casa=' + params.Casa +
+      '&Fuori=' + params.Fuori
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    return ritorno;
+  }
+
   leggeStatistiche() {
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/Statistiche?' +

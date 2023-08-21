@@ -35,8 +35,16 @@ export class ControlloConcorsoComponent implements OnInit, AfterViewInit, OnChan
 
   controllaConcorso(Come) {
     let inviaMail = 'NO';
-    if (confirm('Invio anche la mail a tutti?')) {
-      inviaMail = 'SI';
+    if (this.ModalitaConcorso === 'Controllato') {
+      inviaMail = '';
+    } else {
+      if (Come === 'SI') {
+        if (confirm('Invio anche la mail a tutti?')) {
+          inviaMail = 'SI';
+        }
+      } else {
+        inviaMail = '';
+      }
     }
 
     const parametri = {

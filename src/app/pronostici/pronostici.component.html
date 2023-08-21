@@ -23,6 +23,9 @@
           &nbsp;
         </th>
         <th>
+          &nbsp;
+        </th>
+        <th>
           Casa
         </th>
         <th>
@@ -53,14 +56,19 @@
         <!-- <td style="text-align: center;">
           {{partita.idPartita}}
         </td> -->
-        <td>
+        <td style="text-align: center;">
+          <img class="immagineSquadra" title="Statistiche Squadre"
+            (click)="leggeStatistichePartita(partita)"
+            src="../../assets/Immagini/simulazione.png" (error)="variabiliGlobali.handleMissingImage($event)" />
+        </td>
+       <td style="text-align: center;">
           <img class="immagineSquadra" title="{{partita.Prima}}"
             [src]="partita.ImmagineCasa" (error)="variabiliGlobali.handleMissingImage($event)" />
         </td>
         <td>
           {{partita.Prima}}
         </td>
-        <td>
+        <td style="text-align: center;">
           <img class="immagineSquadra" title="{{partita.Seconda}}"
             [src]="partita.ImmagineFuori" (error)="variabiliGlobali.handleMissingImage($event)" />
         </td>
@@ -209,6 +217,210 @@
       </tr>
     </table>
   </div>
+</div>
+
+<div *ngIf="statistichePartitaVisibile" class="statistiche1 scritta">
+  <div style="width: calc(100% - 40px); height: 40px; float: left; font-weight: bold; text-align: center;">
+    Statistiche {{squadraCasa}}
+  </div>
+  <div style="width: 40px; height: 40px; text-align: right; float: left;">
+    <img class="immagineIcona" title="Chiude" (click)="statistichePartitaVisibile = false"
+      src="../../assets/Immagini/chiusura.png" />
+  </div>
+  <hr />
+  <div style="overflow: auto; width: 100%; height: calc(100% - 50px); float: left;">
+    <table style="width: 100%">
+      <tr>
+        <th>
+          Giornata
+        </th>
+        <th>
+
+        </th>
+        <th>
+          Casa
+        </th>
+        <th>
+
+        </th>
+        <th>
+          Fuori
+        </th>
+        <th>
+          Risultato
+        </th>
+        <th>
+          Segno
+        </th>
+      </tr>
+      <tr *ngFor="let stat of lista1; let i = index" [attr.data-index]="i" class="scritta"
+        [style.background-color]="stat.Pari ? '#dfd773' : 'transparent'"
+        style="border-bottom: 1px solid #999;">
+        <td style="text-align: center;">{{stat.idGiornata}}</td>
+        <td>
+          <img class="immagineSquadra" title="{{stat.Casa}}"
+            [src]="stat.ImmagineCasa" (error)="variabiliGlobali.handleMissingImage($event)" />
+        </td>
+        <td>{{stat.Casa}}</td>
+        <td>
+          <img class="immagineSquadra" title="{{stat.Fuori}}"
+            [src]="stat.ImmagineFuori" (error)="variabiliGlobali.handleMissingImage($event)" />
+        </td>
+        <td>{{stat.Fuori}}</td>
+        <td style="text-align: center;">{{stat.Risultato}}</td>
+        <td style="text-align: center;">{{stat.Segno}}</td>
+      </tr>
+    </table>
+    <hr />
+    <table style="width: 100%">
+      <tr>
+        <th>Giocate</th>
+        <th>Punti</th>
+        <th>Vittorie</th>
+        <th>Pareggi</th>
+        <th>Sconfitte</th>
+        <th>Goal Fatti</th>
+        <th>Goal Subiti</th>
+      </tr>
+      <tr>
+        <th colspan="6" style="text-align: center;">GENERALE</th>
+      </tr>
+      <tr>
+        <td style="text-align: center;">{{statistiche1.Giocate}}</td>
+        <td style="text-align: center;">{{statistiche1.Punti}}</td>
+        <td style="text-align: center;">{{statistiche1.Vittorie}}</td>
+        <td style="text-align: center;">{{statistiche1.Pareggi}}</td>
+        <td style="text-align: center;">{{statistiche1.Sconfitte}}</td>
+        <td style="text-align: center;">{{statistiche1.GoalFatti}}</td>
+        <td style="text-align: center;">{{statistiche1.GoalSubiti}}</td>
+      </tr>
+      <tr>
+        <th colspan="6" style="text-align: center;">CASA</th>
+      </tr>
+      <tr>
+        <td style="text-align: center;">{{statistiche1.GiocateCasa}}</td>
+        <td style="text-align: center;">{{statistiche1.PuntiCasa}}</td>
+        <td style="text-align: center;">{{statistiche1.VittorieCasa}}</td>
+        <td style="text-align: center;">{{statistiche1.PareggiCasa}}</td>
+        <td style="text-align: center;">{{statistiche1.SconfitteCasa}}</td>
+        <td style="text-align: center;">{{statistiche1.GoalFattiCasa}}</td>
+        <td style="text-align: center;">{{statistiche1.GoalSubitiCasa}}</td>
+      </tr>
+      <tr>
+        <th colspan="6" style="text-align: center;">FUORI</th>
+      </tr>
+      <tr>
+        <td style="text-align: center;">{{statistiche1.GiocateFuori}}</td>
+        <td style="text-align: center;">{{statistiche1.PuntiFuori}}</td>
+        <td style="text-align: center;">{{statistiche1.VittorieFuori}}</td>
+        <td style="text-align: center;">{{statistiche1.PareggiFuori}}</td>
+        <td style="text-align: center;">{{statistiche1.SconfitteFuori}}</td>
+        <td style="text-align: center;">{{statistiche1.GoalFattiFuori}}</td>
+        <td style="text-align: center;">{{statistiche1.GoalSubitiFuori}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="statistichePartitaVisibile" class="statistiche2 scritta">
+  <div style="width: calc(100% - 40px); height: 40px; float: left; font-weight: bold; text-align: center;">
+    Statistiche {{squadraFuori}}
+  </div>
+  <div style="width: 40px; height: 40px; text-align: right; float: left;">
+    <img class="immagineIcona" title="Chiude" (click)="statistichePartitaVisibile = false"
+      src="../../assets/Immagini/chiusura.png" />
+  </div>
+  <hr />
+  <table style="width: 100%">
+    <tr>
+      <th>
+        Giornata
+      </th>
+      <th>
+
+      </th>
+      <th>
+        Casa
+      </th>
+      <th>
+
+      </th>
+      <th>
+        Fuori
+      </th>
+      <th>
+        Risultato
+      </th>
+      <th>
+        Segno
+      </th>
+    </tr>
+    <tr *ngFor="let stat of lista2; let i = index" [attr.data-index]="i" class="scritta"
+      [style.background-color]="stat.Pari ? '#dfd773' : 'transparent'"
+      style="border-bottom: 1px solid #999;">
+      <td style="text-align: center;">{{stat.idGiornata}}</td>
+      <td>
+        <img class="immagineSquadra" title="{{stat.Casa}}"
+          [src]="stat.ImmagineCasa" (error)="variabiliGlobali.handleMissingImage($event)" />
+      </td>
+      <td>{{stat.Casa}}</td>
+      <td>
+        <img class="immagineSquadra" title="{{stat.Fuori}}"
+          [src]="stat.ImmagineFuori" (error)="variabiliGlobali.handleMissingImage($event)" />
+      </td>
+      <td>{{stat.Fuori}}</td>
+      <td style="text-align: center;">{{stat.Risultato}}</td>
+      <td style="text-align: center;">{{stat.Segno}}</td>
+    </tr>
+  </table>
+  <hr />
+  <table style="width: 100%">
+    <tr>
+      <th>Giocate</th>
+      <th>Punti</th>
+      <th>Vittorie</th>
+      <th>Pareggi</th>
+      <th>Sconfitte</th>
+      <th>Goal Fatti</th>
+      <th>Goal Subiti</th>
+    </tr>
+    <tr>
+      <th colspan="6" style="text-align: center;">GENERALE</th>
+    </tr>
+    <tr>
+      <td style="text-align: center;">{{statistiche2.Giocate}}</td>
+      <td style="text-align: center;">{{statistiche2.Punti}}</td>
+      <td style="text-align: center;">{{statistiche2.Vittorie}}</td>
+      <td style="text-align: center;">{{statistiche2.Pareggi}}</td>
+      <td style="text-align: center;">{{statistiche2.Sconfitte}}</td>
+      <td style="text-align: center;">{{statistiche2.GoalFatti}}</td>
+      <td style="text-align: center;">{{statistiche2.GoalSubiti}}</td>
+    </tr>
+    <tr>
+      <th colspan="6" style="text-align: center;">CASA</th>
+    </tr>
+    <tr>
+      <td style="text-align: center;">{{statistiche2.GiocateCasa}}</td>
+      <td style="text-align: center;">{{statistiche2.PuntiCasa}}</td>
+      <td style="text-align: center;">{{statistiche2.VittorieCasa}}</td>
+      <td style="text-align: center;">{{statistiche2.PareggiCasa}}</td>
+      <td style="text-align: center;">{{statistiche2.SconfitteCasa}}</td>
+      <td style="text-align: center;">{{statistiche2.GoalFattiCasa}}</td>
+      <td style="text-align: center;">{{statistiche2.GoalSubitiCasa}}</td>
+    </tr>
+    <tr>
+      <th colspan="6" style="text-align: center;">FUORI</th>
+    </tr>
+    <tr>
+      <td style="text-align: center;">{{statistiche2.GiocateFuori}}</td>
+      <td style="text-align: center;">{{statistiche2.PuntiFuori}}</td>
+      <td style="text-align: center;">{{statistiche2.VittorieFuori}}</td>
+      <td style="text-align: center;">{{statistiche2.PareggiFuori}}</td>
+      <td style="text-align: center;">{{statistiche2.SconfitteFuori}}</td>
+      <td style="text-align: center;">{{statistiche2.GoalFattiFuori}}</td>
+      <td style="text-align: center;">{{statistiche2.GoalSubitiFuori}}</td>
+    </tr>
+  </table>
 </div>
 
 <div class="chiusura" (click)="chiusura()" title="Chiusura finestra">
