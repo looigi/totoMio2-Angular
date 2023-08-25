@@ -283,7 +283,7 @@
         <th>Goal Subiti</th>
       </tr>
       <tr>
-        <th colspan="6" style="text-align: center;">GENERALE</th>
+        <th colspan="7" style="text-align: center;">GENERALE</th>
       </tr>
       <tr>
         <td style="text-align: center;">{{statistiche1.Giocate}}</td>
@@ -295,7 +295,7 @@
         <td style="text-align: center;">{{statistiche1.GoalSubiti}}</td>
       </tr>
       <tr>
-        <th colspan="6" style="text-align: center;">CASA</th>
+        <th colspan="7" style="text-align: center;">CASA</th>
       </tr>
       <tr>
         <td style="text-align: center;">{{statistiche1.GiocateCasa}}</td>
@@ -307,7 +307,7 @@
         <td style="text-align: center;">{{statistiche1.GoalSubitiCasa}}</td>
       </tr>
       <tr>
-        <th colspan="6" style="text-align: center;">FUORI</th>
+        <th colspan="7" style="text-align: center;">FUORI</th>
       </tr>
       <tr>
         <td style="text-align: center;">{{statistiche1.GiocateFuori}}</td>
@@ -331,7 +331,8 @@
       src="../../assets/Immagini/chiusura.png" />
   </div>
   <hr />
-  <table style="width: 100%">
+  <div style="overflow: auto; width: 100%; height: calc(100% - 50px); float: left;">
+    <table style="width: 100%">
     <tr>
       <th>
         Giornata
@@ -372,55 +373,56 @@
       <td style="text-align: center;">{{stat.Risultato}}</td>
       <td style="text-align: center;">{{stat.Segno}}</td>
     </tr>
-  </table>
-  <hr />
-  <table style="width: 100%">
-    <tr>
-      <th>Giocate</th>
-      <th>Punti</th>
-      <th>Vittorie</th>
-      <th>Pareggi</th>
-      <th>Sconfitte</th>
-      <th>Goal Fatti</th>
-      <th>Goal Subiti</th>
-    </tr>
-    <tr>
-      <th colspan="6" style="text-align: center;">GENERALE</th>
-    </tr>
-    <tr>
-      <td style="text-align: center;">{{statistiche2.Giocate}}</td>
-      <td style="text-align: center;">{{statistiche2.Punti}}</td>
-      <td style="text-align: center;">{{statistiche2.Vittorie}}</td>
-      <td style="text-align: center;">{{statistiche2.Pareggi}}</td>
-      <td style="text-align: center;">{{statistiche2.Sconfitte}}</td>
-      <td style="text-align: center;">{{statistiche2.GoalFatti}}</td>
-      <td style="text-align: center;">{{statistiche2.GoalSubiti}}</td>
-    </tr>
-    <tr>
-      <th colspan="6" style="text-align: center;">CASA</th>
-    </tr>
-    <tr>
-      <td style="text-align: center;">{{statistiche2.GiocateCasa}}</td>
-      <td style="text-align: center;">{{statistiche2.PuntiCasa}}</td>
-      <td style="text-align: center;">{{statistiche2.VittorieCasa}}</td>
-      <td style="text-align: center;">{{statistiche2.PareggiCasa}}</td>
-      <td style="text-align: center;">{{statistiche2.SconfitteCasa}}</td>
-      <td style="text-align: center;">{{statistiche2.GoalFattiCasa}}</td>
-      <td style="text-align: center;">{{statistiche2.GoalSubitiCasa}}</td>
-    </tr>
-    <tr>
-      <th colspan="6" style="text-align: center;">FUORI</th>
-    </tr>
-    <tr>
-      <td style="text-align: center;">{{statistiche2.GiocateFuori}}</td>
-      <td style="text-align: center;">{{statistiche2.PuntiFuori}}</td>
-      <td style="text-align: center;">{{statistiche2.VittorieFuori}}</td>
-      <td style="text-align: center;">{{statistiche2.PareggiFuori}}</td>
-      <td style="text-align: center;">{{statistiche2.SconfitteFuori}}</td>
-      <td style="text-align: center;">{{statistiche2.GoalFattiFuori}}</td>
-      <td style="text-align: center;">{{statistiche2.GoalSubitiFuori}}</td>
-    </tr>
-  </table>
+    </table>
+    <hr />
+    <table style="width: 100%">
+      <tr>
+        <th>Giocate</th>
+        <th>Punti</th>
+        <th>Vittorie</th>
+        <th>Pareggi</th>
+        <th>Sconfitte</th>
+        <th>Goal Fatti</th>
+        <th>Goal Subiti</th>
+      </tr>
+      <tr>
+        <th colspan="7" style="text-align: center;">GENERALE</th>
+      </tr>
+      <tr>
+        <td style="text-align: center;">{{statistiche2.Giocate}}</td>
+        <td style="text-align: center;">{{statistiche2.Punti}}</td>
+        <td style="text-align: center;">{{statistiche2.Vittorie}}</td>
+        <td style="text-align: center;">{{statistiche2.Pareggi}}</td>
+        <td style="text-align: center;">{{statistiche2.Sconfitte}}</td>
+        <td style="text-align: center;">{{statistiche2.GoalFatti}}</td>
+        <td style="text-align: center;">{{statistiche2.GoalSubiti}}</td>
+      </tr>
+      <tr>
+        <th colspan="7" style="text-align: center;">CASA</th>
+      </tr>
+      <tr>
+        <td style="text-align: center;">{{statistiche2.GiocateCasa}}</td>
+        <td style="text-align: center;">{{statistiche2.PuntiCasa}}</td>
+        <td style="text-align: center;">{{statistiche2.VittorieCasa}}</td>
+        <td style="text-align: center;">{{statistiche2.PareggiCasa}}</td>
+        <td style="text-align: center;">{{statistiche2.SconfitteCasa}}</td>
+        <td style="text-align: center;">{{statistiche2.GoalFattiCasa}}</td>
+        <td style="text-align: center;">{{statistiche2.GoalSubitiCasa}}</td>
+      </tr>
+      <tr>
+        <th colspan="7" style="text-align: center;">FUORI</th>
+      </tr>
+      <tr>
+        <td style="text-align: center;">{{statistiche2.GiocateFuori}}</td>
+        <td style="text-align: center;">{{statistiche2.PuntiFuori}}</td>
+        <td style="text-align: center;">{{statistiche2.VittorieFuori}}</td>
+        <td style="text-align: center;">{{statistiche2.PareggiFuori}}</td>
+        <td style="text-align: center;">{{statistiche2.SconfitteFuori}}</td>
+        <td style="text-align: center;">{{statistiche2.GoalFattiFuori}}</td>
+        <td style="text-align: center;">{{statistiche2.GoalSubitiFuori}}</td>
+      </tr>
+    </table>
+  </div>
 </div>
 
 <div class="chiusura" (click)="chiusura()" title="Chiusura finestra">

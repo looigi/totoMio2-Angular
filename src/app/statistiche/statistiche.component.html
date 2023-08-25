@@ -59,6 +59,28 @@
           <span *ngIf="tipologia=='Storico'">Anni: {{datiDaVisualizzare.Anni}}<br /></span>
           Concorsi Aperti: {{datiDaVisualizzare.ConcorsiAperti}}<br />
           <span *ngIf="tipologia=='Annuale'">Giornata Attuale: {{datiDaVisualizzare.Giornata}}</span>
+          <br /><br /><hr />RECORDS<hr />
+          <table>
+            <tr>
+              <th>Tipologia</th>
+              <th></th>
+              <th>Utente</th>
+              <th>Giornata</th>
+              <th>Valore</th>
+            </tr>
+            <tr *ngFor="let dati of datiDaVisualizzare.StatistichePresi; let i = index" [attr.data-index]="i" class="scritta"
+              [style.background-color]="dati.Pari == 'True' ? '#cecefd' : 'transparent'"
+              style="border-bottom: 1px solid #999;">
+              <td>{{dati.Titolo}}</td>
+              <td>
+                <img class="immagineGiocatore" title="{{dati.NickName}}"
+                  [src]="prendeImmagineGiocatore(dati.idUtente)" (error)="variabiliGlobali.handleMissingImage($event)" />
+              </td>
+              <td>{{dati.NickName}}</td>
+              <td>{{dati.Giornata}}</td>
+              <td>{{dati.Valore}}</td>
+            </tr>
+          </table>
         </div>
 
         <div *ngIf="datiDaVisualizzare && modalita=='BILANCIO'" style="width: 100%;">
