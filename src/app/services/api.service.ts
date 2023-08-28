@@ -660,8 +660,23 @@ export class ApiService {
 
   leggeStatistiche() {
     this.controlloPresenzaUtente();
-    const url = this.variabiliGlobali.urlWS + 'wsUtenti.asmx/Statistiche?' +
+    const url = this.variabiliGlobali.urlWS + 'wsStatistiche.asmx/Statistiche?' +
       'idAnno=' + this.variabiliGlobali.idAnno
+      ;
+      // 'Password=' + this.sistemaTesto(params.Password;
+    // console.log('Login:', url);
+    const ritorno = this.httpclient.get(url);
+    // console.log(ritorno);
+    return ritorno;
+  }
+
+  leggeGrafici(Cosa) {
+    this.controlloPresenzaUtente();
+    const url = this.variabiliGlobali.urlWS + 'wsStatistiche.asmx/PrendeGrafici?' +
+      'idAnno=' + this.variabiliGlobali.idAnno + '&' +
+      'idGiornata=' + this.variabiliGlobali.idConcorso + '&' +
+      'idUtente=' + this.variabiliGlobali.idUser + '&' +
+      'Cosa=' + Cosa
       ;
       // 'Password=' + this.sistemaTesto(params.Password;
     // console.log('Login:', url);

@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Output, EventEmitter, OnChanges, OnInit, SimpleChanges, Input } from "@angular/core";
 import { VariabiliGlobali } from "../VariabiliGlobali.component";
 import { ApiService } from "../services/api.service";
+import * as CanvasJS from '../../assets/js/canvasjs.min.js';
 
 @Component({
   templateUrl: 'statistiche.component.html',
@@ -11,10 +12,13 @@ import { ApiService } from "../services/api.service";
 export class StatisticheComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() chiusuraFinestra: EventEmitter<string> = new EventEmitter<string>();
 
+  canvJS = CanvasJS;
   tipologia = 'Annuale';
   modalita = 'GENERALE';
   datiCompleti;
   datiDaVisualizzare;
+  grafici;
+  TipologiaGrafico = 'Posizioni';
 
   constructor(
     public variabiliGlobali: VariabiliGlobali,
@@ -58,6 +62,71 @@ export class StatisticheComponent implements OnInit, AfterViewInit, OnChanges {
         }
       }
     );
+  }
+
+  caricaGrafici() {
+    this.modalita = 'GRAFICI';
+    this.variabiliGlobali.CaricamentoInCorso = true;
+    this.apiService.leggeGrafici(this.TipologiaGrafico)
+    .map((response: any) => response)
+    .subscribe((data2: string | string[]) => {
+        this.variabiliGlobali.CaricamentoInCorso = false;
+        if (data2) {
+          const data = this.apiService.SistemaStringaRitornata(data2);
+          if (data.indexOf('ERROR') === -1) {
+            const data2 = JSON.parse(data);
+            // console.log(data2);
+            let massimo = 0;
+            data2.Punti.data[0].dataPoints.forEach(element => {
+              if (element > massimo) {
+                massimo = element;
+              }
+            });
+            const puntazzi = {
+              animationEnabled: true,
+              title:{
+                text: "Posizioni in classifica"
+              },
+              axisX: {
+                minimum: 1,
+                maximum: massimo
+              },
+              axisY: {
+                title: "Posizione",
+                titleFontColor: "#4F81BC",
+                lineColor: "#4F81BC",
+                labelFontColor: "#4F81BC",
+                tickColor: "#4F81BC"
+              },
+              toolTip: {
+                shared: false
+              },
+              legend: {
+                cursor:"pointer",
+                itemclick: this.toggleDataSeries.bind(null, this),
+              },
+              data: data2.Punti.data
+            };
+
+            this.grafici = new CanvasJS.Chart("chartContainer", puntazzi);
+            // console.log(puntazzi);
+            this.grafici.render();
+          } else {
+            alert(data);
+          }
+        }
+      }
+    );
+  }
+
+  toggleDataSeries = function(t, e) {
+    // console.log(e);
+    if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+      e.dataSeries.visible = false;
+    } else {
+      e.dataSeries.visible = true;
+    }
+    t.grafici.render();
   }
 
   cambiaTipologia(c) {

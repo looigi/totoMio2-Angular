@@ -52,6 +52,11 @@
           (click)="modalita='PRESE'">
           Squadre Prese
         </div>
+        <div *ngIf="tipologia=='Annuale'" class="tastoLaterale"
+          [style.background-color]="modalita == '' ? '#d1d1ff' : 'white'"
+          (click)="caricaGrafici()">
+          Grafici
+        </div>
       </div>
       <div class="corpoCentrale">
         <div *ngIf="datiDaVisualizzare && modalita=='GENERALE'" style="width: 100%;">
@@ -292,6 +297,16 @@
               </td>
             </tr>
           </table>
+        </div>
+
+        <div *ngIf="datiDaVisualizzare && modalita=='GRAFICI'" style="width: 100%;">
+          <div style="width: 100%; height: 30px; border-bottom: 1px solid #999; float: left;">
+            <div style="width: 30%; float: left;">Tipologia</div>
+            <div style="width: 70%; float: left;">
+              &nbsp;
+            </div>
+          </div>
+          <div id="chartContainer" style="height: calc(100% - 30px); width: 100%; float: left;"></div>
         </div>
       </div>
     </div>
