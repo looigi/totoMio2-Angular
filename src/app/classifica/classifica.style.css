@@ -66,6 +66,12 @@ td {
   margin-top: 3px;
 }
 
+.immagineSuGiu {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
 .immaginePopup {
   width: 150px;
   height: 150px;

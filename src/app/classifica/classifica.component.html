@@ -15,6 +15,7 @@
       <tr>
         <th style="border-right: 1px solid #aaa;">N°</th>
         <th style="border-right: 1px solid #aaa;"></th>
+        <th style="border-right: 1px solid #aaa;"></th>
         <th style="border-right: 1px solid #aaa;">NickName</th>
         <th style="border-right: 1px solid #aaa;">Punti</th>
         <th style="border-right: 1px solid #aaa;">Giocate</th>
@@ -33,6 +34,13 @@
       <tr *ngFor="let classifica_utente of classifica; let i2 = index" [attr.data-index]="i2"
         [style.background-color]="classifica_utente.Pari ? '#cecefd' : 'transparent'">
         <td style="text-align: center; border-right: 1px solid #aaa;" [style.color]="classifica_utente.NickName == variabiliGlobali.Utente ? 'red' : 'black'">{{classifica_utente.Posizione}}</td>
+        <td style="text-align: center; border-right: 1px solid #aaa;" [style.color]="classifica_utente.Differenza > 0 ? 'green' : classifica_utente.Differenza < 0 ? 'red' : 'black'">
+          <div style="width: 70px">
+            <img class="immagineSuGiu" title=""
+              [src]="classifica_utente.SuGiu" (error)="variabiliGlobali.handleMissingImage($event)" />
+            &nbsp;<span *ngIf="classifica_utente.Differenza > 0">+</span>{{classifica_utente.Differenza}}
+          </div>
+        </td>
         <td style="border-right: 1px solid #aaa; text-align: center;"
           (mouseleave)="popupSpento()"
           (mouseover)="popupShow(i2, $event)">

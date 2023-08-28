@@ -132,7 +132,11 @@ export class ClassificaComponent implements OnInit, AfterViewInit, OnChanges {
                   PuntiSorpresa: +c[14],
                   Avatar: avatar,
                   Sfondo: this.variabiliGlobali.urlSfondo + this.variabiliGlobali.idAnno + '/' +
-                    c[0] + '.png?d=' + new Date().toString()
+                    c[0] + '.png?d=' + new Date().toString(),
+                  PosizioneAttuale: +c[15],
+                  PosizionePrecedente: +c[16],
+                  Differenza: +c[16] - +c[15],
+                  SuGiu: (+c[16] - +c[15]) > 0 ? '../assets/Immagini/su.png' : (+c[16] - +c[15]) < 0 ? '../assets/Immagini/giu.png' : '../assets/Immagini/uguale.png'
                 }
                 pari = !pari
                 posizione++;
