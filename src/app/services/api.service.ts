@@ -670,13 +670,14 @@ export class ApiService {
     return ritorno;
   }
 
-  leggeGrafici(Cosa) {
+  leggeGrafici(Cosa, Altro) {
     this.controlloPresenzaUtente();
     const url = this.variabiliGlobali.urlWS + 'wsStatistiche.asmx/PrendeGrafici?' +
       'idAnno=' + this.variabiliGlobali.idAnno + '&' +
       'idGiornata=' + this.variabiliGlobali.idConcorso + '&' +
       'idUtente=' + this.variabiliGlobali.idUser + '&' +
-      'Cosa=' + Cosa
+      'Cosa=' + Cosa + '&' +
+      'Altro=' + Altro
       ;
       // 'Password=' + this.sistemaTesto(params.Password;
     // console.log('Login:', url);

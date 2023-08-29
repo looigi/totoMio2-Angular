@@ -17,8 +17,28 @@ export class StatisticheComponent implements OnInit, AfterViewInit, OnChanges {
   modalita = 'GENERALE';
   datiCompleti;
   datiDaVisualizzare;
+
   grafici;
-  TipologiaGrafico = 'Posizioni';
+  idTipologiaGrafico = 0;
+  TipologiaGrafico = 'Classifica';
+  TitoloGrafico = 'Classifica';
+  Altro = '';
+  Tipologie = [
+    { id: 0, Tipologia: 'Classifica', Altro: '', Titolo: 'Classifica'},
+    { id: 1, Tipologia: 'Posizioni', Altro: '', Titolo: 'Posizioni in classifica'},
+    { id: 2, Tipologia: 'Punti', Altro: '', Titolo: 'Punti per giornata'},
+    { id: 3, Tipologia: 'SegniPresi', Altro: '', Titolo: 'Segni presi per giornata'},
+    { id: 4, Tipologia: 'RisultatiEsatti', Altro: '', Titolo: 'Risultati esatti per giornata'},
+    { id: 5, Tipologia: 'RisultatiCasaTot', Altro: '', Titolo: 'Risultati in casa per giornata'},
+    { id: 6, Tipologia: 'RisultatiFuoriTot', Altro: '', Titolo: 'Risultati fuori per giornata'},
+    { id: 7, Tipologia: 'SommeGoal', Altro: '', Titolo: 'Somma Goal per giornata'},
+    { id: 8, Tipologia: 'DifferenzeGoal', Altro: '', Titolo: 'Differenza Goal per giornata'},
+    { id: 9, Tipologia: 'PuntiPartitaScelta', Altro: '', Titolo: 'Punti P. Scelta per giornata'},
+    { id: 10, Tipologia: 'PuntiSorpresa', Altro: '', Titolo: 'Punti Sorpresa per giornata'},
+    { id: 11, Tipologia: 'Jolly', Altro: 'Altro', Titolo: 'Jolly per giornata'},
+    { id: 12, Tipologia: 'Vittorie', Altro: 'Altro', Titolo: 'Vittorie'},
+    { id: 13, Tipologia: 'Ultimo', Altro: 'Altro', Titolo: 'Ultimo'},
+  ]
 
   constructor(
     public variabiliGlobali: VariabiliGlobali,
@@ -67,7 +87,7 @@ export class StatisticheComponent implements OnInit, AfterViewInit, OnChanges {
   caricaGrafici() {
     this.modalita = 'GRAFICI';
     this.variabiliGlobali.CaricamentoInCorso = true;
-    this.apiService.leggeGrafici(this.TipologiaGrafico)
+    this.apiService.leggeGrafici(this.TipologiaGrafico, this.Altro)
     .map((response: any) => response)
     .subscribe((data2: string | string[]) => {
         this.variabiliGlobali.CaricamentoInCorso = false;
@@ -75,9 +95,10 @@ export class StatisticheComponent implements OnInit, AfterViewInit, OnChanges {
           const data = this.apiService.SistemaStringaRitornata(data2);
           if (data.indexOf('ERROR') === -1) {
             const data2 = JSON.parse(data);
-            // console.log(data2);
+            console.log('Dati grafici', data2);
+
             let massimo = 0;
-            data2.Punti.data[0].dataPoints.forEach(element => {
+            data2.DatiGrafico.data[0].dataPoints.forEach(element => {
               if (element > massimo) {
                 massimo = element;
               }
@@ -85,14 +106,14 @@ export class StatisticheComponent implements OnInit, AfterViewInit, OnChanges {
             const puntazzi = {
               animationEnabled: true,
               title:{
-                text: "Posizioni in classifica"
+                text: this.TitoloGrafico
               },
               axisX: {
                 minimum: 1,
                 maximum: massimo
               },
               axisY: {
-                title: "Posizione",
+                title: this.TitoloGrafico,
                 titleFontColor: "#4F81BC",
                 lineColor: "#4F81BC",
                 labelFontColor: "#4F81BC",
@@ -105,11 +126,11 @@ export class StatisticheComponent implements OnInit, AfterViewInit, OnChanges {
                 cursor:"pointer",
                 itemclick: this.toggleDataSeries.bind(null, this),
               },
-              data: data2.Punti.data
+              data: data2.DatiGrafico.data
             };
 
             this.grafici = new CanvasJS.Chart("chartContainer", puntazzi);
-            // console.log(puntazzi);
+            console.log(puntazzi);
             this.grafici.render();
           } else {
             alert(data);
@@ -136,6 +157,21 @@ export class StatisticheComponent implements OnInit, AfterViewInit, OnChanges {
     } else {
       this.datiDaVisualizzare = this.datiCompleti.Storico;
     }
+  }
+
+  onChangeTipologia(e) {
+    console.log(e, this.Tipologie);
+    setTimeout(() => {
+      this.Tipologie.forEach(element => {
+        if (+element.id === +e) {
+          this.Altro = element.Altro;
+          this.TipologiaGrafico = element.Tipologia;
+          this.TitoloGrafico = element.Titolo;
+        }
+      });
+      console.log(this.TipologiaGrafico);
+      this.caricaGrafici();
+    }, 500);
   }
 
   prendeImmagineSquadra(s) {
